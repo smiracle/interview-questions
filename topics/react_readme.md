@@ -5,6 +5,7 @@
 - [What is React's evolutionary history?](#what-is-react's-evolutionary-history?)
 - [What are the major features of React?](#what-are-the-major-features-of-react?)
 - [What is JSX?](#what-is-jsx?)
+- [What is the difference between an Element and a Component?](#what-is-the-difference-between-an-element-and-a-component?)
 - [What is JEST?](#what-is-jest?)
 
 
@@ -40,7 +41,7 @@ The major features of React are:
 [↑ Back to top](#table-of-contents)
 
 ### What is JSX?
-JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically it just provides the syntactic sugar for the React.createElement(type, props, ...children) function, giving us the expressiveness of JavaScript along with HTML-like template syntax.
+JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically it just provides the syntactic sugar for the React.createElement(type, props, ...children) function, giving us the expressiveness of JavaScript along with HTML-like template syntax. JSX is stricter than HTML.
 
 In the example below, the text inside the h1 tag is returned as a JavaScript function to the render function.
 
@@ -54,12 +55,49 @@ If you don't use JSX syntax then the respective JavaScript code should be writte
 import { createElement } from 'react';
  export default function App() {
 return createElement(
-'h1',
-{
+'h1',{
 className: 'greeting' }, 
 'Hello, this is a JSX Code!' 
 );
 }
+```
+
+[↑ Back to top](#table-of-contents)
+
+### What is the difference between an Element and a Component?
+An Element is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. Elements can contain other Elements in their props. Creating a React element is cheap. Once an element is created, it cannot be mutated.
+
+The JavaScript representation (without JSX) of React Element would be as follows:
+
+```javascript
+const element = React.createElement("div", { id: "login-btn" }, "Login");
+```
+
+The above `React.createElement()` function returns an object as below:
+
+```javascript
+{ type: 'div', props: { children: 'Login', id: 'login-btn' } }
+```
+
+Finally, this element renders to the DOM using ReactDOM.render(). A component can be declared in several different ways. It can be a class with a render() method or it can be defined as a function. In either case, it takes props as input, and returns a JSX tree as the output:
+
+```javascript
+const Button = ({ handleLogin }) => (
+<div id={"login-btn"} onClick={handleLogin}>
+Login
+</div>
+);
+```
+
+Then JSX gets transpiled to a React.createElement() function tree:
+
+```javascript
+const Button = ({ handleLogin }) =>
+React.createElement(
+"div",
+{ id: "login-btn", onClick: handleLogin },
+"Login"
+);
 ```
 
 [↑ Back to top](#table-of-contents)

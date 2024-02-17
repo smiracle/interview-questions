@@ -1,12 +1,9 @@
 #!/bin/bash
 
-# Define the JSON file for the React category
-JSON_FILE="/c/Repos/interview-questions/data/react.json"
+# Define paths
+JSON_FILE="data/react.json"
+JQ_PATH="jq-windows-i386.exe"
 
-# Define the absolute path to jq
-JQ_PATH="/c/Users/stvnm/jq/jq-windows-i386.exe"
-
-# Check if jq and JSON file exist
 if [ ! -f "$JSON_FILE" ]; then
     echo "JSON file not found: $JSON_FILE"
     exit 1

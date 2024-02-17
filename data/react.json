@@ -54,7 +54,7 @@
       "content": [
         {
           "type": "text",
-          "value": "JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically it just provides the syntactic sugar for the React.createElement(type, props, ...children) function, giving us the expressiveness of JavaScript along with HTML-like template syntax."
+          "value": "JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically it just provides the syntactic sugar for the React.createElement(type, props, ...children) function, giving us the expressiveness of JavaScript along with HTML-like template syntax. JSX is stricter than HTML."
         },
         {
           "type": "text",
@@ -71,6 +71,47 @@
         {
           "type": "code",
           "value": "import { createElement } from 'react';\n export default function App() {\nreturn createElement(\n'h1',{\nclassName: 'greeting' }, \n'Hello, this is a JSX Code!' \n);\n}"
+        }
+      ]
+    },
+    {
+      "header": "What is the difference between an Element and a Component?",
+      "content": [
+        {
+          "type": "text",
+          "value": "An Element is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. Elements can contain other Elements in their props. Creating a React element is cheap. Once an element is created, it cannot be mutated."
+        },
+        {
+          "type": "text",
+          "value": "The JavaScript representation (without JSX) of React Element would be as follows:"
+        },
+        {
+          "type": "code",
+          "value": "const element = React.createElement(\"div\", { id: \"login-btn\" }, \"Login\");"
+        },
+        {
+          "type": "text",
+          "value": "The above `React.createElement()` function returns an object as below:"
+        },
+        {
+          "type": "code",
+          "value": "{ type: 'div', props: { children: 'Login', id: 'login-btn' } }"
+        },
+        {
+          "type": "text",
+          "value": "Finally, this element renders to the DOM using ReactDOM.render(). A component can be declared in several different ways. It can be a class with a render() method or it can be defined as a function. In either case, it takes props as input, and returns a JSX tree as the output:"
+        },
+        {
+          "type": "code",
+          "value": "const Button = ({ handleLogin }) => (\n<div id={\"login-btn\"} onClick={handleLogin}>\nLogin\n</div>\n);"
+        },
+        {
+          "type": "text",
+          "value": "Then JSX gets transpiled to a React.createElement() function tree:"
+        },
+        {
+          "type": "code",
+          "value": "const Button = ({ handleLogin }) =>\nReact.createElement(\n\"div\",\n{ id: \"login-btn\", onClick: handleLogin },\n\"Login\"\n);"
         }
       ]
     },
