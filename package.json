@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "node-jq": "^4.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
   }
 }

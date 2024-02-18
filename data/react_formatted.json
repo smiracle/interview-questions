@@ -1,0 +1,166 @@
+{
+    "questions": [
+        {
+            "header": "What is React?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "React(aka React.js or ReactJS) is an open-source front-end JavaScript library that is used for building composable user interfaces, especially for single-page applications. It is used for handling view layer for web and mobile apps based on components in a declarative approach."
+                }
+            ]
+        },
+        {
+            "header": "What is React's History?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "React was created by Jordan Walke, a software engineer working for Facebook. React was first deployed on Facebook's News Feed in 2011 and on Instagram in 2012."
+                },
+                {
+                    "type": "text",
+                    "value": "The history of ReactJS started in 2010 with the creation of XHP. XHP is a PHP extension which improved the syntax of the language such that XML document fragments become valid PHP expressions and the primary purpose was used to create custom and reusable HTML elements."
+                },
+                {
+                    "type": "text",
+                    "value": "The main principle of this extension was to make front-end code easier to understand and to help avoid cross-site scripting attacks. The project was successful in preventing the malicious content submitted by the scrubbing user."
+                },
+                {
+                    "type": "text",
+                    "value": "But there was a different problem with XHP in which dynamic web applications require many roundtrips to the server, and XHP did not solve this problem. Also, the whole UI was re-rendered for each incremental change in the application. Later, the initial prototype of React was created with the name FaxJ by Jordan, inspired from XHP. Finally after sometime React was introduced as a new library into JavaScript ecosystem. JSX comes from the idea of XHP."
+                }
+            ]
+        },
+        {
+            "header": "What are the major features of React?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "The major features of React are:"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Uses JSX syntax, a syntax extension of JS that allows developers to write HTML in their JS code.",
+                        "Uses the Virtual DOM instead of the real DOM, since DOM manipulations are expensive.",
+                        "Supports server-side rendering, which is useful for Search Engine Optimization (SEO).",
+                        "Follows unidirectional or 'one-way' data flow or data binding.",
+                        "Has reusable/composable UI components to develop the view."
+                    ]
+                }
+            ]
+        },
+        {
+            "header": "What is JSX?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "JSX stands for JavaScript XML and it is an XML-like syntax extension to ECMAScript. Basically it just provides the syntactic sugar for the React.createElement(type, props, ...children) function, giving us the expressiveness of JavaScript along with HTML-like template syntax. JSX is stricter than HTML."
+                },
+                {
+                    "type": "text",
+                    "value": "In the example below, the text inside the h1 tag is returned as a JavaScript function to the render function."
+                },
+                {
+                    "type": "code",
+                    "value": "export default function App() {\n  return <h1 className=\"greeting\">{\"Hello, this is a JSX Code!\"}</h1>;\n}\n"
+                },
+                {
+                    "type": "text",
+                    "value": "If you don't use JSX syntax then the respective JavaScript code should be written as below,"
+                },
+                {
+                    "type": "code",
+                    "value": "import { createElement } from \"react\";\nexport default function App() {\n  return createElement(\n    \"h1\",\n    { className: \"greeting\" },\n    \"Hello, this is a JSX Code!\",\n  );\n}\n"
+                }
+            ]
+        },
+        {
+            "header": "What is the difference between an Element and a Component?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "An Element is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. Elements can contain other Elements in their props. Creating a React element is cheap. Once an element is created, it cannot be mutated."
+                },
+                {
+                    "type": "text",
+                    "value": "The JavaScript representation (without JSX) of React Element would be as follows:"
+                },
+                {
+                    "type": "code",
+                    "value": "const element = React.createElement(\"div\", { id: \"login-btn\" }, \"Login\");\n"
+                },
+                {
+                    "type": "text",
+                    "value": "The above `React.createElement()` function returns an object as below:"
+                },
+                {
+                    "type": "json",
+                    "value": "{\n  \"type\": \"div\",\n  \"props\": {\n    \"children\": \"Login\",\n    \"id\": \"login-btn\"\n  }\n}"
+                },
+                {
+                    "type": "text",
+                    "value": "Finally, this element renders to the DOM using ReactDOM.render(). A component can be declared in several different ways. It can be a class with a render() method or it can be defined as a function. In either case, it takes props as input, and returns a JSX tree as the output:"
+                },
+                {
+                    "type": "code",
+                    "value": "const Button = ({ handleLogin }) => (\n  <div id={\"login-btn\"} onClick={handleLogin}>\n    Login\n  </div>\n);\n"
+                },
+                {
+                    "type": "text",
+                    "value": "Then JSX gets transpiled to a React.createElement() function tree:"
+                },
+                {
+                    "type": "code",
+                    "value": "const Button = ({ handleLogin }) =>\n  React.createElement(\n    \"div\",\n    { id: \"login-btn\", onClick: handleLogin },\n    \"Login\",\n  );\n"
+                }
+            ]
+        },
+        {
+            "header": "How to create components in React?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Components are the building blocks of creating User Interfaces(UI) in React. There are two possible ways to create a component."
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Function Components: This is the simplest way to create a component. Those are pure JavaScript functions that accept props object as the first parameter and return React elements to render the output"
+                    ]
+                },
+                {
+                    "type": "code",
+                    "value": "function Greeting({ message }) {\n  return <h1>{`Hello, ${message}`}</h1>;\n}\n"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Class Components: You can also use ES6 class to define a component. The above function component can be written as a class component:"
+                    ]
+                },
+                {
+                    "type": "code",
+                    "value": "class Greeting extends React.Component {\n  render() {\n    return <h1>{`Hello, ${this.props.message}`}</h1>;\n  }\n}\n"
+                }
+            ]
+        },
+        {
+            "header": "What is JEST?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "JEST is a delightful JavaScript Testing Framework with a focus on simplicity."
+                },
+                {
+                    "type": "code",
+                    "value": "const myRef = React.createRef();\n<SomeComponent ref={myRef} />;\n"
+                },
+                {
+                    "type": "link",
+                    "value": "https://jestjs.io/",
+                    "displayText": "JEST"
+                }
+            ]
+        }
+    ]
+}

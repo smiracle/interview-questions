@@ -2,3 +2,9 @@
 
 Uses the shell and the jq library to generate readme files based on JSON data for the purposes of cataloging and
 studying interview questions.
+
+Requires python and prettier to be installed globally and the jq executable (included).
+
+Format the json file with `node format_code_blocks.js`
+
+Then run the readme generation script `./generate-readme.sh`

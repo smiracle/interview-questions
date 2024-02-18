@@ -6,16 +6,16 @@
         {
           "type": "text",
           "value": "React(aka React.js or ReactJS) is an open-source front-end JavaScript library that is used for building composable user interfaces, especially for single-page applications. It is used for handling view layer for web and mobile apps based on components in a declarative approach."
-        },
-        {
-          "type": "text",
-          "value": "React was created by Jordan Walke, a software engineer working for Facebook. React was first deployed on Facebook's News Feed in 2011 and on Instagram in 2012."
         }
       ]
     },
     {
-      "header": "What is React's evolutionary history?",
+      "header": "What is React's History?",
       "content": [
+        {
+          "type": "text",
+          "value": "React was created by Jordan Walke, a software engineer working for Facebook. React was first deployed on Facebook's News Feed in 2011 and on Instagram in 2012."
+        },
         {
           "type": "text",
           "value": "The history of ReactJS started in 2010 with the creation of XHP. XHP is a PHP extension which improved the syntax of the language such that XML document fragments become valid PHP expressions and the primary purpose was used to create custom and reusable HTML elements."
@@ -70,7 +70,7 @@
         },
         {
           "type": "code",
-          "value": "import { createElement } from 'react';\n export default function App() {\nreturn createElement(\n'h1',{\nclassName: 'greeting' }, \n'Hello, this is a JSX Code!' \n);\n}"
+          "value": "import { createElement } from 'react'; export default function App() {return createElement('h1',{className: 'greeting' }, 'Hello, this is a JSX Code!') ;}"
         }
       ]
     },
@@ -94,8 +94,8 @@
           "value": "The above `React.createElement()` function returns an object as below:"
         },
         {
-          "type": "code",
-          "value": "{ type: 'div', props: { children: 'Login', id: 'login-btn' } }"
+          "type": "json",
+          "value": "{ \"type\": \"div\", \"props\": { \"children\": \"Login\", \"id\": \"login-btn\" } }"
         },
         {
           "type": "text",
@@ -112,6 +112,35 @@
         {
           "type": "code",
           "value": "const Button = ({ handleLogin }) =>\nReact.createElement(\n\"div\",\n{ id: \"login-btn\", onClick: handleLogin },\n\"Login\"\n);"
+        }
+      ]
+    },
+    {
+      "header": "How to create components in React?",
+      "content": [
+        {
+          "type": "text",
+          "value": "Components are the building blocks of creating User Interfaces(UI) in React. There are two possible ways to create a component."
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Function Components: This is the simplest way to create a component. Those are pure JavaScript functions that accept props object as the first parameter and return React elements to render the output"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "function Greeting({ message }) {return <h1>{`Hello, ${message}`}</h1>;}"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Class Components: You can also use ES6 class to define a component. The above function component can be written as a class component:"
+          ]
+        },
+        {
+          "type": "code",
+          "value": "class Greeting extends React.Component { render() {return <h1>{`Hello, ${this.props.message}`}</h1>;}}"
         }
       ]
     },
