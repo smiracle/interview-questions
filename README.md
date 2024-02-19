@@ -8,3 +8,5 @@ Requires python and prettier to be installed globally and the jq executable (inc
 Format the json file with `node format_code_blocks.js`
 
 Then run the readme generation script `./generate-readme.sh`
+
+Or run `npm run s` to recompile by calling both scripts.

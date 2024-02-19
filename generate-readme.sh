@@ -37,8 +37,14 @@ while IFS= read -r line; do
     # Append header
     README_CONTENT+="### $header\n\n"
 
-    # Append contents
-    contents=$(echo "$line" | jq -r '.content[] | if .type == "text" or .type == "json" then .value elif .type == "code" then "```javascript\n" + .value + "\n```" elif .type == "link" then "[\(.displayText)](\(.value))" elif .type == "bullets" then .values[] | "- " + . else empty end')
+    # Append contents with support for "image" type
+    contents=$(echo "$line" | jq -r '.content[] |
+        if .type == "text" or .type == "json" then .value
+        elif .type == "code" then "```javascript\n" + .value + "\n```"
+        elif .type == "link" then "[\(.displayText)](\(.value))"
+        elif .type == "bullets" then .values[] | "- " + .
+        elif .type == "image" then "![\(.alt)](\(.path))"
+        else empty end')
     README_CONTENT+="$contents\n\n"
 
     # Append back to top link
@@ -49,4 +55,4 @@ done < <(jq -c '.questions[]' "$FORMATTED_JSON_FILE")
 echo -e "$README_CONTENT" > "$OUTPUT_FILE"
 
 echo "README generated successfully at $OUTPUT_FILE."
-read -p "Press enter to continue"
+#read -p "Press enter to continue"

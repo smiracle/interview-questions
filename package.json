@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5"
+  },
+  "scripts": {
+    "s": "node ./format_code_blocks.js && .\\generate-readme.sh"
   }
 }
