@@ -14,19 +14,39 @@
       "content": [
         {
           "type": "text",
-          "value": "React was created by Jordan Walke, a software engineer working for Facebook. React was first deployed on Facebook's News Feed in 2011 and on Instagram in 2012."
+          "value": "The foundation for ReactJS started in 2010 with the creation of XHP, a PHP extension designed to improve PHP's syntax for creating reusable HTML elements. This project laid the groundwork for React's development."
         },
         {
           "type": "text",
-          "value": "The history of ReactJS started in 2010 with the creation of XHP. XHP is a PHP extension which improved the syntax of the language such that XML document fragments become valid PHP expressions and the primary purpose was used to create custom and reusable HTML elements."
+          "value": "\n\nReact was created by Jordan Walke, a software engineer at Facebook. The initial prototype, known as 'FaxJS', aimed to address inefficiencies in dynamic UI development."
         },
         {
           "type": "text",
-          "value": "The main principle of this extension was to make front-end code easier to understand and to help avoid cross-site scripting attacks. The project was successful in preventing the malicious content submitted by the scrubbing user."
+          "value": "\n\nReact was first used in Facebook's News Feed in 2011 and on Instagram in 2012. The success of React in these applications showcased its potential to streamline front-end development."
         },
         {
           "type": "text",
-          "value": "But there was a different problem with XHP in which dynamic web applications require many roundtrips to the server, and XHP did not solve this problem. Also, the whole UI was re-rendered for each incremental change in the application. Later, the initial prototype of React was created with the name FaxJ by Jordan, inspired from XHP. Finally after sometime React was introduced as a new library into JavaScript ecosystem. JSX comes from the idea of XHP."
+          "value": "\n\nIn 2013, React was officially open-sourced at JSConf US, making it available to the wider developer community. This marked the beginning of its rapid adoption and ecosystem growth."
+        },
+        {
+          "type": "text",
+          "value": "\n\nReact Native was released in 2015, extending React's component-based model to mobile app development and further solidifying React's position in the developer community."
+        },
+        {
+          "type": "text",
+          "value": "\n\nIn 2016, the React team announced the development of React Fiber, a complete rewrite of React's core algorithm, to enhance its capabilities and performance."
+        },
+        {
+          "type": "text",
+          "value": "\n\nReact 16 was released in 2017, incorporating the new Fiber rendering engine. This update brought significant performance improvements and introduced features like error boundaries and fragments."
+        },
+        {
+          "type": "text",
+          "value": "\n\nHooks were introduced in React 16.8 in 2018, offering a powerful new way to use state and other React features in functional components, marking a significant evolution in React's development."
+        },
+        {
+          "type": "text",
+          "value": "\n\nSince then, React has continued to evolve, with the React team focusing on features like concurrent mode, server components, and improving the overall developer experience."
         }
       ]
     },
@@ -83,7 +103,7 @@
         },
         {
           "type": "text",
-          "value": "While JSX makes your code more readable and concise, especially for complex UI structures, using `React.createElement` directly can give you a deeper understanding of React's working principles. It can also be useful in environments where you cannot or prefer not to use a JSX transpiler. However, for larger projects or when working with teams, the clarity and simplicity offered by JSX often outweigh the benefits of avoiding it."
+          "value": "\n\nWhile JSX makes your code more readable and concise, especially for complex UI structures, using `React.createElement` directly can give you a deeper understanding of React's working principles. It can also be useful in environments where you cannot or prefer not to use a JSX transpiler. However, for larger projects or when working with teams, the clarity and simplicity offered by JSX often outweigh the benefits of avoiding it."
         }
       ]
     },
@@ -96,11 +116,11 @@
         },
         {
           "type": "text",
-          "value": " A component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs."
+          "value": " \n\nA component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs."
         },
         {
           "type": "text",
-          "value": "Example JavaScript representation (without JSX) of a React Element:"
+          "value": "\n\nExample JavaScript representation (without JSX) of a React Element:"
         },
         {
           "type": "code",
@@ -223,11 +243,11 @@
         },
         {
           "type": "text",
-          "value": "In class components, the components extending React.PureComponent instead of React.Component become the pure components. When props or state changes, PureComponent will do a shallow comparison on both props and state by invoking shouldComponentUpdate() lifecycle method."
+          "value": "\nIn class components, the components extending React.PureComponent instead of React.Component become the pure components. When props or state changes, PureComponent will do a shallow comparison on both props and state by invoking shouldComponentUpdate() lifecycle method."
         },
         {
           "type": "text",
-          "value": "Note: `React.memo()` is a higher-order component."
+          "value": "\nNote: `React.memo()` is a higher-order component."
         }
       ]
     },
@@ -266,15 +286,15 @@
         },
         {
           "type": "text",
-          "value": "Props are immutable within the child component, which means that a component cannot change its own props."
+          "value": "\nProps are immutable within the child component, which means that a component cannot change its own props."
         },
         {
           "type": "text",
-          "value": "Props can be used to pass data (like strings, numbers, objects, arrays, functions, etc.) and callback functions to child components. This allows child components to behave dynamically based on the data they receive."
+          "value": "\nProps can be used to pass data (like strings, numbers, objects, arrays, functions, etc.) and callback functions to child components. This allows child components to behave dynamically based on the data they receive."
         },
         {
           "type": "text",
-          "value": "Props in a functional component:"
+          "value": "\nProps in a functional component:"
         },
         {
           "type": "code",
@@ -317,7 +337,7 @@
         },
         {
           "type": "text",
-          "value": "A controlled component has its value controlled by React. You manage the form data with a state within the component. Each state mutation will have an associated handler function, making React the \"single source of truth\" regarding the form data. This approach allows you to easily validate or modify user input. Here's a simple example of a controlled component:"
+          "value": "\nA controlled component has its value controlled by React. You manage the form data with a state within the component. Each state mutation will have an associated handler function, making React the \"single source of truth\" regarding the form data. This approach allows you to easily validate or modify user input. Here's a simple example of a controlled component:"
         },
         {
           "type": "code",
@@ -325,7 +345,7 @@
         },
         {
           "type": "text",
-          "value": "An uncontrolled component works like form elements traditionally do in HTML. Instead of writing an event handler for all ways your data might change and funneling all input through a React state, you use a ref to retrieve values from the DOM. This means the form data is handled by the DOM itself. Here's an example of an uncontrolled component:"
+          "value": "\nAn uncontrolled component works like form elements traditionally do in HTML. Instead of writing an event handler for all ways your data might change and funneling all input through a React state, you use a ref to retrieve values from the DOM. This means the form data is handled by the DOM itself. Here's an example of an uncontrolled component:"
         },
         {
           "type": "code",
@@ -345,7 +365,7 @@
         },
         {
           "type": "text",
-          "value": "Uncontrolled Components:"
+          "value": "\nUncontrolled Components:"
         },
         {
           "type": "bullets",
@@ -387,7 +407,7 @@
         },
         {
           "type": "text",
-          "value": "Note: It is recommended to use lifecycle methods rather than this callback function."
+          "value": "\nNote: It is recommended to use lifecycle methods rather than this callback function."
         },
         {
           "type": "code",
@@ -408,7 +428,7 @@
         },
         {
           "type": "text",
-          "value": "Whereas in React it follows camelCase convention:"
+          "value": "In React events such as onClick follow camelCase convention:"
         },
         {
           "type": "code",
@@ -547,16 +567,44 @@
         },
         {
           "type": "text",
-          "value": "React's component-based architecture complements the Virtual DOM's efficiency. Components encapsulate their own state and logic, which allows React to track changes at the component level. This granularity helps in optimizing updates and renders. By using the Virtual DOM, frameworks like React can offer a declarative API for defining UI components. Developers describe what the UI should look like for any given state, and the library takes care of efficiently updating the DOM to match that description. This abstraction allows for the creation of dynamic, interactive UIs that are fast and responsive, even with complex applications that have frequent updates."
+          "value": "\nReact's component-based architecture complements the Virtual DOM's efficiency. Components encapsulate their own state and logic, which allows React to track changes at the component level. This granularity helps in optimizing updates and renders. By using the Virtual DOM, frameworks like React can offer a declarative API for defining UI components. Developers describe what the UI should look like for any given state, and the library takes care of efficiently updating the DOM to match that description. This abstraction allows for the creation of dynamic, interactive UIs that are fast and responsive, even with complex applications that have frequent updates."
         }
       ]
     },
     {
-      "header": "What are hooks in react?",
+      "header": "What are hooks in React?",
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "Hooks are a feature introduced in React 16.8 that allow you to use state and other React features without writing a class. They enable you to \"hook into\" React state and lifecycle features from function components. Hooks don't work inside classes — they let you use React without classes. React provides a few built-in Hooks like useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, useImperativeHandle, useLayoutEffect, and useDebugValue."
+        },
+        {
+          "type": "text",
+          "value": "\nuseState: This Hook lets you add React state to function components."
+        },
+        {
+          "type": "code",
+          "value": "import React, { useState } from 'react'; function Example() { const [count, setCount] = useState(0); return ( <div> <p>You clicked {count} times</p> <button onClick={() => setCount(count + 1)}> Click me </button> </div> ); }"
+        },
+        {
+          "type": "text",
+          "value": "\nuseEffect: This Hook lets you perform side effects in function components. It serves the same purpose as componentDidMount, componentDidUpdate, and componentWillUnmount in React classes, but unified into a single API."
+        },
+        {
+          "type": "code",
+          "value": "import React, { useState, useEffect } from 'react';function Example() {const [count, setCount] = useState(0); useEffect(() => {document.title = `You clicked ${count} times`;});return ( <div>      <p>You clicked {count} times</p> <button onClick={() => setCount(count + 1)}>Click me</button></div>);}"
+        },
+        {
+          "type": "text",
+          "value": "useContext: This Hook lets you subscribe to React context without introducing nesting. It allows you to easily access the context value."
+        },
+        {
+          "type": "code",
+          "value": "import React, { useContext } from 'react';const ThemeContext = React.createContext('light');function Example() {const theme = useContext(ThemeContext); return <div theme={theme}>...</div>;}"
+        },
+        {
+          "type": "text",
+          "value": "Hooks are a powerful and expressive feature that make it easier to design clean, readable, and straightforward components. They allow for better reuse of stateful logic and can make your component logic more modular and easier to understand."
         }
       ]
     },
@@ -565,7 +613,59 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "The useState hook is a fundamental part of React's Hooks API that allows you to add state to functional components. Before hooks, state could only be used in class components, but useState opens up the ability to manage state in a more functional approach."
+        },
+        {
+          "type": "text",
+          "value": "Usage: The useState hook is used to declare a state variable in a functional component. When you call useState, you pass the initial state to this function and it returns an array containing the current state value (the first element) and a function that lets you update it (the second element)."
+        },
+        {
+          "type": "code",
+          "value": "import React, { useState } from 'react'; function Counter() {const [count, setCount] = useState(0);return (<div><p>You clicked {count} times</p><button onClick={() => setCount(count + 1)}>Click me</button></div>);}"
+        },
+        {
+          "type": "text",
+          "value": "Pitfalls and Best Practices: \n1. Not Using Functional Updates for the Previous State: When the new state depends on the old state, you should use a function inside setCount which React will pass the current state to. This ensures state consistency because of React's asynchronous state updates."
+        },
+        {
+          "type": "code",
+          "value": "setCount(prevCount => prevCount + 1);"
+        },
+        {
+          "type": "text",
+          "value": "2. Overusing State: Splitting state into multiple state variables based on which values tend to change together can lead to simpler code and fewer re-renders compared to having a single state object. Instead of this:"
+        },
+        {
+          "type": "code",
+          "value": "const [state, setState] = useState({count: 0, flag: true});"
+        },
+        {
+          "type": "text",
+          "value": "Split state like this:"
+        },
+        {
+          "type": "code",
+          "value": "const [count, setCount] = useState(0); const [flag, setFlag] = useState(true);"
+        },
+        {
+          "type": "text",
+          "value": "3. Expecting State Updates to be Synchronous: React state updates, triggered by useState, do not happen immediately. They are asynchronous for performance reasons. Trying to read state immediately after setting it might not give the updated values. This might not log 1 because state updates are asynchronous:"
+        },
+        {
+          "type": "code",
+          "value": "setCount(1);console.log(count);"
+        },
+        {
+          "type": "text",
+          "value": "4. Initializing State from Props: Be cautious when initializing state from props. It's fine for initial state, but if you need to keep it in sync with props, consider using the useEffect hook instead."
+        },
+        {
+          "type": "code",
+          "value": "const [count, setCount] = useState(props.count);"
+        },
+        {
+          "type": "text",
+          "value": "If props.count changes and you want to update state accordingly, you'll need to use useEffect to observe changes.\n5. Ignoring the Dependency Array in Effects: When using useState in conjunction with useEffect, remember to correctly manage the dependency array of useEffect to avoid infinite loops or stale closures. Understanding and avoiding these pitfalls will help you use useState more effectively, leading to cleaner and more maintainable components."
         }
       ]
     },
@@ -574,7 +674,51 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "The useEffect hook lets you perform side effects in functional components. It serves the same purpose as componentDidMount, componentDidUpdate, and componentWillUnmount in React class lifecycle methods, but unified into a single API.\n\nTypical Usage: useEffect is used for data fetching, setting up a subscription, or manually changing the DOM in React components. It runs after the first render and after every update by default. \nHere's a basic example to fetch data:"
+        },
+        {
+          "type": "code",
+          "value": "import React, { useState, useEffect } from 'react';\n\nfunction Example() {\n  const [data, setData] = useState([]);\n\n  useEffect(() => {\n    fetch(\"https://api.example.com/data\")\n      .then(response => response.json())\n      .then(data => setData(data));\n  }, []); // The empty array means this effect runs once after the initial render\n\n  return (\n    <div>{data.map(item => <div key={item.id}>{item.title}</div>)}</div>\n  );\n}"
+        },
+        {
+          "type": "text",
+          "value": "Pitfalls and Best Practices \n\n1.Forgetting to Specify the Dependency Array: Not providing a dependency array or forgetting to include a variable used inside useEffect can lead to unexpected behavior. It might cause the effect to run more often than needed."
+        },
+        {
+          "type": "code",
+          "value": "useEffect(() => {\n  console.log('Component updated');\n});"
+        },
+        {
+          "type": "text",
+          "value": "2. Including Functions in the Dependency Array Without Wrapping in useCallback: If you pass functions to the dependency array, ensure they are stable between renders by wrapping them with useCallback."
+        },
+        {
+          "type": "code",
+          "value": "const stableFunction = useCallback(() => {\n  console.log('This function is stable between renders');\n}, []);"
+        },
+        {
+          "type": "text",
+          "value": "3. Excessive Fetching on Updates: Ensure the effect only runs when necessary by correctly specifying dependencies to avoid unnecessary network requests."
+        },
+        {
+          "type": "code",
+          "value": "useEffect(() => {\n  fetchData(id);\n}, [id]); // Only re-run the effect if `id` changes"
+        },
+        {
+          "type": "text",
+          "value": "4. Cleaning up Effects: Always return a cleanup function from effects that set up a subscription or listeners to prevent memory leaks."
+        },
+        {
+          "type": "code",
+          "value": "useEffect(() => {\n  const subscription = dataSource.subscribe();\n  return () => {subscription.unsubscribe();  };}, []);"
+        },
+        {
+          "type": "text",
+          "value": "5. Infinite Loops: Be cautious with dependencies to avoid infinite loops. Ensure effects do not endlessly trigger themselves."
+        },
+        {
+          "type": "text",
+          "value": "\n\n6. Ignoring Effect Timing: Effects run after paint, so consider potential UI flickers. Use CSS or conditional rendering to mitigate visible delays."
         }
       ]
     },
@@ -583,25 +727,47 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "When a React component receives new props, a few things happen in sequence to ensure the component reflects the updated props:\n\ngetDerivedStateFromProps is called (if it is defined): This static method is called right before rendering, both on the initial mount and on subsequent updates. It's used to update the state based on changes in props over time. During this process, React ensures that the component accurately represents the new props, maintaining the UI in sync with the data:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "1. `getDerivedStateFromProps` is called (if it is defined): This static method is called right before rendering, both on the initial mount and on subsequent updates. It's used to update the state based on changes in props over time.",
+            "2. `shouldComponentUpdate` is called (if it is defined): This method determines whether React should continue with the rendering process. By returning false, React skips the rendering and lifecycle methods for that update.",
+            "3. `render` method is called: React calls the render method to get the component's updated JSX representation based on the new props and state.",
+            "4. `getSnapshotBeforeUpdate` is called (if it is defined): This method is called right before the most recently rendered output is committed to the DOM. It enables the component to capture some information from the DOM (e.g., scroll position) before it is potentially changed.",
+            "5. `componentDidUpdate` is called: This method is called after the component is updated in the DOM. It's useful for performing operations like network requests or DOM manipulation in response to prop changes."
+          ]
         }
       ]
     },
     {
-      "header": "What are some common pitfalls when fetching data in react?",
+      "header": "What are some common pitfalls when fetching data in React?",
       "content": [
         {
-          "type": "text",
-          "value": "todo"
+          "type": "bullets",
+          "values": [
+            "1. Fetching in the Wrong Lifecycle Method: Fetching data too early, such as in the constructor or componentWillMount (for class components), can lead to server-side rendering issues or state inconsistency. The recommended approach is to fetch data in componentDidMount or, for functional components, within useEffect with an empty dependency array.",
+            "2. Memory Leaks: When a component initiates a data fetch and is unmounted before the fetch completes, setting state on an unmounted component can cause memory leaks. To prevent this, you should cancel any ongoing fetches or ignore the results in the cleanup function of useEffect.",
+            "3. Not Handling Loading States: Failing to handle loading states properly can lead to a poor user experience. It's important to show feedback (like a spinner) while data is being fetched.",
+            "4. Ignoring Errors: Not handling errors in data fetching can leave users confused if the fetch fails silently. Always implement error handling to inform users of any issues.",
+            "5. Over-fetching or Under-fetching: Fetching too much data can lead to performance issues, while fetching too little can cause additional unnecessary network requests. Aim to fetch exactly what's needed.",
+            "6. Not Caching Results: Re-fetching the same data on every component mount can be inefficient, especially for data that changes infrequently. Consider using a caching strategy or a library like React Query to cache and synchronize server state.",
+            "7. Misusing Dependencies in useEffect: Incorrect dependency array usage in useEffect for data fetching can lead to infinite loops or stale closures. Ensure the dependency array accurately represents all variables that the effect depends on."
+          ]
         }
       ]
     },
     {
-      "header": "What is the difference between let and const?",
+      "header": "What is the difference between var and let?",
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "VAR\nDeclaring a var at the global level creates a property on the global object (which is 'window' in browsers). This means that if you declare a global variable with var, you can access it as a property of the global object. Var is function scoped and hoisted to the top of their *function* scope (only the declaration is hoisted, not the initialization). You can redeclare the same variable within the same scope without causing an error, which can lead to bugs."
+        },
+        {
+          "type": "text",
+          "value": "\n\nLET\nLet is block scoped and is hoisted to the top of their *block* scope, but they are not declared or initialized. You cannot redeclare the same variable within the same scope. You cannot redeclare let variables. Declaration at the global level does not create a property on the global object. This behavior is helpful in modular JavaScript development, where you wish to avoid polluting the global namespace. Const works the same as let, but contains values that can't be modified."
         }
       ]
     },
@@ -614,7 +780,7 @@
         },
         {
           "type": "text",
-          "value": "When you would use a callback:"
+          "value": "\n\nWhen you would use a callback:"
         },
         {
           "type": "bullets",
@@ -624,10 +790,6 @@
             "Higher-Order Functions: In JavaScript, functions that take other functions as arguments or return them as output are called higher-order functions. Callbacks are often used in this context to allow for custom behavior to be inserted into reusable functions. For example, array methods like .map(), .filter(), and .reduce() accept callback functions to perform operations on array elements.",
             "Continuation Passing: Callbacks can be used in Continuation-Passing Style (CPS), a pattern where control is passed to the next step of a program through a callback. This can be seen in Node.js style error-first callbacks, where the first argument to the callback is an error object, and subsequent arguments represent resulting data from the async operation."
           ]
-        },
-        {
-          "type": "text",
-          "value": "Example:"
         },
         {
           "type": "code",
@@ -656,7 +818,23 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their containing scope before code execution. Regardless of where functions and variables are declared, they are hoisted to the top of their scope by the JavaScript engine. However, only the declarations are hoisted, not initializations.\n\nFor variables, this means that referencing a variable before it is declared will result in undefined because only the declaration (var x;), not the initialization (x = 5;), is hoisted to the top. For functions, because the entire function declaration is hoisted, it can be called before it is declared in the code.\n\nHere's how hoisting works with variables:"
+        },
+        {
+          "type": "code",
+          "value": "console.log(x); var x = 5; console.log(x); // Outputs: undefined, 5"
+        },
+        {
+          "type": "text",
+          "value": "And for functions:"
+        },
+        {
+          "type": "code",
+          "value": "hoistedFunction(); function hoistedFunction() { console.log('I am hoisted!'); } // Outputs: I am hoisted!"
+        },
+        {
+          "type": "text",
+          "value": "It's important to note that let and const declarations are hoisted as well, but they maintain a temporal dead zone from the start of the block until the declaration is initialized, resulting in a ReferenceError if accessed before initialization."
         }
       ]
     },
@@ -665,7 +843,11 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "A closure in JavaScript is a feature where a function retains access to its lexical scope even when the function is executed outside that scope. In simpler terms, closures allow functions to remember and access variables from the place where they were defined, even after the outer function has finished executing. This behavior enables powerful programming patterns, such as data encapsulation, currying, and creating function factories."
+        },
+        {
+          "type": "code",
+          "value": "function createGreeting(greeting) {return function(name) {console.log(`${greeting}, ${name}!`);};}const greetHello = createGreeting(\"Hello\");greetHello(\"Alice\"); // Output: \"Hello, Alice!\""
         }
       ]
     },
