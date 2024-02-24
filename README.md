@@ -12,3 +12,14 @@ Then run the readme generation script `./generate-readme.sh`
 Or run `npm run s` to recompile by calling both scripts.
 
 You can view formatted readme files in the topics/ directory. The only topic covered for now is React.
+
+#### Run locally
+
+`cd InterviewQuestions && npx react-native run-android`
+
+#### Clean and rebuild
+
+- `cd android`
+- `./gradlew clean`
+- `cd ..`
+- `npx react-native run-android`
