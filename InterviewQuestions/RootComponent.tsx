@@ -1,6 +1,5 @@
-import React from 'react';
 import App from './App';
-import {ThemeProvider} from './ThemeProvider';
+import {ThemeProvider} from './components/ThemeProvider';
 
 const RootComponent = () => {
   return (

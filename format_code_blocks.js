@@ -1,8 +1,8 @@
 const fs = require("fs");
 const prettier = require("prettier");
 
-const dataPath = "./data/react.json"; // Adjust path as needed
-const formattedDataPath = "./data/react_formatted.json"; // Adjust path as needed
+const dataPath = "./InterviewQuestions/data/react.json"; // Adjust path as needed
+const formattedDataPath = "./InterviewQuestions/data/react_formatted.json"; // Adjust path as needed
 
 // Read the JSON file
 let data = JSON.parse(fs.readFileSync(dataPath, "utf8"));

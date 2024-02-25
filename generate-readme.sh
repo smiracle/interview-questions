@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define paths
-JSON_FILE="data/react.json"
-FORMATTED_JSON_FILE="data/react_formatted.json"
+JSON_FILE="InterviewQuestions/data/react.json"
+FORMATTED_JSON_FILE="InterviewQuestions/data/react_formatted.json"
 PYTHON_SCRIPT="./preprocess_json_data.py"
 JQ_PATH="./jq-windows-i386.exe"
 OUTPUT_FILE="topics/react_readme.md"
