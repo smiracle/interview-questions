@@ -1,41 +1,36 @@
-import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {useTheme} from './components/ThemeProvider';
+import {StyleSheet} from 'react-native';
 import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import QuestionsList from './components/QuestionsList';
 import QuestionDetails from './components/QuestionDetails';
-import questionsData from './data/react_formatted.json';
 import {Question} from './components/Question';
+import TopicsList from './components/TopicsList';
 
-// Define the types for your navigation stack
-type RootStackParamList = {
-  QuestionsList: undefined;
+export type RootStackParamList = {
+  TopicsList: undefined;
+  QuestionsList: {topicFileName: string};
   QuestionDetails: {question: Question | null};
 };
+
 const Stack = createStackNavigator<RootStackParamList>();
 
-const questions: Question[] = questionsData.questions as Question[];
-
 const App = () => {
-  const {theme, toggleTheme} = useTheme();
   const [selectedQuestion, setSelectedQuestion] = useState<Question | null>(
     null,
   );
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="TopicsList">
+        <Stack.Screen name="TopicsList" component={TopicsList} />
         <Stack.Screen name="QuestionsList">
           {props => (
             <QuestionsList
-              {...props}
-              questions={questions}
+              topicFileName="react_formatted"
               onSelect={(question: Question) => {
                 setSelectedQuestion(question);
-                props.navigation.navigate('QuestionDetails', {
-                  question,
-                });
+                props.navigation.navigate('QuestionDetails', {question});
               }}
             />
           )}

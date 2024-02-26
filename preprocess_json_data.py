@@ -35,7 +35,7 @@ def preprocess_json_data(file_path):
             elif content['type'] == 'json':
                 content['value'] = format_json_content(content['value'])
 
-    with open('data/react_formatted.json', 'w') as file:
+    with open('InterviewQuestions/data/react_formatted.json', 'w') as file:
         json.dump(data, file, indent=4)
 
-preprocess_json_data('data/react.json')
+preprocess_json_data('InterviewQuestions/data/react.json')

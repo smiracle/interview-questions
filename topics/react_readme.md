@@ -849,6 +849,8 @@ Compatibility: Some third-party libraries or older documentation examples may on
 
 Transitioning to Functional Components
 The React team encourages the use of functional components with Hooks for new development because of their simplicity, reduced boilerplate, and enhanced capabilities with the same power as class components. The introduction of Hooks has addressed many of the limitations that initially led developers to choose class components, such as using local component state, effects, and accessing the context API.
+
+
 While functional components and Hooks are now the recommended approach for new components in React, understanding when to use class components is valuable, especially in legacy projects or when specific patterns necessitate their use. However, for most use cases, functional components with Hooks will be more concise and align with modern React development practices.
 
 [↑ Back to top](#react-topics)

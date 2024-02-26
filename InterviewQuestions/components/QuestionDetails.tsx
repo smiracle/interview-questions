@@ -1,6 +1,7 @@
 import React from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {Question} from './Question';
+import {Image} from 'react-native';
 
 interface QuestionDetailsProps {
   question: Question | null;
@@ -8,7 +9,6 @@ interface QuestionDetailsProps {
 
 const QuestionDetails: React.FC<QuestionDetailsProps> = ({question}) => {
   if (!question) {
-    // Handle the case when no question is selected, maybe show an empty state or a message
     return (
       <View>
         <Text>No question selected.</Text>
@@ -21,6 +21,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({question}) => {
       <Text>{question.header}</Text>
       {question.content.map((content, index) => {
         switch (content.type) {
+          case 'json':
           case 'text':
             return (
               <Text key={index} style={{marginBottom: 10}}>
@@ -38,11 +39,19 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({question}) => {
               </View>
             );
           case 'code':
-            // Render code with a specific style or use a library
             return (
               <Text key={index} style={{fontFamily: 'monospace'}}>
                 {content.value}
               </Text>
+            );
+          case 'image':
+            return (
+              <Image
+                key={index}
+                style={{width: 200, height: 200}}
+                source={{uri: content.path}}
+                alt={content.alt}
+              />
             );
           default:
             return null;

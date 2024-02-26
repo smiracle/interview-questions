@@ -1,28 +1,37 @@
 ### Interview questions
-Created by Steven 2/24/24
-Repository for information regarding common technical interview questions.
-Generates complex readme files based on JSON data.
-Also serves up the JSON data in an Android app using React Native.
 
-You can view formatted readme files in the topics/ directory. The only topic covered for now is React.
+Created by Steven 2/24/24. This repository provides common technical interview questions and their associated answers.
+Scripts here will generate readme files based on JSON data. Code blocks in the readme files are formatted and inserted
+into the readme using Prettier. A built-in android app also serves this data using React Native in an easy to digest
+format.
+
+You can view formatted readme files in the topics/ directory.
 
 #### Prerequisites
-- Python global installation
-- Prettier global installation
+
+- Python global installation.
+- Prettier global installation. You'll have to define the path to your prettier executable in the
+  [preprocess json data](preprocess_json_data.py) file.
 - JQ executable (included).
 
-#### Generating the JSON
+#### Generating the formatted JSON
+
 `node format_code_blocks.js`
 
-#### Regenerating Readme Files
-`./generate-readme.sh`
-Alternatively, you can run `npm run s` which will invoke both the JSON and Readme generation scripts.
+#### Regenerating Readme Files based on the JSON
 
-#### Run locally
+`./generate-readme.sh` Alternatively, you can run `npm run s` which will invoke both the JSON and Readme generation
+scripts.
 
-`cd InterviewQuestions && npx react-native run-android`
+#### Run the Android app locally
 
-#### Clean and rebuild
+Android app commands must be executed inside of the InterviewQuestions directory that's inside of the repository's root
+directory.
+
+- `cd InterviewQuestions`
+- `npx react-native run-android`
+
+#### Clean and rebuild the Android app
 
 - `cd android`
 - `./gradlew clean`
