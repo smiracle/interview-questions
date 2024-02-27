@@ -1,8 +1,11 @@
 const fs = require("fs");
 const prettier = require("prettier");
 
-const dataPath = "./InterviewQuestions/data/react.json";
-const formattedDataPath = "./InterviewQuestions/data/react_formatted.json";
+// Take a topic parameter from the command line
+const topic = process.argv[2]; // Assumes the topic is passed as the first argument
+
+const dataPath = `./InterviewQuestions/data/${topic}.json`;
+const formattedDataPath = `./InterviewQuestions/data/${topic}_formatted.json`;
 
 // Read the JSON file
 let data = JSON.parse(fs.readFileSync(dataPath, "utf8"));

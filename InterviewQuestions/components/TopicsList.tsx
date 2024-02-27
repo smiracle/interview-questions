@@ -6,6 +6,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 const topics = [
   {name: 'React', fileName: 'react_formatted'},
+  {name: 'Systems Design', fileName: 'systems_design_formatted'},
   // Todo: add more
 ];
 

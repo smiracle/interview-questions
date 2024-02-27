@@ -7,15 +7,26 @@ import {
 } from 'react-native';
 import {Question} from './Question';
 import reactQuestions from '../data/react_formatted.json';
+import systemsDesignQuestions from '../data/systems_design_formatted.json';
 
-// Define the type for the topic file names based on the keys in topicToDataMap
-type TopicFileName = 'react_formatted'; // Extend this type as you add more topics
+type TopicFileName = 'react_formatted' | 'systems_design_formatted';
+
 const validatedReactQuestions = validateQuestionsData(reactQuestions)
   ? reactQuestions
   : {questions: []};
 
+const validatedSystemsDesignQuestions = validateQuestionsData(
+  systemsDesignQuestions,
+)
+  ? systemsDesignQuestions
+  : {questions: []};
+
+const topicToDataMap: Record<TopicFileName, {questions: Question[]}> = {
+  react_formatted: validatedReactQuestions,
+  systems_design_formatted: validatedSystemsDesignQuestions,
+};
+
 function validateQuestionsData(data: any): data is {questions: Question[]} {
-  // Check if data is an object and has a questions property that is an array
   if (
     typeof data !== 'object' ||
     data === null ||
@@ -24,9 +35,7 @@ function validateQuestionsData(data: any): data is {questions: Question[]} {
     return false;
   }
 
-  // Check each question in the array
   return data.questions.every((question: any) => {
-    // Check if each question has a header and content property
     if (
       typeof question.header !== 'string' ||
       !Array.isArray(question.content)
@@ -34,9 +43,7 @@ function validateQuestionsData(data: any): data is {questions: Question[]} {
       return false;
     }
 
-    // Check each content item within a question
     return question.content.every((content: any) => {
-      // Validate content based on its type property
       switch (content.type) {
         case 'text':
         case 'code':
@@ -59,11 +66,6 @@ function validateQuestionsData(data: any): data is {questions: Question[]} {
   });
 }
 
-const topicToDataMap: Record<TopicFileName, {questions: Question[]}> = {
-  react_formatted: validatedReactQuestions,
-};
-
-// Props interface now uses TopicFileName to ensure the prop is a valid key of topicToDataMap
 interface QuestionsListProps {
   topicFileName: TopicFileName;
   onSelect: (question: Question) => void;

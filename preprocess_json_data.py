@@ -1,8 +1,21 @@
 import json
 import subprocess
+import sys
 
 # Define the path to the Prettier executable
 prettier_path = r"C:\Users\stvnm\AppData\Roaming\npm\prettier.cmd"
+
+def preprocess_json_data(file_path):
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+
+    # The processing part remains the same
+
+if __name__ == "__main__":
+    # Take topic from command line argument
+    topic = sys.argv[1]  # Assuming the topic is passed as the first argument
+    file_path = f'InterviewQuestions/data/{topic}.json'
+    preprocess_json_data(file_path)
 
 def format_with_prettier(code_str, parser='babel'):
     try:
@@ -38,4 +51,3 @@ def preprocess_json_data(file_path):
     with open('InterviewQuestions/data/react_formatted.json', 'w') as file:
         json.dump(data, file, indent=4)
 
-preprocess_json_data('InterviewQuestions/data/react.json')

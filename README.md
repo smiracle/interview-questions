@@ -23,6 +23,16 @@ You can view formatted readme files in the topics/ directory.
 `./generate-readme.sh` Alternatively, you can run `npm run s` which will invoke both the JSON and Readme generation
 scripts.
 
+### New commands:
+
+`node format_code_blocks.js systems_design`
+
+`./generate-readme.sh systems_design`
+
+(Optional) For preprocess_json_data.py (called inside generate-readme.sh, but can be called directly for testing):
+
+`python preprocess_json_data.py systems_design`
+
 #### Run the Android app locally
 
 Android app commands must be executed inside of the InterviewQuestions directory that's inside of the repository's root
