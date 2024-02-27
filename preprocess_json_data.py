@@ -1,9 +1,14 @@
 import json
 import subprocess
 import sys
+import os
 
-# Define the path to the Prettier executable
-prettier_path = r"C:\Users\stvnm\AppData\Roaming\npm\prettier.cmd"
+script_dir = os.path.dirname(os.path.realpath(__file__))
+prettier_path = os.path.join(script_dir, 'node_modules', '.bin', 'prettier')
+
+# On Windows, the Prettier executable is named 'prettier.cmd'
+if os.name == 'nt':
+    prettier_path += '.cmd'
 
 def preprocess_json_data(file_path):
     with open(file_path, 'r') as file:
@@ -51,3 +56,8 @@ def preprocess_json_data(file_path):
     with open('InterviewQuestions/data/react_formatted.json', 'w') as file:
         json.dump(data, file, indent=4)
 
+if __name__ == "__main__":
+    # Take topic from command line argument
+    topic = sys.argv[1]  # Assuming the topic is passed as the first argument
+    file_path = f'InterviewQuestions/data/{topic}.json'
+    preprocess_json_data(file_path)

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Take a topic parameter
 TOPIC=$1
 
 # Convert the first letter of each word in the TOPIC to uppercase for the header
@@ -13,8 +12,8 @@ PYTHON_SCRIPT="./preprocess_json_data.py"
 JQ_PATH="./jq-windows-i386.exe"
 OUTPUT_FILE="topics/${TOPIC}_readme.md"
 
-# Run the Python script to format the JSON file
-python3 "$PYTHON_SCRIPT" || python "$PYTHON_SCRIPT"  # Fallback to 'python' if 'python3' isn't recognized
+# Run the Python script to format the JSON file with fallbacks
+python "$PYTHON_SCRIPT" $TOPIC || { echo "Python script failed to execute";} || python3 "$PYTHON_SCRIPT" $TOPIC || { echo "Python3 script failed to execute"; read -p "Press enter to continue"; exit 1; }
 
 # Check if the formatted JSON file exists
 if [ ! -f "$FORMATTED_JSON_FILE" ]; then
@@ -58,3 +57,6 @@ done < <(jq -c '.questions[]' "$FORMATTED_JSON_FILE")
 echo -e "$README_CONTENT" > "$OUTPUT_FILE"
 
 echo "README generated successfully at $OUTPUT_FILE."
+
+# Uncomment for easier readability of script output
+#read -p "Press enter to continue"

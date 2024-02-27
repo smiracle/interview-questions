@@ -6,6 +6,10 @@
         {
           "type": "text",
           "value": "Example"
+        },
+        {
+          "type": "code",
+          "value": "const Button = ({ handleLogin }) => (\n<div id={\"login-btn\"} onClick={handleLogin}>\nLogin\n</div>\n);"
         }
       ]
     }
