@@ -10,18 +10,6 @@ prettier_path = os.path.join(script_dir, 'node_modules', '.bin', 'prettier')
 if os.name == 'nt':
     prettier_path += '.cmd'
 
-def preprocess_json_data(file_path):
-    with open(file_path, 'r') as file:
-        data = json.load(file)
-
-    # The processing part remains the same
-
-if __name__ == "__main__":
-    # Take topic from command line argument
-    topic = sys.argv[1]  # Assuming the topic is passed as the first argument
-    file_path = f'InterviewQuestions/data/{topic}.json'
-    preprocess_json_data(file_path)
-
 def format_with_prettier(code_str, parser='babel'):
     try:
         result = subprocess.run([prettier_path, '--parser', parser, '--print-width', '80'], input=code_str, capture_output=True, text=True, shell=True)
@@ -42,7 +30,7 @@ def format_json_content(json_str):
         print("Error decoding JSON:", e)
         return json_str
 
-def preprocess_json_data(file_path):
+def preprocess_json_data(file_path, topic):
     with open(file_path, 'r') as file:
         data = json.load(file)
 
@@ -53,11 +41,13 @@ def preprocess_json_data(file_path):
             elif content['type'] == 'json':
                 content['value'] = format_json_content(content['value'])
 
-    with open('InterviewQuestions/data/react_formatted.json', 'w') as file:
+    # Dynamically create the output file name based on the topic
+    output_file_path = f'InterviewQuestions/data/{topic}_formatted.json'
+    with open(output_file_path, 'w') as file:
         json.dump(data, file, indent=4)
 
 if __name__ == "__main__":
     # Take topic from command line argument
     topic = sys.argv[1]  # Assuming the topic is passed as the first argument
     file_path = f'InterviewQuestions/data/{topic}.json'
-    preprocess_json_data(file_path)
+    preprocess_json_data(file_path, topic)  # Pass topic to the function

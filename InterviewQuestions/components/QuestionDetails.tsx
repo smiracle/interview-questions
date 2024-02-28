@@ -1,13 +1,18 @@
 import React from 'react';
-import {ScrollView, Text, View} from 'react-native';
-import {Question} from './Question';
-import {Image} from 'react-native';
+import {ScrollView, Text, View, Image} from 'react-native';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../App';
+import {QuestionContent} from './Question';
 
 interface QuestionDetailsProps {
-  question: Question | null;
+  navigation: StackNavigationProp<RootStackParamList, 'QuestionDetails'>;
+  route: RouteProp<RootStackParamList, 'QuestionDetails'>;
 }
 
-const QuestionDetails: React.FC<QuestionDetailsProps> = ({question}) => {
+const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
+  const {question} = route.params; // Correctly accessing question from route.params
+
   if (!question) {
     return (
       <View>
@@ -19,7 +24,8 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({question}) => {
   return (
     <ScrollView style={{padding: 10}}>
       <Text>{question.header}</Text>
-      {question.content.map((content, index) => {
+      {question.content.map((content: QuestionContent, index: number) => {
+        // Explicitly typing content and index
         switch (content.type) {
           case 'json':
           case 'text':
@@ -31,7 +37,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({question}) => {
           case 'bullets':
             return (
               <View key={index}>
-                {content.values!.map((value, idx) => (
+                {content.values.map((value, idx) => (
                   <Text key={idx} style={{marginBottom: 5}}>
                     {value}
                   </Text>
@@ -50,7 +56,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({question}) => {
                 key={index}
                 style={{width: 200, height: 200}}
                 source={{uri: content.path}}
-                alt={content.alt}
+                accessibilityLabel={content.alt}
               />
             );
           default:

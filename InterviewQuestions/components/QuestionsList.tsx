@@ -8,87 +8,55 @@ import {
 import {Question} from './Question';
 import reactQuestions from '../data/react_formatted.json';
 import systemsDesignQuestions from '../data/systems_design_formatted.json';
+import {RouteProp} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootStackParamList} from '../App';
+
+type QuestionsListNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'QuestionsList'
+>;
+type QuestionsListRouteProp = RouteProp<RootStackParamList, 'QuestionsList'>;
 
 type TopicFileName = 'react_formatted' | 'systems_design_formatted';
 
-const validatedReactQuestions = validateQuestionsData(reactQuestions)
-  ? reactQuestions
-  : {questions: []};
-
-const validatedSystemsDesignQuestions = validateQuestionsData(
-  systemsDesignQuestions,
-)
-  ? systemsDesignQuestions
-  : {questions: []};
+const validatedReactQuestions: {questions: Question[]} = reactQuestions as {
+  questions: Question[];
+};
+const validatedSystemsDesignQuestions: {questions: Question[]} =
+  systemsDesignQuestions as {questions: Question[]};
 
 const topicToDataMap: Record<TopicFileName, {questions: Question[]}> = {
   react_formatted: validatedReactQuestions,
   systems_design_formatted: validatedSystemsDesignQuestions,
 };
 
-function validateQuestionsData(data: any): data is {questions: Question[]} {
-  if (
-    typeof data !== 'object' ||
-    data === null ||
-    !Array.isArray(data.questions)
-  ) {
-    return false;
-  }
-
-  return data.questions.every((question: any) => {
-    if (
-      typeof question.header !== 'string' ||
-      !Array.isArray(question.content)
-    ) {
-      return false;
-    }
-
-    return question.content.every((content: any) => {
-      switch (content.type) {
-        case 'text':
-        case 'code':
-        case 'json':
-          return typeof content.value === 'string';
-        case 'bullets':
-          return (
-            Array.isArray(content.values) &&
-            content.values.every((val: any) => typeof val === 'string')
-          );
-        case 'image':
-          return (
-            typeof content.alt === 'string' && typeof content.path === 'string'
-          );
-        default:
-          console.log(`Unknown question content type: ${content.type}`);
-          return false;
-      }
-    });
-  });
-}
-
 interface QuestionsListProps {
-  topicFileName: TopicFileName;
-  onSelect: (question: Question) => void;
+  navigation: QuestionsListNavigationProp;
+  route: QuestionsListRouteProp;
 }
 
-const QuestionsList: React.FC<QuestionsListProps> = ({
-  topicFileName,
-  onSelect,
-}) => {
+const QuestionsList: React.FC<QuestionsListProps> = ({navigation, route}) => {
+  const {topicFileName} = route.params;
   const [questions, setQuestions] = useState<Question[]>([]);
 
+  const onSelect = (question: Question) => {
+    // Navigate to QuestionDetails screen with the selected question
+    navigation.navigate('QuestionDetails', {question});
+  };
+
   useEffect(() => {
-    const topicQuestions = topicToDataMap[topicFileName];
-    console.log('Loaded questions for:', topicFileName, topicQuestions);
-    setQuestions(topicQuestions.questions);
+    if (topicFileName in topicToDataMap) {
+      const topicQuestions =
+        topicToDataMap[topicFileName as TopicFileName]?.questions;
+      if (topicQuestions) {
+        setQuestions(topicQuestions);
+      }
+    }
   }, [topicFileName]);
 
   const renderItem = ({item}: ListRenderItemInfo<Question>) => (
-    <TouchableOpacity
-      onPress={() => {
-        console.log('Selected question:', item);
-        onSelect(item);
-      }}>
+    <TouchableOpacity onPress={() => onSelect(item)}>
       <Text style={{padding: 10, fontSize: 18}}>{item.header}</Text>
     </TouchableOpacity>
   );

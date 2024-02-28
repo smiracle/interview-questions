@@ -1,17 +1,688 @@
 {
-  "questions": [
-    {
-      "header": "E",
-      "content": [
+    "questions": [
         {
-          "type": "text",
-          "value": "Example"
+            "header": "What is systems design?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": ""
+                },
+                {
+                    "type": "code",
+                    "value": "const Button = ({ handleLogin }) => (\n  <div id={\"login-btn\"} onClick={handleLogin}>\n    Login\n  </div>\n);\n"
+                }
+            ]
         },
         {
-          "type": "code",
-          "value": "const Button = ({ handleLogin }) => (\n<div id={\"login-btn\"} onClick={handleLogin}>\nLogin\n</div>\n);"
+            "header": "What is CAP theorem?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "How is Horizontal scaling different from Vertical scaling?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is load balancing? Why is it important in system design?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is latency, throughput, and availability of a system?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is sharding and how does it differ from partitioning?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is partitioning and how does it differ from sharding?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "How is performance and scalability related to each other?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is caching, what are some update strategies associated with caching?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is consistency and its patterns?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is a CDN?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": ""
+                },
+                {
+                    "type": "text",
+                    "value": ""
+                },
+                {
+                    "type": "text",
+                    "value": ""
+                },
+                {
+                    "type": "text",
+                    "value": ""
+                }
+            ]
+        },
+        {
+            "header": "What is leader election?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is SSE?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is long polling?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is SEO, how is it best carried out?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is DNS?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "The Domain Name System (DNS) is a hierarchical and decentralized naming system used for computers, services, or any resource connected to the Internet or a private network. It associates various information with domain names assigned to each of the participating entities. Most prominently, it translates more readily memorized domain names to the numerical IP addresses needed for locating and identifying computer services and devices with the underlying network protocols.\n\nDNS is fundamental to the functionality of the internet, providing a quick and user-friendly way of accessing websites without needing to remember the numerical IP addresses of web servers. It's often described as the \"phonebook of the internet\" because it converts human-readable domain names into machine-readable IP addresses, allowing browsers to load Internet resources."
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nHow DNS Works:"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "1. DNS Query: When you type a web address (e.g., www.example.com) into your browser, your computer sends a DNS query to find the corresponding IP address for that website.",
+                        "2. Recursive Resolver: The query first goes to a DNS recursive resolver, typically operated by your Internet Service Provider (ISP). If the resolver has the IP address in its cache from a previous lookup, it returns the address to your computer. If not, it queries further.",
+                        "3. Root Name Servers: The resolver then queries one of the root name servers. The root server responds with the address of a Top-Level Domain (TLD) name server (e.g., .com, .net, .org) that stores information for its domains.",
+                        "4. TLD (Top Level Domain) Name Servers: The resolver next queries the TLD name server, which responds with the IP address of the domain's authoritative name server.",
+                        "5. Authoritative Name Servers: Finally, the resolver queries the authoritative name server for the web address. This server has access to the domain's records and responds with the IP address of the server where the website is hosted.",
+                        "6. Resolution: The DNS resolver sends the IP address back to your computer. Your computer can then make a direct request to the web server at that IP address to access the website."
+                    ]
+                },
+                {
+                    "type": "Key Components:",
+                    "value": "\n\nKey components:"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Domain: A human-friendly address of a website (e.g., www.example.com).",
+                        "IP Address: A unique numeric identifier for each device on a network.",
+                        "DNS Resolver: Acts as a mediator between the user and DNS servers to find the correct IP address.",
+                        "Root Name Servers: The top of the DNS hierarchy that directs queries to TLD name servers based on the extension (.com, .net, etc.).",
+                        "TLD Name Servers: Manage the second-level domain names such as .com, .net, etc. Authoritative Name Servers: Hold the DNS records for individual domains, providing the exact 6. "
+                    ]
+                }
+            ]
+        },
+        {
+            "header": "What is a websocket? How do you implement one? Why use a websocket over Http?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What is lower latency interaction?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Low latency means that there is very little delay between the time you request something and the time you get a response. As it applies to webSockets, it just means that data can be sent quicker (particularly over slow links) because the connection has already been established so no extra packet roundtrips are required to establish the TCP connection."
+                }
+            ]
+        },
+        {
+            "header": "How does buffer overflow work?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "What are some of the design issues in distributed systems?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Example"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a notification system?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design Tic-Tac-Toe?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a web cache?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design consistent hashing, and why?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a unique ID generator in distributed systems?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a ticketing system like JIRA?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design an e-commerce store?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design an online portal to sell products?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a fitness wearable to measure heart rate?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design an online shopping cart?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design an API?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design autocomplete for a search engine?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "What is the best way to design a global chat service like Whatsapp or a Facebook messenger?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a URL shortening service like TinyURL or bit.ly?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design forum-like systems like Quora, Reddit or HackerNews?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design Facebook\u00e2\u20ac\u2122s newsfeed system?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a parking lot system?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a recommendation system?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design an API Rate Limiter system for GitHub or Firebase sites?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design global file storage and file sharing services like Google Drive, Dropbox etc?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a type-ahead search engine service?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design Netflix?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design YouTube?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a traffic control system?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design a web crawler?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design an ATM system?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
+        },
+        {
+            "header": "How do you design ride sharing systems like Uber, Ola or Lyft?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Required Features\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nCommon Issues\n"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nConsiderations\n"
+                }
+            ]
         }
-      ]
-    }
-  ]
+    ]
 }
