@@ -1,9 +1,10 @@
-import React from 'react';
-import {ScrollView, Text, View, Image} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView, Text, View, Image, Dimensions} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
 import {QuestionContent} from './Question';
+import {imageMap} from './ImageMap';
 
 interface QuestionDetailsProps {
   navigation: StackNavigationProp<RootStackParamList, 'QuestionDetails'>;
@@ -11,7 +12,7 @@ interface QuestionDetailsProps {
 }
 
 const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
-  const {question} = route.params; // Correctly accessing question from route.params
+  const {question} = route.params;
 
   if (!question) {
     return (
@@ -20,14 +21,37 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
       </View>
     );
   }
+  const [imageHeights, setImageHeights] = useState<{[key: string]: number}>({});
+
+  const deviceWidth = Dimensions.get('window').width;
+  const adjustImageHeight = (imgKey: string, width: number, height: number) => {
+    const aspectRatio = height / width;
+    const calculatedHeight = deviceWidth * aspectRatio;
+    setImageHeights(prevHeights => ({
+      ...prevHeights,
+      [imgKey]: calculatedHeight,
+    }));
+  };
 
   return (
     <ScrollView style={{padding: 10}}>
-      <Text>{question.header}</Text>
+      <Text
+        style={{
+          fontSize: 18,
+          fontWeight: 'bold',
+          color: '#333',
+          paddingTop: 10,
+          paddingBottom: 10,
+          marginBottom: 10,
+          backgroundColor: '#f0f0f0',
+          borderRadius: 5,
+        }}>
+        {question.header}
+      </Text>
+
       {question.content.map((content: QuestionContent, index: number) => {
-        // Explicitly typing content and index
+        const imgKey = `image-${index}`;
         switch (content.type) {
-          case 'json':
           case 'text':
             return (
               <Text key={index} style={{marginBottom: 10}}>
@@ -44,9 +68,23 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
                 ))}
               </View>
             );
+          case 'json':
           case 'code':
             return (
-              <Text key={index} style={{fontFamily: 'monospace'}}>
+              <Text
+                key={index}
+                style={{
+                  fontFamily: 'monospace',
+                  backgroundColor: '#2E2E2E',
+                  color: '#F8F8F8',
+                  padding: 10,
+                  borderRadius: 5,
+                  overflow: 'hidden',
+                  marginTop: 5,
+                  marginBottom: 5,
+                  fontSize: 12,
+                  lineHeight: 24,
+                }}>
                 {content.value}
               </Text>
             );
@@ -54,9 +92,17 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
             return (
               <Image
                 key={index}
-                style={{width: 200, height: 200}}
-                source={{uri: content.path}}
+                style={{
+                  width: '100%',
+                  height: imageHeights[imgKey] || undefined,
+                }}
+                source={imageMap[content.path]}
                 accessibilityLabel={content.alt}
+                resizeMode="contain"
+                onLoad={event => {
+                  const {width, height} = event.nativeEvent.source;
+                  adjustImageHeight(imgKey, width, height);
+                }}
               />
             );
           default:

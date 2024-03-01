@@ -55,9 +55,11 @@ const QuestionsList: React.FC<QuestionsListProps> = ({navigation, route}) => {
     }
   }, [topicFileName]);
 
-  const renderItem = ({item}: ListRenderItemInfo<Question>) => (
+  const renderItem = ({item, index}: ListRenderItemInfo<Question>) => (
     <TouchableOpacity onPress={() => onSelect(item)}>
-      <Text style={{padding: 10, fontSize: 18}}>{item.header}</Text>
+      <Text style={{padding: 10, fontSize: 18}}>{`${index + 1}. ${
+        item.header
+      }`}</Text>
     </TouchableOpacity>
   );
 

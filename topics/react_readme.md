@@ -34,7 +34,6 @@
 - [What is the event loop?](#what-is-the-event-loop)
 - [When is it a good idea to use a class in react?](#when-is-it-a-good-idea-to-use-a-class-in-react)
 - [What are some of the rules of React Hooks and why do those rules exist?](#what-are-some-of-the-rules-of-react-hooks-and-why-do-those-rules-exist)
-- [E](#e)
 
 ### What is React?
 
@@ -254,7 +253,7 @@ Note: `React.memo()` is a higher-order component.
 ### What is state in React?
 
 State of a component is an object that holds some information that may change over the lifetime of the component. The important point is whenever the state object changes, the component re-renders. It is always recommended to make our state as simple as possible and minimize the number of stateful components.
-![React State Diagram](../images/react/state.jpg)
+![React State Diagram](../InterviewQuestions/images/react/state.jpg)
 Let's take an example of User component with message state. Here, useState hook has been used to add state to the User component and it returns an array with current state and function to update it.
 ```javascript
 import React, { useState } from "react";
@@ -843,7 +842,7 @@ Error Boundaries: Until now, error boundaries (a component that catches JavaScri
 While Hooks offer a more functional approach to managing state and side effects, some developers may still prefer the structure and organization of class components for complex scenarios. However, this preference is becoming less common as the community and tooling around Hooks continue to mature.
 
 
-4.Third-Party Libraries or Documentation
+4. Third-Party Libraries or Documentation
 Compatibility: Some third-party libraries or older documentation examples may only provide class component usage examples. While many libraries have updated or support both, there might be instances where using a class component aligns better with certain external resources.
 
 
@@ -877,12 +876,6 @@ Why These Rules Exist
 Ensure reliability: By enforcing a consistent order and usage pattern for Hooks, React can reliably manage state and side effects in functional components.
 Foster simplicity and readability: Hooks reduce the complexity of sharing and managing stateful logic compared to class components and higher-order components (HOCs).
 Facilitate optimization: Adhering to the Hooks rules allows React to optimize re-renders and other performance aspects under the hood.
-
-[↑ Back to top](#react-topics)
-
-### E
-
-Example
 
 [↑ Back to top](#react-topics)
 

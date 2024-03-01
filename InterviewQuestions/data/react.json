@@ -261,7 +261,7 @@
         {
           "type": "image",
           "alt": "React State Diagram",
-          "path": "../images/react/state.jpg"
+          "path": "../InterviewQuestions/images/react/state.jpg"
         },
         {
           "type": "text",
@@ -545,7 +545,7 @@
         {
           "type": "image",
           "alt": "Virtual DOM 1",
-          "path": "../images/react/vdom1.png"
+          "path": "../InterviewQuestions/images/react/vdom1.png"
         },
         {
           "type": "text",
@@ -554,7 +554,7 @@
         {
           "type": "image",
           "alt": "Virtual DOM 2",
-          "path": "../images/react/vdom2.png"
+          "path": "../InterviewQuestions/images/react/vdom2.png"
         },
         {
           "type": "text",
@@ -563,7 +563,7 @@
         {
           "type": "image",
           "alt": "Virtual DOM 3",
-          "path": "../images/react/vdom3.png"
+          "path": "../InterviewQuestions/images/react/vdom3.png"
         },
         {
           "type": "text",

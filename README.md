@@ -14,6 +14,23 @@ You can view formatted readme files in the topics/ directory.
   [preprocess json data](preprocess_json_data.py) file.
 - JQ executable (included).
 
+#### Run the Android app locally
+
+Android app commands must be executed inside of the InterviewQuestions directory that's inside of the repository's root
+directory.
+
+- `cd InterviewQuestions`
+- `npx react-native run-android`
+
+#### Clean and rebuild the Android app
+
+These commands can sometimes help resolve issues with a bad build.
+
+- `cd android`
+- `./gradlew clean`
+- `cd ..`
+- `npx react-native run-android`
+
 #### Workflow
 
 To add new information for a topic:
@@ -46,20 +63,3 @@ Alternatively, you can run `npm run s [topic]` which will invoke both the JSON a
 This script is called inside generate-readme.sh, but can be called directly for testing:
 
 `python preprocess_json_data.py systems_design`
-
-#### Run the Android app locally
-
-Android app commands must be executed inside of the InterviewQuestions directory that's inside of the repository's root
-directory.
-
-- `cd InterviewQuestions`
-- `npx react-native run-android`
-
-#### Clean and rebuild the Android app
-
-These commands can sometimes help resolve issues with a bad build.
-
-- `cd android`
-- `./gradlew clean`
-- `cd ..`
-- `npx react-native run-android`
