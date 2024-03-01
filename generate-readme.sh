@@ -59,4 +59,4 @@ echo -e "$README_CONTENT" > "$OUTPUT_FILE"
 echo "README generated successfully at $OUTPUT_FILE."
 
 # Uncomment for easier readability of script output
-#read -p "Press enter to continue"
+read -p "Press enter to continue"

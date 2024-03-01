@@ -6,7 +6,27 @@
     "prettier": "^3.2.5"
   },
   "scripts": {
+    "react": "node .\\format_code_blocks.js react && .\\generate-readme.sh react",
+    "typescript": "node .\\format_code_blocks.js typescript && .\\generate-readme.sh typescript",
+    "javascript": "node .\\format_code_blocks.js javascript && .\\generate-readme.sh javascript",
+    "nodejs": "node .\\format_code_blocks.js nodejs && .\\generate-readme.sh nodejs",
+    "css": "node .\\format_code_blocks.js css && .\\generate-readme.sh css",
+    "html": "node .\\format_code_blocks.js html && .\\generate-readme.sh html",
+    "data_structures_and_algorithms": "node .\\format_code_blocks.js data_structures_and_algorithms && .\\generate-readme.sh data_structures_and_algorithms",
     "systems_design": "node .\\format_code_blocks.js systems_design && .\\generate-readme.sh systems_design",
-    "react": "node .\\format_code_blocks.js react && .\\generate-readme.sh react"
+    "security": "node .\\format_code_blocks.js security && .\\generate-readme.sh security",
+    "nosql": "node .\\format_code_blocks.js nosql && .\\generate-readme.sh nosql",
+    "sql": "node .\\format_code_blocks.js sql && .\\generate-readme.sh sql",
+    "postgresql": "node .\\format_code_blocks.js postgresql && .\\generate-readme.sh postgresql",
+    "dotnet": "node .\\format_code_blocks.js dotnet && .\\generate-readme.sh dotnet",
+    "rest": "node .\\format_code_blocks.js rest && .\\generate-readme.sh rest",
+    "soap": "node .\\format_code_blocks.js soap && .\\generate-readme.sh soap",
+    "docker": "node .\\format_code_blocks.js docker && .\\generate-readme.sh docker",
+    "java": "node .\\format_code_blocks.js java && .\\generate-readme.sh java",
+    "shell": "node .\\format_code_blocks.js shell && .\\generate-readme.sh shell",
+    "python": "node .\\format_code_blocks.js python && .\\generate-readme.sh python",
+    "rust": "node .\\format_code_blocks.js rust && .\\generate-readme.sh rust",
+    "machine_learning": "node .\\format_code_blocks.js machine_learning && .\\generate-readme.sh machine_learning",
+    "aws": "node .\\format_code_blocks.js aws && .\\generate-readme.sh aws"
   }
 }

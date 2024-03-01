@@ -900,7 +900,7 @@
         },
         {
           "type": "text",
-          "value": "\n\n4.Third-Party Libraries or Documentation\nCompatibility: Some third-party libraries or older documentation examples may only provide class component usage examples. While many libraries have updated or support both, there might be instances where using a class component aligns better with certain external resources."
+          "value": "\n\n4. Third-Party Libraries or Documentation\nCompatibility: Some third-party libraries or older documentation examples may only provide class component usage examples. While many libraries have updated or support both, there might be instances where using a class component aligns better with certain external resources."
         },
         {
           "type": "text",
@@ -934,15 +934,6 @@
         {
           "type": "text",
           "value": "\n\nWhy These Rules Exist\n\nEnsure reliability: By enforcing a consistent order and usage pattern for Hooks, React can reliably manage state and side effects in functional components.\nFoster simplicity and readability: Hooks reduce the complexity of sharing and managing stateful logic compared to class components and higher-order components (HOCs).\nFacilitate optimization: Adhering to the Hooks rules allows React to optimize re-renders and other performance aspects under the hood."
-        }
-      ]
-    },
-    {
-      "header": "E",
-      "content": [
-        {
-          "type": "text",
-          "value": "Example"
         }
       ]
     }

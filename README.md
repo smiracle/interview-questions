@@ -14,22 +14,36 @@ You can view formatted readme files in the topics/ directory.
   [preprocess json data](preprocess_json_data.py) file.
 - JQ executable (included).
 
-#### Generating the formatted JSON
+#### Workflow
 
-`node format_code_blocks.js`
+To add new information for a topic:
 
-#### Regenerating Readme Files based on the JSON
+1. Edit the corresponding base json file in the data/ directory (react.json for example).
+2. Run the corresponding command below to generate the formatted JSON using the base JSON.
+3. Run the readme generation script. (Both this step and #2 can be run together using the scripts in package.json)
+4. View the readme files in topics/ or reload the Android app at will.
 
-`./generate-readme.sh` Alternatively, you can run `npm run s` which will invoke both the JSON and Readme generation
-scripts.
+#### Generate the formatted JSON
 
-### New commands:
+`node format_code_blocks.js [topic]`
 
-`node format_code_blocks.js systems_design`
+- Ex: `node format_code_blocks.js systems_design`
 
-`./generate-readme.sh systems_design`
+#### Regenerate Readme Files based on the JSON
 
-(Optional) For preprocess_json_data.py (called inside generate-readme.sh, but can be called directly for testing):
+`./generate-readme.sh [topic]`
+
+- Ex: `./generate-readme.sh systems_design`
+
+### Both at the same time
+
+Alternatively, you can run `npm run s [topic]` which will invoke both the JSON and Readme generation scripts.
+
+-ex: `npm run systems_design`
+
+#### (Optional) Invoke preprocess_json_data.py
+
+This script is called inside generate-readme.sh, but can be called directly for testing:
 
 `python preprocess_json_data.py systems_design`
 
@@ -42,6 +56,8 @@ directory.
 - `npx react-native run-android`
 
 #### Clean and rebuild the Android app
+
+These commands can sometimes help resolve issues with a bad build.
 
 - `cd android`
 - `./gradlew clean`
