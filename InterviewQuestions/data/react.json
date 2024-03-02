@@ -18,35 +18,35 @@
         },
         {
           "type": "text",
-          "value": "\n\nReact was created by Jordan Walke, a software engineer at Facebook. The initial prototype, known as 'FaxJS', aimed to address inefficiencies in dynamic UI development."
+          "value": "React was created by Jordan Walke, a software engineer at Facebook. The initial prototype, known as 'FaxJS', aimed to address inefficiencies in dynamic UI development."
         },
         {
           "type": "text",
-          "value": "\n\nReact was first used in Facebook's News Feed in 2011 and on Instagram in 2012. The success of React in these applications showcased its potential to streamline front-end development."
+          "value": "React was first used in Facebook's News Feed in 2011 and on Instagram in 2012. The success of React in these applications showcased its potential to streamline front-end development."
         },
         {
           "type": "text",
-          "value": "\n\nIn 2013, React was officially open-sourced at JSConf US, making it available to the wider developer community. This marked the beginning of its rapid adoption and ecosystem growth."
+          "value": "In 2013, React was officially open-sourced at JSConf US, making it available to the wider developer community. This marked the beginning of its rapid adoption and ecosystem growth."
         },
         {
           "type": "text",
-          "value": "\n\nReact Native was released in 2015, extending React's component-based model to mobile app development and further solidifying React's position in the developer community."
+          "value": "React Native was released in 2015, extending React's component-based model to mobile app development and further solidifying React's position in the developer community."
         },
         {
           "type": "text",
-          "value": "\n\nIn 2016, the React team announced the development of React Fiber, a complete rewrite of React's core algorithm, to enhance its capabilities and performance."
+          "value": "In 2016, the React team announced the development of React Fiber, a complete rewrite of React's core algorithm, to enhance its capabilities and performance."
         },
         {
           "type": "text",
-          "value": "\n\nReact 16 was released in 2017, incorporating the new Fiber rendering engine. This update brought significant performance improvements and introduced features like error boundaries and fragments."
+          "value": "React 16 was released in 2017, incorporating the new Fiber rendering engine. This update brought significant performance improvements and introduced features like error boundaries and fragments."
         },
         {
           "type": "text",
-          "value": "\n\nHooks were introduced in React 16.8 in 2018, offering a powerful new way to use state and other React features in functional components, marking a significant evolution in React's development."
+          "value": "Hooks were introduced in React 16.8 in 2018, offering a powerful new way to use state and other React features in functional components, marking a significant evolution in React's development."
         },
         {
           "type": "text",
-          "value": "\n\nSince then, React has continued to evolve, with the React team focusing on features like concurrent mode, server components, and improving the overall developer experience."
+          "value": "Since then, React has continued to evolve, with the React team focusing on features like concurrent mode, server components, and improving the overall developer experience."
         }
       ]
     },
@@ -103,7 +103,7 @@
         },
         {
           "type": "text",
-          "value": "\n\nWhile JSX makes your code more readable and concise, especially for complex UI structures, using `React.createElement` directly can give you a deeper understanding of React's working principles. It can also be useful in environments where you cannot or prefer not to use a JSX transpiler. However, for larger projects or when working with teams, the clarity and simplicity offered by JSX often outweigh the benefits of avoiding it."
+          "value": "While JSX makes your code more readable and concise, especially for complex UI structures, using `React.createElement` directly can give you a deeper understanding of React's working principles. It can also be useful in environments where you cannot or prefer not to use a JSX transpiler. However, for larger projects or when working with teams, the clarity and simplicity offered by JSX often outweigh the benefits of avoiding it."
         }
       ]
     },
@@ -116,11 +116,11 @@
         },
         {
           "type": "text",
-          "value": " \n\nA component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs."
+          "value": " A component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs."
         },
         {
           "type": "text",
-          "value": "\n\nExample JavaScript representation (without JSX) of a React Element:"
+          "value": "Example JavaScript representation (without JSX) of a React Element:"
         },
         {
           "type": "code",
@@ -576,7 +576,7 @@
       "content": [
         {
           "type": "text",
-          "value": "Hooks are a feature introduced in React 16.8 that allow you to use state and other React features without writing a class. They enable you to \"hook into\" React state and lifecycle features from function components. Hooks don't work inside classes — they let you use React without classes. React provides a few built-in Hooks like useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, useImperativeHandle, useLayoutEffect, and useDebugValue."
+          "value": "Hooks are a feature introduced in React 16.8 that allow you to use state and other React features without writing a class. They enable you to \"hook into\" React state and lifecycle features from function components. Hooks don't work inside classes - they let you use React without classes. React provides a few built-in Hooks like useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, useImperativeHandle, useLayoutEffect, and useDebugValue."
         },
         {
           "type": "text",
@@ -718,7 +718,7 @@
         },
         {
           "type": "text",
-          "value": "\n\n6. Ignoring Effect Timing: Effects run after paint, so consider potential UI flickers. Use CSS or conditional rendering to mitigate visible delays."
+          "value": "6. Ignoring Effect Timing: Effects run after paint, so consider potential UI flickers. Use CSS or conditional rendering to mitigate visible delays."
         }
       ]
     },
@@ -767,7 +767,7 @@
         },
         {
           "type": "text",
-          "value": "\n\nLET\nLet is block scoped and is hoisted to the top of their *block* scope, but they are not declared or initialized. You cannot redeclare the same variable within the same scope. You cannot redeclare let variables. Declaration at the global level does not create a property on the global object. This behavior is helpful in modular JavaScript development, where you wish to avoid polluting the global namespace. Const works the same as let, but contains values that can't be modified."
+          "value": "LET\nLet is block scoped and is hoisted to the top of their *block* scope, but they are not declared or initialized. You cannot redeclare the same variable within the same scope. You cannot redeclare let variables. Declaration at the global level does not create a property on the global object. This behavior is helpful in modular JavaScript development, where you wish to avoid polluting the global namespace. Const works the same as let, but contains values that can't be modified."
         }
       ]
     },
@@ -780,7 +780,7 @@
         },
         {
           "type": "text",
-          "value": "\n\nWhen you would use a callback:"
+          "value": "When you would use a callback:"
         },
         {
           "type": "bullets",
@@ -868,7 +868,7 @@
         },
         {
           "type": "text",
-          "value": "\n\nEvent Loop in the Context of React and TypeScript:"
+          "value": "Event Loop in the Context of React and TypeScript:"
         },
         {
           "type": "bullets",
@@ -888,27 +888,27 @@
         },
         {
           "type": "text",
-          "value": "\n\n1. Familiarity and Legacy Codebases\nFamiliarity: Developers coming from an Object-Oriented Programming (OOP) background might find class components more intuitive initially."
+          "value": "1. Familiarity and Legacy Codebases\nFamiliarity: Developers coming from an Object-Oriented Programming (OOP) background might find class components more intuitive initially."
         },
         {
           "type": "text",
-          "value": "\n\n2. Certain Lifecycle Methods\nError Boundaries: Until now, error boundaries (a component that catches JavaScript errors anywhere in its child component tree) can only be implemented using class components by defining componentDidCatch and static getDerivedStateFromError."
+          "value": "2. Certain Lifecycle Methods\nError Boundaries: Until now, error boundaries (a component that catches JavaScript errors anywhere in its child component tree) can only be implemented using class components by defining componentDidCatch and static getDerivedStateFromError."
         },
         {
           "type": "text",
-          "value": "\n\n3. Complex State Logic and Side Effects\nWhile Hooks offer a more functional approach to managing state and side effects, some developers may still prefer the structure and organization of class components for complex scenarios. However, this preference is becoming less common as the community and tooling around Hooks continue to mature."
+          "value": "3. Complex State Logic and Side Effects\nWhile Hooks offer a more functional approach to managing state and side effects, some developers may still prefer the structure and organization of class components for complex scenarios. However, this preference is becoming less common as the community and tooling around Hooks continue to mature."
         },
         {
           "type": "text",
-          "value": "\n\n4. Third-Party Libraries or Documentation\nCompatibility: Some third-party libraries or older documentation examples may only provide class component usage examples. While many libraries have updated or support both, there might be instances where using a class component aligns better with certain external resources."
+          "value": "4. Third-Party Libraries or Documentation\nCompatibility: Some third-party libraries or older documentation examples may only provide class component usage examples. While many libraries have updated or support both, there might be instances where using a class component aligns better with certain external resources."
         },
         {
           "type": "text",
-          "value": "\n\nTransitioning to Functional Components\nThe React team encourages the use of functional components with Hooks for new development because of their simplicity, reduced boilerplate, and enhanced capabilities with the same power as class components. The introduction of Hooks has addressed many of the limitations that initially led developers to choose class components, such as using local component state, effects, and accessing the context API."
+          "value": "Transitioning to Functional Components\nThe React team encourages the use of functional components with Hooks for new development because of their simplicity, reduced boilerplate, and enhanced capabilities with the same power as class components. The introduction of Hooks has addressed many of the limitations that initially led developers to choose class components, such as using local component state, effects, and accessing the context API."
         },
         {
           "type": "text",
-          "value": "\n\nWhile functional components and Hooks are now the recommended approach for new components in React, understanding when to use class components is valuable, especially in legacy projects or when specific patterns necessitate their use. However, for most use cases, functional components with Hooks will be more concise and align with modern React development practices."
+          "value": "While functional components and Hooks are now the recommended approach for new components in React, understanding when to use class components is valuable, especially in legacy projects or when specific patterns necessitate their use. However, for most use cases, functional components with Hooks will be more concise and align with modern React development practices."
         }
       ]
     },
@@ -921,7 +921,7 @@
         },
         {
           "type": "text",
-          "value": "\n\n1. Only Call Hooks at the Top Level Rule: Do not call Hooks inside loops, conditions, or nested functions. Why: React relies on the order in which Hooks are called to properly associate the Hook call with the correct component instance across multiple renders. If you call Hooks conditionally or within loops, the order of Hook calls might change between renders, leading to bugs and inconsistencies in the component state management."
+          "value": "1. Only Call Hooks at the Top Level Rule: Do not call Hooks inside loops, conditions, or nested functions. Why: React relies on the order in which Hooks are called to properly associate the Hook call with the correct component instance across multiple renders. If you call Hooks conditionally or within loops, the order of Hook calls might change between renders, leading to bugs and inconsistencies in the component state management."
         },
         {
           "type": "text",
@@ -929,11 +929,11 @@
         },
         {
           "type": "text",
-          "value": "\n\nAdditional Guidelines and Practices\nBeyond these two primary rules, adhering to the following guidelines can help ensure that you use Hooks effectively and avoid common pitfalls: \nUse Custom Hooks for Reusable Logic: Encapsulate and reuse logic across components by creating custom Hooks. This follows the DRY principle and improves code readability and maintenance. \nFollow the use Naming Convention for Custom Hooks: Custom Hooks should start with use (e.g., useFetch), indicating that they are Hooks and making them easily identifiable in your codebase. \nLint Your Code for Hook Rules: Use the ESLint plugin eslint-plugin-react-hooks provided by the React team to automatically check your code for violations of the Hooks rules. This can catch potential issues early in the development process."
+          "value": "Additional Guidelines and Practices\nBeyond these two primary rules, adhering to the following guidelines can help ensure that you use Hooks effectively and avoid common pitfalls: \nUse Custom Hooks for Reusable Logic: Encapsulate and reuse logic across components by creating custom Hooks. This follows the DRY principle and improves code readability and maintenance. \nFollow the use Naming Convention for Custom Hooks: Custom Hooks should start with use (e.g., useFetch), indicating that they are Hooks and making them easily identifiable in your codebase. \nLint Your Code for Hook Rules: Use the ESLint plugin eslint-plugin-react-hooks provided by the React team to automatically check your code for violations of the Hooks rules. This can catch potential issues early in the development process."
         },
         {
           "type": "text",
-          "value": "\n\nWhy These Rules Exist\n\nEnsure reliability: By enforcing a consistent order and usage pattern for Hooks, React can reliably manage state and side effects in functional components.\nFoster simplicity and readability: Hooks reduce the complexity of sharing and managing stateful logic compared to class components and higher-order components (HOCs).\nFacilitate optimization: Adhering to the Hooks rules allows React to optimize re-renders and other performance aspects under the hood."
+          "value": "Why These Rules Exist\n\nEnsure reliability: By enforcing a consistent order and usage pattern for Hooks, React can reliably manage state and side effects in functional components.\nFoster simplicity and readability: Hooks reduce the complexity of sharing and managing stateful logic compared to class components and higher-order components (HOCs).\nFacilitate optimization: Adhering to the Hooks rules allows React to optimize re-renders and other performance aspects under the hood."
         }
       ]
     }

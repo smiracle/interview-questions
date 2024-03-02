@@ -9,8 +9,3 @@ export interface Question {
   header: string;
   content: QuestionContent[];
 }
-
-interface ImageData {
-  alt: string;
-  path: string;
-}

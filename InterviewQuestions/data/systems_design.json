@@ -129,7 +129,7 @@
         },
         {
           "type": "text",
-          "value": "However, vertical scaling has its limits—there's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected."
+          "value": "However, vertical scaling has its limits - there's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected."
         }
       ]
     },

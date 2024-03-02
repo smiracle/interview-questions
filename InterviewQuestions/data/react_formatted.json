@@ -18,35 +18,35 @@
         },
         {
           "type": "text",
-          "value": "\n\nReact was created by Jordan Walke, a software engineer at Facebook. The initial prototype, known as 'FaxJS', aimed to address inefficiencies in dynamic UI development."
+          "value": "React was created by Jordan Walke, a software engineer at Facebook. The initial prototype, known as 'FaxJS', aimed to address inefficiencies in dynamic UI development."
         },
         {
           "type": "text",
-          "value": "\n\nReact was first used in Facebook's News Feed in 2011 and on Instagram in 2012. The success of React in these applications showcased its potential to streamline front-end development."
+          "value": "React was first used in Facebook's News Feed in 2011 and on Instagram in 2012. The success of React in these applications showcased its potential to streamline front-end development."
         },
         {
           "type": "text",
-          "value": "\n\nIn 2013, React was officially open-sourced at JSConf US, making it available to the wider developer community. This marked the beginning of its rapid adoption and ecosystem growth."
+          "value": "In 2013, React was officially open-sourced at JSConf US, making it available to the wider developer community. This marked the beginning of its rapid adoption and ecosystem growth."
         },
         {
           "type": "text",
-          "value": "\n\nReact Native was released in 2015, extending React's component-based model to mobile app development and further solidifying React's position in the developer community."
+          "value": "React Native was released in 2015, extending React's component-based model to mobile app development and further solidifying React's position in the developer community."
         },
         {
           "type": "text",
-          "value": "\n\nIn 2016, the React team announced the development of React Fiber, a complete rewrite of React's core algorithm, to enhance its capabilities and performance."
+          "value": "In 2016, the React team announced the development of React Fiber, a complete rewrite of React's core algorithm, to enhance its capabilities and performance."
         },
         {
           "type": "text",
-          "value": "\n\nReact 16 was released in 2017, incorporating the new Fiber rendering engine. This update brought significant performance improvements and introduced features like error boundaries and fragments."
+          "value": "React 16 was released in 2017, incorporating the new Fiber rendering engine. This update brought significant performance improvements and introduced features like error boundaries and fragments."
         },
         {
           "type": "text",
-          "value": "\n\nHooks were introduced in React 16.8 in 2018, offering a powerful new way to use state and other React features in functional components, marking a significant evolution in React's development."
+          "value": "Hooks were introduced in React 16.8 in 2018, offering a powerful new way to use state and other React features in functional components, marking a significant evolution in React's development."
         },
         {
           "type": "text",
-          "value": "\n\nSince then, React has continued to evolve, with the React team focusing on features like concurrent mode, server components, and improving the overall developer experience."
+          "value": "Since then, React has continued to evolve, with the React team focusing on features like concurrent mode, server components, and improving the overall developer experience."
         }
       ]
     },

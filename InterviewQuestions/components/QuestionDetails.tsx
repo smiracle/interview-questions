@@ -34,7 +34,11 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
   };
 
   return (
-    <ScrollView style={{padding: 10}}>
+    <ScrollView
+      style={{
+        paddingLeft: 10,
+        paddingRight: 10,
+      }}>
       <Text
         style={{
           fontSize: 18,
@@ -54,7 +58,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
         switch (content.type) {
           case 'text':
             return (
-              <Text key={index} style={{marginBottom: 10}}>
+              <Text key={index} style={{marginBottom: 5}}>
                 {content.value}
               </Text>
             );
@@ -63,7 +67,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
               <View key={index}>
                 {content.values.map((value, idx) => (
                   <Text key={idx} style={{marginBottom: 5}}>
-                    {value}
+                    &#8226; {value}
                   </Text>
                 ))}
               </View>
@@ -77,13 +81,13 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
                   fontFamily: 'monospace',
                   backgroundColor: '#2E2E2E',
                   color: '#F8F8F8',
-                  padding: 10,
+                  padding: 5,
                   borderRadius: 5,
                   overflow: 'hidden',
                   marginTop: 5,
                   marginBottom: 5,
                   fontSize: 12,
-                  lineHeight: 24,
+                  lineHeight: 12,
                 }}>
                 {content.value}
               </Text>

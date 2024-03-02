@@ -6,30 +6,17 @@ import {
   ListRenderItemInfo,
 } from 'react-native';
 import {Question} from './Question';
-import reactQuestions from '../data/react_formatted.json';
-import systemsDesignQuestions from '../data/systems_design_formatted.json';
+
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
+import {TopicFileName, topicToDataMap} from './QuestionsDataMap';
 
 type QuestionsListNavigationProp = StackNavigationProp<
   RootStackParamList,
   'QuestionsList'
 >;
 type QuestionsListRouteProp = RouteProp<RootStackParamList, 'QuestionsList'>;
-
-type TopicFileName = 'react_formatted' | 'systems_design_formatted';
-
-const validatedReactQuestions: {questions: Question[]} = reactQuestions as {
-  questions: Question[];
-};
-const validatedSystemsDesignQuestions: {questions: Question[]} =
-  systemsDesignQuestions as {questions: Question[]};
-
-const topicToDataMap: Record<TopicFileName, {questions: Question[]}> = {
-  react_formatted: validatedReactQuestions,
-  systems_design_formatted: validatedSystemsDesignQuestions,
-};
 
 interface QuestionsListProps {
   navigation: QuestionsListNavigationProp;
