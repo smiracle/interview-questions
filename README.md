@@ -63,3 +63,23 @@ Alternatively, you can run `npm run s [topic]` which will invoke both the JSON a
 This script is called inside generate-readme.sh, but can be called directly for testing:
 
 `python preprocess_json_data.py systems_design`
+
+## Building an APK for use on Android
+
+Run keytool command to generate the signing key (only need to do this once, not for repeated releases):
+
+```bash
+keytool -genkeypair -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+```
+
+Generate apk file for android devices: First, bundle the release version of the app:
+
+```bash
+cd android && ./gradlew bundleRelease
+```
+
+Next, build the APK with the following command:
+
+```bash
+./gradlew assembleRelease
+```

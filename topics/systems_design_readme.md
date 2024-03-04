@@ -22,7 +22,7 @@
 - [How does buffer overflow work?](#how-does-buffer-overflow-work)
 - [What are some common design issues in distributed systems?](#what-are-some-common-design-issues-in-distributed-systems)
 - [Designing a Notification System: Features, Issues, and Considerations](#designing-a-notification-system-features-issues-and-considerations)
-- [How do you design Tic-Tac-Toe (what are examples of required features, common issues, resolutions, and other considerations)?](#how-do-you-design-tic-tac-toe-what-are-examples-of-required-features-common-issues-resolutions-and-other-considerations)
+- [How do you design Tic-Tac-Toe?](#how-do-you-design-tic-tac-toe)
 - [Designing a Web Cache: Features, Issues, Resolutions, and Considerations](#designing-a-web-cache-features-issues-resolutions-and-considerations)
 - [How do you design consistent hashing, and why?](#how-do-you-design-consistent-hashing-and-why)
 - [How do you design a unique ID generator in distributed systems?](#how-do-you-design-a-unique-id-generator-in-distributed-systems)
@@ -36,8 +36,8 @@
 - [What is the best way to design a global chat service like Whatsapp or a Facebook messenger?](#what-is-the-best-way-to-design-a-global-chat-service-like-whatsapp-or-a-facebook-messenger)
 - [How do you design a URL shortening service like TinyURL or bit.ly?](#how-do-you-design-a-url-shortening-service-like-tinyurl-or-bitly)
 - [How do you design forum-like systems like Quora, Reddit or HackerNews?](#how-do-you-design-forum-like-systems-like-quora-reddit-or-hackernews)
-- [How do you design Facebookâ€™s newsfeed system?](#how-do-you-design-facebooks-newsfeed-system)
-- [How do you design a parking lot system (what are examples of required features, common issues, resolutions, and other considerations)?](#how-do-you-design-a-parking-lot-system-what-are-examples-of-required-features-common-issues-resolutions-and-other-considerations)
+- [How do you design Facebook's newsfeed system?](#how-do-you-design-facebooks-newsfeed-system)
+- [How do you design a parking lot system?](#how-do-you-design-a-parking-lot-system)
 - [How do you design a recommendation system?](#how-do-you-design-a-recommendation-system)
 - [How do you design an API Rate Limiter system for GitHub or Firebase sites?](#how-do-you-design-an-api-rate-limiter-system-for-github-or-firebase-sites)
 - [How do you design global file storage and file sharing services like Google Drive, Dropbox etc?](#how-do-you-design-global-file-storage-and-file-sharing-services-like-google-drive-dropbox-etc)
@@ -53,7 +53,9 @@
 
 ### What is systems design?
 
-The process of establishing system aspects such as modules, architecture, components and their interfaces, and data for a system based on specified requirements is known as system design. It is the process of identifying, creating, and designing systems that meet a companyâ€™s or organizationâ€™s specific objectives and expectations. Systems design is more about system analysis, architectural patterns, APIs, design patterns, and glueing it all together than it is about coding. Because your application will be able to handle the architectural load, designing your system adequately for the requirements of your application will eliminate unnecessary costs and maintenance efforts, as well as provide a better experience for your end-users.
+The process of establishing system aspects such as modules, architecture, components and their interfaces, and data for a system based on specified requirements is known as system design. It is the process of identifying, creating, and designing systems that meet a company's or organization's specific objectives and expectations. 
+
+Systems design is more about system analysis, architectural patterns, APIs, design patterns, and glueing it all together than it is about coding. Because your application will be able to handle the architectural load, designing your system adequately for the requirements of your application will eliminate unnecessary costs and maintenance efforts, as well as provide a better experience for your end-users.
 
 [↑ Back to top](#systems_design-topics)
 
@@ -79,6 +81,7 @@ The CAP Theorem for distributed computing was published by Eric Brewer. This sta
 - 2. Availability (a guarantee that every request receives a response about whether it was successful or failed)
 - 3. Partition tolerance (the system continues to operate despite arbitrary message loss or failure of part of the system)
 This theorem has created the base for modern distributed computing approaches. The most high volume traffic companies (e.g. Amazon, Google, Facebook) use this as a basis for deciding their application architecture. It's important to understand that only two of these three conditions can be guaranteed to be met by a system.
+![CAP](../InterviewQuestions/images/systems_design/cap.png)
 
 [↑ Back to top](#systems_design-topics)
 
@@ -88,19 +91,24 @@ Load balancers are systems or devices that distribute incoming network traffic a
 
 
 How load balancers work
-- 1. Traffic Distribution: When a client sends a request to a server, the load balancer receives the request first. Based on its configuration, it selects a server from the pool of available servers to forward the request to.
-- 2. Health Checks: Load balancers periodically check the health of all servers in the pool to ensure they can handle requests. If a server fails a health check, it is temporarily removed from the pool until it becomes healthy again.
-- 3. Session Persistence: Some applications require that a user's session be maintained with the same server for the duration of their visit. Load balancers can use various methods to ensure session persistence or 'stickiness'.
+- Traffic Distribution: When a client sends a request to a server, the load balancer receives the request first. Based on its configuration, it selects a server from the pool of available servers to forward the request to.
+- Health Checks: Load balancers periodically check the health of all servers in the pool to ensure they can handle requests. If a server fails a health check, it is temporarily removed from the pool until it becomes healthy again.
+- Session Persistence: Some applications require that a user's session be maintained with the same server for the duration of their visit. Load balancers can use various methods to ensure session persistence or 'stickiness'.
+
+
 Types of Load Balancing:
 - Round Robin: Requests are distributed across the servers sequentially.
 - Least Connections: Requests are sent to the server with the fewest active connections.
 - IP Hash: The client's IP address is used to determine which server receives the request, ensuring session persistence.
 - Least Response Time: Requests are sent to the server with the shortest average response time.
+
+
 Deployment Models:
 - Hardware Load Balancers: Physical devices specifically designed for load balancing with built-in optimizations and features.
 - Software Load Balancers: Applications running on general-purpose hardware, offering flexibility and integration with cloud environments.
 - Cloud-Based Load Balancers: Provided as part of cloud services, these are fully managed by the cloud provider, offering scalability and integration with cloud resources.
 - Load balancers are crucial in modern web infrastructure, enabling the efficient management of network resources, improving user experience, and ensuring the resilience and reliability of web applications and services.
+![load balancing](../InterviewQuestions/images/systems_design/load_balancing.png)
 
 [↑ Back to top](#systems_design-topics)
 
@@ -125,7 +133,7 @@ Vertical scaling, on the other hand, means upgrading the existing machines' capa
 Advantages of vertical scaling include:
 - Simplicity, as it usually involves fewer complexities related to the system architecture changes.
 - Lower initial complexity for applications not designed to run on multiple machines, since there's no need to manage communication or data consistency across multiple nodes.
-However, vertical scaling has its limitsâ€”there's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected.
+However, vertical scaling has its limits - there's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected.
 
 [↑ Back to top](#systems_design-topics)
 
@@ -568,7 +576,7 @@ Considerations
 
 [↑ Back to top](#systems_design-topics)
 
-### How do you design Tic-Tac-Toe (what are examples of required features, common issues, resolutions, and other considerations)?
+### How do you design Tic-Tac-Toe?
 
 Required Features
 - Two-player gameplay support, either local (two players on the same device) or online (players on separate devices)
@@ -1113,7 +1121,7 @@ Considerations
 
 [↑ Back to top](#systems_design-topics)
 
-### How do you design Facebookâ€™s newsfeed system?
+### How do you design Facebook's newsfeed system?
 
 Required Features
 - Personalized content delivery based on user interests, interactions, and connections
@@ -1152,7 +1160,7 @@ Considerations
 
 [↑ Back to top](#systems_design-topics)
 
-### How do you design a parking lot system (what are examples of required features, common issues, resolutions, and other considerations)?
+### How do you design a parking lot system?
 
 Required Features
 - Entry and exit ticketing systems to track vehicle entry and exit times

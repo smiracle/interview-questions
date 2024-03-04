@@ -5,8 +5,20 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "The process of establishing system aspects such as modules, architecture, components and their interfaces, and data for a system based on specified requirements is known as system design. It is the process of identifying, creating, and designing systems that meet a company\u00e2\u20ac\u2122s or organization\u00e2\u20ac\u2122s specific objectives and expectations. Systems design is more about system analysis, architectural patterns, APIs, design patterns, and glueing it all together than it is about coding. Because your application will be able to handle the architectural load, designing your system adequately for the requirements of your application will eliminate unnecessary costs and maintenance efforts, as well as provide a better experience for your end-users."
+                    "value": "The process of establishing system aspects such as modules, architecture, components and their interfaces, and data for a system based on specified requirements is known as system design. It is the process of identifying, creating, and designing systems that meet a company's or organization's specific objectives and expectations. \n\nSystems design is more about system analysis, architectural patterns, APIs, design patterns, and glueing it all together than it is about coding. Because your application will be able to handle the architectural load, designing your system adequately for the requirements of your application will eliminate unnecessary costs and maintenance efforts, as well as provide a better experience for your end-users."
                 }
+            ],
+            "answers": [
+                "Systems design involves defining the architecture, modules, interfaces, and data for a system to satisfy specified requirements",
+                "It focuses on the technical and business needs of a company, ensuring that the system aligns with its goals and processes",
+                "System design includes considering scalability, reliability, and performance to handle expected loads and future growth",
+                "It entails selecting appropriate technology stacks, frameworks, and tools that best fit the system's needs and constraints",
+                "Effective systems design requires understanding of best practices, design patterns, and architectural principles",
+                "Systems design often involves trade-offs between different architectural choices to balance features, performance, and cost",
+                "It includes planning for data persistence, choosing databases, and designing data schemas that efficiently support the system's operations",
+                "Designing systems for high availability and fault tolerance is critical to ensure continuous operation under various conditions",
+                "Systems design is an iterative process, involving feedback loops with stakeholders to refine requirements and solutions",
+                "Documentation plays a crucial role in systems design, providing a blueprint for development and future maintenance"
             ]
         },
         {
@@ -27,6 +39,18 @@
                         "10. Review and Feedback. Be open to feedback and questions from the interviewer. They may point out aspects you haven't considered or suggest alternatives. Engaging in a constructive discussion shows your ability to adapt and consider different perspectives."
                     ]
                 }
+            ],
+            "answers": [
+                "Start by clarifying the scope and key requirements of the system to ensure alignment with the interviewer",
+                "Outline the system's interfaces, detailing the input data and expected output to define functionality boundaries",
+                "Sketch a high-level architecture focusing on main components and their interactions, providing a system overview",
+                "Delve into detailed design of key components, demonstrating your knowledge of technologies and design patterns",
+                "Discuss data storage, retrieval, and management, considering scalability and data integrity implications",
+                "Explain scalability and performance strategies, addressing potential bottlenecks and growth accommodation",
+                "Address system reliability and fault tolerance, outlining strategies for maintaining operations during failures",
+                "Identify and mitigate potential security risks, ensuring user data and system operations are secure",
+                "Conclude by summarizing key design points and trade-offs, explaining decision-making rationale",
+                "Engage with feedback constructively, showing adaptability and openness to different perspectives"
             ]
         },
         {
@@ -47,6 +71,11 @@
                 {
                     "type": "text",
                     "value": "This theorem has created the base for modern distributed computing approaches. The most high volume traffic companies (e.g. Amazon, Google, Facebook) use this as a basis for deciding their application architecture. It's important to understand that only two of these three conditions can be guaranteed to be met by a system."
+                },
+                {
+                    "type": "image",
+                    "alt": "CAP",
+                    "path": "../InterviewQuestions/images/systems_design/cap.png"
                 }
             ]
         },
@@ -64,14 +93,14 @@
                 {
                     "type": "bullets",
                     "values": [
-                        "1. Traffic Distribution: When a client sends a request to a server, the load balancer receives the request first. Based on its configuration, it selects a server from the pool of available servers to forward the request to.",
-                        "2. Health Checks: Load balancers periodically check the health of all servers in the pool to ensure they can handle requests. If a server fails a health check, it is temporarily removed from the pool until it becomes healthy again.",
-                        "3. Session Persistence: Some applications require that a user's session be maintained with the same server for the duration of their visit. Load balancers can use various methods to ensure session persistence or 'stickiness'."
+                        "Traffic Distribution: When a client sends a request to a server, the load balancer receives the request first. Based on its configuration, it selects a server from the pool of available servers to forward the request to.",
+                        "Health Checks: Load balancers periodically check the health of all servers in the pool to ensure they can handle requests. If a server fails a health check, it is temporarily removed from the pool until it becomes healthy again.",
+                        "Session Persistence: Some applications require that a user's session be maintained with the same server for the duration of their visit. Load balancers can use various methods to ensure session persistence or 'stickiness'."
                     ]
                 },
                 {
                     "type": "text",
-                    "value": "Types of Load Balancing:"
+                    "value": "\n\nTypes of Load Balancing:"
                 },
                 {
                     "type": "bullets",
@@ -84,7 +113,7 @@
                 },
                 {
                     "type": "text",
-                    "value": "Deployment Models:"
+                    "value": "\n\nDeployment Models:"
                 },
                 {
                     "type": "bullets",
@@ -94,6 +123,11 @@
                         "Cloud-Based Load Balancers: Provided as part of cloud services, these are fully managed by the cloud provider, offering scalability and integration with cloud resources.",
                         "Load balancers are crucial in modern web infrastructure, enabling the efficient management of network resources, improving user experience, and ensuring the resilience and reliability of web applications and services."
                     ]
+                },
+                {
+                    "type": "image",
+                    "alt": "load balancing",
+                    "path": "../InterviewQuestions/images/systems_design/load_balancing.png"
                 }
             ]
         },
@@ -129,7 +163,7 @@
                 },
                 {
                     "type": "text",
-                    "value": "However, vertical scaling has its limits\u00e2\u20ac\u201dthere's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected."
+                    "value": "However, vertical scaling has its limits - there's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected."
                 }
             ]
         },
@@ -861,7 +895,7 @@
             ]
         },
         {
-            "header": "How do you design Tic-Tac-Toe (what are examples of required features, common issues, resolutions, and other considerations)?",
+            "header": "How do you design Tic-Tac-Toe?",
             "content": [
                 {
                     "type": "text",
@@ -1770,7 +1804,7 @@
             ]
         },
         {
-            "header": "How do you design Facebook\u00e2\u20ac\u2122s newsfeed system?",
+            "header": "How do you design Facebook's newsfeed system?",
             "content": [
                 {
                     "type": "text",
@@ -1835,7 +1869,7 @@
             ]
         },
         {
-            "header": "How do you design a parking lot system (what are examples of required features, common issues, resolutions, and other considerations)?",
+            "header": "How do you design a parking lot system?",
             "content": [
                 {
                     "type": "text",

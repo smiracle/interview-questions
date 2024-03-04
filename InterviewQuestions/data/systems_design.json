@@ -5,8 +5,20 @@
       "content": [
         {
           "type": "text",
-          "value": "The process of establishing system aspects such as modules, architecture, components and their interfaces, and data for a system based on specified requirements is known as system design. It is the process of identifying, creating, and designing systems that meet a company's or organization's specific objectives and expectations. Systems design is more about system analysis, architectural patterns, APIs, design patterns, and glueing it all together than it is about coding. Because your application will be able to handle the architectural load, designing your system adequately for the requirements of your application will eliminate unnecessary costs and maintenance efforts, as well as provide a better experience for your end-users."
+          "value": "The process of establishing system aspects such as modules, architecture, components and their interfaces, and data for a system based on specified requirements is known as system design. It is the process of identifying, creating, and designing systems that meet a company's or organization's specific objectives and expectations. \n\nSystems design is more about system analysis, architectural patterns, APIs, design patterns, and glueing it all together than it is about coding. Because your application will be able to handle the architectural load, designing your system adequately for the requirements of your application will eliminate unnecessary costs and maintenance efforts, as well as provide a better experience for your end-users."
         }
+      ],
+      "answers": [
+        "Systems design involves defining the architecture, modules, interfaces, and data for a system to satisfy specified requirements",
+        "It focuses on the technical and business needs of a company, ensuring that the system aligns with its goals and processes",
+        "System design includes considering scalability, reliability, and performance to handle expected loads and future growth",
+        "It entails selecting appropriate technology stacks, frameworks, and tools that best fit the system's needs and constraints",
+        "Effective systems design requires understanding of best practices, design patterns, and architectural principles",
+        "Systems design often involves trade-offs between different architectural choices to balance features, performance, and cost",
+        "It includes planning for data persistence, choosing databases, and designing data schemas that efficiently support the system's operations",
+        "Designing systems for high availability and fault tolerance is critical to ensure continuous operation under various conditions",
+        "Systems design is an iterative process, involving feedback loops with stakeholders to refine requirements and solutions",
+        "Documentation plays a crucial role in systems design, providing a blueprint for development and future maintenance"
       ]
     },
     {
@@ -27,6 +39,18 @@
             "10. Review and Feedback. Be open to feedback and questions from the interviewer. They may point out aspects you haven't considered or suggest alternatives. Engaging in a constructive discussion shows your ability to adapt and consider different perspectives."
           ]
         }
+      ],
+      "answers": [
+        "Start by clarifying the scope and key requirements of the system to ensure alignment with the interviewer",
+        "Outline the system's interfaces, detailing the input data and expected output to define functionality boundaries",
+        "Sketch a high-level architecture focusing on main components and their interactions, providing a system overview",
+        "Delve into detailed design of key components, demonstrating your knowledge of technologies and design patterns",
+        "Discuss data storage, retrieval, and management, considering scalability and data integrity implications",
+        "Explain scalability and performance strategies, addressing potential bottlenecks and growth accommodation",
+        "Address system reliability and fault tolerance, outlining strategies for maintaining operations during failures",
+        "Identify and mitigate potential security risks, ensuring user data and system operations are secure",
+        "Conclude by summarizing key design points and trade-offs, explaining decision-making rationale",
+        "Engage with feedback constructively, showing adaptability and openness to different perspectives"
       ]
     },
     {
@@ -69,14 +93,14 @@
         {
           "type": "bullets",
           "values": [
-            "1. Traffic Distribution: When a client sends a request to a server, the load balancer receives the request first. Based on its configuration, it selects a server from the pool of available servers to forward the request to.",
-            "2. Health Checks: Load balancers periodically check the health of all servers in the pool to ensure they can handle requests. If a server fails a health check, it is temporarily removed from the pool until it becomes healthy again.",
-            "3. Session Persistence: Some applications require that a user's session be maintained with the same server for the duration of their visit. Load balancers can use various methods to ensure session persistence or 'stickiness'."
+            "Traffic Distribution: When a client sends a request to a server, the load balancer receives the request first. Based on its configuration, it selects a server from the pool of available servers to forward the request to.",
+            "Health Checks: Load balancers periodically check the health of all servers in the pool to ensure they can handle requests. If a server fails a health check, it is temporarily removed from the pool until it becomes healthy again.",
+            "Session Persistence: Some applications require that a user's session be maintained with the same server for the duration of their visit. Load balancers can use various methods to ensure session persistence or 'stickiness'."
           ]
         },
         {
           "type": "text",
-          "value": "Types of Load Balancing:"
+          "value": "\n\nTypes of Load Balancing:"
         },
         {
           "type": "bullets",
@@ -89,7 +113,7 @@
         },
         {
           "type": "text",
-          "value": "Deployment Models:"
+          "value": "\n\nDeployment Models:"
         },
         {
           "type": "bullets",
@@ -99,7 +123,24 @@
             "Cloud-Based Load Balancers: Provided as part of cloud services, these are fully managed by the cloud provider, offering scalability and integration with cloud resources.",
             "Load balancers are crucial in modern web infrastructure, enabling the efficient management of network resources, improving user experience, and ensuring the resilience and reliability of web applications and services."
           ]
+        },
+        {
+          "type": "image",
+          "alt": "load balancing",
+          "path": "../InterviewQuestions/images/systems_design/load_balancing.png"
         }
+      ],
+      "answers": [
+        "Load balancing distributes network traffic across multiple servers to ensure no single server becomes overloaded, increasing application reliability and availability.",
+        "It optimizes resource use, improves response times, and maximizes throughput, leading to a more efficient network infrastructure.",
+        "Load balancing supports failover, automatically rerouting traffic from failing or overloaded servers to healthy ones to maintain service continuity.",
+        "It enables scalable applications by allowing more servers to be added or removed based on demand, ensuring the system can handle increases in traffic.",
+        "Load balancers can provide additional security features such as SSL termination and protection against certain types of attacks.",
+        "They support session persistence, ensuring that a user's session is maintained with the same server for the duration of their visit for applications requiring it.",
+        "Load balancing techniques, like round robin, least connections, and IP hash, offer different methods of distributing traffic based on specific needs.",
+        "Deployment models include hardware load balancers, software load balancers, and cloud-based load balancers, each offering unique benefits.",
+        "In cloud environments, load balancers facilitate auto-scaling by distributing traffic across instances and integrating seamlessly with cloud services.",
+        "Load balancing is fundamental in achieving high availability and disaster recovery, ensuring systems remain operational even during outages or maintenance."
       ]
     },
     {
@@ -136,6 +177,18 @@
           "type": "text",
           "value": "However, vertical scaling has its limits - there's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected."
         }
+      ],
+      "answers": [
+        "Scalability is the system's ability to handle increased loads by adding resources, with horizontal scaling adding more machines and vertical scaling upgrading existing ones.",
+        "Horizontal scaling, or scaling out, involves adding more nodes to a system, increasing fault tolerance and allowing for easy adjustment based on demand.",
+        "Vertical scaling, or scaling up, involves enhancing the capacity of existing machines, which can be simpler but introduces a single point of failure.",
+        "Horizontal scaling offers potentially unlimited scalability, limited only by the infrastructure's capability to distribute loads efficiently.",
+        "Vertical scaling is limited by the maximum capacity upgrades of a machine, making it less feasible for extensive growth.",
+        "Horizontal scaling supports distributed systems architecture, making it suitable for applications designed to run on multiple machines.",
+        "Vertical scaling may initially be less complex but can become cost-prohibitive and technically challenging at higher scales.",
+        "Horizontal scaling enhances system redundancy, reducing the impact of a single node's failure on the overall system.",
+        "Vertical scaling's simplicity benefits applications not initially designed for distributed environments but lacks flexibility in scaling operations.",
+        "Choosing between horizontal and vertical scaling depends on the application's requirements, growth expectations, and architectural design."
       ]
     },
     {
@@ -161,6 +214,18 @@
           "type": "text",
           "value": "\n\nImportance in Systems Design:\nLatency and Throughput: There's often a trade-off between latency and throughput that needs to be balanced based on the application's requirements. For instance, optimizing for low latency might mean processing fewer requests at a time to ensure quick responses, while maximizing throughput might involve batch processing that introduces delays.\nAvailability: Designing for high availability often involves redundancy, geographic distribution of resources, and the ability to quickly recover from failures. This can add complexity and cost to the system design but is necessary for mission-critical applications."
         }
+      ],
+      "answers": [
+        "Latency is the delay in system response to a request, throughput is the rate of processing data, and availability is the system's operational uptime.",
+        "Low latency is vital for interactive applications requiring immediate feedback, such as online gaming or financial trading platforms.",
+        "High throughput ensures a system can handle large volumes of data or many users simultaneously, crucial for services like video streaming.",
+        "High availability minimizes downtime, essential for critical systems where outages can cause significant impact.",
+        "Balancing latency and throughput depends on application needs; optimizing one may affect the other.",
+        "Ensuring high availability can involve redundancy, failover mechanisms, and robust error handling to maintain service continuity.",
+        "Reducing latency improves user experience in real-time applications by providing faster responses to user actions.",
+        "Increasing throughput allows a system to accommodate growth in user demand or data volume without degradation in performance.",
+        "Availability is enhanced through strategies like geographic distribution and quick failure recovery, important for maintaining user trust and satisfaction.",
+        "The trade-offs between latency, throughput, and availability must be carefully managed in system design to meet specific application requirements."
       ]
     },
     {
@@ -198,6 +263,18 @@
           "type": "text",
           "value": "In essence, while performance is about how well a system operates at a given scale, scalability is about how well it adapts to increased demands. A well-designed system aims to excel in both areas, ensuring that it not only performs efficiently under current conditions but can also grow to meet future demands without compromising on performance."
         }
+      ],
+      "answers": [
+        "Performance measures system efficiency in processing requests, while scalability is the ability to maintain performance under increased load.",
+        "Enhancing performance can reduce the resources needed per operation, making a system easier to scale.",
+        "Scalability ensures a system can handle growth in users, data, or transactions without significant performance degradation.",
+        "Horizontal scaling involves adding more machines to distribute load, whereas vertical scaling adds more power to an existing machine.",
+        "Good performance is crucial for scalability; a system that performs poorly at a low scale may not benefit from scaling.",
+        "The success of scalability is measured by the system’s ability to maintain or improve performance metrics under higher loads.",
+        "Trade-offs between performance and scalability may be necessary; optimizing one aspect can affect the other.",
+        "A scalable system can adapt to increased demands, ensuring it continues to perform efficiently as workload grows.",
+        "Achieving high performance and scalability requires a balance, often involving code optimization and architectural adjustments.",
+        "A well-designed system excels in both performance and scalability, efficiently operating under current conditions and adapting to future demands."
       ]
     },
     {
@@ -244,6 +321,18 @@
             "Performance Optimization: Both techniques aim to optimize performance, but they do so in different ways and for different types of operations (e.g., sharding for writes, partitioning for reads)."
           ]
         }
+      ],
+      "answers": [
+        "Sharding distributes data across multiple servers to improve scalability and performance for write-heavy operations, while partitioning divides data within a single server to enhance query performance and manageability for read-heavy operations.",
+        "Shards are distributed across different physical or virtual servers, often using a shard key, whereas partitions are contained within a single database system.",
+        "Sharding is more complex to implement and manage, requiring application-level changes for data distribution, whereas partitioning is often managed by the DBMS, requiring less direct intervention.",
+        "Partitioning improves query performance by reducing the data scanned during query execution, making it suitable for read-heavy operations.",
+        "Sharding improves performance and reduces load on single servers by executing operations in parallel across multiple shards.",
+        "Partitioning can be transparent to the application, with the DBMS handling data distribution and retrieval across partitions.",
+        "Sharding is primarily used for scaling out applications horizontally, allowing more data to be handled by adding more servers.",
+        "Partitioning methods include range, list, or hash-based on specific keys, allowing for efficient data organization and retrieval.",
+        "Sharding requires careful planning of data distribution strategies to ensure balanced load and performance across shards.",
+        "The choice between sharding and partitioning depends on the specific needs and goals of the database system, including the type of operations (write vs. read-heavy) and scalability requirements."
       ]
     },
     {
@@ -281,6 +370,15 @@
           "type": "text",
           "value": "\n\nChoosing the right cache update strategy involves balancing the need for data consistency, the performance impact of cache operations, and the complexity of implementing and managing the caching logic. The best approach depends on the specific requirements and characteristics of the application, such as the acceptable staleness of data, read-to-write ratio, and the criticality of operations."
         }
+      ],
+      "answers": [
+        "Caching stores copies of data or computational results temporarily to speed up future data retrieval, reduce latency, and improve system performance.",
+        "Write-Through Cache ensures data is written into the cache and the database simultaneously, providing strong consistency but potentially slower write operations.",
+        "Write-Around Cache writes data directly to persistent storage, bypassing the cache, which conserves cache space but may increase read latency for newly written data.",
+        "Write-Back Cache initially writes data to the cache alone, then to the storage system later, speeding up write operations but risking data loss if the cache fails before persisting.",
+        "Cache Invalidation removes outdated data from the cache, requiring strategies to determine when cached data becomes obsolete, such as time-based expiration or event-driven invalidation.",
+        "Cache Refreshing updates the cache with the latest data at fixed intervals or on demand, ensuring the cache reflects recent changes in the data source.",
+        "Choosing the right cache update strategy involves balancing data consistency, performance impact, and the complexity of caching logic, tailored to application requirements."
       ]
     },
     {
@@ -306,6 +404,16 @@
           "type": "text",
           "value": "Trade-offs and Considerations\nThe choice of consistency model has significant implications for system design, particularly in balancing the trade-offs between consistency (C), availability (A), and partition tolerance (P) as outlined by the CAP theorem. Systems often need to prioritize two out of these three properties, leading to different consistency patterns being more suitable for some applications than others. The decision largely depends on the specific requirements of the application, such as the need for real-time data accuracy versus the need for high availability and fault tolerance."
         }
+      ],
+      "answers": [
+        "Strong Consistency ensures any read operation retrieves the most recent write operation's result, guaranteeing simultaneous data visibility across all users.",
+        "Eventual Consistency guarantees that if no new updates are made, eventually all accesses to a data item will return the same value, allowing for temporary discrepancies.",
+        "Causal Consistency ensures causally related updates are seen by all nodes in the same order, offering a balance between strict consistency and flexibility.",
+        "Read-Your-Writes Consistency guarantees that a process writing data will always read its own writes, important for user-facing applications where immediate feedback is expected.",
+        "Session Consistency extends read-your-writes consistency within a user session context, ensuring consistency for all session-related operations.",
+        "Monotonic Read Consistency ensures that if a read operation returns a value, subsequent reads will not return older values, preventing data regressions for the client.",
+        "Monotonic Write Consistency ensures writes from a single source are applied in the order issued, crucial for maintaining logical operation sequences.",
+        "The choice of consistency model impacts system design, with trade-offs between consistency, availability, and partition tolerance as outlined by the CAP theorem."
       ]
     },
     {
@@ -335,7 +443,7 @@
         },
         {
           "type": "text",
-          "value": "Types of Content Served by CDNs\nCDNs are versatile and can deliver a wide range of content, including:"
+          "value": "\n\nTypes of Content Served by CDNs\nCDNs are versatile and can deliver a wide range of content, including:"
         },
         {
           "type": "bullets",
@@ -349,7 +457,7 @@
         },
         {
           "type": "text",
-          "value": "Use Cases\nCDNs are used across various types of websites and applications, especially those requiring high availability and performance, such as:"
+          "value": "\n\nUse Cases\nCDNs are used across various types of websites and applications, especially those requiring high availability and performance, such as:"
         },
         {
           "type": "bullets",
@@ -360,6 +468,15 @@
             "Software distribution, for efficient delivery of large files to a global audience."
           ]
         }
+      ],
+      "answers": [
+        "A CDN reduces latency by serving content from the closest server to the user's geographic location, enhancing site speed and user experience.",
+        "CDNs improve website scalability and reliability by handling traffic spikes and distributing load across multiple servers.",
+        "They enhance content availability and provide redundancy by rerouting traffic in case of server failures.",
+        "Through caching and optimizations, CDNs optimize bandwidth usage, lowering hosting costs and improving load times.",
+        "CDNs enhance security with features like DDoS protection and secure certificates management, safeguarding against attacks.",
+        "CDNs are versatile, delivering web objects, downloadable objects, applications, streaming media, and more, to a wide range of websites and applications.",
+        "They are crucial for high-availability and performance-demanding platforms like e-commerce sites, news and media websites, online gaming, and software distribution."
       ]
     },
     {
@@ -385,7 +502,7 @@
         },
         {
           "type": "text",
-          "value": "Common Leader Election Algorithms"
+          "value": "\n\nCommon Leader Election Algorithms"
         },
         {
           "type": "bullets",
@@ -398,7 +515,7 @@
         },
         {
           "type": "text",
-          "value": "Applications of Leader Election\nLeader election is crucial in various distributed systems scenarios, including:"
+          "value": "\n\nApplications of Leader Election\nLeader election is crucial in various distributed systems scenarios, including:"
         },
         {
           "type": "bullets",
@@ -409,6 +526,15 @@
             "Distributed lock management to control access to shared resources."
           ]
         }
+      ],
+      "answers": [
+        "Leader election ensures a single node (the leader) manages critical operations in distributed systems, enhancing efficiency and reducing errors.",
+        "It is initiated when there's no current leader, leading to an election process where nodes communicate to elect the new leader based on predefined criteria.",
+        "Common algorithms include the Bully Algorithm, Ring Algorithm, Raft Consensus Algorithm, and Zookeeper's Zab Protocol, each with unique mechanisms for electing a leader.",
+        "Once elected, the leader performs tasks such as coordinating access to shared resources and making decisions on behalf of the cluster, while other nodes may serve as workers or standbys.",
+        "Leader election is applied in scenarios like distributed databases for data consistency, cluster management systems for resource scheduling, and distributed file systems for access management.",
+        "The process involves continuous monitoring of the leader's health, with mechanisms for re-election if the current leader fails or becomes unresponsive.",
+        "This coordination mechanism simplifies the management of distributed tasks, ensuring only one node is in charge of critical operations at any given time."
       ]
     },
     {
@@ -434,7 +560,7 @@
         },
         {
           "type": "text",
-          "value": "Use Cases for SSE\nSSE is particularly well-suited for applications that require real-time data updates from the server, such as:"
+          "value": "\n\nUse Cases for SSE\nSSE is particularly well-suited for applications that require real-time data updates from the server, such as:"
         },
         {
           "type": "bullets",
@@ -447,7 +573,7 @@
         },
         {
           "type": "text",
-          "value": "Comparing SSE with WebSockets\nWhile both SSE and WebSockets provide mechanisms for real-time communication between clients and servers, there are key differences:"
+          "value": "\n\nComparing SSE with WebSockets\nWhile both SSE and WebSockets provide mechanisms for real-time communication between clients and servers, there are key differences:"
         },
         {
           "type": "bullets",
@@ -537,7 +663,7 @@
         },
         {
           "type": "text",
-          "value": "2. Technical SEO\nThis involves optimizing the technical aspects of your website to improve its indexing and crawling by search engines. Elements include:"
+          "value": "\n2. Technical SEO\nThis involves optimizing the technical aspects of your website to improve its indexing and crawling by search engines. Elements include:"
         },
         {
           "type": "bullets",
@@ -552,7 +678,7 @@
         },
         {
           "type": "text",
-          "value": "3. Off-Page SEO\nOff-page SEO focuses on external factors that influence your site's authority and rankings:"
+          "value": "\n3. Off-Page SEO\nOff-page SEO focuses on external factors that influence your site's authority and rankings:"
         },
         {
           "type": "bullets",
@@ -604,18 +730,12 @@
           ]
         },
         {
-          "type": "Key Components:",
+          "type": "text",
           "value": "\n\nKey components:"
         },
         {
-          "type": "bullets",
-          "values": [
-            "Domain: A human-friendly address of a website (e.g., www.example.com).",
-            "IP Address: A unique numeric identifier for each device on a network.",
-            "DNS Resolver: Acts as a mediator between the user and DNS servers to find the correct IP address.",
-            "Root Name Servers: The top of the DNS hierarchy that directs queries to TLD name servers based on the extension (.com, .net, etc.).",
-            "TLD Name Servers: Manage the second-level domain names such as .com, .net, etc. Authoritative Name Servers: Hold the DNS records for individual domains, providing the exact 6. "
-          ]
+          "type": "text",
+          "value": "Domain: A human-friendly address of a website (e.g., www.example.com). \nIP Address: A unique numeric identifier for each device on a network.\nDNS Resolver: Acts as a mediator between the user and DNS servers to find the correct IP address.\nRoot Name Servers: The top of the DNS hierarchy that directs queries to TLD name servers based on the extension (.com, .net, etc.).\nTLD Name Servers: Manage the second-level domain names such as .com, .net, etc. \nAuthoritative Name Servers: Hold the DNS records for individual domains, providing the exact 6. "
         }
       ]
     },
@@ -640,7 +760,7 @@
         },
         {
           "type": "text",
-          "value": "Client-Side Implementation"
+          "value": "\nClient-Side Implementation"
         },
         {
           "type": "bullets",
@@ -652,7 +772,7 @@
         },
         {
           "type": "text",
-          "value": "Server-Side Example (Node.js using ws library):"
+          "value": "\nServer-Side Example (Node.js using ws library):"
         },
         {
           "type": "code",
@@ -668,7 +788,7 @@
         },
         {
           "type": "text",
-          "value": "Why Use WebSocket Over HTTP?"
+          "value": "\nWhy Use WebSocket Over HTTP?"
         },
         {
           "type": "bullets",

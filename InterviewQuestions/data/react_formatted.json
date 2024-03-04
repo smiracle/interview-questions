@@ -7,6 +7,13 @@
                     "type": "text",
                     "value": "React, React.js or ReactJS is an open-source front-end JavaScript library that is used for building composable user interfaces, especially for single-page applications. It is used for handling view layer for web and mobile apps based on components in a declarative approach."
                 }
+            ],
+            "answers": [
+                "A JavaScript library for building user interfaces",
+                "A framework for server-side rendering",
+                "A database query language",
+                "A design tool for prototyping websites",
+                "An operating system for mobile devices"
             ]
         },
         {
@@ -48,6 +55,13 @@
                     "type": "text",
                     "value": "Since then, React has continued to evolve, with the React team focusing on features like concurrent mode, server components, and improving the overall developer experience."
                 }
+            ],
+            "answers": [
+                "Created by Jordan Walke, React was first used in Facebook's News Feed in 2011",
+                "Developed as a side project at Google to enhance Gmail's performance",
+                "Launched by Twitter to improve the rendering of tweets",
+                "Originally a PHP extension for rendering database queries as UI components",
+                "A collaboration between Facebook and Microsoft to standardize UI frameworks"
             ]
         },
         {
@@ -67,6 +81,18 @@
                         "Has reusable/composable UI components to develop the view."
                     ]
                 }
+            ],
+            "answers": [
+                "Supports server-side rendering, which is useful for SEO",
+                "Incorporates two-way data binding by default",
+                "Uses real DOM for faster rendering and better performance",
+                "Primarily focuses on back-end development for server operations",
+                "Automatically syncs data between components without developer input",
+                "Designed primarily for building mobile applications with native capabilities",
+                "Employs proprietary syntax similar to HTML for component structuring",
+                "Relies on class-based components as the only means to manage state",
+                "Integrates model-view-controller (MVC) architecture for data handling",
+                "Utilizes inline styling exclusively for component design and layout"
             ]
         },
         {
@@ -92,6 +118,18 @@
                     "type": "code",
                     "value": "import { createElement } from \"react\";\nexport default function App() {\n  return createElement(\n    \"h1\",\n    { className: \"greeting\" },\n    \"Hello, this is a JSX Code!\",\n  );\n}\n"
                 }
+            ],
+            "answers": [
+                "An XML-like syntax extension to ECMAScript used with React to describe what the UI should look like",
+                "A new programming language developed by Facebook for building user interfaces",
+                "A JavaScript-based framework for server-side rendering",
+                "A CSS preprocessor extension that allows writing CSS in JavaScript files",
+                "A template engine for dynamic HTML rendering",
+                "A compiler that converts HTML documents into React components",
+                "A tool for managing state within React applications",
+                "A database query language integrated within React for direct database manipulation",
+                "A testing framework specifically designed for React apps",
+                "An extension for Chrome DevTools dedicated to debugging JSX syntax"
             ]
         },
         {
@@ -105,6 +143,18 @@
                     "type": "text",
                     "value": "While JSX makes your code more readable and concise, especially for complex UI structures, using `React.createElement` directly can give you a deeper understanding of React's working principles. It can also be useful in environments where you cannot or prefer not to use a JSX transpiler. However, for larger projects or when working with teams, the clarity and simplicity offered by JSX often outweigh the benefits of avoiding it."
                 }
+            ],
+            "answers": [
+                "No, it's optional and React can be used with plain JavaScript",
+                "Yes, React components cannot be rendered without JSX",
+                "JSX is the only language that can be used with React",
+                "React requires JSX for state management in applications",
+                "JSX is necessary for integrating React with other libraries like Redux",
+                "Using JSX is mandated by the ECMAScript standard for React",
+                "React's performance optimizations are only activated when using JSX",
+                "JSX is a requirement for server-side rendering in React applications",
+                "You must use JSX if you want to incorporate React Hooks in your components",
+                "Without JSX, React can only render static HTML content"
             ]
         },
         {
@@ -162,6 +212,18 @@
                         "Elements are immutable objects that represent the UI at a certain point in time. Components can be dynamic, managing state, and responding to user input."
                     ]
                 }
+            ],
+            "answers": [
+                "An element is a static description of the UI, while a component can encapsulate state and behavior",
+                "Elements are only functions, whereas components are exclusively classes",
+                "Components are used to manipulate the DOM directly, while elements cannot interact with the DOM",
+                "Elements can manage lifecycle methods and state, unlike components",
+                "Components are the smallest building blocks of React apps, not elements",
+                "Only elements can receive and work with props to generate UI output",
+                "A component is just an HTML tag, whereas an element consists of several components",
+                "Elements are compiled at runtime, whereas components are compiled at build time",
+                "Components cannot be reused across the React application, unlike elements",
+                "Elements directly correspond to native mobile components when using React Native"
             ]
         },
         {
@@ -194,6 +256,18 @@
                     "type": "code",
                     "value": "class Greeting extends React.Component {\n  render() {\n    return <h1>{`Hello, ${this.props.message}`}</h1>;\n  }\n}\n"
                 }
+            ],
+            "answers": [
+                "Function components are defined as JavaScript functions that return React elements",
+                "Class components must be instantiated before use, while function components are directly invoked",
+                "Function components can only use hooks introduced in React 16.8 for managing state and side effects, unlike class components",
+                "Class components are the only way to define components that need to manage a state",
+                "Components in React can only be created using JSX syntax",
+                "Every React component must use class syntax to enable reusability",
+                "Function components automatically handle binding this to class instances",
+                "React components are always written in TypeScript for type safety",
+                "Class components have been deprecated in favor of function components with hooks",
+                "React elements returned from a component must be wrapped in a <Fragment> when returning multiple elements"
             ]
         },
         {
@@ -226,6 +300,18 @@
                     "type": "text",
                     "value": "This example demonstrates how to implement an Error Boundary using a third-party library, avoiding the need for Class components."
                 }
+            ],
+            "answers": [
+                "Utilizing React features that lack a Hook equivalent, such as Error Boundaries",
+                "Function components are less performant than Class components",
+                "Class components provide more control over the component lifecycle",
+                "Hooks cannot be used within Class components",
+                "Class components are necessary for type safety and better integration with TypeScript",
+                "Function components do not support the use of refs",
+                "Error handling in Function components requires different patterns than Class components",
+                "Class components offer a more familiar syntax for developers coming from OOP backgrounds",
+                "Maintaining state in large applications is easier with Class components",
+                "React's context features are only available in Class components"
             ]
         },
         {
@@ -267,6 +353,18 @@
                     "type": "text",
                     "value": "\nNote: `React.memo()` is a higher-order component."
                 }
+            ],
+            "answers": [
+                "Pure components automatically manage re-renders to optimize performance",
+                "Only function components can be pure components",
+                "Pure components use deep comparison to prevent unnecessary updates",
+                "State changes in pure components always trigger re-renders",
+                "Pure components cannot receive props",
+                "Memoization is a technique used exclusively for class components",
+                "Pure components eliminate the need for using React hooks",
+                "All components in React are pure by default",
+                "Pure components do not support lifecycle methods",
+                "React.memo() is used to convert class components into pure components"
             ]
         },
         {
@@ -293,6 +391,18 @@
                     "type": "text",
                     "value": "State is similar to props, but it is private and fully controlled by the component, i.e., it is not accessible to any other component till the owner component decides to pass it."
                 }
+            ],
+            "answers": [
+                "An object that holds information that may change over the lifetime of a component",
+                "A method to pass data between components without using props",
+                "Immutable data structure that controls component rendering",
+                "Global data storage similar to Redux or Context API",
+                "A way to make components stateless and functional",
+                "Only available in class components and not in functional components",
+                "A static data store that does not trigger re-renders upon changes",
+                "Used for storing user input that does not affect the component output",
+                "A complex data structure that requires manual intervention to update",
+                "Automatically shared across all components in an application"
             ]
         },
         {
@@ -326,6 +436,18 @@
                     "type": "code",
                     "value": "class Greeting extends React.Component {\n  render() {\n    return <h1>Hello, {this.props.name}!</h1>;\n  }\n}\nclass App extends React.Component {\n  render() {\n    return <Greeting name=\"React\" />;\n  }\n}\n"
                 }
+            ],
+            "answers": [
+                "A mechanism for passing data and functions from parent to child components",
+                "Variables that are automatically available in all components",
+                "Mutable data that can be modified within the child component",
+                "A feature exclusive to class components and unavailable in functional components",
+                "The only way to maintain state within React applications",
+                "Data passed from child to parent components as a form of back-propagation",
+                "A type of global variable accessible by all components in an application",
+                "Stored in the component's state and managed through lifecycle methods",
+                "Props are used to directly manipulate the DOM in React components",
+                "A method to perform deep cloning of objects and arrays in React"
             ]
         },
         {
@@ -335,6 +457,18 @@
                     "type": "text",
                     "value": "In React, both `state` and `props` are plain JavaScript objects and used to manage the data of a component, but they are used in different ways and have different characteristics. `state` is managed by the component itself and can be updated using the `setState()` function. Unlike props, state can be modified by the component and is used to manage the internal state of the component. Changes in the state trigger a re-render of the component and its children. `props` (short for \"properties\") are passed to a component by its parent component and are `read-only`, meaning that they cannot be modified by the component itself. `props` can be used to configure the behavior of a component and to pass data between components."
                 }
+            ],
+            "answers": [
+                "`state` is managed within the component and can be changed, while `props` are passed to the component and are read-only",
+                "`props` are used to maintain internal data that changes over time",
+                "Only `state` can be used to pass data between different components",
+                "`props` can be modified using the `setState()` method",
+                "`state` is external and must be passed into the component at creation",
+                "Components cannot re-render based on changes to `props`",
+                "`props` are used for internal component logic and state management",
+                "Both `state` and `props` can be modified directly to trigger UI updates",
+                "`state` is inherited from parent components, whereas `props` are defined within the component",
+                "Changes in `props` do not trigger a re-render of the component"
             ]
         },
         {
@@ -344,6 +478,18 @@
                     "type": "text",
                     "value": "If you try to update the state directly then it won't re-render the component. Instead use `setState()` method. It schedules an update to a component's state object. When state changes, the component responds by re-rendering. Note: You can directly assign to the state object either in constructor or using latest javascript's class field declaration syntax."
                 }
+            ],
+            "answers": [
+                "Direct updates to the state do not trigger a re-render of the component",
+                "Direct state updates can lead to inconsistent component state",
+                "Using `setState()` ensures component state is updated predictably",
+                "Direct updates bypass React's state management, leading to potential bugs",
+                "React's diffing algorithm cannot detect direct state modifications",
+                "Direct state updates can overwrite changes made by other state updates",
+                "The `setState()` method provides batch updates for performance optimization",
+                "Direct updates can cause issues with component lifecycle methods",
+                "React components rely on `setState()` to manage state transitions effectively",
+                "Direct state updates do not provide the previous state as a reference for updates"
             ]
         },
         {
@@ -393,6 +539,18 @@
                         "The DOM itself is the source of truth, which may make managing data flow less straightforward in complex applications."
                     ]
                 }
+            ],
+            "answers": [
+                "Controlled components allow React to control data input and form submission, ensuring a single source of truth",
+                "Uncontrolled components require manual reset functions to clear form data",
+                "Controlled components cannot integrate with third-party input controls",
+                "In uncontrolled components, data validation must occur at the server level after form submission",
+                "Controlled components use refs to directly interact with the DOM elements",
+                "Uncontrolled components are easier to integrate with React because they do not require state management",
+                "Controlled components offer better performance with large scale applications due to direct DOM manipulation",
+                "In uncontrolled components, React automatically handles all form data updates and storage",
+                "Controlled components are less flexible when dealing with complex forms and user inputs",
+                "Uncontrolled components can only submit data in JSON format"
             ]
         },
         {
@@ -414,6 +572,18 @@
                         "Render Props: Share state between components using a function prop that the component uses to know what to render. This is a more flexible way to share state but can lead to more complex patterns."
                     ]
                 }
+            ],
+            "answers": [
+                "Lifting State Up allows components to share state by moving it up to their common parent",
+                "React Context is inefficient for large-scale applications due to excessive re-renders",
+                "Global State Management Libraries like Redux or MobX are only suitable for small projects",
+                "Custom Hooks cannot encapsulate and share logic or state between components",
+                "Prop Drilling is the most recommended method for state sharing in React due to its simplicity",
+                "Higher-Order Components (HOCs) are outdated and replaced entirely by React Hooks",
+                "Render Props method introduces unnecessary complexity and is discouraged in React applications",
+                "State can only be shared between components using local storage or similar external systems",
+                "Sharing state directly between sibling components is natively supported in React without lifting state up",
+                "All state in React applications should be global to ensure components can access it when needed"
             ]
         },
         {
@@ -431,6 +601,18 @@
                     "type": "code",
                     "value": "setState({ name: \"John\" }, () =>\n  console.log(\"The name has updated and component re-rendered\"),\n);\n"
                 }
+            ],
+            "answers": [
+                "The callback function in `setState()` ensures actions are performed after the state has been updated",
+                "Callback functions in `setState()` are used to immediately revert the state to its previous value",
+                "It is mandatory to use a callback function every time `setState()` is called to prevent errors",
+                "Lifecycle methods are incapable of handling post-render logic, making callback functions essential",
+                "The callback function delays state updates to synchronize with other asynchronous operations",
+                "Using a callback function with `setState()` significantly improves the performance of React applications",
+                "Callback functions are the only way to access the updated state values outside the component",
+                "React automatically batches multiple `setState()` calls, but the callback function forces them to execute instantly",
+                "The callback function is invoked before the actual state update to pre-process the state values",
+                "Callback functions are used with `setState()` to bypass React's batch updating mechanism for immediate UI updates"
             ]
         },
         {
@@ -472,6 +654,18 @@
                     "type": "text",
                     "value": "In HTML, you need to invoke the function by appending () Whereas in react you should not append () with the function name. (refer to the \"activateLasers\" function in the first point for example)"
                 }
+            ],
+            "answers": [
+                "In React, event handlers use camelCase naming convention, while HTML uses lowercase",
+                "React requires calling `preventDefault()` to avoid default behavior, unlike HTML where `return false` can be used",
+                "HTML event handlers can execute JavaScript code directly within strings, but React uses function references",
+                "React's `onClick` is a function property, whereas HTML's `onclick` is an attribute that receives a string",
+                "In React, appending `()` to function names in event handlers will execute the function at render time, not at event time",
+                "HTML allows inline event handlers with direct JavaScript code, while React encourages separation of concerns",
+                "React event handlers are passed an event object that is consistent across browsers, unlike the varying event objects in plain HTML",
+                "Event delegation is handled automatically in React, whereas in HTML, it needs to be managed explicitly",
+                "In HTML, event listeners are added directly to DOM elements, but in React, they are added to virtual DOM elements",
+                "React integrates event handling into its component-based architecture, offering more control and scalability compared to traditional HTML"
             ]
         },
         {
@@ -515,6 +709,18 @@
                     "type": "text",
                     "value": "Note: If the callback is passed as a prop to child components, those components might do an extra re-rendering. In those cases, it is preferred to go with .bind() or the public class fields syntax approach considering performance."
                 }
+            ],
+            "answers": [
+                "Binding in the constructor is the most performant method to bind event handlers",
+                "Public class fields syntax cannot be used in functional components",
+                "Arrow functions in callbacks may lead to performance issues due to re-rendering",
+                "The `.bind()` method creates a new function instance, increasing memory usage",
+                "Public class fields syntax is not supported in older browsers without transpilation",
+                "Arrow functions enhance readability and reduce boilerplate code",
+                "Using `.bind()` in render method leads to the same performance issues as arrow functions",
+                "Only arrow functions can access the component's `this` context without binding",
+                "Public class fields syntax and `.bind()` are interchangeable in terms of functionality",
+                "Arrow functions in render method are the recommended way for all event handling in React"
             ]
         },
         {
@@ -538,15 +744,39 @@
                     "type": "text",
                     "value": "\nThe Shadow DOM is a part of the Web Components specification, which also includes Custom Elements and HTML Templates. Together, these technologies provide a powerful way to create reusable, encapsulated, and interoperable web components. Modern browsers provide native support for the Shadow DOM, making it an essential tool for front-end developers aiming to create modular web applications."
                 }
+            ],
+            "answers": [
+                "The Shadow DOM prevents CSS styles from being applied globally, limiting the scope to the component only",
+                "It eliminates the need for CSS naming conventions like BEM to avoid style conflicts",
+                "Shadow DOM components cannot be styled or accessed with external JavaScript",
+                "It automatically polyfills CSS and JavaScript for cross-browser compatibility",
+                "All web components must use Shadow DOM to be considered valid custom elements",
+                "Shadow DOMs can be nested inside each other to create complex UI structures",
+                "The main document's DOM can directly manipulate and style content inside a shadow DOM",
+                "Shadow DOM reduces the performance of web pages due to its encapsulation",
+                "It provides a built-in mechanism for server-side rendering of components",
+                "Content inside a shadow DOM is inaccessible to screen readers and SEO crawlers"
             ]
         },
         {
-            "header": "What is Virtual DOM?",
+            "header": "What is the Virtual DOM?",
             "content": [
                 {
                     "type": "text",
                     "value": "The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The representation of a UI is kept in memory and synced with the real DOM. It's a step that happens between the render function being called and the displaying of elements on the screen. This entire process is called reconciliation."
                 }
+            ],
+            "answers": [
+                "The Virtual DOM allows for direct manipulation and editing of the browser's DOM structure",
+                "It significantly reduces the performance of web applications by increasing memory usage",
+                "Virtual DOM is a concept exclusive to React and is not used in any other frontend framework",
+                "Changes in the Virtual DOM immediately update the real DOM without any performance optimization",
+                "The Virtual DOM operates independently of the browser's native DOM, leading to compatibility issues",
+                "Reconciliation involves comparing the entire Virtual DOM tree with the real DOM for every minor change",
+                "Virtual DOM is less efficient than directly working with the real DOM for dynamic UI updates",
+                "It prevents developers from using CSS animations and transitions effectively",
+                "The Virtual DOM does not support event handling or user interactions within the UI",
+                "Each update in the Virtual DOM requires a full page reload to reflect changes in the UI"
             ]
         },
         {
@@ -587,6 +817,18 @@
                     "type": "text",
                     "value": "\nReact's component-based architecture complements the Virtual DOM's efficiency. Components encapsulate their own state and logic, which allows React to track changes at the component level. This granularity helps in optimizing updates and renders. By using the Virtual DOM, frameworks like React can offer a declarative API for defining UI components. Developers describe what the UI should look like for any given state, and the library takes care of efficiently updating the DOM to match that description. This abstraction allows for the creation of dynamic, interactive UIs that are fast and responsive, even with complex applications that have frequent updates."
                 }
+            ],
+            "answers": [
+                "The Virtual DOM increases the complexity and development time for applications",
+                "It requires manual intervention for each step of the diffing and reconciliation process",
+                "Changes in the Virtual DOM are directly applied to the real DOM without any optimization",
+                "The Virtual DOM works identically across all browsers without any need for optimization",
+                "Diffing algorithms in the Virtual DOM can only detect changes in the top-level component",
+                "Reconciliation is a process that significantly decreases the application's performance due to the frequent updates",
+                "The Virtual DOM does not support component-based architecture, making it less suitable for large applications",
+                "Developers must manually manage the state and properties within the Virtual DOM",
+                "The Virtual DOM's efficiency is surpassed by traditional DOM manipulation techniques for simple applications",
+                "Every change in the application requires a complete rebuild of the Virtual DOM tree"
             ]
         },
         {
@@ -624,6 +866,18 @@
                     "type": "text",
                     "value": "Hooks are a powerful and expressive feature that make it easier to design clean, readable, and straightforward components. They allow for better reuse of stateful logic and can make your component logic more modular and easier to understand."
                 }
+            ],
+            "answers": [
+                "Hooks eliminate the need for any other JavaScript libraries or frameworks",
+                "They can be used interchangeably with lifecycle methods in class components",
+                "Hooks allow for state and context sharing between class components",
+                "Using Hooks significantly decreases the performance of function components",
+                "useState and useEffect are the only Hooks provided by React",
+                "Hooks can be used inside loops, conditions, and nested functions for managing state",
+                "Custom Hooks are discouraged as they lead to code duplication and increased complexity",
+                "Hooks provide a way to directly mutate the DOM without using React's DOM diffing algorithm",
+                "All Hooks start with 'use' because they are typically utilized in user-defined components",
+                "Hooks are backward compatible and can be used in applications built with older versions of React without any changes"
             ]
         },
         {
@@ -685,6 +939,18 @@
                     "type": "text",
                     "value": "If props.count changes and you want to update state accordingly, you'll need to use useEffect to observe changes.\n5. Ignoring the Dependency Array in Effects: When using useState in conjunction with useEffect, remember to correctly manage the dependency array of useEffect to avoid infinite loops or stale closures. Understanding and avoiding these pitfalls will help you use useState more effectively, leading to cleaner and more maintainable components."
                 }
+            ],
+            "answers": [
+                "Using useState does not cause any performance issues or pitfalls in React applications",
+                "You can update the state synchronously by calling setCount multiple times in a row",
+                "useState completely eliminates the need for class components in React",
+                "It's recommended to store all component state in a single useState call for simplicity",
+                "State initialized from props automatically updates when the props change",
+                "Functional updates with useState are optional and don't offer any real benefits",
+                "Splitting state into multiple useState calls can lead to increased complexity and is discouraged",
+                "The dependency array in useEffect is only a suggestion and can be ignored without consequences",
+                "React guarantees the immediate reflection of state updates in the component",
+                "Ignoring the dependency array in effects leads to cleaner and simpler code"
             ]
         },
         {
@@ -738,6 +1004,18 @@
                     "type": "text",
                     "value": "6. Ignoring Effect Timing: Effects run after paint, so consider potential UI flickers. Use CSS or conditional rendering to mitigate visible delays."
                 }
+            ],
+            "answers": [
+                "useEffect can be used without dependencies or cleanup to simplify code",
+                "Including every used variable in the dependency array is optional and often unnecessary",
+                "Functions in the dependency array do not need to be wrapped with useCallback for optimization",
+                "Excessive fetching in useEffect is a recommended practice for keeping data up-to-date",
+                "Memory leaks are a minor concern and often do not require cleanup functions",
+                "Infinite loops in useEffect signify a highly dynamic and responsive component",
+                "useEffect is executed before the DOM is painted to ensure immediate effect application",
+                "Specifying an empty dependency array causes useEffect to run on every render",
+                "Cleanup functions in useEffect can safely be omitted for one-time effects",
+                "Ignoring effect timing can enhance user experience by introducing dynamic UI changes"
             ]
         },
         {
@@ -757,6 +1035,18 @@
                         "5. `componentDidUpdate` is called: This method is called after the component is updated in the DOM. It's useful for performing operations like network requests or DOM manipulation in response to prop changes."
                     ]
                 }
+            ],
+            "answers": [
+                "A component ignores new props if they are identical to the previous props",
+                "`getDerivedStateFromProps` allows a component to alter its internal state directly without rendering",
+                "If `shouldComponentUpdate` returns false, the component will never update again for any state or props changes",
+                "The `render` method can decide not to render the new props if it's not necessary",
+                "`getSnapshotBeforeUpdate` can modify the props before they are passed to the render method",
+                "`componentDidUpdate` is the only method that should be used for handling new props",
+                "Receiving new props automatically triggers all child components to re-render, regardless of their props",
+                "React merges new props with old ones, maintaining any unchanged prop values",
+                "The entire component tree is re-rendered from scratch when any component receives new props",
+                "New props cause the component to bypass the Virtual DOM comparison for a direct update"
             ]
         },
         {
@@ -774,127 +1064,18 @@
                         "7. Misusing Dependencies in useEffect: Incorrect dependency array usage in useEffect for data fetching can lead to infinite loops or stale closures. Ensure the dependency array accurately represents all variables that the effect depends on."
                     ]
                 }
-            ]
-        },
-        {
-            "header": "What is the difference between var and let?",
-            "content": [
-                {
-                    "type": "text",
-                    "value": "VAR\nDeclaring a var at the global level creates a property on the global object (which is 'window' in browsers). This means that if you declare a global variable with var, you can access it as a property of the global object. Var is function scoped and hoisted to the top of their *function* scope (only the declaration is hoisted, not the initialization). You can redeclare the same variable within the same scope without causing an error, which can lead to bugs."
-                },
-                {
-                    "type": "text",
-                    "value": "LET\nLet is block scoped and is hoisted to the top of their *block* scope, but they are not declared or initialized. You cannot redeclare the same variable within the same scope. You cannot redeclare let variables. Declaration at the global level does not create a property on the global object. This behavior is helpful in modular JavaScript development, where you wish to avoid polluting the global namespace. Const works the same as let, but contains values that can't be modified."
-                }
-            ]
-        },
-        {
-            "header": "What is a callback, when would you use one?",
-            "content": [
-                {
-                    "type": "text",
-                    "value": "A callback is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action. In JavaScript, callbacks are used extensively, particularly in asynchronous operations such as web API requests, file operations, or timers. They provide a way to ensure that certain code does not execute until other code has already finished execution, which is crucial in operations that take an unknown amount of time to complete, like fetching data from a server."
-                },
-                {
-                    "type": "text",
-                    "value": "When you would use a callback:"
-                },
-                {
-                    "type": "bullets",
-                    "values": [
-                        "Asynchronous Operations: The most common use case for callbacks is in asynchronous operations, where you need to wait for an operation to complete without blocking the execution of subsequent code. For example, when making API calls, you might provide a callback function to be executed once the data is received.",
-                        "Event Listeners: Callbacks are used to define behavior that should happen in response to an event, such as a user clicking a button or a form being submitted.",
-                        "Higher-Order Functions: In JavaScript, functions that take other functions as arguments or return them as output are called higher-order functions. Callbacks are often used in this context to allow for custom behavior to be inserted into reusable functions. For example, array methods like .map(), .filter(), and .reduce() accept callback functions to perform operations on array elements.",
-                        "Continuation Passing: Callbacks can be used in Continuation-Passing Style (CPS), a pattern where control is passed to the next step of a program through a callback. This can be seen in Node.js style error-first callbacks, where the first argument to the callback is an error object, and subsequent arguments represent resulting data from the async operation."
-                    ]
-                },
-                {
-                    "type": "code",
-                    "value": "function fetchData(callback) {\n  setTimeout(() => {\n    const data = { user: \"John Doe\", age: 30 };\n    callback(data);\n  }, 1000);\n}\nfetchData((userData) => {\n  console.log(userData);\n});\n"
-                },
-                {
-                    "type": "text",
-                    "value": "In this example, fetchData simulates an asynchronous operation that takes 1 second to complete. The callback function is passed as an argument to fetchData and is called with the \"fetched\" data once it is available."
-                },
-                {
-                    "type": "text",
-                    "value": "\nAdvantages:\nCallbacks provide a simple way to handle asynchronous operations.\nThey allow for flexible code where functions can be passed around and used dynamically."
-                },
-                {
-                    "type": "text",
-                    "value": "\nDisadvantages:\nExcessive use of callbacks can lead to \"callback hell,\" where multiple nested callbacks become hard to read and maintain. This issue is also known as \"Pyramid of Doom.\" \nDifficulties in error handling in nested callbacks."
-                },
-                {
-                    "type": "text",
-                    "value": "\nTo mitigate some of these disadvantages, Promises and async/await syntax were introduced in JavaScript, offering a cleaner and more readable way to handle asynchronous operations."
-                }
-            ]
-        },
-        {
-            "header": "What is hoisting?",
-            "content": [
-                {
-                    "type": "text",
-                    "value": "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their containing scope before code execution. Regardless of where functions and variables are declared, they are hoisted to the top of their scope by the JavaScript engine. However, only the declarations are hoisted, not initializations.\n\nFor variables, this means that referencing a variable before it is declared will result in undefined because only the declaration (var x;), not the initialization (x = 5;), is hoisted to the top. For functions, because the entire function declaration is hoisted, it can be called before it is declared in the code.\n\nHere's how hoisting works with variables:"
-                },
-                {
-                    "type": "code",
-                    "value": "console.log(x);\nvar x = 5;\nconsole.log(x); // Outputs: undefined, 5\n"
-                },
-                {
-                    "type": "text",
-                    "value": "And for functions:"
-                },
-                {
-                    "type": "code",
-                    "value": "hoistedFunction();\nfunction hoistedFunction() {\n  console.log(\"I am hoisted!\");\n} // Outputs: I am hoisted!\n"
-                },
-                {
-                    "type": "text",
-                    "value": "It's important to note that let and const declarations are hoisted as well, but they maintain a temporal dead zone from the start of the block until the declaration is initialized, resulting in a ReferenceError if accessed before initialization."
-                }
-            ]
-        },
-        {
-            "header": "What is a closure?",
-            "content": [
-                {
-                    "type": "text",
-                    "value": "A closure in JavaScript is a feature where a function retains access to its lexical scope even when the function is executed outside that scope. In simpler terms, closures allow functions to remember and access variables from the place where they were defined, even after the outer function has finished executing. This behavior enables powerful programming patterns, such as data encapsulation, currying, and creating function factories."
-                },
-                {
-                    "type": "code",
-                    "value": "function createGreeting(greeting) {\n  return function (name) {\n    console.log(`${greeting}, ${name}!`);\n  };\n}\nconst greetHello = createGreeting(\"Hello\");\ngreetHello(\"Alice\"); // Output: \"Hello, Alice!\"\n"
-                }
-            ]
-        },
-        {
-            "header": "What is the event loop?",
-            "content": [
-                {
-                    "type": "text",
-                    "value": "The event loop is a fundamental concept that is not specific to React or TypeScript but is a core part of the JavaScript runtime environment, such as in browsers or Node.js. It's responsible for handling asynchronous operations and managing the execution order of scripts, handling events, and executing queued tasks and callbacks."
-                },
-                {
-                    "type": "bullets",
-                    "values": [
-                        "1. Call Stack: It's where the JavaScript runtime keeps track of the function calls currently running. When a function executes, it's pushed onto the stack, and when it returns, it's popped off the stack. The call stack is LIFO (Last In, First Out).",
-                        "2. Callback Queue: When asynchronous operations (like setTimeout, network requests, or event handlers) complete, their callbacks are added to the callback queue. These are tasks waiting to be moved to the call stack for execution.",
-                        "3. Event Loop: Its job is to look at the call stack and the callback queue. If the call stack is empty, it takes the first event from the queue and pushes it onto the call stack, which effectively runs it. This loop allows JavaScript to perform non-blocking operations, despite being single-threaded."
-                    ]
-                },
-                {
-                    "type": "text",
-                    "value": "Event Loop in the Context of React and TypeScript:"
-                },
-                {
-                    "type": "bullets",
-                    "values": [
-                        "React: React's updates and rendering can be asynchronous. React 16 and above versions (with the introduction of Fiber architecture) improve handling of asynchronous tasks by breaking work into chunks and spreading them over multiple frames. React's state updates may be batched or deferred to optimize performance, but this scheduling is managed internally by React and is abstracted away from the developer.",
-                        "TypeScript: The event loop concept applies to the JavaScript that TypeScript compiles to. TypeScript does not change how the event loop works; it only provides types and other syntactical constructs that are stripped away during the compilation process."
-                    ]
-                }
+            ],
+            "answers": [
+                "Fetching data in `componentDidMount` causes unnecessary delays and should be avoided",
+                "Memory leaks are a minor concern and can be ignored in modern web development",
+                "Handling loading states is unnecessary since users expect some delay in data fetching",
+                "Errors in data fetching should be handled silently to avoid disrupting the user experience",
+                "Always fetching the maximum amount of data possible is best to reduce the number of requests",
+                "Caching results is discouraged as it can lead to outdated data being displayed to the user",
+                "Including too many dependencies in the `useEffect` array is recommended to ensure data is always up to date",
+                "Using `useEffect` without a dependency array is the best practice for all data fetching scenarios",
+                "Over-fetching data enhances the user experience by providing more information than requested",
+                "Ignoring errors and loading states simplifies the component and reduces code complexity"
             ]
         },
         {
@@ -928,6 +1109,18 @@
                     "type": "text",
                     "value": "While functional components and Hooks are now the recommended approach for new components in React, understanding when to use class components is valuable, especially in legacy projects or when specific patterns necessitate their use. However, for most use cases, functional components with Hooks will be more concise and align with modern React development practices."
                 }
+            ],
+            "answers": [
+                "Class components are now completely obsolete and should never be used in React",
+                "Hooks can fully replace class components, including error boundaries and complex state logic",
+                "Familiarity with OOP is irrelevant for React development and doesn't justify the use of class components",
+                "All third-party libraries have been updated to support Hooks, making class components unnecessary",
+                "The React team discourages the use of class components under any circumstances",
+                "Complex state logic and side effects are less efficient and more difficult to manage in class components",
+                "Using class components significantly improves application performance compared to functional components",
+                "Error boundaries are easier to implement with Hooks than with class components",
+                "Class components provide access to features not available in functional components, such as context and refs",
+                "For legacy projects, it's recommended to refactor all class components to functional components immediately"
             ]
         },
         {
@@ -935,7 +1128,7 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "React Hooks, introduced in React 16.8, allow functional components to use state and other React features. To ensure that Hooks are used correctly and to maximize their benefits, React enforces two main rules:"
+                    "value": "React Hooks allow functional components to use state and other React features. To ensure that Hooks are used correctly and to maximize their benefits, React enforces two main rules:"
                 },
                 {
                     "type": "text",
@@ -953,6 +1146,18 @@
                     "type": "text",
                     "value": "Why These Rules Exist\n\nEnsure reliability: By enforcing a consistent order and usage pattern for Hooks, React can reliably manage state and side effects in functional components.\nFoster simplicity and readability: Hooks reduce the complexity of sharing and managing stateful logic compared to class components and higher-order components (HOCs).\nFacilitate optimization: Adhering to the Hooks rules allows React to optimize re-renders and other performance aspects under the hood."
                 }
+            ],
+            "answers": [
+                "You can call Hooks at any level, including inside loops, conditions, or nested functions, for dynamic behavior",
+                "Hooks can be called from any JavaScript function, not just React functional components or custom Hooks",
+                "The order of Hook calls does not matter; React does not rely on it for state management",
+                "Custom Hooks are unnecessary; it's better to duplicate logic across components for clarity",
+                "Prefixing custom Hooks with 'use' is optional and has no impact on their functionality",
+                "Using ESLint to lint Hook rules is overkill and not recommended for small projects",
+                "React's state and lifecycle features are accessible outside of Hooks, making them optional",
+                "Class components offer a simpler and more readable way to manage state than Hooks",
+                "Hooks complicate the React component lifecycle and make optimization harder",
+                "Ignoring the rules of Hooks will not lead to bugs or inconsistencies in component state management"
             ]
         }
     ]

@@ -8,6 +8,187 @@
           "value": "todo"
         }
       ]
+    },
+    {
+      "header": "What is the difference between var and let?",
+      "content": [
+        {
+          "type": "text",
+          "value": "VAR\nDeclaring a var at the global level creates a property on the global object (which is 'window' in browsers). This means that if you declare a global variable with var, you can access it as a property of the global object. Var is function scoped and hoisted to the top of their *function* scope (only the declaration is hoisted, not the initialization). You can redeclare the same variable within the same scope without causing an error, which can lead to bugs."
+        },
+        {
+          "type": "text",
+          "value": "LET\nLet is block scoped and is hoisted to the top of their *block* scope, but they are not declared or initialized. You cannot redeclare the same variable within the same scope. You cannot redeclare let variables. Declaration at the global level does not create a property on the global object. This behavior is helpful in modular JavaScript development, where you wish to avoid polluting the global namespace. Const works the same as let, but contains values that can't be modified."
+        }
+      ],
+      "answers": [
+        "var variables are block scoped, just like let",
+        "You can freely redeclare variables using let in the same scope",
+        "var declarations are not hoisted, making them safer to use in functions",
+        "Global var declarations do not create properties on the global object",
+        "let variables are initialized at declaration, preventing reference errors",
+        "Using var is recommended over let for maintaining cleaner code",
+        "The difference in scope between var and let is negligible in modern JavaScript",
+        "Redeclaring a variable with let in the same scope will not cause any errors",
+        "let and var are interchangeable in terms of functionality and scope",
+        "The global object properties are not affected by let declarations at the global level"
+      ]
+    },
+    {
+      "header": "What is a callback, when would you use one?",
+      "content": [
+        {
+          "type": "text",
+          "value": "A callback is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action. In JavaScript, callbacks are used extensively, particularly in asynchronous operations such as web API requests, file operations, or timers. They provide a way to ensure that certain code does not execute until other code has already finished execution, which is crucial in operations that take an unknown amount of time to complete, like fetching data from a server."
+        },
+        {
+          "type": "text",
+          "value": "When you would use a callback:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Asynchronous Operations: The most common use case for callbacks is in asynchronous operations, where you need to wait for an operation to complete without blocking the execution of subsequent code. For example, when making API calls, you might provide a callback function to be executed once the data is received.",
+            "Event Listeners: Callbacks are used to define behavior that should happen in response to an event, such as a user clicking a button or a form being submitted.",
+            "Higher-Order Functions: In JavaScript, functions that take other functions as arguments or return them as output are called higher-order functions. Callbacks are often used in this context to allow for custom behavior to be inserted into reusable functions. For example, array methods like .map(), .filter(), and .reduce() accept callback functions to perform operations on array elements.",
+            "Continuation Passing: Callbacks can be used in Continuation-Passing Style (CPS), a pattern where control is passed to the next step of a program through a callback. This can be seen in Node.js style error-first callbacks, where the first argument to the callback is an error object, and subsequent arguments represent resulting data from the async operation."
+          ]
+        },
+        {
+          "type": "code",
+          "value": "function fetchData(callback) {setTimeout(() => {const data = { user: 'John Doe', age: 30 };callback(data);}, 1000); }fetchData((userData) => {console.log(userData); });"
+        },
+        {
+          "type": "text",
+          "value": "In this example, fetchData simulates an asynchronous operation that takes 1 second to complete. The callback function is passed as an argument to fetchData and is called with the \"fetched\" data once it is available."
+        },
+        {
+          "type": "text",
+          "value": "\nAdvantages:\nCallbacks provide a simple way to handle asynchronous operations.\nThey allow for flexible code where functions can be passed around and used dynamically."
+        },
+        {
+          "type": "text",
+          "value": "\nDisadvantages:\nExcessive use of callbacks can lead to \"callback hell,\" where multiple nested callbacks become hard to read and maintain. This issue is also known as \"Pyramid of Doom.\" \nDifficulties in error handling in nested callbacks."
+        },
+        {
+          "type": "text",
+          "value": "\nTo mitigate some of these disadvantages, Promises and async/await syntax were introduced in JavaScript, offering a cleaner and more readable way to handle asynchronous operations."
+        }
+      ],
+      "answers": [
+        "Callbacks are outdated and should not be used in modern JavaScript development",
+        "For simple operations, it's better to use synchronous code blocks instead of callbacks",
+        "Callbacks can be used interchangeably with promises and async/await without any consideration",
+        "Event listeners and higher-order functions do not benefit from the use of callbacks",
+        "Using callbacks in asynchronous operations can increase the execution time of your program",
+        "Callback hell is a myth and not a concern when writing JavaScript code",
+        "Error handling is easier with nested callbacks compared to promises or async/await",
+        "The introduction of promises and async/await has made callbacks completely obsolete",
+        "You should avoid passing functions as arguments to other functions to keep code clean",
+        "Continuation Passing Style is an outdated pattern and offers no real benefits in Node.js or browser environments"
+      ]
+    },
+    {
+      "header": "What is hoisting?",
+      "content": [
+        {
+          "type": "text",
+          "value": "Hoisting is a JavaScript mechanism where variables and function declarations are moved to the top of their containing scope before code execution. Regardless of where functions and variables are declared, they are hoisted to the top of their scope by the JavaScript engine. However, only the declarations are hoisted, not initializations.\n\nFor variables, this means that referencing a variable before it is declared will result in undefined because only the declaration (var x;), not the initialization (x = 5;), is hoisted to the top. For functions, because the entire function declaration is hoisted, it can be called before it is declared in the code.\n\nHere's how hoisting works with variables:"
+        },
+        {
+          "type": "code",
+          "value": "console.log(x); var x = 5; console.log(x); // Outputs: undefined, 5"
+        },
+        {
+          "type": "text",
+          "value": "And for functions:"
+        },
+        {
+          "type": "code",
+          "value": "hoistedFunction(); function hoistedFunction() { console.log('I am hoisted!'); } // Outputs: I am hoisted!"
+        },
+        {
+          "type": "text",
+          "value": "It's important to note that let and const declarations are hoisted as well, but they maintain a temporal dead zone from the start of the block until the declaration is initialized, resulting in a ReferenceError if accessed before initialization."
+        }
+      ],
+      "answers": [
+        "Hoisting applies to all variable types, including let and const, in the same way as var",
+        "Function expressions are hoisted in the same way as function declarations",
+        "Variables declared with var are initialized with their assigned value at the top of the scope",
+        "Accessing a let or const variable before its declaration will not result in a ReferenceError",
+        "Hoisting allows for cleaner and more organized code, as declarations need not be placed at the top",
+        "The temporal dead zone does not apply to variables declared with var",
+        "Hoisting is a recommended practice for all variable and function declarations",
+        "JavaScript engines do not move declarations to the top of their scope; hoisting is just a metaphor",
+        "It is considered best practice to call functions before declaring them to take advantage of hoisting",
+        "let and const are hoisted and accessible anywhere in the block, similar to var"
+      ]
+    },
+    {
+      "header": "What is a closure?",
+      "content": [
+        {
+          "type": "text",
+          "value": "A closure in JavaScript is a feature where a function retains access to its lexical scope even when the function is executed outside that scope. In simpler terms, closures allow functions to remember and access variables from the place where they were defined, even after the outer function has finished executing. This behavior enables powerful programming patterns, such as data encapsulation, currying, and creating function factories."
+        },
+        {
+          "type": "code",
+          "value": "function createGreeting(greeting) {return function(name) {console.log(`${greeting}, ${name}!`);};}const greetHello = createGreeting(\"Hello\");greetHello(\"Alice\"); // Output: \"Hello, Alice!\""
+        }
+      ],
+      "answers": [
+        "Closures are functions that retain access to the outer function's scope even after the outer function has returned",
+        "Closures can be used to create private variables in JavaScript",
+        "Closures are a consequence of the JavaScript variable scope and execution context",
+        "Every JavaScript function is a closure that encapsulates its own scope",
+        "Closures are primarily used for event handling and asynchronous communication",
+        "Closures can lead to memory leaks if not properly handled",
+        "Closures are unique to JavaScript and do not exist in other programming languages",
+        "Closures can be used to implement the module pattern for structuring and organizing code",
+        "Using closures, one can write functions that generate other functions",
+        "Closures allow for the creation of functions with hidden state, which can only be manipulated through the closure's own functions"
+      ]
+    },
+    {
+      "header": "What is the event loop?",
+      "content": [
+        {
+          "type": "text",
+          "value": "The event loop is a fundamental concept that is not specific to React or TypeScript but is a core part of the JavaScript runtime environment, such as in browsers or Node.js. It's responsible for handling asynchronous operations and managing the execution order of scripts, handling events, and executing queued tasks and callbacks."
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "1. Call Stack: It's where the JavaScript runtime keeps track of the function calls currently running. When a function executes, it's pushed onto the stack, and when it returns, it's popped off the stack. The call stack is LIFO (Last In, First Out).",
+            "2. Callback Queue: When asynchronous operations (like setTimeout, network requests, or event handlers) complete, their callbacks are added to the callback queue. These are tasks waiting to be moved to the call stack for execution.",
+            "3. Event Loop: Its job is to look at the call stack and the callback queue. If the call stack is empty, it takes the first event from the queue and pushes it onto the call stack, which effectively runs it. This loop allows JavaScript to perform non-blocking operations, despite being single-threaded."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Event Loop in the Context of React and TypeScript:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "React: React's updates and rendering can be asynchronous. React 16 and above versions (with the introduction of Fiber architecture) improve handling of asynchronous tasks by breaking work into chunks and spreading them over multiple frames. React's state updates may be batched or deferred to optimize performance, but this scheduling is managed internally by React and is abstracted away from the developer.",
+            "TypeScript: The event loop concept applies to the JavaScript that TypeScript compiles to. TypeScript does not change how the event loop works; it only provides types and other syntactical constructs that are stripped away during the compilation process."
+          ]
+        }
+      ],
+      "answers": [
+        "The event loop allows JavaScript to perform non-blocking operations by using a call stack, a callback queue, and the loop itself to manage execution",
+        "It ensures that JavaScript remains responsive, allowing asynchronous functions to run in the background and their callbacks to execute once the call stack is clear",
+        "The event loop is a critical part of the JavaScript runtime used to handle asynchronous events, manage execution order, and facilitate smooth UI interactions",
+        "In React, the event loop plays a role in scheduling updates and rendering components asynchronously for performance optimization",
+        "TypeScript, being a superset of JavaScript, relies on the JavaScript runtime's event loop for managing asynchronous operations",
+        "Understanding the event loop is crucial for developing efficient JavaScript applications that handle I/O or network requests smoothly",
+        "The event loop helps prevent the blocking of the main thread, ensuring that user interactions and animations remain smooth",
+        "React's Fiber architecture takes advantage of the event loop to improve app responsiveness by breaking UI updates into small, manageable chunks",
+        "The event loop is essential for Node.js environments, where it handles all asynchronous I/O operations",
+        "Developers need to be mindful of the event loop to avoid common pitfalls like blocking the main thread or creating infinite loops"
+      ]
     }
   ]
 }

@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   ScrollView,
   Text,
+  TouchableOpacity,
+  StyleSheet,
   View,
   Image,
-  StyleSheet,
-  Dimensions,
-  Button,
 } from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '../App';
-import {Question, QuestionContent} from './Question';
 import {TopicFileName, topicToDataMap} from './QuestionsDataMap';
+import {Question, QuestionContent} from './Question';
 import {imageMap} from './ImageMap';
+import {sharedStyles} from './_Styles';
 
 type QuizQuestionRouteProp = RouteProp<RootStackParamList, 'QuizQuestion'>;
 type QuizQuestionNavigationProp = StackNavigationProp<
@@ -26,125 +26,169 @@ interface QuizQuestionProps {
   navigation: QuizQuestionNavigationProp;
 }
 
-const QuizQuestion: React.FC<QuizQuestionProps> = ({route}) => {
+const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
   const {topicFileName} = route.params;
-  const [randomQuestion, setRandomQuestion] = useState<Question | null>(null);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 
   useEffect(() => {
-    const topicQuestions =
-      topicToDataMap[topicFileName as TopicFileName]?.questions;
-    if (topicQuestions && topicQuestions.length) {
-      const randomIndex = Math.floor(Math.random() * topicQuestions.length);
-      setRandomQuestion(topicQuestions[randomIndex]);
-    }
+    const loadQuestions = () => {
+      const loadedQuestions =
+        topicToDataMap[topicFileName as TopicFileName]?.questions;
+      const selectedQuestions = loadedQuestions
+        ?.sort(() => 0.5 - Math.random())
+        .slice(0, 5);
+      setQuestions(selectedQuestions ?? []);
+    };
+    loadQuestions();
   }, [topicFileName]);
 
-  const handleShowAnswer = () => {
-    setShowAnswer(!showAnswer);
+  const handleAnswerSelection = (answer: string) => {
+    const correctAnswer = questions[currentQuestionIndex]?.answers?.[0];
+    setIsAnswerCorrect(answer === correctAnswer);
+    setSelectedAnswer(answer);
+    setShowAnswer(true);
   };
 
-  const deviceWidth = Dimensions.get('window').width;
-  const [imageHeights, setImageHeights] = useState<{[key: string]: number}>({});
+  const handleNextQuestion = () => {
+    setShowAnswer(false); // Hide feedback when moving to the next question
+    setSelectedAnswer(''); // Reset selected answer
+    setIsAnswerCorrect(false); // Reset correctness state
 
-  const adjustImageHeight = (imgKey: string, width: number, height: number) => {
-    const aspectRatio = height / width;
-    const calculatedHeight = deviceWidth * aspectRatio;
-    setImageHeights(prevHeights => ({
-      ...prevHeights,
-      [imgKey]: calculatedHeight,
-    }));
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      navigation.goBack(); // or navigate to a results page
+    }
+  };
+
+  const currentQuestion = questions[currentQuestionIndex];
+  const hasAnswers =
+    currentQuestion?.answers && currentQuestion.answers.length > 0;
+
+  const renderContent = (content: QuestionContent, index: number) => {
+    switch (content.type) {
+      case 'text':
+        return (
+          <Text key={index} style={styles.text}>
+            {content.value}
+          </Text>
+        );
+      case 'bullets':
+        return (
+          <View key={index}>
+            {content.values.map((value, idx) => (
+              <Text key={`${index}-${idx}`} style={styles.bullet}>
+                &#8226; {value}
+              </Text>
+            ))}
+          </View>
+        );
+      case 'code':
+        return (
+          <Text key={index} style={sharedStyles.code}>
+            {content.value}
+          </Text>
+        );
+      case 'image':
+        const imageSource = imageMap[content.path];
+        return (
+          <Image
+            key={index}
+            source={imageSource}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        );
+      default:
+        return null;
+    }
   };
 
   return (
-    <ScrollView style={styles.scrollView}>
-      <Text style={styles.header}>{randomQuestion?.header}</Text>
-      {showAnswer &&
-        randomQuestion?.content.map(
-          (content: QuestionContent, index: number) => {
-            const imgKey = `image-${index}`;
-            switch (content.type) {
-              case 'text':
-                return (
-                  <Text key={index} style={styles.text}>
-                    {content.value}
-                  </Text>
-                );
-              case 'bullets':
-                return (
-                  <View key={index}>
-                    {content.values.map((value, idx) => (
-                      <Text key={idx} style={styles.bullet}>
-                        &#8226; {value}
-                      </Text>
-                    ))}
-                  </View>
-                );
-              case 'code':
-              case 'json':
-                return (
-                  <Text key={index} style={styles.code}>
-                    {content.value}
-                  </Text>
-                );
-              case 'image':
-                return (
-                  <Image
-                    key={index}
-                    style={{
-                      width: '100%',
-                      height: imageHeights[imgKey] || undefined,
-                    }}
-                    source={imageMap[content.path]}
-                    resizeMode="contain"
-                    onLoad={event => {
-                      const {width, height} = event.nativeEvent.source;
-                      adjustImageHeight(imgKey, width, height);
-                    }}
-                  />
-                );
-              default:
-                return null;
-            }
-          },
-        )}
-      {!showAnswer && <Button title="Show Answer" onPress={handleShowAnswer} />}
+    <ScrollView style={styles.container}>
+      <Text style={styles.questionHeader}>{currentQuestion?.header}</Text>
+      {hasAnswers &&
+        !showAnswer &&
+        currentQuestion?.answers?.slice(0, 5).map((answer, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.answerButton}
+            onPress={() => handleAnswerSelection(answer)}>
+            <Text style={styles.answerText}>{answer}</Text>
+          </TouchableOpacity>
+        ))}
+      {showAnswer && (
+        <>
+          <Text style={styles.feedbackText}>
+            {isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
+          </Text>
+          {currentQuestion?.content.map(renderContent)}
+          <TouchableOpacity
+            style={styles.nextButton}
+            onPress={handleNextQuestion}>
+            <Text style={styles.nextButtonText}>Continue</Text>
+          </TouchableOpacity>
+        </>
+      )}
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
+  revealButton: {
+    backgroundColor: '#007bff',
     padding: 10,
-  },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    paddingTop: 10,
-    paddingBottom: 10,
     marginBottom: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  revealButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+  },
+  container: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  questionHeader: {
+    fontSize: 20,
+    marginBottom: 20,
+  },
+  answerButton: {
     backgroundColor: '#f0f0f0',
+    padding: 10,
+    marginVertical: 5,
     borderRadius: 5,
   },
-  text: {
-    marginBottom: 10,
+  answerText: {
+    fontSize: 16,
   },
-  bullet: {
-    marginBottom: 5,
+  answerFeedback: {
+    marginTop: 20,
   },
-  code: {
-    fontFamily: 'monospace',
-    backgroundColor: '#2E2E2E',
-    color: '#F8F8F8',
+  feedbackText: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  nextButton: {
+    backgroundColor: '#007bff',
     padding: 10,
     borderRadius: 5,
-    overflow: 'hidden',
-    marginTop: 5,
-    marginBottom: 5,
-    fontSize: 12,
-    lineHeight: 24,
+    marginBottom: 10,
   },
+  nextButtonText: {
+    color: '#ffffff',
+    textAlign: 'center',
+    fontSize: 16,
+  },
+  bullet: {},
+  text: {},
+  image: {width: '100%', height: 200},
 });
 
 export default QuizQuestion;
