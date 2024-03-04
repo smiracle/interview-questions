@@ -8,4 +8,5 @@ export type QuestionContent =
 export interface Question {
   header: string;
   content: QuestionContent[];
+  answers?: string[];
 }

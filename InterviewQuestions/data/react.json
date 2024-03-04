@@ -165,48 +165,66 @@
       ]
     },
     {
-      "header": "How to create components in React?",
+      "header": "How do you create components in React?",
       "content": [
         {
           "type": "text",
-          "value": "Components are the building blocks of creating User Interfaces(UI) in React. There are two possible ways to create a component."
+          "value": "Components are the building blocks of User Interfaces (UI) in React. There are two main ways to create a component: Function Components and Class Components."
         },
         {
           "type": "bullets",
           "values": [
-            "Function Components: This is the simplest way to create a component. Those are pure JavaScript functions that accept props object as the first parameter and return React elements to render the output"
+            "Function Components: These are the simplest way to create a component. They are pure JavaScript functions that accept a props object as the first parameter and return React elements.",
+            "Class Components: These components are defined using ES6 classes. They offer more features such as local state and lifecycle methods."
           ]
         },
         {
-          "type": "code",
-          "value": "function Greeting({ message }) {return <h1>{`Hello, ${message}`}</h1>;}"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "Class Components: You can also use ES6 class to define a component. The above function component can be written as a class component:"
-          ]
+          "type": "text",
+          "value": "Example of a Function Component:"
         },
         {
           "type": "code",
-          "value": "class Greeting extends React.Component { render() {return <h1>{`Hello, ${this.props.message}`}</h1>;}}"
+          "value": "function Greeting({ message }) { return <h1>{`Hello, ${message}`}</h1>; }"
+        },
+        {
+          "type": "text",
+          "value": "Example of a Class Component:"
+        },
+        {
+          "type": "code",
+          "value": "class Greeting extends React.Component { render() { return <h1>{`Hello, ${this.props.message}`}</h1>; } }"
         }
       ]
     },
     {
-      "header": "When to use a Class Component over a Function Component?",
+      "header": "When to Use a Class Component Over a Function Component?",
       "content": [
         {
           "type": "text",
-          "value": "After the addition of Hooks(i.e. React 16.8 onwards) it is always recommended to use Function components over Class components in React. Because you could use state, lifecycle methods and other features that were only available in class component present in function component too."
+          "value": "With the introduction of Hooks in React 16.8, Function components have become capable of utilizing state, lifecycle methods, and other features that were previously exclusive to Class components. This advancement has made Function components more preferable due to their simplicity and conciseness."
         },
         {
           "type": "text",
-          "value": "But even there are two reasons to use Class components over Function components: \n1. If you need a React functionality whose Function component equivalent is not present yet, like Error Boundaries. \n2. In older versions, if the component needs state or lifecycle methods then you need to use class component.\nNote: You can also use reusable react error boundary third-party component without writing any class. i.e, No need to use class components for Error boundaries."
+          "value": "However, there are specific scenarios where you might still consider using Class components:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Utilizing React features that lack a Hook equivalent, such as Error Boundaries.",
+            "Maintaining legacy projects that rely on Class component architecture and haven't been refactored to use Hooks."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "It's important to note that for Error Boundaries, which are a common reason to use Class components, there are now third-party libraries that offer functional component solutions. Therefore, the necessity to use Class components has been further reduced."
         },
         {
           "type": "code",
-          "value": "\"use client\";import { ErrorBoundary } from \"react-error-boundary\";<ErrorBoundary fallback={<div>Something went wrong</div>}><ExampleApplication /></ErrorBoundary>"
+          "value": "import { ErrorBoundary } from 'react-error-boundary';\n\n<ErrorBoundary fallback={<div>Something went wrong</div>}>\n  <ExampleApplication />\n</ErrorBoundary>"
+        },
+        {
+          "type": "text",
+          "value": "This example demonstrates how to implement an Error Boundary using a third-party library, avoiding the need for Class components."
         }
       ]
     },
@@ -925,11 +943,11 @@
         },
         {
           "type": "text",
-          "value": "\n2. Only Call Hooks from React Functions Rule: Call Hooks from React functional components or from custom Hooks. Why: This rule ensures that the Hooks' mechanism works correctly within the React component lifecycle and its ecosystem. Hooks are designed to tap into React's state and lifecycle features, and calling them from regular JavaScript functions would break their association with React component instances, leading to incorrect behavior."
+          "value": "2. Only Call Hooks from React Functions Rule: Call Hooks from React functional components or from custom Hooks. Why: This rule ensures that the Hooks' mechanism works correctly within the React component lifecycle and its ecosystem. Hooks are designed to tap into React's state and lifecycle features, and calling them from regular JavaScript functions would break their association with React component instances, leading to incorrect behavior."
         },
         {
           "type": "text",
-          "value": "Additional Guidelines and Practices\nBeyond these two primary rules, adhering to the following guidelines can help ensure that you use Hooks effectively and avoid common pitfalls: \nUse Custom Hooks for Reusable Logic: Encapsulate and reuse logic across components by creating custom Hooks. This follows the DRY principle and improves code readability and maintenance. \nFollow the use Naming Convention for Custom Hooks: Custom Hooks should start with use (e.g., useFetch), indicating that they are Hooks and making them easily identifiable in your codebase. \nLint Your Code for Hook Rules: Use the ESLint plugin eslint-plugin-react-hooks provided by the React team to automatically check your code for violations of the Hooks rules. This can catch potential issues early in the development process."
+          "value": "\n\nAdditional Guidelines and Practices\nBeyond these two primary rules, adhering to the following guidelines can help ensure that you use Hooks effectively and avoid common pitfalls: \nUse Custom Hooks for Reusable Logic: Encapsulate and reuse logic across components by creating custom Hooks. This follows the DRY principle and improves code readability and maintenance. \nFollow the use Naming Convention for Custom Hooks: Custom Hooks should start with use (e.g., useFetch), indicating that they are Hooks and making them easily identifiable in your codebase. \nLint Your Code for Hook Rules: Use the ESLint plugin eslint-plugin-react-hooks provided by the React team to automatically check your code for violations of the Hooks rules. This can catch potential issues early in the development process."
         },
         {
           "type": "text",

@@ -47,6 +47,11 @@
         {
           "type": "text",
           "value": "This theorem has created the base for modern distributed computing approaches. The most high volume traffic companies (e.g. Amazon, Google, Facebook) use this as a basis for deciding their application architecture. It's important to understand that only two of these three conditions can be guaranteed to be met by a system."
+        },
+        {
+          "type": "image",
+          "alt": "CAP",
+          "path": "../InterviewQuestions/images/systems_design/cap.png"
         }
       ]
     },

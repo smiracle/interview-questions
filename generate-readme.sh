@@ -42,8 +42,9 @@ while IFS= read -r line; do
 
     # Append contents
     contents=$(echo "$line" | jq -r '.content[] |
-        if .type == "text" or .type == "json" then .value
+        if .type == "text" then .value
         elif .type == "code" then "```javascript\n" + .value + "\n```"
+        elif .type == "json" then "```json\n" + .value + "\n```"
         elif .type == "link" then "[\(.displayText)](\(.value))"
         elif .type == "bullets" then .values[] | "- " + .
         elif .type == "image" then "![\(.alt)](\(.path))"

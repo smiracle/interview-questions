@@ -1,48 +1,31 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
 import {topics} from './QuestionsDataMap';
+import {sharedStyles} from './_Styles';
 
-interface QuizProps {
-  navigation: StackNavigationProp<RootStackParamList, 'QuizQuestion'>;
+interface TopicsListProps {
+  navigation: StackNavigationProp<RootStackParamList, 'TopicsList'>;
 }
 
-const Quiz: React.FC<QuizProps> = ({navigation}) => {
+const TopicsList: React.FC<TopicsListProps> = ({navigation}) => {
   const onSelectTopic = (topic: {name: string; fileName: string}) => {
-    navigation.navigate('QuizQuestion', {topicFileName: topic.fileName});
+    navigation.navigate('QuestionsList', {topicFileName: topic.fileName});
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={sharedStyles.container}>
       {topics.map((topic, index) => (
         <TouchableOpacity
           key={index}
-          style={styles.button}
+          style={sharedStyles.button}
           onPress={() => onSelectTopic(topic)}>
-          <Text style={styles.text}>{topic.name}</Text>
+          <Text style={sharedStyles.text}>{topic.name}</Text>
         </TouchableOpacity>
       ))}
-    </View>
+    </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
-  },
-  button: {
-    padding: 10,
-    margin: 10,
-    backgroundColor: '#007bff',
-    borderRadius: 5,
-  },
-  text: {
-    color: '#ffffff',
-  },
-});
-
-export default Quiz;
+export default TopicsList;

@@ -5,7 +5,18 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "Amazon Web Services (AWS) is a comprehensive and broadly adopted cloud platform offered by Amazon. It provides over 200 fully featured services from data centers globally. AWS services can be used by developers, enterprises, governments, and startups to lower costs, become more agile, and innovate faster. \nAWS offers a wide range of cloud computing services and solutions for computing power, storage options, networking, database management, analytics, deployment, management, machine learning, security, and more. Users can select services as needed, and AWS provides a scalable and efficient way to manage infrastructure resources.\n\nKey features of AWS include:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Elastic Compute Cloud (EC2): Provides scalable virtual servers.",
+            "Simple Storage Service (S3): Offers scalable and secure cloud storage.",
+            "Relational Database Service (RDS): Simplifies setup, operation, and scaling of a relational database.",
+            "Lambda: Allows running code without provisioning or managing servers.",
+            "CloudFront: A global content delivery network (CDN) service.",
+            "Elastic Beanstalk: An easy-to-use service for deploying applications which automates the deployment of applications in the cloud."
+          ]
         }
       ]
     },

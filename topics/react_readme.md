@@ -7,8 +7,8 @@
 - [What is JSX?](#what-is-jsx)
 - [Do you have to use React with JSX?](#do-you-have-to-use-react-with-jsx)
 - [What is the difference between an Element and a Component?](#what-is-the-difference-between-an-element-and-a-component)
-- [How to create components in React?](#how-to-create-components-in-react)
-- [When to use a Class Component over a Function Component?](#when-to-use-a-class-component-over-a-function-component)
+- [How do you create components in React?](#how-do-you-create-components-in-react)
+- [When to Use a Class Component Over a Function Component?](#when-to-use-a-class-component-over-a-function-component)
 - [What are Pure Components?](#what-are-pure-components)
 - [What is state in React?](#what-is-state-in-react)
 - [What are props in React?](#what-are-props-in-react)
@@ -44,29 +44,13 @@ React, React.js or ReactJS is an open-source front-end JavaScript library that i
 ### What is React's History?
 
 The foundation for ReactJS started in 2010 with the creation of XHP, a PHP extension designed to improve PHP's syntax for creating reusable HTML elements. This project laid the groundwork for React's development.
-
-
 React was created by Jordan Walke, a software engineer at Facebook. The initial prototype, known as 'FaxJS', aimed to address inefficiencies in dynamic UI development.
-
-
 React was first used in Facebook's News Feed in 2011 and on Instagram in 2012. The success of React in these applications showcased its potential to streamline front-end development.
-
-
 In 2013, React was officially open-sourced at JSConf US, making it available to the wider developer community. This marked the beginning of its rapid adoption and ecosystem growth.
-
-
 React Native was released in 2015, extending React's component-based model to mobile app development and further solidifying React's position in the developer community.
-
-
 In 2016, the React team announced the development of React Fiber, a complete rewrite of React's core algorithm, to enhance its capabilities and performance.
-
-
 React 16 was released in 2017, incorporating the new Fiber rendering engine. This update brought significant performance improvements and introduced features like error boundaries and fragments.
-
-
 Hooks were introduced in React 16.8 in 2018, offering a powerful new way to use state and other React features in functional components, marking a significant evolution in React's development.
-
-
 Since then, React has continued to evolve, with the React team focusing on features like concurrent mode, server components, and improving the overall developer experience.
 
 [↑ Back to top](#react-topics)
@@ -110,8 +94,6 @@ export default function App() {
 ### Do you have to use React with JSX?
 
 No, you do not have to use React with JSX. JSX is a popular syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files, making it easier to create React elements. However, it is entirely optional. React can be used without JSX by using plain JavaScript to create your UI components. JSX is syntactic sugar over React's createElement function, which is the underlying method for defining UI elements in React. Each JSX element is transpiled into a React.createElement call by Babel or another transpiler.
-
-
 While JSX makes your code more readable and concise, especially for complex UI structures, using `React.createElement` directly can give you a deeper understanding of React's working principles. It can also be useful in environments where you cannot or prefer not to use a JSX transpiler. However, for larger projects or when working with teams, the clarity and simplicity offered by JSX often outweigh the benefits of avoiding it.
 
 [↑ Back to top](#react-topics)
@@ -119,17 +101,14 @@ While JSX makes your code more readable and concise, especially for complex UI s
 ### What is the difference between an Element and a Component?
 
  A React element is an object representation of a DOM node. It's what you see in the virtual DOM, describing what you want to see on the screen. React elements are immutable, plain objects that describe the structure of UIs. Elements are created using React.createElement() or JSX tags. For example: `<div />` translates to React.createElement('div'). Think of elements as the "blueprints" or descriptions of what you want to see on the screen. They are not actual DOM nodes; they are just objects that tell React what the DOM should look like.
- 
-
-A component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs.
-
-
+ A component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs.
 Example JavaScript representation (without JSX) of a React Element:
 ```javascript
 const element = React.createElement("div", { id: "login-btn" }, "Login");
 
 ```
 The above `React.createElement()` function returns an object as below:
+```json
 {
   "type": "div",
   "props": {
@@ -137,6 +116,7 @@ The above `React.createElement()` function returns an object as below:
     "id": "login-btn"
   }
 }
+```
 Finally, this element renders to the DOM using ReactDOM.render(). A component can be declared in several different ways. It can be a class with a render() method or it can be defined as a function. In either case, it takes props as input, and returns a JSX tree as the output:
 ```javascript
 const Button = ({ handleLogin }) => (
@@ -163,17 +143,19 @@ Key Differences
 
 [↑ Back to top](#react-topics)
 
-### How to create components in React?
+### How do you create components in React?
 
-Components are the building blocks of creating User Interfaces(UI) in React. There are two possible ways to create a component.
-- Function Components: This is the simplest way to create a component. Those are pure JavaScript functions that accept props object as the first parameter and return React elements to render the output
+Components are the building blocks of User Interfaces (UI) in React. There are two main ways to create a component: Function Components and Class Components.
+- Function Components: These are the simplest way to create a component. They are pure JavaScript functions that accept a props object as the first parameter and return React elements.
+- Class Components: These components are defined using ES6 classes. They offer more features such as local state and lifecycle methods.
+Example of a Function Component:
 ```javascript
 function Greeting({ message }) {
   return <h1>{`Hello, ${message}`}</h1>;
 }
 
 ```
-- Class Components: You can also use ES6 class to define a component. The above function component can be written as a class component:
+Example of a Class Component:
 ```javascript
 class Greeting extends React.Component {
   render() {
@@ -185,21 +167,22 @@ class Greeting extends React.Component {
 
 [↑ Back to top](#react-topics)
 
-### When to use a Class Component over a Function Component?
+### When to Use a Class Component Over a Function Component?
 
-After the addition of Hooks(i.e. React 16.8 onwards) it is always recommended to use Function components over Class components in React. Because you could use state, lifecycle methods and other features that were only available in class component present in function component too.
-But even there are two reasons to use Class components over Function components: 
-1. If you need a React functionality whose Function component equivalent is not present yet, like Error Boundaries. 
-2. In older versions, if the component needs state or lifecycle methods then you need to use class component.
-Note: You can also use reusable react error boundary third-party component without writing any class. i.e, No need to use class components for Error boundaries.
+With the introduction of Hooks in React 16.8, Function components have become capable of utilizing state, lifecycle methods, and other features that were previously exclusive to Class components. This advancement has made Function components more preferable due to their simplicity and conciseness.
+However, there are specific scenarios where you might still consider using Class components:
+- Utilizing React features that lack a Hook equivalent, such as Error Boundaries.
+- Maintaining legacy projects that rely on Class component architecture and haven't been refactored to use Hooks.
+It's important to note that for Error Boundaries, which are a common reason to use Class components, there are now third-party libraries that offer functional component solutions. Therefore, the necessity to use Class components has been further reduced.
 ```javascript
-"use client";
 import { ErrorBoundary } from "react-error-boundary";
+
 <ErrorBoundary fallback={<div>Something went wrong</div>}>
   <ExampleApplication />
 </ErrorBoundary>;
 
 ```
+This example demonstrates how to implement an Error Boundary using a third-party library, avoiding the need for Class components.
 
 [↑ Back to top](#react-topics)
 
@@ -518,11 +501,11 @@ The Virtual DOM (VDOM) is an in-memory representation of Real DOM. The represent
 
 The Virtual DOM is a lightweight copy of the real DOM (Document Object Model) in memory. It represents the UI's structure, properties, and state in a simplified way. Because direct interactions with the real DOM are slow and performance-intensive, especially with frequent updates, the Virtual DOM serves as a faster intermediary. It works in three basic steps:
 1. Changes applied to the VDOM: Whenever a change occurs (e.g., due to user interactions or data updates), the change is first applied to the Virtual DOM instead of the real DOM. This approach allows React (or similar libraries) to batch multiple changes into a single update cycle, significantly reducing direct manipulation of the real DOM, which is more costly in terms of performance.
-![Virtual DOM 1](../images/react/vdom1.png)
+![Virtual DOM 1](../InterviewQuestions/images/react/vdom1.png)
 2. VDOM state Diffing: React compares the current state of the Virtual DOM with its previous state (before the updates were applied) to determine exactly what changed. This comparison process is known as "diffing." React uses a diffing algorithm to efficiently identify differences between the old and new Virtual DOM structures.
-![Virtual DOM 2](../images/react/vdom2.png)
+![Virtual DOM 2](../InterviewQuestions/images/react/vdom2.png)
 3. Reconciliation: Based on the differences identified by the diffing algorithm, React calculates the most efficient way to update the real DOM to match the new state of the Virtual DOM. This process is called reconciliation. It ensures that the minimum number of DOM operations are performed, leading to better performance and a smoother user experience. Only the parts of the real DOM that changed are updated. If a component's state or props do not change, React avoids re-rendering that component or manipulating its corresponding DOM nodes. This selective update mechanism further optimizes performance by avoiding unnecessary work.
-![Virtual DOM 3](../images/react/vdom3.png)
+![Virtual DOM 3](../InterviewQuestions/images/react/vdom3.png)
 
 React's component-based architecture complements the Virtual DOM's efficiency. Components encapsulate their own state and logic, which allows React to track changes at the component level. This granularity helps in optimizing updates and renders. By using the Virtual DOM, frameworks like React can offer a declarative API for defining UI components. Developers describe what the UI should look like for any given state, and the library takes care of efficiently updating the DOM to match that description. This abstraction allows for the creation of dynamic, interactive UIs that are fast and responsive, even with complex applications that have frequent updates.
 
@@ -530,7 +513,7 @@ React's component-based architecture complements the Virtual DOM's efficiency. C
 
 ### What are hooks in React?
 
-Hooks are a feature introduced in React 16.8 that allow you to use state and other React features without writing a class. They enable you to "hook into" React state and lifecycle features from function components. Hooks don't work inside classes â€” they let you use React without classes. React provides a few built-in Hooks like useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, useImperativeHandle, useLayoutEffect, and useDebugValue.
+Hooks are a feature introduced in React 16.8 that allow you to use state and other React features without writing a class. They enable you to "hook into" React state and lifecycle features from function components. Hooks don't work inside classes - they let you use React without classes. React provides a few built-in Hooks like useState, useEffect, useContext, useReducer, useCallback, useMemo, useRef, useImperativeHandle, useLayoutEffect, and useDebugValue.
 
 useState: This Hook lets you add React state to function components.
 ```javascript
@@ -692,8 +675,6 @@ useEffect(() => {
 
 ```
 5. Infinite Loops: Be cautious with dependencies to avoid infinite loops. Ensure effects do not endlessly trigger themselves.
-
-
 6. Ignoring Effect Timing: Effects run after paint, so consider potential UI flickers. Use CSS or conditional rendering to mitigate visible delays.
 
 [↑ Back to top](#react-topics)
@@ -727,8 +708,6 @@ getDerivedStateFromProps is called (if it is defined): This static method is cal
 
 VAR
 Declaring a var at the global level creates a property on the global object (which is 'window' in browsers). This means that if you declare a global variable with var, you can access it as a property of the global object. Var is function scoped and hoisted to the top of their *function* scope (only the declaration is hoisted, not the initialization). You can redeclare the same variable within the same scope without causing an error, which can lead to bugs.
-
-
 LET
 Let is block scoped and is hoisted to the top of their *block* scope, but they are not declared or initialized. You cannot redeclare the same variable within the same scope. You cannot redeclare let variables. Declaration at the global level does not create a property on the global object. This behavior is helpful in modular JavaScript development, where you wish to avoid polluting the global namespace. Const works the same as let, but contains values that can't be modified.
 
@@ -737,8 +716,6 @@ Let is block scoped and is hoisted to the top of their *block* scope, but they a
 ### What is a callback, when would you use one?
 
 A callback is a function passed into another function as an argument, which is then invoked inside the outer function to complete some kind of routine or action. In JavaScript, callbacks are used extensively, particularly in asynchronous operations such as web API requests, file operations, or timers. They provide a way to ensure that certain code does not execute until other code has already finished execution, which is crucial in operations that take an unknown amount of time to complete, like fetching data from a server.
-
-
 When you would use a callback:
 - Asynchronous Operations: The most common use case for callbacks is in asynchronous operations, where you need to wait for an operation to complete without blocking the execution of subsequent code. For example, when making API calls, you might provide a callback function to be executed once the data is received.
 - Event Listeners: Callbacks are used to define behavior that should happen in response to an event, such as a user clicking a button or a form being submitted.
@@ -817,8 +794,6 @@ The event loop is a fundamental concept that is not specific to React or TypeScr
 - 1. Call Stack: It's where the JavaScript runtime keeps track of the function calls currently running. When a function executes, it's pushed onto the stack, and when it returns, it's popped off the stack. The call stack is LIFO (Last In, First Out).
 - 2. Callback Queue: When asynchronous operations (like setTimeout, network requests, or event handlers) complete, their callbacks are added to the callback queue. These are tasks waiting to be moved to the call stack for execution.
 - 3. Event Loop: Its job is to look at the call stack and the callback queue. If the call stack is empty, it takes the first event from the queue and pushes it onto the call stack, which effectively runs it. This loop allows JavaScript to perform non-blocking operations, despite being single-threaded.
-
-
 Event Loop in the Context of React and TypeScript:
 - React: React's updates and rendering can be asynchronous. React 16 and above versions (with the introduction of Fiber architecture) improve handling of asynchronous tasks by breaking work into chunks and spreading them over multiple frames. React's state updates may be batched or deferred to optimize performance, but this scheduling is managed internally by React and is abstracted away from the developer.
 - TypeScript: The event loop concept applies to the JavaScript that TypeScript compiles to. TypeScript does not change how the event loop works; it only provides types and other syntactical constructs that are stripped away during the compilation process.
@@ -828,28 +803,16 @@ Event Loop in the Context of React and TypeScript:
 ### When is it a good idea to use a class in react?
 
 Using class components in React has become less common since the introduction of Hooks, which allow functional components to use state and lifecycle methods. However, there are still scenarios where class components may be preferable or necessary:
-
-
 1. Familiarity and Legacy Codebases
 Familiarity: Developers coming from an Object-Oriented Programming (OOP) background might find class components more intuitive initially.
-
-
 2. Certain Lifecycle Methods
 Error Boundaries: Until now, error boundaries (a component that catches JavaScript errors anywhere in its child component tree) can only be implemented using class components by defining componentDidCatch and static getDerivedStateFromError.
-
-
 3. Complex State Logic and Side Effects
 While Hooks offer a more functional approach to managing state and side effects, some developers may still prefer the structure and organization of class components for complex scenarios. However, this preference is becoming less common as the community and tooling around Hooks continue to mature.
-
-
 4. Third-Party Libraries or Documentation
 Compatibility: Some third-party libraries or older documentation examples may only provide class component usage examples. While many libraries have updated or support both, there might be instances where using a class component aligns better with certain external resources.
-
-
 Transitioning to Functional Components
 The React team encourages the use of functional components with Hooks for new development because of their simplicity, reduced boilerplate, and enhanced capabilities with the same power as class components. The introduction of Hooks has addressed many of the limitations that initially led developers to choose class components, such as using local component state, effects, and accessing the context API.
-
-
 While functional components and Hooks are now the recommended approach for new components in React, understanding when to use class components is valuable, especially in legacy projects or when specific patterns necessitate their use. However, for most use cases, functional components with Hooks will be more concise and align with modern React development practices.
 
 [↑ Back to top](#react-topics)
@@ -857,10 +820,7 @@ While functional components and Hooks are now the recommended approach for new c
 ### What are some of the rules of React Hooks and why do those rules exist?
 
 React Hooks, introduced in React 16.8, allow functional components to use state and other React features. To ensure that Hooks are used correctly and to maximize their benefits, React enforces two main rules:
-
-
 1. Only Call Hooks at the Top Level Rule: Do not call Hooks inside loops, conditions, or nested functions. Why: React relies on the order in which Hooks are called to properly associate the Hook call with the correct component instance across multiple renders. If you call Hooks conditionally or within loops, the order of Hook calls might change between renders, leading to bugs and inconsistencies in the component state management.
-
 2. Only Call Hooks from React Functions Rule: Call Hooks from React functional components or from custom Hooks. Why: This rule ensures that the Hooks' mechanism works correctly within the React component lifecycle and its ecosystem. Hooks are designed to tap into React's state and lifecycle features, and calling them from regular JavaScript functions would break their association with React component instances, leading to incorrect behavior.
 
 
@@ -869,8 +829,6 @@ Beyond these two primary rules, adhering to the following guidelines can help en
 Use Custom Hooks for Reusable Logic: Encapsulate and reuse logic across components by creating custom Hooks. This follows the DRY principle and improves code readability and maintenance. 
 Follow the use Naming Convention for Custom Hooks: Custom Hooks should start with use (e.g., useFetch), indicating that they are Hooks and making them easily identifiable in your codebase. 
 Lint Your Code for Hook Rules: Use the ESLint plugin eslint-plugin-react-hooks provided by the React team to automatically check your code for violations of the Hooks rules. This can catch potential issues early in the development process.
-
-
 Why These Rules Exist
 
 Ensure reliability: By enforcing a consistent order and usage pattern for Hooks, React can reliably manage state and side effects in functional components.

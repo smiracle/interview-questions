@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
+import {sharedStyles} from './_Styles';
 
 interface MainMenuProps {
   navigation: StackNavigationProp<RootStackParamList, 'MainMenu'>;
@@ -9,37 +10,20 @@ interface MainMenuProps {
 
 const MainMenu: React.FC<MainMenuProps> = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <View style={sharedStyles.container}>
       <Text>Select a Study Mode</Text>
       <TouchableOpacity
-        style={styles.button}
+        style={sharedStyles.button}
         onPress={() => navigation.navigate('TopicsList')}>
-        <Text style={styles.text}>Question Listing</Text>
+        <Text style={sharedStyles.text}>Full Listing</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.button}
+        style={sharedStyles.button}
         onPress={() => navigation.navigate('Quiz')}>
-        <Text style={styles.text}>Random Question Quiz</Text>
+        <Text style={sharedStyles.text}>Quiz</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    padding: 10,
-    margin: 10,
-    backgroundColor: '#007bff',
-    borderRadius: 5,
-  },
-  text: {
-    color: '#ffffff',
-  },
-});
 
 export default MainMenu;
