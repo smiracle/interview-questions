@@ -83,3 +83,5 @@ Next, build the APK with the following command:
 ```bash
 ./gradlew assembleRelease
 ```
+
+The APK is generated at `android/app/build/outputs/apk/release/app-release.apk`
