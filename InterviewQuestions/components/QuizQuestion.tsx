@@ -26,37 +26,114 @@ interface QuizQuestionProps {
   navigation: QuizQuestionNavigationProp;
 }
 
+interface ShuffledAnswer {
+  text: string;
+  isCorrect: boolean;
+}
+
+interface QuestionWithShuffledAnswers {
+  header: string;
+  content: QuestionContent[];
+  answers: ShuffledAnswer[];
+}
+
 const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
   const {topicFileName} = route.params;
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionWithShuffledAnswers[]>([]);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
 
-  useEffect(() => {
-    const loadQuestions = () => {
-      const loadedQuestions =
-        topicToDataMap[topicFileName as TopicFileName]?.questions;
-      const selectedQuestions = loadedQuestions
-        ?.sort(() => 0.5 - Math.random())
-        .slice(0, 5);
-      setQuestions(selectedQuestions ?? []);
-    };
-    loadQuestions();
-  }, [topicFileName]);
-
-  const handleAnswerSelection = (answer: string) => {
-    const correctAnswer = questions[currentQuestionIndex]?.answers?.[0];
-    setIsAnswerCorrect(answer === correctAnswer);
-    setSelectedAnswer(answer);
+  const handleAnswerSelection = (answerText: string) => {
+    const selectedAnswer = questions[currentQuestionIndex].answers.find(
+      answer => answer.text === answerText,
+    );
+    setIsAnswerCorrect(selectedAnswer?.isCorrect ?? false);
+    setSelectedAnswer(answerText);
     setShowAnswer(true);
   };
+  useEffect(() => {
+    const loadQuestions = async () => {
+      const loadedQuestions: Question[] =
+        topicToDataMap[topicFileName as TopicFileName]?.questions || [];
+
+      // Shuffle all loaded questions to randomize their order
+      const shuffledQuestions: Question[] = shuffleQuestions(loadedQuestions);
+
+      // Process each question to shuffle answers and ensure the correct answer is included
+      const selectedAndProcessedQuestions: QuestionWithShuffledAnswers[] =
+        shuffledQuestions
+          .map((question: Question): QuestionWithShuffledAnswers => {
+            // Ensure every question is treated as having answers, even if initially undefined
+            const answers: string[] = question.answers || [];
+            const taggedAnswers: ShuffledAnswer[] = tagCorrectAnswer(answers);
+            const shuffledAndProcessedAnswers: ShuffledAnswer[] =
+              shuffleAndEnsureCorrectAnswer(taggedAnswers);
+
+            return {
+              ...question,
+              answers: shuffledAndProcessedAnswers,
+            };
+          })
+          .slice(0, 5); // Select the first 5 shuffled and processed questions
+
+      setQuestions(selectedAndProcessedQuestions);
+    };
+    loadQuestions();
+  }, [topicFileName, topicToDataMap]);
+
+  function shuffleQuestions(questions: Question[]): Question[] {
+    for (let i = questions.length - 1; i > 0; i--) {
+      const j: number = Math.floor(Math.random() * (i + 1));
+      [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
+    return questions;
+  }
+
+  function shuffleAndEnsureCorrectAnswer(
+    answers: ShuffledAnswer[],
+  ): ShuffledAnswer[] {
+    const correctAnswer = answers.find(answer => answer.isCorrect);
+    const otherAnswers = answers.filter(answer => !answer.isCorrect);
+
+    let shuffledOtherAnswers: ShuffledAnswer[] = shuffleAnswers(otherAnswers);
+
+    const selectedOtherAnswers: ShuffledAnswer[] = shuffledOtherAnswers.slice(
+      0,
+      4,
+    );
+
+    const combinedAnswers: ShuffledAnswer[] = correctAnswer
+      ? [correctAnswer, ...selectedOtherAnswers]
+      : [...selectedOtherAnswers];
+
+    return shuffleAnswers(combinedAnswers);
+  }
+
+  function shuffleAnswers(answers: ShuffledAnswer[]): ShuffledAnswer[] {
+    for (let i = answers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [answers[i], answers[j]] = [answers[j], answers[i]];
+    }
+    return answers;
+  }
+
+  function tagCorrectAnswer(answers: string[]): ShuffledAnswer[] {
+    return answers.map(
+      (answer: string, index: number): ShuffledAnswer => ({
+        text: answer,
+        isCorrect: index === 0, // Assumes the first answer is always correct
+      }),
+    );
+  }
 
   const handleNextQuestion = () => {
-    setShowAnswer(false); // Hide feedback when moving to the next question
-    setSelectedAnswer(''); // Reset selected answer
-    setIsAnswerCorrect(false); // Reset correctness state
+    // Reset
+    setShowAnswer(false);
+    setSelectedAnswer('');
+    setIsAnswerCorrect(false);
 
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -73,7 +150,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
     switch (content.type) {
       case 'text':
         return (
-          <Text key={index} style={styles.text}>
+          <Text key={index} style={sharedStyles.text}>
             {content.value}
           </Text>
         );
@@ -81,7 +158,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
         return (
           <View key={index}>
             {content.values.map((value, idx) => (
-              <Text key={`${index}-${idx}`} style={styles.bullet}>
+              <Text key={`${index}-${idx}`} style={sharedStyles.bullet}>
                 &#8226; {value}
               </Text>
             ))}
@@ -113,17 +190,23 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
       <Text style={styles.questionHeader}>{currentQuestion?.header}</Text>
       {hasAnswers &&
         !showAnswer &&
-        currentQuestion?.answers?.slice(0, 5).map((answer, index) => (
+        currentQuestion?.answers?.map((answer, index) => (
           <TouchableOpacity
             key={index}
             style={styles.answerButton}
-            onPress={() => handleAnswerSelection(answer)}>
-            <Text style={styles.answerText}>{answer}</Text>
+            onPress={() => handleAnswerSelection(answer.text)}>
+            <Text style={styles.answerText}>{answer.text}</Text>
           </TouchableOpacity>
         ))}
+
       {showAnswer && (
         <>
-          <Text style={styles.feedbackText}>
+          <Text
+            style={
+              isAnswerCorrect
+                ? styles.feedbackTextCorrect
+                : styles.feedbackTextIncorrect
+            }>
             {isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
           </Text>
           {currentQuestion?.content.map(renderContent)}
@@ -134,13 +217,15 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
           </TouchableOpacity>
         </>
       )}
+      {/* Extra whitespace */}
+      <Text style={{height: 50}}></Text>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   revealButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#009688',
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
@@ -157,6 +242,7 @@ const styles = StyleSheet.create({
   questionHeader: {
     fontSize: 20,
     marginBottom: 20,
+    color: '#000',
   },
   answerButton: {
     backgroundColor: '#f0f0f0',
@@ -166,20 +252,29 @@ const styles = StyleSheet.create({
   },
   answerText: {
     fontSize: 16,
+    color: '#000',
   },
   answerFeedback: {
     marginTop: 20,
   },
-  feedbackText: {
+  feedbackTextCorrect: {
     fontSize: 18,
     textAlign: 'center',
     marginBottom: 20,
+    color: 'green',
+  },
+  feedbackTextIncorrect: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: 'red',
   },
   nextButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#009688',
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,
+    marginTop: 10,
   },
   nextButtonText: {
     color: '#ffffff',

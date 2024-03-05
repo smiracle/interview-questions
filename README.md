@@ -5,6 +5,8 @@ Scripts here will generate readme files based on JSON data. Code blocks in the r
 into the readme using Prettier. A built-in android app also serves this data using React Native in an easy to digest
 format.
 
+For now data is only available for these topics: React, Systems Design, and Javascript.
+
 You can view formatted readme files in the topics/ directory.
 
 #### Prerequisites
@@ -14,13 +16,17 @@ You can view formatted readme files in the topics/ directory.
   [preprocess json data](preprocess_json_data.py) file.
 - JQ executable (included).
 
-#### Run the Android app locally
+#### Run the Android app locally in Android Studio emulator
 
 Android app commands must be executed inside of the InterviewQuestions directory that's inside of the repository's root
 directory.
 
 - `cd InterviewQuestions`
 - `npx react-native run-android`
+
+#### Clear the cache
+
+- `npx react-native start --reset-cache`
 
 #### Clean and rebuild the Android app
 
@@ -35,7 +41,7 @@ These commands can sometimes help resolve issues with a bad build.
 
 To add new information for a topic:
 
-1. Edit the corresponding base json file in the data/ directory (react.json for example).
+1. Edit the corresponding base, non-formatted, json file in the data/ directory (react.json for example).
 2. Run the corresponding command below to generate the formatted JSON using the base JSON.
 3. Run the readme generation script. (Both this step and #2 can be run together using the scripts in package.json)
 4. View the readme files in topics/ or reload the Android app at will.
@@ -57,6 +63,9 @@ To add new information for a topic:
 Alternatively, you can run `npm run s [topic]` which will invoke both the JSON and Readme generation scripts.
 
 -ex: `npm run systems_design`
+
+- On Windows I've found that you need to run these commmands from Powershell and have the JQ directory set in your PATH
+  environment variables. Check that JQ is correctly installed with `jq --version`.
 
 #### (Optional) Invoke preprocess_json_data.py
 

@@ -12,18 +12,32 @@ export const sharedStyles = StyleSheet.create({
     padding: 15,
     marginVertical: 8,
     backgroundColor: '#009688',
+    color: '#fff',
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#00796B',
     width: '80%',
     alignItems: 'center',
   },
+  questionListingItem: {
+    padding: 15,
+    marginVertical: 8,
+    color: '#000000',
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#00796B',
+    alignItems: 'center',
+  },
   text: {
-    color: '#ffffff',
-    fontWeight: 'bold',
+    color: '#000000',
+    fontSize: 16,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
   },
   revealButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#009688',
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
@@ -36,6 +50,7 @@ export const sharedStyles = StyleSheet.create({
   questionHeader: {
     fontSize: 20,
     marginBottom: 20,
+    color: '#000',
   },
   answerButton: {
     backgroundColor: '#f0f0f0',
@@ -49,13 +64,8 @@ export const sharedStyles = StyleSheet.create({
   answerFeedback: {
     marginTop: 20,
   },
-  feedbackText: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
   nextButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#009688',
     padding: 10,
     borderRadius: 5,
   },
@@ -64,7 +74,7 @@ export const sharedStyles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
   },
-  bullet: {marginBottom: 5},
+  bullet: {marginBottom: 5, color: '#000000', fontSize: 16},
   code: {
     fontFamily: 'monospace',
     backgroundColor: '#2E2E2E',

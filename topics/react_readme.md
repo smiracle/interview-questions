@@ -95,8 +95,10 @@ While JSX makes your code more readable and concise, especially for complex UI s
 
 ### What is the difference between an Element and a Component?
 
- A React element is an object representation of a DOM node. It's what you see in the virtual DOM, describing what you want to see on the screen. React elements are immutable, plain objects that describe the structure of UIs. Elements are created using React.createElement() or JSX tags. For example: `<div />` translates to React.createElement('div'). Think of elements as the "blueprints" or descriptions of what you want to see on the screen. They are not actual DOM nodes; they are just objects that tell React what the DOM should look like.
- A component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs.
+A React element is an object representation of a DOM node. It's what you see in the virtual DOM, describing what you want to see on the screen. React elements are immutable, plain objects that describe the structure of UIs. Elements are created using React.createElement() or JSX tags. For example: `<div />` translates to React.createElement('div'). Think of elements as the "blueprints" or descriptions of what you want to see on the screen. They are not actual DOM nodes; they are just objects that tell React what the DOM should look like.
+
+A component in React is a reusable piece of the UI. It can be a class or a function that optionally accepts inputs (props) and returns a React element. Components let you split the UI into independent, reusable pieces that handle their own state. There are two main types of components in React: Class Components and Functional Components. Class components are ES6 classes that extend from React.Component and can have state and lifecycle methods. Functional components are simpler functions that return JSX and can use hooks for state and side effects. Components can accept and use props to produce different elements based on the input data. They can maintain internal state, and when the state or props change, React decides whether to re-render the component. Components are the building blocks of React applications. They encapsulate behavior and rendering logic, making it easy to develop, maintain, and scale UIs.
+
 Example JavaScript representation (without JSX) of a React Element:
 ```javascript
 const element = React.createElement("div", { id: "login-btn" }, "Login");
@@ -112,6 +114,7 @@ The above `React.createElement()` function returns an object as below:
   }
 }
 ```
+
 Finally, this element renders to the DOM using ReactDOM.render(). A component can be declared in several different ways. It can be a class with a render() method or it can be defined as a function. In either case, it takes props as input, and returns a JSX tree as the output:
 ```javascript
 const Button = ({ handleLogin }) => (
@@ -131,6 +134,7 @@ const Button = ({ handleLogin }) =>
   );
 
 ```
+
 Key Differences
 - An element is a static description of what you want to render, whereas a component can contain logic and state. A component returns an element (or a tree of elements) that React will then render.
 - Elements are the smallest building blocks of React apps, and components are composed of those elements.
@@ -710,8 +714,10 @@ Error Boundaries: Until now, error boundaries (a component that catches JavaScri
 While Hooks offer a more functional approach to managing state and side effects, some developers may still prefer the structure and organization of class components for complex scenarios. However, this preference is becoming less common as the community and tooling around Hooks continue to mature.
 4. Third-Party Libraries or Documentation
 Compatibility: Some third-party libraries or older documentation examples may only provide class component usage examples. While many libraries have updated or support both, there might be instances where using a class component aligns better with certain external resources.
+
 Transitioning to Functional Components
 The React team encourages the use of functional components with Hooks for new development because of their simplicity, reduced boilerplate, and enhanced capabilities with the same power as class components. The introduction of Hooks has addressed many of the limitations that initially led developers to choose class components, such as using local component state, effects, and accessing the context API.
+
 While functional components and Hooks are now the recommended approach for new components in React, understanding when to use class components is valuable, especially in legacy projects or when specific patterns necessitate their use. However, for most use cases, functional components with Hooks will be more concise and align with modern React development practices.
 
 [↑ Back to top](#react-topics)

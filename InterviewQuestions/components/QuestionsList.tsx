@@ -11,6 +11,7 @@ import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
 import {TopicFileName, topicToDataMap} from './QuestionsDataMap';
+import {sharedStyles} from './_Styles';
 
 type QuestionsListNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -28,7 +29,6 @@ const QuestionsList: React.FC<QuestionsListProps> = ({navigation, route}) => {
   const [questions, setQuestions] = useState<Question[]>([]);
 
   const onSelect = (question: Question) => {
-    // Navigate to QuestionDetails screen with the selected question
     navigation.navigate('QuestionDetails', {question});
   };
 
@@ -43,10 +43,10 @@ const QuestionsList: React.FC<QuestionsListProps> = ({navigation, route}) => {
   }, [topicFileName]);
 
   const renderItem = ({item, index}: ListRenderItemInfo<Question>) => (
-    <TouchableOpacity onPress={() => onSelect(item)}>
-      <Text style={{padding: 10, fontSize: 18}}>{`${index + 1}. ${
-        item.header
-      }`}</Text>
+    <TouchableOpacity
+      onPress={() => onSelect(item)}
+      style={sharedStyles.questionListingItem}>
+      <Text style={sharedStyles.text}>{`${index + 1}. ${item.header}`}</Text>
     </TouchableOpacity>
   );
 

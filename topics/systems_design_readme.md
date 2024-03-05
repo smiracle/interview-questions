@@ -4,7 +4,7 @@
 - [What is systems design?](#what-is-systems-design)
 - [How should systems design interview questions typically be handled?](#how-should-systems-design-interview-questions-typically-be-handled)
 - [What is CAP theorem?](#what-is-cap-theorem)
-- [What is load balancing? Why is it important in system design?](#what-is-load-balancing-why-is-it-important-in-system-design)
+- [What is load balancing? Why is it important in systems design?](#what-is-load-balancing-why-is-it-important-in-systems-design)
 - [What is scalability? How does horizontal scaling differ from vertical scaling?](#what-is-scalability-how-does-horizontal-scaling-differ-from-vertical-scaling)
 - [What is latency, throughput, and availability of a system?](#what-is-latency-throughput-and-availability-of-a-system)
 - [What is performance and scalability, how are they related to each other?](#what-is-performance-and-scalability-how-are-they-related-to-each-other)
@@ -21,9 +21,9 @@
 - [What is lower latency interaction?](#what-is-lower-latency-interaction)
 - [How does buffer overflow work?](#how-does-buffer-overflow-work)
 - [What are some common design issues in distributed systems?](#what-are-some-common-design-issues-in-distributed-systems)
-- [Designing a Notification System: Features, Issues, and Considerations](#designing-a-notification-system-features-issues-and-considerations)
+- [How do you design a notification system?](#how-do-you-design-a-notification-system)
 - [How do you design Tic-Tac-Toe?](#how-do-you-design-tic-tac-toe)
-- [Designing a Web Cache: Features, Issues, Resolutions, and Considerations](#designing-a-web-cache-features-issues-resolutions-and-considerations)
+- [How do you design a web cache?](#how-do-you-design-a-web-cache)
 - [How do you design consistent hashing, and why?](#how-do-you-design-consistent-hashing-and-why)
 - [How do you design a unique ID generator in distributed systems?](#how-do-you-design-a-unique-id-generator-in-distributed-systems)
 - [How do you design a ticketing system like JIRA?](#how-do-you-design-a-ticketing-system-like-jira)
@@ -49,7 +49,6 @@
 - [How do you design an ATM system?](#how-do-you-design-an-atm-system)
 - [How do you design ride sharing systems like Uber, Ola or Lyft?](#how-do-you-design-ride-sharing-systems-like-uber-ola-or-lyft)
 - [How do you design an MMO game?](#how-do-you-design-an-mmo-game)
-- [Links](#links)
 
 ### What is systems design?
 
@@ -85,7 +84,7 @@ This theorem has created the base for modern distributed computing approaches. T
 
 [↑ Back to top](#systems_design-topics)
 
-### What is load balancing? Why is it important in system design?
+### What is load balancing? Why is it important in systems design?
 
 Load balancers are systems or devices that distribute incoming network traffic across multiple servers. This distribution ensures that no single server bears too much demand. By spreading the requests across multiple servers, load balancers reduce individual server load, increase the capacity and reliability of applications, and ensure their availability even under high traffic conditions. Load balancers can provide additional security features like SSL termination, where SSL encryption and decryption occur at the load balancer level instead of on individual servers.
 
@@ -189,6 +188,7 @@ Key characteristics of sharding include:
 - Shards are distributed across different physical or virtual servers, often using a shard key to determine how data is distributed.
 - It is primarily used to improve performance and scalability of write-heavy database operations by distributing the load.
 - Sharding can be complex to implement and manage, as it often requires changes to application logic to handle data distribution and aggregation from multiple shards.
+
 Partitioning
 Partitioning typically refers to dividing a database or table into smaller segments or partitions, but it usually happens within a single database server. The main goal of partitioning is to improve manageability, performance, and efficiency of data retrieval. Data can be partitioned in various ways, such as by range (e.g., date ranges), list (e.g., category), or hash (based on a hash function applied to a partition key).
 
@@ -196,6 +196,7 @@ Key characteristics of partitioning include:
 - Partitions are usually contained within a single database system, making it easier to manage than sharded setups.
 - It is primarily used to improve query performance, especially for read-heavy operations, by reducing the amount of data scanned during query execution.
 - Partitioning can be transparent to the application, as the database management system (DBMS) can handle data distribution and retrieval across partitions without requiring application-level changes.
+
 Differences Between Sharding and Partitioning
 - Scope of Distribution: Sharding distributes data across multiple servers or database instances, while partitioning divides data within a single database or table.
 - Purpose and Use Case: Sharding is used to scale databases horizontally by adding more servers to handle increased load, particularly for write operations. Partitioning is used to improve the manageability and query performance within a single database, especially for read operations.
@@ -251,6 +252,7 @@ Consistency Models
 - 5. Session Consistency. Session consistency is a variation of read-your-writes consistency extended to a session context, where a system ensures consistency within the context of a user session. It guarantees that within a session, all reads will reflect writes that happened in the same session, even if they might not be immediately visible outside the session.
 - 6. Monotonic Read Consistency. Monotonic read consistency ensures that if a read operation returns a particular value, any subsequent read operations will never return an older value. This model helps prevent regressions in data seen by the client but does not guarantee immediate visibility of the latest writes.
 - 7. Monotonic Write Consistency. This pattern ensures that writes from a single source are applied in the order they were issued, which is crucial for maintaining the logical sequence of operations. It does not, however, guarantee immediate consistency across the system.
+
 Trade-offs and Considerations
 The choice of consistency model has significant implications for system design, particularly in balancing the trade-offs between consistency (C), availability (A), and partition tolerance (P) as outlined by the CAP theorem. Systems often need to prioritize two out of these three properties, leading to different consistency patterns being more suitable for some applications than others. The decision largely depends on the specific requirements of the application, such as the need for real-time data accuracy versus the need for high availability and fault tolerance.
 
@@ -271,6 +273,8 @@ Key Features of CDNs
 - Content Availability and Redundancy: CDNs can reroute traffic in case of server failure, enhancing content availability and providing redundancy.
 - Optimized Bandwidth: Through caching and other optimizations, CDNs can reduce the amount of data transferred, lowering hosting costs and improving website load times.
 - Security: CDNs can improve security by providing DDoS protection, improving security certificates management, and other security features to safeguard websites against attacks.
+
+
 Types of Content Served by CDNs
 CDNs are versatile and can deliver a wide range of content, including:
 - Web objects (text, graphics, and scripts)
@@ -278,6 +282,8 @@ CDNs are versatile and can deliver a wide range of content, including:
 - Applications (e-commerce, portals)
 - Live streaming media, on-demand video, and social networks
 - And more
+
+
 Use Cases
 CDNs are used across various types of websites and applications, especially those requiring high availability and performance, such as:
 - E-commerce sites, to ensure fast loading times during high traffic periods.
@@ -301,11 +307,15 @@ Leader election algorithms vary in complexity and behavior, but they generally f
 - Declaration: Once a leader is elected, the new leader announces its role to the other nodes, and those nodes acknowledge the leader's authority.
 - Operation: The leader then performs its designated tasks, while other nodes may take on worker roles or standby in a ready state to take over leadership if needed.
 - Monitoring and Failover: The system continuously monitors the health of the leader. If the leader fails or becomes unresponsive, the election process is reinitiated to select a new leader.
+
+
 Common Leader Election Algorithms
 - Bully Algorithm: This algorithm elects the node with the highest ID as the leader. If a node detects the leader is down, it starts an election, and the node with the highest ID among the contenders wins.
 - Ring Algorithm: In this approach, nodes are arranged in a logical ring, and election messages are passed around the ring until a leader is elected.
 - Raft Consensus Algorithm: Raft is a more modern consensus algorithm designed to be easy to understand. It ensures a leader is elected and that the leader coordinates all changes to the distributed data.
 - Zookeeper's Zab Protocol: Used by Apache Zookeeper to manage leader election among distributed processes. It ensures a single leader is elected and handles message coordination to maintain consistency.
+
+
 Applications of Leader Election
 Leader election is crucial in various distributed systems scenarios, including:
 - Distributed databases and data stores to coordinate writes and maintain data consistency.
@@ -326,12 +336,16 @@ Key Features of SSE
 - Automatic Reconnection: If the connection to the server is lost, the browser automatically attempts to reconnect after a timeout. The server can also suggest a reconnection time via the retry field.
 - Event IDs: SSE supports event IDs that help the client keep track of the last event received. This is useful for resuming the event stream from the correct point after a disconnection.
 - Custom Events: Servers can specify event types, allowing clients to listen for specific types of messages and handle them accordingly.
+
+
 Use Cases for SSE
 SSE is particularly well-suited for applications that require real-time data updates from the server, such as:
 - Live feeds: News, sports scores, or social media updates can be pushed to clients as they happen.
 - Notifications: Real-time notifications or alerts can be sent to users' browsers.
 - Real-time analytics: Updating dashboards with real-time metrics and analytics data.
 - Chat applications: Displaying new messages in chat applications (although two-way communication might require additional technology like WebSockets).
+
+
 Comparing SSE with WebSockets
 While both SSE and WebSockets provide mechanisms for real-time communication between clients and servers, there are key differences:
 - Direction of Communication: SSE is designed for unidirectional communication (server to client), making it simpler but less flexible compared to WebSockets, which support full-duplex, two-way communication.
@@ -361,6 +375,7 @@ Disadvantages of Long Polling
 - Resource Intensive: Keeping connections open for long periods can be resource-intensive for the server, especially with a large number of clients, as each open connection consumes server resources.
 - Latency: While it reduces latency compared to traditional polling, there's still a delay between when data becomes available and when the server sends the response, especially if the connection times out and needs to be re-established.
 - Scalability: Scalability can be an issue due to the high number of open connections the server has to manage, which can be mitigated but requires additional infrastructure and complexity.
+
 Use Cases
 Long polling is often used in applications where real-time updates are crucial but where the use of technologies like WebSockets or SSE is not feasible or necessary. Examples include chat applications, live feeds, and any scenario where servers need to push updates to clients in real-time or near-real-time but where maintaining a constant connection is resource-prohibitive or unsupported by client environments.
 
@@ -384,6 +399,7 @@ This refers to optimizing the content and elements within your website pages. Ke
 - Meta Tags: Optimizing title tags and meta descriptions to include target keywords and encourage click-throughs from SERPs.
 - URL Structure: Making URLs descriptive, brief, and keyword-rich where appropriate.
 - Internal Linking: Using internal links to connect your content and guide users through your website, which also helps search engines understand site structure.
+
 2. Technical SEO
 This involves optimizing the technical aspects of your website to improve its indexing and crawling by search engines. Elements include:
 - Mobile-Friendliness: Ensuring the site is responsive and provides a good user experience on mobile devices.
@@ -392,17 +408,20 @@ This involves optimizing the technical aspects of your website to improve its in
 - XML Sitemap: Creating and submitting an XML sitemap to search engines to help them discover and index your pages.
 - Robots.txt: Configuring the robots.txt file to control which parts of your site search engines can crawl.
 - Structured Data Markup: Using schema.org markup to provide search engines with more information about your content, potentially enhancing visibility in SERPs through rich snippets.
+
 3. Off-Page SEO
 Off-page SEO focuses on external factors that influence your site's authority and rankings:
 - Backlinks: Earning quality backlinks from reputable sites in your industry or niche, which signal to search engines that others vouch for your content.
 - Social Signals: While not a direct ranking factor, social media activity can increase visibility and traffic, indirectly affecting SEO.
 - Online Reputation and Reviews: Managing your online reputation, including encouraging positive reviews, which can influence both users and search engine perceptions.
+
 Best Practices for Effective SEO
 - Continuous Improvement: SEO is not a one-time task but an ongoing process. Search engines frequently update their algorithms, so staying informed and adapting your strategies is crucial.
 - User Experience (UX): Prioritize creating a positive user experience, as factors like dwell time (how long visitors stay on your site) can influence rankings.
 - Avoid Black Hat Techniques: Stick to ethical SEO practices. Techniques designed to trick search engines (like keyword stuffing, cloaking, or buying links) can result in penalties.
 - Quality Over Quantity: Focus on creating valuable, high-quality content and earning quality backlinks rather than trying to game the system with low-quality content or spammy links.
-Implementing a comprehensive SEO strategy that covers these areas can significantly improve a website's visibility and ranking in SERPs, leading to increased traffic and, ideally, conversions or other desired actions by visitors.
+
+Implementing a comprehensive SEO strategy that covers these areas can significantly improve a website's visibility and ranking in SERPs (search engine results pages), leading to increased traffic and, ideally, conversions or other desired actions by visitors.
 
 [↑ Back to top](#systems_design-topics)
 
@@ -420,11 +439,15 @@ How DNS Works:
 - 4. TLD (Top Level Domain) Name Servers: The resolver next queries the TLD name server, which responds with the IP address of the domain's authoritative name server.
 - 5. Authoritative Name Servers: Finally, the resolver queries the authoritative name server for the web address. This server has access to the domain's records and responds with the IP address of the server where the website is hosted.
 - 6. Resolution: The DNS resolver sends the IP address back to your computer. Your computer can then make a direct request to the web server at that IP address to access the website.
-- Domain: A human-friendly address of a website (e.g., www.example.com).
-- IP Address: A unique numeric identifier for each device on a network.
-- DNS Resolver: Acts as a mediator between the user and DNS servers to find the correct IP address.
-- Root Name Servers: The top of the DNS hierarchy that directs queries to TLD name servers based on the extension (.com, .net, etc.).
-- TLD Name Servers: Manage the second-level domain names such as .com, .net, etc. Authoritative Name Servers: Hold the DNS records for individual domains, providing the exact 6. 
+
+
+Key components:
+Domain: A human-friendly address of a website (e.g., www.example.com). 
+IP Address: A unique numeric identifier for each device on a network.
+DNS Resolver: Acts as a mediator between the user and DNS servers to find the correct IP address.
+Root Name Servers: The top of the DNS hierarchy that directs queries to TLD name servers based on the extension (.com, .net, etc.).
+TLD Name Servers: Manage the second-level domain names such as .com, .net, etc. 
+Authoritative Name Servers: Hold the DNS records for individual domains, providing the exact 6. 
 
 [↑ Back to top](#systems_design-topics)
 
@@ -438,10 +461,12 @@ Server-Side Implementation
 - 1) Choose a WebSocket Library: For most programming languages, there are libraries available that simplify the process of implementing WebSocket servers. For example, in Node.js, you might use the ws or socket.io library.
 - 2) Create a WebSocket Server: Using your chosen library, create a WebSocket server that listens for incoming WebSocket connections. Define the logic for handling different types of messages from clients, such as opening connections, closing connections, and processing incoming data.
 - 3) Handling Connections: Implement event handlers to manage connection lifecycle events, including connection establishment (onopen), receiving messages (onmessage), error handling (onerror), and connection closure (onclose).
+
 Client-Side Implementation
 - 1) Creating a WebSocket Connection: In the browser, use the WebSocket API to create a new WebSocket connection by specifying the URL of the WebSocket server. The URL scheme starts with ws:// or wss:// for secure connections.
 - 2) Handling Events: Similar to the server side, implement event handlers on the client side to manage connection events, including opening the connection, receiving messages, handling errors, and closing the connection.
 - 3) Sending and Receiving Messages: Use the send method to send data to the server and process received data in the onmessage event handler.
+
 Server-Side Example (Node.js using ws library):
 ```javascript
 const WebSocket = require("ws");
@@ -463,11 +488,13 @@ Client-Side Example (HTML/JavaScript):
 </script>;
 
 ```
+
 Why Use WebSocket Over HTTP?
 - Real-Time Communication: WebSocket provides a real-time, two-way communication channel, making it ideal for applications that require instant updates.
 - Lower Overhead: After the initial handshake, WebSocket does not require the HTTP headers for each message, reducing the amount of overhead and improving performance, especially for frequent and small messages.
 - Persistent Connection: WebSocket keeps the connection open, eliminating the need to establish a new connection for each message exchange, as is necessary with HTTP. This persistent connection reduces latency and increases efficiency.
 - Full-Duplex Communication: WebSocket allows for simultaneous two-way data transmission, enabling both the client and server to send data independently without waiting for a request-response cycle.
+
 WebSocket is chosen over HTTP in scenarios requiring real-time data exchange and minimal latency because it provides a more efficient, persistent, and real-time communication channel suitable for modern web applications.
 
 [↑ Back to top](#systems_design-topics)
@@ -481,6 +508,7 @@ Lowering latency is crucial in many scenarios, such as:
 - 2) Financial Trading Systems: For high-frequency trading platforms, lower latency can mean the difference between a profitable trade and a significant loss. Financial institutions invest heavily in technology and infrastructure to minimize delays in order execution and data receipt.
 - 3) Real-Time Communication Applications: Video conferencing, VoIP, and live streaming services benefit significantly from lower latency, as it enables more natural and interruption-free conversations and interactions among participants.
 - 4) Web Applications and Services: Websites and web applications strive for lower latency to improve user experience, ensuring that pages load quickly and interactions feel responsive.
+
 Strategies for Achieving Lower Latency
 - Optimizing Network Routes: Using the most direct network paths between clients and servers can reduce transmission times.
 - Content Delivery Networks (CDNs): Distributing content across geographically dispersed servers allows users to access data from a location closer to them, reducing latency.
@@ -488,6 +516,7 @@ Strategies for Achieving Lower Latency
 - Upgrading Infrastructure: Investing in faster servers, networking equipment, and broadband connections can reduce processing and transmission times.
 - Protocol Optimization: Using protocols designed for low latency, such as WebSockets for real-time web applications, can reduce the delays introduced by communication protocols.
 - Caching: Storing frequently accessed data in temporary storage close to the user (such as in-browser caches or edge nodes) minimizes the need for repeated data retrieval actions.
+
 In essence, lower latency interaction enhances the performance and user experience of digital services and applications by minimizing delays, making activities such as online gaming, real-time communication, and interactive web browsing more efficient and enjoyable.
 
 [↑ Back to top](#systems_design-topics)
@@ -495,11 +524,13 @@ In essence, lower latency interaction enhances the performance and user experien
 ### How does buffer overflow work?
 
 A buffer overflow occurs when more data is written to a buffer (a temporary storage area in memory) than it can hold. Since buffers have a fixed capacity, any extra data can overflow into adjacent memory spaces. This behavior can lead to various types of software vulnerabilities, including crashes, data corruption, and security breaches, such as unauthorized access or execution of malicious code.
+
 How Buffer Overflow Works:
 - 1) Buffer Definition and Data Writing: A buffer is typically created by allocating a fixed amount of memory for storing data, such as user input. When data is written into the buffer, it's expected that the amount does not exceed the allocated size.
 - 2) Overflow Condition: The overflow happens when the program does not properly check the amount of data written into the buffer, allowing more data to be written than there is space allocated for it.
 - 3) Memory Corruption: The extra data that cannot fit in the buffer spills over into adjacent memory spaces. This can overwrite important data, such as other variables, program state information, or even the instructions to be executed next (the return address of a function, for example).
 - 4) Exploitation: Malicious actors can exploit buffer overflows by carefully crafting the input data so that the overflow overwrites specific areas of memory with payloads designed to execute arbitrary code. If, for example, the return address of a function is overwritten with the address of the injected malicious code, the program's execution flow can be hijacked, allowing attackers to execute code with the privileges of the vulnerable program.
+
 Preventing Buffer Overflows: To mitigate buffer overflow vulnerabilities, developers and programmers use several strategies, including:
 - Bounds Checking: Implementing checks in the code to ensure that data written to a buffer does not exceed its allocated size.
 - Safe Programming Languages: Using programming languages that inherently check array and buffer boundaries, such as Java or Python, can prevent buffer overflows.
@@ -507,6 +538,7 @@ Preventing Buffer Overflows: To mitigate buffer overflow vulnerabilities, develo
 - Stack Canaries: Placing a known value (the "canary") just before the stack return pointer. The program checks this value before executing a return instruction; if the value has changed, an overflow has likely occurred, and the program can take action to prevent exploitation.
 - Address Space Layout Randomization (ASLR): Randomizing the location of program and system data in memory makes it more difficult for attackers to predictably exploit buffer overflows.
 - Non-executable Memory Regions: Marking certain areas of memory as non-executable (using NX bit or DEP - Data Execution Prevention) prevents the execution of code in these areas, thwarting many buffer overflow attack attempts.
+
 Despite these mitigation techniques, buffer overflow vulnerabilities continue to be a concern, especially in legacy systems and applications written in languages like C and C++ that do not enforce automatic bounds checking. Awareness, secure coding practices, and regular security testing are essential components of a strategy to prevent these vulnerabilities.
 
 [↑ Back to top](#systems_design-topics)
@@ -524,11 +556,10 @@ Distributed systems, which consist of components located on different networked 
 - 8. Service Discovery. In a dynamic distributed system, components and services can frequently change due to scaling operations, failures, and deployments. Designing an effective service discovery mechanism allows components to find and communicate with each other automatically despite these changes.
 - 9. Data Management. Distributed systems often involve managing large volumes of data across different nodes. Issues such as data replication, synchronization, and consistency across nodes need to be addressed to ensure that the system operates efficiently and accurately.
 - 10. System Management and Monitoring. Monitoring the health, performance, and behavior of a distributed system is challenging due to its complexity and the number of components involved. Developing tools and practices for effective system management, logging, and monitoring is essential for diagnosing problems, understanding system behavior, and planning capacity.
-Addressing these design issues requires a deep understanding of distributed computing principles, as well as careful planning and attention to detail in the system's architecture and implementation.
 
 [↑ Back to top](#systems_design-topics)
 
-### Designing a Notification System: Features, Issues, and Considerations
+### How do you design a notification system?
 
 Required Features
 - Multi-channel support (e.g., email, SMS, push notifications, in-app messages)
@@ -612,7 +643,7 @@ Considerations
 
 [↑ Back to top](#systems_design-topics)
 
-### Designing a Web Cache: Features, Issues, Resolutions, and Considerations
+### How do you design a web cache?
 
 Required Features
 - Caching strategies (e.g., Least Recently Used (LRU), First In First Out (FIFO), etc.) to manage cache eviction
@@ -680,6 +711,10 @@ Considerations
 - Choosing the right hashing function that minimizes collisions and provides a good distribution of keys.
 - Integrating with other system components, such as load balancers and caching layers, to ensure seamless operation.
 - Assessing the impact of consistent hashing on application-specific requirements, such as query latency and data locality.
+
+
+Why?
+Consistent hashing is a strategy designed to distribute data across a cluster of servers in a way that minimizes reorganization when servers are added or removed. It addresses several challenges in distributed systems, including scalability, high availability, load distribution, data locality, fault tolerance, simplifying data management, and decentralization. By ensuring keys are evenly spread across nodes, consistent hashing improves load distribution and reduces hot spots. It facilitates easy scaling and data replication, enhancing system availability and fault tolerance. The use of virtual nodes and hashing functions optimizes key distribution and minimizes management overhead, while integration with system components ensures seamless operation. Consistent hashing's adaptability to workload and data distribution variations, along with minimal overhead for operations, makes it a cornerstone technique for designing robust, efficient distributed systems.
 
 [↑ Back to top](#systems_design-topics)
 
@@ -1638,23 +1673,6 @@ Considerations
 - Creating a compelling and immersive narrative that evolves with player actions
 - Implementing data analytics to understand player behavior and guide development decisions
 - Complying with international regulations and standards for online interactions and transactions
-
-[↑ Back to top](#systems_design-topics)
-
-### Links
-
-- https://igotanoffer.com/blogs/tech/system-design-interviews#game
-- https://www.interviewbit.com/system-design-interview-questions/
-- https://lnkd.in/gCE5-2Uy
-- https://lnkd.in/gBK3Yr-k
-- https://lnkd.in/gKmiBGMY
-- https://lnkd.in/gTwWGgRW
-- https://lnkd.in/gge-HFki
-- https://lnkd.in/gcEenvvY
-- https://lnkd.in/g2v99kw4
-- https://lnkd.in/gtw7H378
-- https://lnkd.in/g3i2Jzsd
-- https://lnkd.in/ghVWhgAb
 
 [↑ Back to top](#systems_design-topics)
 

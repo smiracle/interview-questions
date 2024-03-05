@@ -21,7 +21,7 @@ const Quiz: React.FC<QuizProps> = ({navigation}) => {
           key={index}
           style={sharedStyles.button}
           onPress={() => onSelectTopic(topic)}>
-          <Text style={sharedStyles.text}>{topic.name}</Text>
+          <Text style={sharedStyles.buttonText}>{topic.name}</Text>
         </TouchableOpacity>
       ))}
     </ScrollView>

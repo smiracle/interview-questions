@@ -5,6 +5,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
 import {QuestionContent} from './Question';
 import {imageMap} from './ImageMap';
+import {sharedStyles} from './_Styles';
 
 interface QuestionDetailsProps {
   navigation: StackNavigationProp<RootStackParamList, 'QuestionDetails'>;
@@ -38,27 +39,16 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
       style={{
         paddingLeft: 10,
         paddingRight: 10,
+        paddingBottom: 50,
       }}>
-      <Text
-        style={{
-          fontSize: 18,
-          fontWeight: 'bold',
-          color: '#333',
-          paddingTop: 10,
-          paddingBottom: 10,
-          marginBottom: 10,
-          backgroundColor: '#f0f0f0',
-          borderRadius: 5,
-        }}>
-        {question.header}
-      </Text>
+      <Text style={sharedStyles.questionHeader}>{question.header}</Text>
 
       {question.content.map((content: QuestionContent, index: number) => {
         const imgKey = `image-${index}`;
         switch (content.type) {
           case 'text':
             return (
-              <Text key={index} style={{marginBottom: 5}}>
+              <Text key={index} style={sharedStyles.text}>
                 {content.value}
               </Text>
             );
@@ -66,7 +56,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
             return (
               <View key={index}>
                 {content.values.map((value, idx) => (
-                  <Text key={idx} style={{marginBottom: 5}}>
+                  <Text key={idx} style={sharedStyles.bullet}>
                     &#8226; {value}
                   </Text>
                 ))}
@@ -75,20 +65,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
           case 'json':
           case 'code':
             return (
-              <Text
-                key={index}
-                style={{
-                  fontFamily: 'monospace',
-                  backgroundColor: '#2E2E2E',
-                  color: '#F8F8F8',
-                  padding: 5,
-                  borderRadius: 5,
-                  overflow: 'hidden',
-                  marginTop: 5,
-                  marginBottom: 5,
-                  fontSize: 12,
-                  lineHeight: 12,
-                }}>
+              <Text key={index} style={sharedStyles.code}>
                 {content.value}
               </Text>
             );
@@ -113,6 +90,8 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
             return null;
         }
       })}
+      {/* Extra whitespace */}
+      <Text style={{height: 50}}></Text>
     </ScrollView>
   );
 };
