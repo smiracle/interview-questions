@@ -43,8 +43,8 @@ To add new information for a topic:
 
 1. Edit the corresponding base, non-formatted, json file in the data/ directory (react.json for example).
 2. Run the corresponding command below to generate the formatted JSON using the base JSON.
-3. Run the readme generation script. (Both this step and #2 can be run together using the scripts in package.json)
-4. View the readme files in topics/ or reload the Android app at will.
+3. Run the readme generation script. Both this step and #2 can be run together using the scripts in package.json.
+4. View the readme files in topics/ or reload the Android app to view the information.
 
 #### Generate the formatted JSON
 

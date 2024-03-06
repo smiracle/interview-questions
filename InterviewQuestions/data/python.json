@@ -5,8 +5,24 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "Python is a high-level, interpreted programming language known for its simplicity and readability. Created by Guido van Rossum and first released in 1991, Python's design philosophy emphasizes code readability with its notable use of significant whitespace. It supports multiple programming paradigms, including structured, object-oriented, and functional programming. Python is dynamically typed and garbage-collected, making it suitable for a wide range of applications, from web development to scientific computing."
+        },
+        {
+          "type": "text",
+          "value": "Python's comprehensive standard library, open-source development model, and support for modules and packages enhance its modularity and reusability. It's one of the most popular programming languages in the world, used by beginners and professionals alike. Python's syntax allows programmers to express concepts in fewer lines of code than might be used in languages such as C++ or Java."
         }
+      ],
+      "answers": [
+        "Python is a versatile programming language that emphasizes readability and supports multiple programming paradigms.",
+        "Python's syntax is similar to C and Java, requiring explicit declaration of variables before use.",
+        "Unlike Python, most programming languages do not support both object-oriented and functional programming paradigms.",
+        "Python is a compiled language, requiring a compilation step before execution to improve performance.",
+        "One of the limitations of Python is its lack of support for mobile computing and mobile application development.",
+        "Python was designed primarily for web development, with other applications like data analysis and machine learning as secondary use cases.",
+        "The Python programming language enforces strong type checking, requiring variables to be explicitly typed.",
+        "Python's execution speed is comparable to that of statically typed, compiled languages such as C++ and Rust.",
+        "Python does not support garbage collection, relying on the developer to manage memory manually.",
+        "Python's standard library is minimal, often requiring external packages for common tasks such as file I/O and network communication."
       ]
     }
   ]

@@ -1,12 +1,28 @@
 {
     "questions": [
         {
-            "header": "What is Node JS?",
+            "header": "What is Node.js?",
             "content": [
                 {
                     "type": "text",
-                    "value": "todo"
+                    "value": "Node.js is an open-source, cross-platform JavaScript runtime environment that executes JavaScript code outside a web browser. It enables developers to use JavaScript to write command-line tools and for server-side scripting\u00e2\u20ac\u201drunning scripts server-side to produce dynamic web page content before the page is sent to the user's web browser. Consequently, Node.js represents a 'JavaScript everywhere' paradigm, unifying web application development around a single programming language, rather than different languages for server-side and client-side scripts."
+                },
+                {
+                    "type": "text",
+                    "value": "Built on Chrome's V8 JavaScript engine, Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices. Node.js also comes with a vast ecosystem of open-source libraries available through the npm package manager."
                 }
+            ],
+            "answers": [
+                "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine that executes JavaScript code server-side.",
+                "Node.js is primarily used for front-end development, enabling interactive elements on websites.",
+                "It relies on a multi-threaded blocking I/O model to handle multiple connections simultaneously.",
+                "Node.js uses the PHP engine for script execution to enhance its compatibility with traditional web technologies.",
+                "It is unsuitable for real-time applications due to its high overhead and slow performance in handling concurrent connections.",
+                "Node.js does not support the use of npm packages, limiting its utility in modern web development.",
+                "It exclusively supports the JavaScript programming language, with no ability to execute code written in other languages.",
+                "Node.js applications are less scalable due to their reliance on synchronous execution for I/O operations.",
+                "The runtime environment does not allow for event-driven programming, making it less efficient for web servers.",
+                "Node.js's architecture leads to increased memory consumption for high-load applications, making it less efficient than other server-side technologies."
             ]
         }
     ]

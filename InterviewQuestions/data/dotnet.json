@@ -5,8 +5,20 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": ".NET is a free, cross-platform, open-source developer platform for building many different types of applications. With .NET, you can use multiple languages, editors, and libraries to build for web, mobile, desktop, games, and IoT. Depending on the type of application you want to build, you can choose .NET Core for cross-platform development, .NET Framework for Windows apps and services, and Xamarin/Mono for mobile apps. .NET provides a unified set of APIs across all .NET platforms, with additional APIs for specific operating systems. It also supports cloud, IoT, machine learning, microservices, and more with an extensive class library and runtime."
         }
+      ],
+      "answers": [
+        ".NET is a developer platform for building various types of applications, including web, mobile, and desktop applications.",
+        "It supports multiple programming languages, such as C#, F#, and Visual Basic, allowing developers to choose the most suitable one.",
+        ".NET includes frameworks like .NET Core, .NET Framework, and Xamarin, each designed for specific types of development.",
+        "Developers can build cross-platform applications that run on Windows, Linux, and macOS using .NET Core.",
+        ".NET provides extensive class libraries, APIs, and runtime for application development and execution.",
+        ".NET is a proprietary software framework that only supports development for the Windows platform.",
+        "It does not support cloud computing, machine learning, or IoT development.",
+        "Applications built with .NET cannot be deployed on Linux or macOS operating systems.",
+        ".NET primarily focuses on game development and does not support web or mobile application development.",
+        ".NET is outdated and has been replaced by newer technologies such as Node.js and Python for web development."
       ]
     }
   ]

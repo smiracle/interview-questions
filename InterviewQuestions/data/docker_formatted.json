@@ -5,8 +5,20 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "todo"
+                    "value": "Docker is an open-source platform for developing, shipping, and running applications. It enables you to separate your applications from your infrastructure so you can deliver software quickly. Docker provides the ability to package and run an application in a loosely isolated environment called a container. Containers are lightweight, portable, and provide a consistent runtime environment for applications, ensuring that they run the same, regardless of where they are deployed. Docker automates the repetitive tasks of setting up and configuring development environments, making it easier to build, test, and deploy applications swiftly and securely."
                 }
+            ],
+            "answers": [
+                "Docker is a tool designed to make it easier to create, deploy, and run applications by using containers.",
+                "It allows developers to package an application with all of its dependencies into a standardized unit for software development.",
+                "Docker containers are lightweight, making them ideal for isolating applications and improving scalability and efficiency.",
+                "Docker simplifies the process of managing applications in different environments, ensuring consistency across development, testing, and production.",
+                "Docker Hub is a registry service provided by Docker for finding and sharing container images with your team.",
+                "Docker is primarily focused on virtualization and does not support containerized applications.",
+                "Docker containers require the same amount of resources as traditional virtual machines.",
+                "Docker can only be used in Linux environments and does not support Windows or macOS.",
+                "Applications deployed with Docker are less secure than those deployed on physical servers.",
+                "Docker is incompatible with cloud services, limiting its use in modern, cloud-based applications."
             ]
         }
     ]

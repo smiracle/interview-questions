@@ -5,8 +5,24 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "SQL, or Structured Query Language, is a domain-specific language used in programming and designed for managing and manipulating relational database management systems. It is particularly useful for handling structured data, where there are relationships between different entities/variables of the data. SQL offers a way to insert, query, update, and modify data within databases. Developed in the 1970s, SQL has been standardized by both ANSI and ISO, with multiple versions over the years."
+        },
+        {
+          "type": "text",
+          "value": "SQL commands can be used to interact with a database, such as to retrieve data from a database (SELECT), insert records in a database (INSERT), update records in a database (UPDATE), delete records from a database (DELETE), create new databases (CREATE DATABASE), create new tables in a database (CREATE TABLE), create stored procedures in a database (CREATE PROCEDURE), set permissions on tables, procedures, and views (GRANT/REVOKE), and much more."
         }
+      ],
+      "answers": [
+        "SQL is a standard language for accessing and manipulating databases, enabling operations such as querying, updating, and data insertion.",
+        "SQL stands for 'Strong Question Language', focused exclusively on complex mathematical computations.",
+        "SQL is primarily a tool for hacking into databases to retrieve sensitive information without authorization.",
+        "SQL is a programming language that facilitates the creation of desktop applications.",
+        "SQL can only interact with databases that are hosted on Windows servers.",
+        "SQL allows for the creation, deletion, and modification of databases and their structures.",
+        "SQL is used to insert, query, update, and delete data in a database, supporting transactions and concurrency.",
+        "SQL databases are inherently unsecure and cannot be used for financial or personal data.",
+        "SQL supports distributed databases and can work with data spread across multiple servers and locations.",
+        "SQL's capabilities are limited to data manipulation and do not include database management aspects like backup and recovery."
       ]
     }
   ]

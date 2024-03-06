@@ -5,8 +5,24 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "PostgreSQL is an open-source, object-relational database management system (ORDBMS) with an emphasis on extensibility and standards compliance. Developed by the PostgreSQL Global Development Group, it is one of the most advanced and widely used database systems. PostgreSQL supports a wide range of data types, including primitive types, structured types, and custom types, making it highly flexible for different data storage needs."
+        },
+        {
+          "type": "text",
+          "value": "It offers robust features to ensure data integrity, including complex SQL queries, foreign keys, triggers, updatable views, and transactional integrity. It is designed for scalability, high availability, and compatibility with various programming languages and environments. PostgreSQL's advanced features, such as Multi-Version Concurrency Control (MVCC), point-in-time recovery, and asynchronous replication, make it suitable for high-volume environments and complex applications."
         }
+      ],
+      "answers": [
+        "PostgreSQL is an advanced, open-source object-relational database system known for its reliability, data integrity, and correctness.",
+        "Unlike PostgreSQL, most database systems do not support custom data types, limiting their extensibility.",
+        "PostgreSQL is primarily used for mobile app development, with web and enterprise applications as secondary use cases.",
+        "One of PostgreSQL's limitations is its lack of support for NoSQL data models, making it unsuitable for unstructured data.",
+        "PostgreSQL requires manual management of database transactions to maintain data integrity and consistency.",
+        "The system does not support advanced features like Multi-Version Concurrency Control (MVCC) and point-in-time recovery.",
+        "PostgreSQL is known for its low performance in read-heavy applications compared to other database systems.",
+        "It lacks a comprehensive set of management tools in its standard distribution, requiring third-party solutions for database administration.",
+        "PostgreSQL's replication capabilities are limited to synchronous replication, without support for asynchronous replication.",
+        "The database system has minimal built-in security features, often relying on external tools and configurations for securing data."
       ]
     }
   ]

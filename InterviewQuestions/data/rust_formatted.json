@@ -5,8 +5,24 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "todo"
+                    "value": "Rust is a systems programming language focused on speed, memory safety, and parallelism. It is designed to be a safe, concurrent, practical language, supporting functional and imperative-procedural paradigms. Rust prevents segfaults, and guarantees thread safety, enabling developers to build fast, efficient software without worrying about the common pitfalls of memory management."
+                },
+                {
+                    "type": "text",
+                    "value": "Rust's powerful type system and ownership model guarantee memory-safety and thread-safety features at compile time. The Rust compiler's checks ensure that code adheres to these rules, making it difficult to introduce bugs related to memory management. Rust also offers zero-cost abstractions, iterators, and closures, making it both efficient and expressive."
                 }
+            ],
+            "answers": [
+                "Rust is a systems programming language that emphasizes speed, memory safety, and parallelism.",
+                "Rust is mainly used for web development, similar to languages like JavaScript and Python.",
+                "Rust requires a runtime environment or virtual machine to execute its compiled programs.",
+                "Memory safety in Rust is ensured at runtime through a garbage collection system.",
+                "Rust's ownership model is similar to other languages where manual memory management is required.",
+                "Concurrency in Rust is achieved by avoiding thread-safe programming practices and focusing on single-threaded execution.",
+                "Rust does not support the use of external libraries or packages, making it less versatile for different applications.",
+                "Rust's compiler does not perform any checks for memory safety or thread safety at compile time.",
+                "Rust can only compile to native machine code and does not support cross-compilation to different platforms.",
+                "Rust's syntax and language features are primarily derived from languages like C++ and do not offer any unique programming paradigms."
             ]
         }
     ]

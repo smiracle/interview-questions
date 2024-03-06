@@ -5,8 +5,20 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "JavaScript is a high-level, interpreted scripting language that conforms to the ECMAScript specification. It is a language that is characterized by dynamic typing, first-class functions, and prototype-based object-orientation. Initially designed to make web development easier by allowing developers to add interactive elements to websites, JavaScript has grown into a powerful language used on both the client-side and server-side to build scalable and complex applications. It can be used to create web pages that are interactive, responsive, and user-friendly. JavaScript is universally supported by all modern web browsers without the need for plugins. Its versatility extends to the development of games, mobile applications, and server-side network programming."
         }
+      ],
+      "answers": [
+        "JavaScript is a scripting language that enables you to create dynamically updating content, control multimedia, animate images, and much more.",
+        "It is primarily used for client-side web development, enhancing user interfaces and experiences.",
+        "JavaScript allows developers to create rich web applications that can interact with users, control the browser, communicate asynchronously, and alter document content that is displayed.",
+        "JavaScript is a part of the web development holy trinity, alongside HTML and CSS.",
+        "It is only used for creating web page alerts and pop-ups.",
+        "JavaScript cannot be used on the server-side or for building desktop applications.",
+        "It is a statically typed language that requires variable type declarations.",
+        "JavaScript code must be compiled before it can be executed by a web browser.",
+        "It does not support object-oriented programming or function as a first-class object.",
+        "JavaScript is incompatible with mobile devices and cannot be used to develop mobile applications."
       ]
     },
     {

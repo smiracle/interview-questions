@@ -5,8 +5,24 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "NoSQL databases are designed to store, distribute, and access data using methods that differ from relational databases. These databases are known for their ability to handle large volumes of unstructured, semi-structured, or structured data. They provide flexible schemas and scale easily with large amounts of data and high user loads. NoSQL databases are categorized into four main types: document, key-value, wide-column, and graph databases, each serving different data storage requirements."
+        },
+        {
+          "type": "text",
+          "value": "NoSQL databases excel in applications that require rapid development, horizontal scalability, and the ability to handle a wide variety of data types. They are commonly used in big data analytics, real-time web applications, and IoT (Internet of Things) applications. The flexibility of NoSQL databases allows developers to make changes to the database schema without impacting existing data, enabling faster iteration and development cycles."
         }
+      ],
+      "answers": [
+        "NoSQL databases are designed for high scalability, flexible schema designs, and handling large volumes of diverse data types.",
+        "NoSQL databases strictly follow ACID (Atomicity, Consistency, Isolation, Durability) properties similar to relational databases.",
+        "These databases are limited to text and numerical data types, restricting their use in handling complex data structures.",
+        "NoSQL databases typically require more storage space than relational databases due to their denormalized data structure.",
+        "They are primarily used for static data storage where data consistency and integrity are not critical requirements.",
+        "NoSQL databases do not support SQL language for data manipulation, relying solely on proprietary APIs for all operations.",
+        "These databases are unsuitable for applications that require complex transactions and multi-record updates in a single operation.",
+        "NoSQL databases are known for their poor performance in read-heavy applications due to the lack of indexing mechanisms.",
+        "They lack the ability to enforce data integrity rules and constraints, making them prone to data anomalies.",
+        "NoSQL databases offer limited security features out of the box, often requiring additional tools and configurations for securing data access."
       ]
     }
   ]

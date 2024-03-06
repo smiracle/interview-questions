@@ -5,8 +5,20 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "todo"
+                    "value": "Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language that is intended to let application developers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying computer architecture. Java is used to develop mobile apps, web apps, desktop apps, games, and much more. It is known for its simplicity, portability, and robust features that make it suitable for networked and distributed environments."
                 }
+            ],
+            "answers": [
+                "Java is an object-oriented programming language used for building a wide range of applications, from mobile to enterprise-level solutions.",
+                "It operates on the principle of 'write once, run anywhere,' making Java applications portable across different computing platforms.",
+                "Java is popular in enterprise environments due to its robustness, security features, and the extensive libraries available for developers.",
+                "It is the foundational programming language for Android app development.",
+                "Java code can only be run on specialized Java operating systems.",
+                "Java does not support the creation of web-based applications.",
+                "It is a scripting language that is executed on the client side without the need for a virtual machine.",
+                "Java applications are inherently insecure and not suitable for distributed environments.",
+                "It is primarily used for developing simple console-based applications and cannot handle complex user interfaces.",
+                "Java does not support the use of object-oriented programming principles such as inheritance and polymorphism."
             ]
         }
     ]

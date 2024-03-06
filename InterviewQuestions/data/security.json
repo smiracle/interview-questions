@@ -1,12 +1,28 @@
 {
   "questions": [
     {
-      "header": "What is security (in the context of software development)?",
+      "header": "What is Security in Software Development?",
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "Security in software development refers to the process and methodologies implemented to protect software against vulnerabilities and threats that can compromise data integrity, privacy, and functionality. It encompasses practices to identify, mitigate, and prevent security risks during the development lifecycle, ensuring the software is resilient against unauthorized access, breaches, and other cyber threats."
+        },
+        {
+          "type": "text",
+          "value": "Effective security measures in software development include implementing secure coding practices, conducting regular security assessments and code reviews, and adopting security frameworks and standards. It aims to address security concerns at every phase of the development process, from planning and design to deployment and maintenance, to minimize vulnerabilities and protect against potential attacks."
         }
+      ],
+      "answers": [
+        "Security in software development focuses on protecting software from vulnerabilities and threats, ensuring data integrity and privacy.",
+        "Security in software development is solely the responsibility of the security team, and developers need not worry about it.",
+        "Security practices in software development only need to be considered during the final stages of the project, just before deployment.",
+        "Security in software development is a one-time process that, once implemented, guarantees the software is secure forever.",
+        "Secure coding practices are optional and can be considered as an enhancement rather than a necessity in software development.",
+        "Conducting security assessments is only necessary for software projects dealing with sensitive or financial information.",
+        "Adopting security frameworks and standards restricts the creativity and flexibility of developers in the software development process.",
+        "Security in software development is focused on creating complex password requirements for end-users.",
+        "Regular security assessments and code reviews significantly slow down the software development process and are often skipped to meet deadlines.",
+        "Security in software development addresses risks only in the deployment phase, ignoring the planning, design, and maintenance phases."
       ]
     }
   ]

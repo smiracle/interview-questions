@@ -59,14 +59,11 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
       const loadedQuestions: Question[] =
         topicToDataMap[topicFileName as TopicFileName]?.questions || [];
 
-      // Shuffle all loaded questions to randomize their order
       const shuffledQuestions: Question[] = shuffleQuestions(loadedQuestions);
 
-      // Process each question to shuffle answers and ensure the correct answer is included
       const selectedAndProcessedQuestions: QuestionWithShuffledAnswers[] =
         shuffledQuestions
           .map((question: Question): QuestionWithShuffledAnswers => {
-            // Ensure every question is treated as having answers, even if initially undefined
             const answers: string[] = question.answers || [];
             const taggedAnswers: ShuffledAnswer[] = tagCorrectAnswer(answers);
             const shuffledAndProcessedAnswers: ShuffledAnswer[] =
@@ -77,7 +74,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
               answers: shuffledAndProcessedAnswers,
             };
           })
-          .slice(0, 5); // Select the first 5 shuffled and processed questions
+          .slice(0, 5);
 
       setQuestions(selectedAndProcessedQuestions);
     };
@@ -224,17 +221,6 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  revealButton: {
-    backgroundColor: '#009688',
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-  },
-  revealButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
-  },
   container: {
     paddingLeft: 20,
     paddingRight: 20,
@@ -253,9 +239,6 @@ const styles = StyleSheet.create({
   answerText: {
     fontSize: 16,
     color: '#000',
-  },
-  answerFeedback: {
-    marginTop: 20,
   },
   feedbackTextCorrect: {
     fontSize: 18,
@@ -281,8 +264,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
   },
-  bullet: {},
-  text: {},
   image: {width: '100%', height: 200},
 });
 

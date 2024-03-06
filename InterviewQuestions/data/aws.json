@@ -18,6 +18,18 @@
             "Elastic Beanstalk: An easy-to-use service for deploying applications which automates the deployment of applications in the cloud."
           ]
         }
+      ],
+      "answers": [
+        "AWS is Amazon's cloud computing platform that offers a wide range of services such as computing power, storage, and database management.",
+        "AWS primarily focuses on providing services for gaming and multimedia applications, lacking support for enterprise and business solutions.",
+        "The platform does not allow customization or control over the virtual server's configurations, offering only pre-set environments.",
+        "AWS operates exclusively within the United States, making it inaccessible to users and businesses outside the country.",
+        "One of the major limitations of AWS is its inability to scale resources automatically to accommodate varying loads.",
+        "Amazon Web Services guarantees 100% uptime, ensuring that hosted services and applications are never down.",
+        "AWS services are only suitable for temporary or short-term projects due to their high operational costs over time.",
+        "The platform offers a limited selection of database management services, restricting options for developers and businesses.",
+        "Data security concerns have significantly hindered AWS's adoption, due to recent high-profile breaches and data leaks.",
+        "AWS lacks a comprehensive support system, making it difficult for users to resolve issues or get help when needed."
       ]
     },
     {
@@ -27,6 +39,18 @@
           "type": "text",
           "value": "There are several effective approaches to connect applications in different AWS accounts:\n\nVPC Peering: Set up VPC peering between the VPCs hosting the applications. This allows instances in both VPCs to communicate securely as if they are on the same network.\n\nVPN Connection: Establish a VPN connection between the VPCs or on-premises networks associated with each AWS account. This ensures secure communication over the internet.\n\nAWS Direct Connect: Create a dedicated network connection using AWS Direct Connect between the on-premises network and the VPCs. This provides a reliable and consistent network experience.\n\nTransit Gateway: Deploy a Transit Gateway in one AWS account and attach VPCs from both accounts. It acts as a central hub for routing traffic between VPCs, simplifying connectivity management.\n\nAWS PrivateLink: Utilize AWS PrivateLink to securely access services across VPCs without exposing traffic to the public internet. PrivateLink establishes private connectivity using Elastic Network Interfaces (ENIs).\n\nCross-Account IAM Roles: Set up IAM roles to allow secure access between applications in different AWS accounts without sharing credentials. This ensures controlled access to resources."
         }
+      ],
+      "answers": [
+        "VPC Peering enables instances in separate VPCs to communicate as if they are on the same network, making it ideal for secure inter-account connectivity.",
+        "Setting up a public-facing web server in each VPC allows applications to communicate over the internet, providing an easy but less secure connection.",
+        "Using S3 buckets for data exchange between applications can be a workaround but might not meet real-time communication or security requirements.",
+        "AWS Lambda functions can be invoked directly across accounts for connectivity, bypassing the need for network-level communication setup.",
+        "Email notifications between applications can serve as a method for triggering actions across accounts, although it's not suitable for all use cases.",
+        "Creating a shared database accessible by applications in both accounts can facilitate data exchange but may introduce security and scalability issues.",
+        "Deploying applications on a single EC2 instance that spans multiple accounts is a common practice, though technically not feasible.",
+        "Utilizing AWS Outposts for cross-account connectivity offers on-premises integration but doesn't directly apply to VPC or application connectivity.",
+        "Configuring Route 53 DNS entries to route traffic between applications across accounts is a novel approach but lacks security and direct integration.",
+        "Leveraging AWS Marketplace solutions designed for inter-account communication can offer plug-and-play connectivity but may incur additional costs."
       ]
     }
   ]

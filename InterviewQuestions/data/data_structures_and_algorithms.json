@@ -5,8 +5,20 @@
       "content": [
         {
           "type": "text",
-          "value": "todo"
+          "value": "Data structures are ways of organizing and storing data in a computer so that it can be accessed and modified efficiently. Algorithms are step-by-step procedures or formulas for solving a particular problem. Together, data structures and algorithms provide a foundation for efficient problem-solving with computers. They enable developers to handle large amounts of data effectively, perform operations on data quickly, and solve complex computational problems. By choosing the appropriate data structure and algorithm, programmers can optimize the performance and resource usage of their applications."
         }
+      ],
+      "answers": [
+        "Data structures are ways to organize data in a computer's memory to facilitate efficient access and modification.",
+        "Algorithms are sequences of steps or rules designed to perform a specific task or solve a problem.",
+        "Effective use of data structures and algorithms improves software performance and efficiency.",
+        "Common data structures include arrays, linked lists, stacks, queues, trees, and graphs.",
+        "Sorting, searching, and graph algorithms are examples of algorithms used to manipulate data within these structures.",
+        "Choosing the wrong data structure or algorithm can significantly degrade application performance.",
+        "Data structures and algorithms are irrelevant in the era of high-performance computing and do not impact modern software development.",
+        "All algorithms provide the same efficiency regardless of the data structure used.",
+        "Understanding data structures and algorithms is only necessary for low-level system programming.",
+        "Data structures can only be implemented in high-level programming languages, not in scripting languages."
       ]
     }
   ]

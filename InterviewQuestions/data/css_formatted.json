@@ -5,8 +5,20 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "todo"
+                    "value": "CSS (Cascading Style Sheets) is a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS defines how elements should be rendered on screen, on paper, in speech, or on other media. It is one of the cornerstone technologies of the World Wide Web, alongside HTML and JavaScript. CSS enables web designers and developers to separate the content of a website from its design and layout, allowing for more flexibility, accessibility, and control in the specification of presentation characteristics."
                 }
+            ],
+            "answers": [
+                "CSS is a language that describes the style of an HTML document, specifying how elements should be displayed.",
+                "It stands for 'Cascading Style Sheets' and is used to add design, layout, and formatting to web pages.",
+                "CSS allows web developers to create visually engaging webpages with various design elements like colors, fonts, and spacing.",
+                "Using CSS improves web page load times and website maintenance by separating content from design.",
+                "CSS has no role in the layout or design of web pages; it's solely used for adding content.",
+                "All web browsers render CSS in the exact same way, without any differences or inconsistencies.",
+                "CSS cannot be used to create responsive web designs that adjust to different screen sizes and devices.",
+                "Modifying a website's CSS does not affect its accessibility or usability on different devices.",
+                "CSS is only applicable to HTML documents and cannot be used with other types of documents.",
+                "The introduction of CSS has had no significant impact on web design and development practices."
             ]
         }
     ]

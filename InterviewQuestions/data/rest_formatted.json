@@ -5,8 +5,24 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "todo"
+                    "value": "REST (Representational State Transfer) is an architectural style for designing networked applications. It relies on a stateless, client-server, cacheable communications protocol -- typically HTTP. In REST, resources are manipulated using a fixed set of operations. REST is designed to use a stateless communication protocol, often HTTP, making it an ideal choice for web services and APIs."
+                },
+                {
+                    "type": "text",
+                    "value": "A RESTful web service exposes a set of resources that identify the targets of the interaction with its clients. Resources are defined in URLs, providing a global addressing space for resource and service discovery. RESTful services use HTTP methods explicitly, making it a powerful, performant, and scalable approach to building web services."
                 }
+            ],
+            "answers": [
+                "REST is an architectural style for developing web services that emphasize communication via representational state transfers.",
+                "RESTful services primarily communicate using XML for data interchange between client and server.",
+                "REST requires maintaining a client-side session to keep track of user state.",
+                "A key principle of REST is its reliance on a stateful communication protocol for client-server interactions.",
+                "In REST architecture, operations on resources are not explicitly defined, allowing any method to be applied to any resource.",
+                "RESTful APIs are limited to a single communication protocol, HTTPS, for security reasons.",
+                "One of the constraints of REST is that it does not support asynchronous operations and real-time communication.",
+                "RESTful services cannot be cached, making them less efficient for frequent data retrieval operations.",
+                "The use of URLs in REST is restricted to static paths, not allowing parameters or query string inputs for dynamic resource access.",
+                "REST is specifically designed for use in distributed systems, requiring complex coordination and configuration between servers."
             ]
         }
     ]

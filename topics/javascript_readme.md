@@ -11,7 +11,7 @@
 
 ### What is JavaScript?
 
-todo
+JavaScript is a high-level, interpreted scripting language that conforms to the ECMAScript specification. It is a language that is characterized by dynamic typing, first-class functions, and prototype-based object-orientation. Initially designed to make web development easier by allowing developers to add interactive elements to websites, JavaScript has grown into a powerful language used on both the client-side and server-side to build scalable and complex applications. It can be used to create web pages that are interactive, responsive, and user-friendly. JavaScript is universally supported by all modern web browsers without the need for plugins. Its versatility extends to the development of games, mobile applications, and server-side network programming.
 
 [↑ Back to top](#javascript-topics)
 

@@ -21,7 +21,9 @@ Key features of AWS include:
 
 ### You have two applications deployed in separate AWS accounts, and you need to establish connectivity between them. What AWS services or configurations would you utilize, and why?
 
-There are several effective approaches to connect applications in different AWS accounts:VPC Peering: Set up VPC peering between the VPCs hosting the applications. This allows instances in both VPCs to communicate securely as if they are on the same network.
+There are several effective approaches to connect applications in different AWS accounts:
+
+VPC Peering: Set up VPC peering between the VPCs hosting the applications. This allows instances in both VPCs to communicate securely as if they are on the same network.
 
 VPN Connection: Establish a VPN connection between the VPCs or on-premises networks associated with each AWS account. This ensures secure communication over the internet.
 
