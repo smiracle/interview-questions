@@ -1,11 +1,14 @@
 ### Interview questions
 
 Created by Steven 2/24/24. This repository provides common technical interview questions and their associated answers.
-Scripts here will generate readme files based on JSON data. Code blocks in the readme files are formatted and inserted
-into the readme using Prettier. A built-in android app also serves this data using React Native in an easy to digest
-format.
+Scripts here will generate readme files based on JSON data. Objects of type "code" are validated, formatted, and
+inserted into the readme using Prettier and written to the /topics directory.
 
-For now data is only available for these topics: React, Systems Design, and Javascript.
+A React Native android app also serves this data in an easy to digest format, all of that is contained here in the
+InterviewQuestions/ Directory.
+
+For now data is only available for these topics, though I intend to add more info over time: React, Systems Design, and
+Javascript.
 
 You can view formatted readme files in the topics/ directory.
 
