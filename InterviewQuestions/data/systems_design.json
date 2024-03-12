@@ -2466,7 +2466,83 @@
             "Sliding window log: The sliding window log algorithm fixes the issue with fixed window edges. The algorithm keeps track of request timestamps. Timestamp data is usually kept in cache, such as sorted sets of Redis. When a new request comes in, remove all the outdated timestamps. Outdated timestamps are defined as those older than the start of the current time window. Add timestamp of the new request to the log. If the log size is the same or lower than the allowed count, a request is accepted. Otherwise, it is rejected. Rate limiting implemented by this algorithm is very accurate. In any rolling window, requests will not exceed the rate limit. The algorithm consumes a lot of memory because even if a request is rejected, its timestamp might still be stored in memory.",
             "Sliding window counter: The sliding window counter algorithm is a hybrid approach that combines the fixed window counter and sliding window log. The algorithm can be implemented by two different approaches. It smooths out spikes in traffic because the rate is based on the average rate of the previous window. Memory efficient. It only works for not-so-strict look back window. It is an approximation of the actual rate because it assumes requests in the previous window are evenly distributed. However, this problem may not be as bad as it seems. According to experiments done by Cloudflare, only 0.003% of requests are wrongly allowed or rate limited among 400 million requests."
           ]
+        },
+        {
+          "type": "image",
+          "alt": "rate_limiter",
+          "path": "../InterviewQuestions/images/systems_design/rate_limiter.png"
         }
+      ]
+    },
+    {
+      "header": "What is the difference between HTTP, WebSocket, Raw TCP, and UDP?",
+      "content": [
+        {
+          "type": "text",
+          "value": "HTTP (Hypertext Transfer Protocol)"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Protocol Type: Application layer protocol primarily used in web communication.",
+            "Connection: Stateless and request/response model. Each request from a client requires a new connection to the server, which is closed once a response is sent.",
+            "Use Cases: Web browsing, REST APIs, and generally serving web pages.",
+            "Strengths: Ubiquitous and supported by all web browsers. Well-suited for document/web page fetches where each request is independent.",
+            "Limitations: Overhead from headers and re-establishing connections. Not designed for real-time communication."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "WebSocket"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Protocol Type: Application layer protocol providing full-duplex communication channels over a single TCP connection.",
+            "Connection: Persistent, allowing for real-time bidirectional data transfer between client and server after an initial handshake over HTTP.",
+            "Use Cases: Real-time applications like online games, chat applications, and live sports updates.",
+            "Strengths: Enables real-time communication with less overhead after the initial handshake. Built on the existing HTTP infrastructure.",
+            "Limitations: More complex to implement and manage than HTTP due to the persistent connection."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Raw TCP (Transmission Control Protocol)"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Protocol Type: Transport layer protocol that provides reliable, ordered, and error-checked delivery of a stream of bytes.",
+            "Connection: Connection-oriented; a connection must be established before data can be sent.",
+            "Use Cases: General purpose data transmission, custom server-client applications, email (SMTP, IMAP), file transfer (FTP), and more.",
+            "Strengths: Reliable transmission with error checking and correction. Ordered data delivery ensures that data arrives in sequence.",
+            "Limitations: Can introduce latency due to its reliability mechanisms (e.g., retransmission). Overhead from establishing connections and managing state."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "UDP (User Datagram Protocol)"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Protocol Type: Transport layer protocol offering a connectionless service for minimal message-oriented transactions.",
+            "Connection: Connectionless; data can be sent without establishing a connection, leading to lower latency.",
+            "Use Cases: Streaming media (audio, video), online multiplayer games, voice over IP (VoIP), and any application where speed is more critical than reliability.",
+            "Strengths: Low latency and overhead, making it suitable for time-sensitive applications. Simplicity and efficiency for broadcast and multicast transmissions.",
+            "Limitations: Unreliable; packets may be lost or arrive out of order without automatic correction. Lacks congestion control, which can lead to network congestion."
+          ]
+        }
+      ],
+      "answers": [
+        "HTTP and WebSocket operate at the application layer with HTTP being stateless and WebSocket allowing for persistent, real-time communication. Raw TCP and UDP operate at the transport layer, with TCP providing reliable, ordered delivery, and UDP being connectionless and suited for applications requiring low latency.",
+        "WebSocket and Raw TCP both provide mechanisms for reliable data delivery and error correction, making them suitable for applications where data integrity is critical.",
+        "UDP is primarily used for serving web pages and REST APIs due to its stateless nature and fast connection setup times.",
+        "HTTP is designed for real-time communication, making it the preferred protocol for online gaming and live streaming applications.",
+        "Raw TCP is a connectionless protocol that excels in scenarios where low latency is more critical than the reliability of data transmission.",
+        "WebSocket connections are stateless, similar to HTTP, requiring a new connection for each message exchange between client and server.",
+        "HTTP and UDP are both designed to support full-duplex communication, allowing simultaneous bidirectional data flow.",
+        "UDP uses a request/response model for data transmission, which involves establishing a new connection for each request made by a client."
       ]
     },
     {

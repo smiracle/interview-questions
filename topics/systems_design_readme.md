@@ -39,6 +39,8 @@
 - [How do you design Facebook's newsfeed system?](#how-do-you-design-facebooks-newsfeed-system)
 - [How do you design a parking lot system?](#how-do-you-design-a-parking-lot-system)
 - [How do you design a recommendation system?](#how-do-you-design-a-recommendation-system)
+- [What is a rate limiter?](#what-is-a-rate-limiter)
+- [What is the difference between HTTP, WebSocket, Raw TCP, and UDP?](#what-is-the-difference-between-http-websocket-raw-tcp-and-udp)
 - [How do you design an API Rate Limiter system for GitHub or Firebase sites?](#how-do-you-design-an-api-rate-limiter-system-for-github-or-firebase-sites)
 - [How do you design global file storage and file sharing services like Google Drive, Dropbox etc?](#how-do-you-design-global-file-storage-and-file-sharing-services-like-google-drive-dropbox-etc)
 - [How do you design a type-ahead search engine service?](#how-do-you-design-a-type-ahead-search-engine-service)
@@ -1270,6 +1272,59 @@ Considerations
 - Balancing recommendation accuracy with computational efficiency
 - Providing users with control over their data and the recommendations they receive
 - Staying informed about and compliant with global data protection regulations
+
+[↑ Back to top](#systems_design-topics)
+
+### What is a rate limiter?
+
+In a network system, a rate limiter is used to control the rate of traffic sent by a client or a service. In the HTTP world, a rate limiter limits the number of client requests allowed to be sent over a specified period. If the API request count exceeds the threshold defined by the rate limiter, all the excess calls are blocked. Here are a few examples:
+- A user can write no more than 2 posts per second.
+- You can create a maximum of 10 accounts per day from the same IP address.
+- You can claim rewards no more than 5 times per week from the same device.
+Benefits:
+- Prevent resource starvation caused by Denial of Service (DoS) attack
+- Reduce cost. Limiting excess requests means fewer servers and allocating more resources to high priority APIs. Rate limiting is extremely important for companies that use paid third party APIs that charge per-call.
+- Prevent servers from being overloaded. To reduce server load, a rate limiter is used to filter out excess requests caused by bots or users' misbehavior.
+Design considerations:
+- You can implement a rate limiter on either the client or server-side. But client is generally an unreliable place to enforce rate limiting because client requests can easily be forged by malicious actors. Moreover, we might not have control over the client implementation.
+- Cloud microservices have become widely popular and rate limiting is usually implemented within a component called API gateway. API gateway is a fully managed service that supports rate limiting, SSL termination, authentication, IP whitelisting, servicing static content, etc. Importatnt to know if the API gateway is middleware that supports rate limiting.
+- When you implement everything on the server-side, you have full control of the algorithm. However, your choice might be limited if you use a third-party gateway.
+- If you have already used microservice architecture and included an API gateway in the design to perform authentication, IP whitelisting, etc., adding a rate limiter to the API gateway might be best.
+Rate limiting can be implemented using different algorithms, and each of them has distinct pros and cons. Even though this chapter does not focus on algorithms, understanding them at high-level helps to choose the right algorithm or combination of algorithms to fit our use cases. Here is a list of popular algorithms:
+- Token bucket: A container that has pre-defined capacity. Tokens are put in the bucket at preset rates periodically. Once the bucket is full, no more tokens are added and are considered 'overflow' that is dropped. 
+- Leaking bucket: The leaking bucket algorithm is similar to the token bucket except that requests are processed at a fixed rate. It is usually implemented with a first-in-first-out (FIFO) queue. When a request arrives, the system checks if the queue is full. If it is not full, the request is added to the queue. Otherwise, the request is dropped. Requests are pulled and processed at regular intervals. Memory efficient given the limited queue size. Requests are processed at a fixed rate therefore it is suitable for use cases that a stable outflow rate is needed. A burst of traffic fills up the queue with old requests, and if they are not processed in time, recent requests will be rate limited. There are two parameters in the algorithm. It might not be easy to tune them properly.
+- Fixed window counter: Fixed window counter algorithm works as follows: The algorithm divides the timeline into fix-sized time windows and assign a counter for each window. Each request increments the counter by one. Once the counter reaches the pre-defined threshold, new requests are dropped until a new time window starts. Memory efficient. Easy to understand. Resetting available quota at the end of a unit time window fits certain use cases. Spike in traffic at the edges of a window could cause more requests than the allowed quota to go through.
+- Sliding window log: The sliding window log algorithm fixes the issue with fixed window edges. The algorithm keeps track of request timestamps. Timestamp data is usually kept in cache, such as sorted sets of Redis. When a new request comes in, remove all the outdated timestamps. Outdated timestamps are defined as those older than the start of the current time window. Add timestamp of the new request to the log. If the log size is the same or lower than the allowed count, a request is accepted. Otherwise, it is rejected. Rate limiting implemented by this algorithm is very accurate. In any rolling window, requests will not exceed the rate limit. The algorithm consumes a lot of memory because even if a request is rejected, its timestamp might still be stored in memory.
+- Sliding window counter: The sliding window counter algorithm is a hybrid approach that combines the fixed window counter and sliding window log. The algorithm can be implemented by two different approaches. It smooths out spikes in traffic because the rate is based on the average rate of the previous window. Memory efficient. It only works for not-so-strict look back window. It is an approximation of the actual rate because it assumes requests in the previous window are evenly distributed. However, this problem may not be as bad as it seems. According to experiments done by Cloudflare, only 0.003% of requests are wrongly allowed or rate limited among 400 million requests.
+
+[↑ Back to top](#systems_design-topics)
+
+### What is the difference between HTTP, WebSocket, Raw TCP, and UDP?
+
+HTTP (Hypertext Transfer Protocol)
+- Protocol Type: Application layer protocol primarily used in web communication.
+- Connection: Stateless and request/response model. Each request from a client requires a new connection to the server, which is closed once a response is sent.
+- Use Cases: Web browsing, REST APIs, and generally serving web pages.
+- Strengths: Ubiquitous and supported by all web browsers. Well-suited for document/web page fetches where each request is independent.
+- Limitations: Overhead from headers and re-establishing connections. Not designed for real-time communication.
+WebSocket
+- Protocol Type: Application layer protocol providing full-duplex communication channels over a single TCP connection.
+- Connection: Persistent, allowing for real-time bidirectional data transfer between client and server after an initial handshake over HTTP.
+- Use Cases: Real-time applications like online games, chat applications, and live sports updates.
+- Strengths: Enables real-time communication with less overhead after the initial handshake. Built on the existing HTTP infrastructure.
+- Limitations: More complex to implement and manage than HTTP due to the persistent connection.
+Raw TCP (Transmission Control Protocol)
+- Protocol Type: Transport layer protocol that provides reliable, ordered, and error-checked delivery of a stream of bytes.
+- Connection: Connection-oriented; a connection must be established before data can be sent.
+- Use Cases: General purpose data transmission, custom server-client applications, email (SMTP, IMAP), file transfer (FTP), and more.
+- Strengths: Reliable transmission with error checking and correction. Ordered data delivery ensures that data arrives in sequence.
+- Limitations: Can introduce latency due to its reliability mechanisms (e.g., retransmission). Overhead from establishing connections and managing state.
+UDP (User Datagram Protocol)
+- Protocol Type: Transport layer protocol offering a connectionless service for minimal message-oriented transactions.
+- Connection: Connectionless; data can be sent without establishing a connection, leading to lower latency.
+- Use Cases: Streaming media (audio, video), online multiplayer games, voice over IP (VoIP), and any application where speed is more critical than reliability.
+- Strengths: Low latency and overhead, making it suitable for time-sensitive applications. Simplicity and efficiency for broadcast and multicast transmissions.
+- Limitations: Unreliable; packets may be lost or arrive out of order without automatic correction. Lacks congestion control, which can lead to network congestion.
 
 [↑ Back to top](#systems_design-topics)
 
