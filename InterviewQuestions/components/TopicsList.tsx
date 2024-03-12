@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {ScrollView, Text, TouchableOpacity} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../App';
 import {topics} from './QuestionsDataMap';
@@ -16,6 +16,10 @@ const TopicsList: React.FC<TopicsListProps> = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={sharedStyles.container}>
+      <Text>
+        (Many of these are bare bones for now, though React and Systems Design
+        has some info)
+      </Text>
       {topics.map((topic, index) => (
         <TouchableOpacity
           key={index}

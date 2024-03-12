@@ -13,17 +13,20 @@ const Quiz: React.FC<QuizProps> = ({navigation}) => {
   const onSelectTopic = (topic: {name: string; fileName: string}) => {
     navigation.navigate('QuizQuestion', {topicFileName: topic.fileName});
   };
+  const allowedTopicsForNow = ['JavaScript', 'React', 'Systems Design'];
 
   return (
     <ScrollView contentContainerStyle={sharedStyles.container}>
-      {topics.map((topic, index) => (
-        <TouchableOpacity
-          key={index}
-          style={sharedStyles.button}
-          onPress={() => onSelectTopic(topic)}>
-          <Text style={sharedStyles.buttonText}>{topic.name}</Text>
-        </TouchableOpacity>
-      ))}
+      {topics
+        .filter(x => allowedTopicsForNow.includes(x.name))
+        .map((topic, index) => (
+          <TouchableOpacity
+            key={index}
+            style={sharedStyles.button}
+            onPress={() => onSelectTopic(topic)}>
+            <Text style={sharedStyles.buttonText}>{topic.name}</Text>
+          </TouchableOpacity>
+        ))}
     </ScrollView>
   );
 };
