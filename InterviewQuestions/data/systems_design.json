@@ -29,15 +29,33 @@
           "values": [
             "1. Clarify Requirements. Start by asking clarifying questions to understand the scope and key requirements of the system you are being asked to design. Determine the system's goals, the number of users it needs to support, the types of users, and any specific functionalities or constraints. Understanding these requirements upfront ensures that you and the interviewer are aligned on the expectations for the system's design.",
             "2. Define System Interfaces. Outline the system's interfaces by defining how users or other systems will interact with it. Specify the input data the system will receive and the expected output. Clearly defining the APIs or user interfaces helps in setting clear boundaries for the system's functionalities.",
-            "3. High-Level Design. Sketch a high-level architecture of the system, focusing on the main components and how they interact with each other. This overview should include critical elements like databases, servers, caches, load balancers, and any external services. The goal is to provide a bird's eye view of how the system fits together.",
+            "3. High-Level Design. Sketch a high-level architecture of the system, focusing on the main components and how they interact with each other. This overview should include critical elements like databases, servers, caches, load balancers, and any external services. The goal is to provide a bird's eye view of how the system fits together. Propose this design and go through a few concrete use cases to get buy-in from the interviewer.",
             "4. Deep Dive into Key Components. Choose one or a few components of the system that are crucial for meeting the requirements and delve into their detailed design. Discuss how these components will be implemented, how they will scale, and how they will handle failures. This is your opportunity to showcase your knowledge of various technologies and design patterns.",
-            "5. Data Management. Discuss how data will be stored, retrieved, and managed. Consider the choice between SQL and NoSQL databases based on the system's needs, how data consistency will be ensured, and how the system will handle large volumes of data. Also, consider the implications of your choices for data scalability and integrity.",
+            "5. Data Management. Discuss how data will be stored, retrieved, and managed. Consider the choice between SQL and NoSQL databases based on the system's needs, how data consistency will be ensured, and how the system will handle large volumes of scalable data.",
             "6. Scalability and Performance. Explain how your design will scale to accommodate growth in users or data volume. Discuss concepts like horizontal vs. vertical scaling, caching strategies, database sharding, and load balancing. Highlight how your design addresses potential performance bottlenecks.",
-            "7. Reliability and Fault Tolerance. Address how the system will ensure high availability and reliability. Discuss strategies for handling system failures, data backups, redundancy, and disaster recovery plans. It's important to consider how the system will maintain its operations in the face of hardware or software failures.",
-            "8. Security Considerations. Identify potential security risks and how they will be mitigated. Discuss authentication, authorization, data encryption, and secure communication protocols. Ensuring the security of user data and system operations is crucial in any design.",
+            "7. Reliability and Fault Tolerance. Address how the system will ensure high availability and reliability. Discuss strategies for handling system failures, data backups, redundancy, and disaster recovery plans.",
+            "8. Security Considerations. Identify potential security risks and how they will be mitigated. Discuss authentication, authorization, data encryption, and secure communication protocols.",
             "9. Wrap-up and Trade-offs. Conclude your design by summarizing the key points and discussing any trade-offs you made in your design choices. It's important to communicate why certain decisions were made and how they balance the system's needs in terms of performance, scalability, and reliability.",
             "10. Review and Feedback. Be open to feedback and questions from the interviewer. They may point out aspects you haven't considered or suggest alternatives. Engaging in a constructive discussion shows your ability to adapt and consider different perspectives."
           ]
+        },
+        {
+          "type": "text",
+          "value": "Good questions to ask:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "What specific features are we going to build?",
+            "How many users does the product have?",
+            "Is the product intended exclusively for the web or a mobile app, or both?",
+            "How fast does the company anticipate to scale up? What are the anticipated scales in 3 months, 6 months, and a year?",
+            "What is the company's technology stack? What existing services you might leverage to simplify the design?"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Do not under any circumstances attempt to immediately dive into a concrete solution without proposing a high-level design first."
         }
       ],
       "answers": [
@@ -92,11 +110,302 @@
       ]
     },
     {
+      "header": "What is a rate limiter?",
+      "content": [
+        {
+          "type": "text",
+          "value": "In a network system, a rate limiter is used to control the rate of traffic sent by a client or a service. In the HTTP world, a rate limiter limits the number of client requests allowed to be sent over a specified period. If the API request count exceeds the threshold defined by the rate limiter, all the excess calls are blocked. Here are a few examples:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "A user can write no more than 2 posts per second.",
+            "You can create a maximum of 10 accounts per day from the same IP address.",
+            "You can claim rewards no more than 5 times per week from the same device."
+          ]
+        },
+        {
+          "type": "image",
+          "alt": "rate_limiter",
+          "path": "../InterviewQuestions/images/systems_design/rate_limiter.png"
+        },
+        {
+          "type": "text",
+          "value": "\nBenefits:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Prevent resource starvation caused by Denial of Service (DoS) attack",
+            "Reduce cost. Limiting excess requests means fewer servers and allocating more resources to high priority APIs. Rate limiting is extremely important for companies that use paid third party APIs that charge per-call.",
+            "Prevent servers from being overloaded. To reduce server load, a rate limiter is used to filter out excess requests caused by bots or users' misbehavior."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\nDesign considerations:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "You can implement a rate limiter on either the client or server-side. But client is generally an unreliable place to enforce rate limiting because client requests can easily be forged by malicious actors. Moreover, we might not have control over the client implementation.",
+            "When you implement everything on the server-side, you have full control of the algorithm. However, your choice might be limited if you use a third-party gateway.",
+            "Cloud microservices have become widely popular and rate limiting is usually implemented within a component called API gateway. API gateway is a fully managed service that supports rate limiting, SSL termination, authentication, IP whitelisting, servicing static content, etc. Importatnt to know if the API gateway is middleware that supports rate limiting.",
+            "If you have already used microservice architecture and included an API gateway in the design to perform authentication, IP whitelisting, etc., adding a rate limiter to the API gateway might be best."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n\nRate Limiter Algorithms"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Token bucket: A container that has pre-defined capacity. Tokens are put in the bucket at preset rates periodically. Once the bucket is full, no more tokens are added and are considered 'overflow' that is dropped. Like leaking bucket has two parameters - bucket size and refill rate. Easy to understand and implement, memory efficient, and allows for short traffic bursts. But might be difficult to tune properly.",
+            "Leaking bucket: The leaking bucket algorithm is similar to the token bucket except that requests are processed at a fixed rate. It is usually implemented with a first-in-first-out (FIFO) queue. When a request arrives, the system checks if the queue is full. If it is not full, the request is added to the queue. Otherwise, the request is dropped. Requests are polled and processed at regular intervals. Memory efficient given the limited queue size. This is also memory efficient, and requests are processed at a fixed rate therefore it is suitable for use cases where a stable outflow rate is needed. A burst of traffic fills up the queue with old requests, and if they are not processed in time, recent requests will be rate limited. Like token bucket, has only two parameters - bucket size, outflow rate. Once again may be difficult to tune properly.",
+            "Fixed window counter: This algorithm divides the timeline into fixed size time 'windows' and assign a counter for each window. Each request increments the counter by one. Once the counter reaches the pre-defined threshold, new requests are dropped until a new time window starts. Memory efficient. Easy to understand. Resetting available quota at the end of a unit time window fits certain use cases. Spike in traffic at the edges of a window could cause more requests than the allowed quota to go through, so may have issues with many traffic bursts.",
+            "Sliding window log: The sliding window log algorithm fixes the issue with fixed window edges. The algorithm keeps track of request timestamps. Timestamp data is usually kept in cache, such as sorted sets of Redis. When a new request comes in, remove all the outdated timestamps. Outdated timestamps are defined as those older than the start of the current time window. Add a timestamp of the new request to the log. If the log size is the same or lower than the allowed count, the request is accepted. Otherwise, it is rejected. Rate limiting implemented by this algorithm is very accurate. In any sliding window, requests will not exceed the rate limit. The algorithm consumes a lot of memory because even if a request is rejected, its timestamp might still be stored in memory.",
+            "Sliding window counter: The sliding window counter algorithm is a hybrid approach that combines the fixed window counter and sliding window log. The algorithm can be implemented by two different approaches. It smooths out spikes in traffic because the rate is based on the average rate of the previous window and is memory efficient. It only works for a not-so-strict look back window. It is an approximation of the actual rate because it assumes requests in the previous window are evenly distributed. However, this problem may not be as bad as it seems. According to experiments done by Cloudflare, only 0.003% of requests are wrongly allowed or rate limited among 400 million requests."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n\nHigh-level architecture\nWe need a counter to keep track of how many requests are sent from the same user, IP address, etc. If the counter is larger than the limit, the request is disallowed. Using the database is not a good idea due to slowness of disk access. In-memory cache is typically chosen because it is fast and supports time-based expiration strategy. For instance, Redis is a popular option to implement rate limiting. It is an inmemory store that offers two commands: INCR (increases the stored counter by 1) and EXPIRE (sets a timeout for the counter, if the timeout expires the counter is automatically deleted)."
+        },
+        {
+          "type": "text",
+          "value": "\n\nIn cases where the client exceeds the rate limit, the server responds with a 429 Too Many Requests status code. Additionally, the response includes the X-Ratelimit-Retry-After header, providing the cooldown period necessary before subsequent requests can be made without triggering throttling. Clients can determine if they are being throttled and track the number of allowable requests before throttling through specific HTTP response headers returned by the rate limiter.:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "X-Ratelimit-Remaining: Indicates the number of remaining requests allowed within the current rate limit window.",
+            "X-Ratelimit-Limit: Specifies the total number of requests a client can make per time window.",
+            "X-Ratelimit-Retry-After: Tells the client how many seconds to wait before making a new request to avoid being throttled."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n\nA Detailed Design Deep Dive"
+        },
+        {
+          "type": "image",
+          "alt": "rate_limiter2",
+          "path": "../InterviewQuestions/images/systems_design/rate_limiter2.png"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Rules are stored on the disk. Workers frequently pull rules from the disk and store them in the cache.",
+            "When a client sends a request to the server, the request is sent to the rate limiter middleware first.",
+            "Rate limiter middleware loads rules from the cache. It fetches counters and last request timestamp from Redis cache. Based on the response, the rate limiter decides: 1) if the request is not rate limited, it is forwarded to API servers. 2) if the request is rate limited, the rate limiter returns 429 too many requests error to the client. In the meantime, the request is either dropped or forwarded to the queue."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n\nDistributed Environment Rate Limiting Pitfalls\nThere are two challenges: \n1) Race condition - If two requests concurrently read the counter value before either of them writes the value back, each will increment the counter by one and write it back without checking the other thread. Both requests, which are really threads, believe they have the correct counter value. However, the correct counter value should be +1)\n2) Synchronization - As the web tier is stateless, clients can send requests to a different rate limiter. If no synchronization happens, rate limiter 1 does not contain any data about client 2. Thus, the rate limiter cannot work properly. One possible solution is to use sticky sessions that allow a client to send traffic to the same rate limiter. This solution is not advisable because it is neither scalable nor flexible. A better approach is to use centralized data stores like Redis."
+        },
+        {
+          "type": "text",
+          "value": "\n\nPerformance Optimization\nFirst, multi-data center setup is crucial for a rate limiter because latency is high for users located far away from the data center. Most cloud service providers build many edge server locations around the world. For example, as of 5/20 2020, Cloudflare has 194 geographically distributed edge servers. Traffic is automatically routed to the closest edge server to reduce latency.\nSecond, synchronize data with an eventual consistency model. The eventual consistency model seeks to achieve high availability that informally guarantees that, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. This is suitable for applications where the system can tolerate some degree of inconsistency for a period, such as social networking feeds, collaborative editing platforms, and distributed file systems."
+        },
+        {
+          "type": "text",
+          "value": "\n\nReview\nHard vs soft rate limiting. Hard: The number of requests cannot exceed the threshold. Soft: Requests can exceed the threshold for a short period.\n Rate limiting at different levels. This json mostly describes application level rate limiting (layer 7, the highest). It is possible to apply rate limiting at other layers. For example, you can apply rate limiting by IP addresses using Iptables (layer 3).\n Note: The Open Systems Interconnection model (OSI model) has 7 layers: Layer 1: Physical layer, Layer 2: Data link layer, Layer 3: Network layer, Layer 4: Transport layer, Layer 5: Session layer, Layer 6: Presentation layer, Layer 7: Application layer.\nAvoid being rate limited. Design your client with best practices: Use client cache to avoid making frequent API calls, understand the limit and do not send too many requests in a short time frame, include code to catch exceptions or errors so your client can gracefully recover from exceptions. Add sufficient back off time to retry logic."
+        }
+      ],
+      "answers": [
+        "A system or mechanism used to control the rate of operations or requests to ensure optimal performance and avoid overloading resources.",
+        "A software tool that accelerates the speed of network requests to improve user experience and system efficiency.",
+        "A database optimization technique that increases the throughput of transaction processing by caching frequently accessed data.",
+        "An encryption method used to secure data transmission across networks by limiting access to authorized users only.",
+        "A load balancing strategy that distributes incoming network traffic evenly across multiple servers to prevent any single server from becoming a bottleneck.",
+        "A firewall setting that blocks all incoming and outgoing traffic to protect against unauthorized access to network resources.",
+        "An algorithm that dynamically adjusts the bandwidth allocation for different types of network traffic to prioritize critical services.",
+        "A monitoring tool that tracks the performance of web applications and alerts administrators to any issues that could affect user experience.",
+        "A development framework that provides a set of guidelines for building scalable and maintainable software applications, focusing on rate limiting as a core feature to ensure stability under heavy load conditions.",
+        "A network protocol that defines the rules for data packet transmission between different devices over the internet, with built-in mechanisms to control traffic flow."
+      ]
+    },
+    {
+      "header": "What is SSL Termination?",
+      "content": [
+        {
+          "type": "text",
+          "value": "SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer before it reaches the web server. This setup enables the web server to focus on delivering content rather than encryption, enhancing performance and speed. It's particularly beneficial in environments where high traffic is expected, as it efficiently distributes the load across multiple servers. SSL termination also simplifies SSL certificate management, as only the load balancer needs to have the certificate installed, not every server in the network."
+        }
+      ],
+      "answers": [
+        "SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer, enhancing performance and simplifying SSL certificate management.",
+        "SSL termination involves encrypting non-SSL traffic with SSL/TLS at the load balancer to secure communications.",
+        "SSL termination is the action of permanently invalidating an SSL certificate at the web server level to switch to a non-secure HTTP protocol.",
+        "SSL termination refers to the process where encrypted SSL traffic is inspected for threats at the firewall before being sent to the server.",
+        "SSL termination is a method where the SSL/TLS encryption process is offloaded to a third-party service outside the server's network for improved security."
+      ]
+    },
+    {
+      "header": "What is SSL?",
+      "content": [
+        {
+          "type": "text",
+          "value": "SSL, or Secure Sockets Layer, is a cryptographic protocol designed to provide secure communications over a computer network. It's most commonly used on the internet to secure connections between web servers and clients (browsers), ensuring that all data transmitted is encrypted and safe from eavesdropping. The use of SSL certificates, issued by Certificate Authorities (CAs), helps in verifying the authenticity of websites, adding an additional layer of trust for online transactions and information exchange."
+        }
+      ],
+      "answers": [
+        "SSL is a protocol for encrypting internet traffic and verifying server identity, ensuring secure online transactions.",
+        "SSL is a software package that speeds up the loading time of websites by compressing data before transmission.",
+        "SSL stands for Server Software Licensing, a method for web servers to ensure only authorized users can access certain web pages.",
+        "SSL is a type of malware designed to steal personal information by posing as legitimate security software.",
+        "SSL is an outdated method for creating websites, replaced by modern programming languages like HTML5 and JavaScript."
+      ]
+    },
+    {
+      "header": "What is TLS?",
+      "content": [
+        {
+          "type": "text",
+          "value": "TLS, or Transport Layer Security, is an encryption protocol that provides security over a computer network. Websites use TLS to secure all communications between their servers and web browsers, ensuring that personal information, such as credit card numbers and login credentials, are transmitted securely. TLS is the updated, more secure version of SSL, and it uses stronger encryption algorithms and provides enhanced security features. Implementing TLS involves obtaining a TLS certificate from a trusted Certificate Authority (CA) and configuring the server to use the certificate for secure communications."
+        }
+      ],
+      "answers": [
+        "TLS is a protocol for encrypting data sent over the internet, ensuring secure communications between web servers and clients.",
+        "TLS is a programming language used for creating dynamic web content and applications.",
+        "TLS stands for Time-Limited Software, a type of digital rights management (DRM) technology used to control software usage.",
+        "TLS is a database management system optimized for handling large volumes of transactional data.",
+        "TLS is a tool for tracking and logging user activity on websites to analyze web traffic and user behavior."
+      ]
+    },
+    {
+      "header": "How do you design consistent hashing, and why?",
+      "content": [
+        {
+          "type": "text",
+          "value": "\n\nWhy?\nConsistent hashing is a strategy designed to distribute data across a cluster of servers in a way that minimizes reorganization when servers are added or removed. It addresses several challenges in distributed systems, including scalability, high availability, load distribution, data locality, fault tolerance, simplifying data management, and decentralization. By ensuring keys are evenly spread across nodes, consistent hashing improves load distribution and reduces hot spots. It facilitates easy scaling and data replication, enhancing system availability and fault tolerance. The use of virtual nodes and hashing functions optimizes key distribution and minimizes management overhead, while integration with system components ensures seamless operation. Consistent hashing's adaptability to workload and data distribution variations, along with minimal overhead for operations, makes it a cornerstone technique for designing robust, efficient distributed systems."
+        },
+        {
+          "type": "text",
+          "value": "Required Features"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Distribution uniformity to ensure keys are evenly spread across the available nodes or buckets.",
+            "Scalability to easily add or remove nodes without significantly disrupting the key distribution.",
+            "Replication support to enhance data availability and fault tolerance.",
+            "Flexibility to accommodate various types of workloads and data distributions.",
+            "Minimal overhead for key lookup and node selection to maintain high performance."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n\nCommon Issues"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Hot spots, where some nodes receive significantly more load than others, leading to uneven load distribution.",
+            "Handling node failures and ensuring the consistent hashing mechanism quickly adapts to changes in the node set.",
+            "Maintaining data consistency and availability during node addition or removal.",
+            "Complexity in implementing a consistent hashing mechanism that accurately reflects the theoretical model."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n\nResolutions"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Use virtual nodes (vnodes) to improve distribution uniformity and ease the handling of node addition/removal.",
+            "Implement automatic data replication and rebalancing mechanisms to maintain data availability and consistency.",
+            "Design a robust failure detection and recovery process to quickly adapt to changes in the cluster's state.",
+            "Simplify the consistent hashing algorithm's implementation by leveraging existing libraries and frameworks that have been tested and optimized."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "\n\nConsiderations"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Evaluating the trade-offs between the complexity of consistent hashing and the benefits it provides in terms of scalability and performance.",
+            "Determining the optimal number of virtual nodes to balance between load distribution and management overhead.",
+            "Choosing the right hashing function that minimizes collisions and provides a good distribution of keys.",
+            "Integrating with other system components, such as load balancers and caching layers, to ensure seamless operation.",
+            "Assessing the impact of consistent hashing on application-specific requirements, such as query latency and data locality."
+          ]
+        }
+      ],
+      "answers": [
+        "Consistent hashing minimizes redistribution of keys when nodes are added or removed, improving system scalability and performance.",
+        "Using virtual nodes enhances load distribution and simplifies node management in distributed systems.",
+        "Automatic data replication and rebalancing ensure high availability and fault tolerance, critical for maintaining service continuity.",
+        "A robust failure detection and recovery mechanism allows for quick adaptation to changes, minimizing the impact of node failures on the system.",
+        "Leveraging existing libraries for consistent hashing can reduce implementation complexity and increase reliability through tested solutions.",
+        "The choice of a suitable hashing function is crucial for minimizing key collisions and achieving uniform distribution across nodes.",
+        "Determining the optimal number of virtual nodes involves balancing improved load distribution against the management overhead.",
+        "Integration with system components like load balancers is essential for maintaining high performance and seamless operation.",
+        "Consistent hashing requires careful consideration of application-specific requirements to ensure it effectively supports desired performance metrics.",
+        "Evaluating the complexity and benefits of consistent hashing helps in deciding its appropriateness for specific distributed system architectures."
+      ]
+    },
+    {
+      "header": "What are HTTP Status Codes?",
+      "content": [
+        {
+          "type": "text",
+          "value": "HTTP status codes are issued by a server in response to a client's request made to the server. These codes are divided into five categories:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "1xx (Informational): The request was received, continuing process",
+            "2xx (Successful): The request was successfully received, understood, and accepted",
+            "3xx (Redirection): Further action needs to be taken in order to complete the request",
+            "4xx (Client Error): The request contains bad syntax or cannot be fulfilled",
+            "5xx (Server Error): The server failed to fulfill an apparently valid request"
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Common HTTP Status Codes:"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "200 OK: The request has succeeded",
+            "201 Created: The request has been fulfilled, resulting in the creation of a new resource",
+            "301 Moved Permanently: The URL of the requested resource has been changed permanently",
+            "400 Bad Request: The server cannot or will not process the request due to an apparent client error",
+            "401 Unauthorized: Authentication is required and has failed or has not yet been provided",
+            "403 Forbidden: The server understood the request, but is refusing to fulfill it",
+            "404 Not Found: The requested resource could not be found but may be available in the future",
+            "429 Too Many Requests: The user has sent too many requests in a given amount of time (\"rate limiting\")",
+            "500 Internal Server Error: An unexpected condition was encountered",
+            "503 Service Unavailable: The server is currently unable to handle the request due to a temporary overloading or maintenance of the server"
+          ]
+        }
+      ],
+      "answers": [
+        "HTTP status codes provide standardized indications of the outcomes of HTTP requests, helping identify issues and the state of the requested resource.",
+        "HTTP status codes are encryption methods applied to secure HTTP requests between clients and servers.",
+        "HTTP status codes are protocols used for data compression in web communication to reduce bandwidth usage.",
+        "HTTP status codes are configuration settings in web servers that dictate how requests are routed within the server.",
+        "HTTP status codes are part of the HTML code used to design the visual layout of web pages."
+      ]
+    },
+    {
       "header": "What is load balancing? Why is it important in systems design?",
       "content": [
         {
           "type": "text",
           "value": "Load balancers are systems or devices that distribute incoming network traffic across multiple servers. This distribution ensures that no single server bears too much demand. By spreading the requests across multiple servers, load balancers reduce individual server load, increase the capacity and reliability of applications, and ensure their availability even under high traffic conditions. Load balancers can provide additional security features like SSL termination, where SSL encryption and decryption occur at the load balancer level instead of on individual servers."
+        },
+        {
+          "type": "image",
+          "alt": "load balancing",
+          "path": "../InterviewQuestions/images/systems_design/load_balancing.png"
         },
         {
           "type": "text",
@@ -135,11 +444,6 @@
             "Cloud-Based Load Balancers: Provided as part of cloud services, these are fully managed by the cloud provider, offering scalability and integration with cloud resources.",
             "Load balancers are crucial in modern web infrastructure, enabling the efficient management of network resources, improving user experience, and ensuring the resilience and reliability of web applications and services."
           ]
-        },
-        {
-          "type": "image",
-          "alt": "load balancing",
-          "path": "../InterviewQuestions/images/systems_design/load_balancing.png"
         }
       ],
       "answers": [
@@ -282,7 +586,7 @@
         "Scalability ensures a system can handle growth in users, data, or transactions without significant performance degradation.",
         "Horizontal scaling involves adding more machines to distribute load, whereas vertical scaling adds more power to an existing machine.",
         "Good performance is crucial for scalability; a system that performs poorly at a low scale may not benefit from scaling.",
-        "The success of scalability is measured by the system’s ability to maintain or improve performance metrics under higher loads.",
+        "The success of scalability is measured by the system's ability to maintain or improve performance metrics under higher loads.",
         "Trade-offs between performance and scalability may be necessary; optimizing one aspect can affect the other.",
         "A scalable system can adapt to increased demands, ensuring it continues to perform efficiently as workload grows.",
         "Achieving high performance and scalability requires a balance, often involving code optimization and architectural adjustments.",
@@ -1249,81 +1553,6 @@
         "Choosing the appropriate cache placement (client-side, server-side, CDN) optimizes response times and reduces bandwidth consumption.",
         "Granularity in caching (whole pages vs. fragments) allows for more precise control over what is cached, improving cache effectiveness and resource usage.",
         "Evaluating the trade-offs between custom and off-the-shelf caching solutions can lead to a more tailored approach that meets specific application needs while controlling complexity."
-      ]
-    },
-    {
-      "header": "How do you design consistent hashing, and why?",
-      "content": [
-        {
-          "type": "text",
-          "value": "Required Features"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "Distribution uniformity to ensure keys are evenly spread across the available nodes or buckets.",
-            "Scalability to easily add or remove nodes without significantly disrupting the key distribution.",
-            "Replication support to enhance data availability and fault tolerance.",
-            "Flexibility to accommodate various types of workloads and data distributions.",
-            "Minimal overhead for key lookup and node selection to maintain high performance."
-          ]
-        },
-        {
-          "type": "text",
-          "value": "\n\nCommon Issues"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "Hot spots, where some nodes receive significantly more load than others, leading to uneven load distribution.",
-            "Handling node failures and ensuring the consistent hashing mechanism quickly adapts to changes in the node set.",
-            "Maintaining data consistency and availability during node addition or removal.",
-            "Complexity in implementing a consistent hashing mechanism that accurately reflects the theoretical model."
-          ]
-        },
-        {
-          "type": "text",
-          "value": "\n\nResolutions"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "Use virtual nodes (vnodes) to improve distribution uniformity and ease the handling of node addition/removal.",
-            "Implement automatic data replication and rebalancing mechanisms to maintain data availability and consistency.",
-            "Design a robust failure detection and recovery process to quickly adapt to changes in the cluster's state.",
-            "Simplify the consistent hashing algorithm's implementation by leveraging existing libraries and frameworks that have been tested and optimized."
-          ]
-        },
-        {
-          "type": "text",
-          "value": "\n\nConsiderations"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "Evaluating the trade-offs between the complexity of consistent hashing and the benefits it provides in terms of scalability and performance.",
-            "Determining the optimal number of virtual nodes to balance between load distribution and management overhead.",
-            "Choosing the right hashing function that minimizes collisions and provides a good distribution of keys.",
-            "Integrating with other system components, such as load balancers and caching layers, to ensure seamless operation.",
-            "Assessing the impact of consistent hashing on application-specific requirements, such as query latency and data locality."
-          ]
-        },
-        {
-          "type": "text",
-          "value": "\n\nWhy?\nConsistent hashing is a strategy designed to distribute data across a cluster of servers in a way that minimizes reorganization when servers are added or removed. It addresses several challenges in distributed systems, including scalability, high availability, load distribution, data locality, fault tolerance, simplifying data management, and decentralization. By ensuring keys are evenly spread across nodes, consistent hashing improves load distribution and reduces hot spots. It facilitates easy scaling and data replication, enhancing system availability and fault tolerance. The use of virtual nodes and hashing functions optimizes key distribution and minimizes management overhead, while integration with system components ensures seamless operation. Consistent hashing's adaptability to workload and data distribution variations, along with minimal overhead for operations, makes it a cornerstone technique for designing robust, efficient distributed systems."
-        }
-      ],
-      "answers": [
-        "Consistent hashing minimizes redistribution of keys when nodes are added or removed, improving system scalability and performance.",
-        "Using virtual nodes enhances load distribution and simplifies node management in distributed systems.",
-        "Automatic data replication and rebalancing ensure high availability and fault tolerance, critical for maintaining service continuity.",
-        "A robust failure detection and recovery mechanism allows for quick adaptation to changes, minimizing the impact of node failures on the system.",
-        "Leveraging existing libraries for consistent hashing can reduce implementation complexity and increase reliability through tested solutions.",
-        "The choice of a suitable hashing function is crucial for minimizing key collisions and achieving uniform distribution across nodes.",
-        "Determining the optimal number of virtual nodes involves balancing improved load distribution against the management overhead.",
-        "Integration with system components like load balancers is essential for maintaining high performance and seamless operation.",
-        "Consistent hashing requires careful consideration of application-specific requirements to ensure it effectively supports desired performance metrics.",
-        "Evaluating the complexity and benefits of consistent hashing helps in deciding its appropriateness for specific distributed system architectures."
       ]
     },
     {
@@ -2414,67 +2643,6 @@
       ]
     },
     {
-      "header": "What is a rate limiter?",
-      "content": [
-        {
-          "type": "text",
-          "value": "In a network system, a rate limiter is used to control the rate of traffic sent by a client or a service. In the HTTP world, a rate limiter limits the number of client requests allowed to be sent over a specified period. If the API request count exceeds the threshold defined by the rate limiter, all the excess calls are blocked. Here are a few examples:"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "A user can write no more than 2 posts per second.",
-            "You can create a maximum of 10 accounts per day from the same IP address.",
-            "You can claim rewards no more than 5 times per week from the same device."
-          ]
-        },
-        {
-          "type": "text",
-          "value": "Benefits:"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "Prevent resource starvation caused by Denial of Service (DoS) attack",
-            "Reduce cost. Limiting excess requests means fewer servers and allocating more resources to high priority APIs. Rate limiting is extremely important for companies that use paid third party APIs that charge per-call.",
-            "Prevent servers from being overloaded. To reduce server load, a rate limiter is used to filter out excess requests caused by bots or users' misbehavior."
-          ]
-        },
-        {
-          "type": "text",
-          "value": "Design considerations:"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "You can implement a rate limiter on either the client or server-side. But client is generally an unreliable place to enforce rate limiting because client requests can easily be forged by malicious actors. Moreover, we might not have control over the client implementation.",
-            "Cloud microservices have become widely popular and rate limiting is usually implemented within a component called API gateway. API gateway is a fully managed service that supports rate limiting, SSL termination, authentication, IP whitelisting, servicing static content, etc. Importatnt to know if the API gateway is middleware that supports rate limiting.",
-            "When you implement everything on the server-side, you have full control of the algorithm. However, your choice might be limited if you use a third-party gateway.",
-            "If you have already used microservice architecture and included an API gateway in the design to perform authentication, IP whitelisting, etc., adding a rate limiter to the API gateway might be best."
-          ]
-        },
-        {
-          "type": "text",
-          "value": "Rate limiting can be implemented using different algorithms, and each of them has distinct pros and cons. Even though this chapter does not focus on algorithms, understanding them at high-level helps to choose the right algorithm or combination of algorithms to fit our use cases. Here is a list of popular algorithms:"
-        },
-        {
-          "type": "bullets",
-          "values": [
-            "Token bucket: A container that has pre-defined capacity. Tokens are put in the bucket at preset rates periodically. Once the bucket is full, no more tokens are added and are considered 'overflow' that is dropped. ",
-            "Leaking bucket: The leaking bucket algorithm is similar to the token bucket except that requests are processed at a fixed rate. It is usually implemented with a first-in-first-out (FIFO) queue. When a request arrives, the system checks if the queue is full. If it is not full, the request is added to the queue. Otherwise, the request is dropped. Requests are pulled and processed at regular intervals. Memory efficient given the limited queue size. Requests are processed at a fixed rate therefore it is suitable for use cases that a stable outflow rate is needed. A burst of traffic fills up the queue with old requests, and if they are not processed in time, recent requests will be rate limited. There are two parameters in the algorithm. It might not be easy to tune them properly.",
-            "Fixed window counter: Fixed window counter algorithm works as follows: The algorithm divides the timeline into fix-sized time windows and assign a counter for each window. Each request increments the counter by one. Once the counter reaches the pre-defined threshold, new requests are dropped until a new time window starts. Memory efficient. Easy to understand. Resetting available quota at the end of a unit time window fits certain use cases. Spike in traffic at the edges of a window could cause more requests than the allowed quota to go through.",
-            "Sliding window log: The sliding window log algorithm fixes the issue with fixed window edges. The algorithm keeps track of request timestamps. Timestamp data is usually kept in cache, such as sorted sets of Redis. When a new request comes in, remove all the outdated timestamps. Outdated timestamps are defined as those older than the start of the current time window. Add timestamp of the new request to the log. If the log size is the same or lower than the allowed count, a request is accepted. Otherwise, it is rejected. Rate limiting implemented by this algorithm is very accurate. In any rolling window, requests will not exceed the rate limit. The algorithm consumes a lot of memory because even if a request is rejected, its timestamp might still be stored in memory.",
-            "Sliding window counter: The sliding window counter algorithm is a hybrid approach that combines the fixed window counter and sliding window log. The algorithm can be implemented by two different approaches. It smooths out spikes in traffic because the rate is based on the average rate of the previous window. Memory efficient. It only works for not-so-strict look back window. It is an approximation of the actual rate because it assumes requests in the previous window are evenly distributed. However, this problem may not be as bad as it seems. According to experiments done by Cloudflare, only 0.003% of requests are wrongly allowed or rate limited among 400 million requests."
-          ]
-        },
-        {
-          "type": "image",
-          "alt": "rate_limiter",
-          "path": "../InterviewQuestions/images/systems_design/rate_limiter.png"
-        }
-      ]
-    },
-    {
       "header": "What is the difference between HTTP, WebSocket, Raw TCP, and UDP?",
       "content": [
         {
@@ -3314,6 +3482,114 @@
         "Regular content updates and expansions, introducing new challenges, regions, and storylines to maintain player interest and engagement over time, ensuring the game's longevity and vibrancy.",
         "Scalable world design, employing dynamic instancing and load balancing to accommodate growing player populations while maintaining the integrity and continuity of the game world.",
         "Robust anti-cheat and moderation systems to uphold fair play and a respectful community atmosphere, ensuring a safe and enjoyable environment for all players."
+      ]
+    },
+    {
+      "header": "What are some examples of specific, real-world services that can be discussed during systems design interviews?",
+      "content": [
+        {
+          "type": "text",
+          "value": "Web Services and Cloud Platforms"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Amazon Web Services (AWS): A comprehensive cloud platform offering a wide range of services such as EC2 (virtual servers), S3 (storage), RDS (relational databases), Lambda (serverless computing), and many more.",
+            "Google Cloud Platform (GCP): Offers services similar to AWS, including Compute Engine, Cloud Storage, BigQuery (data warehousing), and Cloud Functions.",
+            "Microsoft Azure: Provides a mix of IaaS, PaaS, and SaaS services including Azure VMs, Azure Blob Storage, and Azure Cosmos DB."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Databases"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "MongoDB: A popular NoSQL database known for its flexibility and scalability.",
+            "PostgreSQL: An advanced open-source relational database with a strong emphasis on standards compliance and extensibility.",
+            "Redis: An in-memory data structure store used as a database, cache, and message broker."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Messaging Systems"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Apache Kafka: A distributed streaming platform that's widely used for building real-time streaming data pipelines and applications.",
+            "RabbitMQ: A message broker that implements the Advanced Message Queuing Protocol (AMQP), facilitating complex routing scenarios."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Search Engines"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Elasticsearch: A distributed, RESTful search and analytics engine capable of solving a growing number of use cases.",
+            "Apache Solr: An open-source search platform built on Apache Lucene, providing scalable search and indexing capabilities."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Content Delivery Networks (CDNs)"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Cloudflare: Offers a range of services aimed at enhancing the performance and security of websites, including a CDN service.",
+            "Akamai: One of the oldest and largest CDN providers, known for its massive distributed computing platform."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Container Orchestration"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "Kubernetes: An open-source system for automating deployment, scaling, and management of containerized applications.",
+            "Docker Swarm: A native clustering system for Docker that turns a group of Docker hosts into a single virtual server."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Version Control Systems"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "GitHub: A cloud-based service hosting Git repositories, with features that facilitate code review, project management, and CI/CD.",
+            "GitLab: Similar to GitHub, GitLab provides a web-based Git repository manager with wiki, issue tracking, and CI/CD pipeline features."
+          ]
+        },
+        {
+          "type": "text",
+          "value": "Real-Time Communication Platforms"
+        },
+        {
+          "type": "bullets",
+          "values": [
+            "WebSocket: A computer communications protocol, providing full-duplex communication channels over a single TCP connection.",
+            "WebRTC: Enables web applications to perform real-time voice, video, and data sharing without plugins."
+          ]
+        }
+      ],
+
+      "answers": [
+        "Amazon Web Services (AWS) is a comprehensive cloud platform offering a wide range of services such as EC2, S3, RDS, Lambda, and more, providing scalable solutions for computing, storage, and beyond.",
+        "Google Cloud Platform (GCP) specializes exclusively in AI and machine learning services without offering infrastructure solutions like computing and storage.",
+        "Microsoft Azure is primarily a platform for gaming services, offering tools and solutions specifically designed for game developers and esports tournaments.",
+        "MongoDB is a relational database known for its strict schema requirements and transactional data integrity guarantees.",
+        "PostgreSQL is an in-memory data structure store primarily used for caching and message brokering, without support for persistent storage.",
+        "Redis is a distributed streaming platform for building real-time messaging applications, with built-in support for websockets.",
+        "Apache Kafka is a message broker that strictly follows the REST architectural style for synchronous communication between services.",
+        "RabbitMQ is the leading search engine platform offering distributed search and analytics capabilities with a focus on text indexing.",
+        "Elasticsearch is known for its content delivery network (CDN) service, optimizing web content delivery globally.",
+        "Apache Solr is a container orchestration tool for managing microservices architecture, with a focus on automatic scaling and deployment."
       ]
     }
   ]

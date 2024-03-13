@@ -9,7 +9,7 @@
         },
         {
           "type": "text",
-          "value": "TypeScript supports tools for large-scale JavaScript applications for any browser, for any host, on any OS. TypeScript compiles to readable, standards-based JavaScript. It includes features from ES6 and beyond, plus a way to add static type-checking to your code, or to use TypeScript’s own type system, which includes even more capabilities, such as interfaces and enums."
+          "value": "TypeScript supports tools for large-scale JavaScript applications for any browser, for any host, on any OS. TypeScript compiles to readable, standards-based JavaScript. It includes features from ES6 and beyond, plus a way to add static type-checking to your code, or to use TypeScript's own type system, which includes even more capabilities, such as interfaces and enums."
         }
       ],
       "answers": [

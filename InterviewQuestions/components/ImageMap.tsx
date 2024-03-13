@@ -8,4 +8,5 @@ export const imageMap: ImageMapType = {
   '../InterviewQuestions/images/systems_design/cap.png': require('../images/systems_design/cap.png'),
   '../InterviewQuestions/images/systems_design/load_balancing.png': require('../images/systems_design/load_balancing.png'),
   '../InterviewQuestions/images/systems_design/rate_limiter.png': require('../images/systems_design/rate_limiter.png'),
+  '../InterviewQuestions/images/systems_design/rate_limiter2.png': require('../images/systems_design/rate_limiter2.png'),
 };
