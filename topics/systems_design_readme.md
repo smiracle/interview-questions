@@ -8,13 +8,13 @@
 - [What is SSL Termination?](#what-is-ssl-termination)
 - [What is SSL?](#what-is-ssl)
 - [What is TLS?](#what-is-tls)
-- [How do you design consistent hashing, and why?](#how-do-you-design-consistent-hashing-and-why)
 - [What are HTTP Status Codes?](#what-are-http-status-codes)
 - [What is load balancing? Why is it important in systems design?](#what-is-load-balancing-why-is-it-important-in-systems-design)
 - [What is scalability? How does horizontal scaling differ from vertical scaling?](#what-is-scalability-how-does-horizontal-scaling-differ-from-vertical-scaling)
 - [What is latency, throughput, and availability of a system?](#what-is-latency-throughput-and-availability-of-a-system)
 - [What is performance and scalability, how are they related to each other?](#what-is-performance-and-scalability-how-are-they-related-to-each-other)
-- [What is sharding and partitioning? How do they differ?](#what-is-sharding-and-partitioning-how-do-they-differ)
+- [How do you design consistent hashing, and why?](#how-do-you-design-consistent-hashing-and-why)
+- [What is partitioning and what is sharding? How do they differ?](#what-is-partitioning-and-what-is-sharding-how-do-they-differ)
 - [What is caching, what are some update strategies associated with caching?](#what-is-caching-what-are-some-update-strategies-associated-with-caching)
 - [What is consistency and its patterns?](#what-is-consistency-and-its-patterns)
 - [What is a CDN?](#what-is-a-cdn)
@@ -30,6 +30,7 @@
 - [How do you design a notification system?](#how-do-you-design-a-notification-system)
 - [How do you design Tic-Tac-Toe?](#how-do-you-design-tic-tac-toe)
 - [How do you design a web cache?](#how-do-you-design-a-web-cache)
+- [How do you design a key-value store, and what problems do they solve?](#how-do-you-design-a-key-value-store-and-what-problems-do-they-solve)
 - [How do you design a unique ID generator in distributed systems?](#how-do-you-design-a-unique-id-generator-in-distributed-systems)
 - [How do you design a ticketing system like JIRA?](#how-do-you-design-a-ticketing-system-like-jira)
 - [How do you design an e-commerce store?](#how-do-you-design-an-e-commerce-store)
@@ -180,43 +181,6 @@ TLS, or Transport Layer Security, is an encryption protocol that provides securi
 
 [↑ Back to top](#systems_design-topics)
 
-### How do you design consistent hashing, and why?
-
-Required Features
-- Distribution uniformity to ensure keys are evenly spread across the available nodes or buckets.
-- Scalability to easily add or remove nodes without significantly disrupting the key distribution.
-- Replication support to enhance data availability and fault tolerance.
-- Flexibility to accommodate various types of workloads and data distributions.
-- Minimal overhead for key lookup and node selection to maintain high performance.
-
-
-Common Issues
-- Hot spots, where some nodes receive significantly more load than others, leading to uneven load distribution.
-- Handling node failures and ensuring the consistent hashing mechanism quickly adapts to changes in the node set.
-- Maintaining data consistency and availability during node addition or removal.
-- Complexity in implementing a consistent hashing mechanism that accurately reflects the theoretical model.
-
-
-Resolutions
-- Use virtual nodes (vnodes) to improve distribution uniformity and ease the handling of node addition/removal.
-- Implement automatic data replication and rebalancing mechanisms to maintain data availability and consistency.
-- Design a robust failure detection and recovery process to quickly adapt to changes in the cluster's state.
-- Simplify the consistent hashing algorithm's implementation by leveraging existing libraries and frameworks that have been tested and optimized.
-
-
-Considerations
-- Evaluating the trade-offs between the complexity of consistent hashing and the benefits it provides in terms of scalability and performance.
-- Determining the optimal number of virtual nodes to balance between load distribution and management overhead.
-- Choosing the right hashing function that minimizes collisions and provides a good distribution of keys.
-- Integrating with other system components, such as load balancers and caching layers, to ensure seamless operation.
-- Assessing the impact of consistent hashing on application-specific requirements, such as query latency and data locality.
-
-
-Why?
-Consistent hashing is a strategy designed to distribute data across a cluster of servers in a way that minimizes reorganization when servers are added or removed. It addresses several challenges in distributed systems, including scalability, high availability, load distribution, data locality, fault tolerance, simplifying data management, and decentralization. By ensuring keys are evenly spread across nodes, consistent hashing improves load distribution and reduces hot spots. It facilitates easy scaling and data replication, enhancing system availability and fault tolerance. The use of virtual nodes and hashing functions optimizes key distribution and minimizes management overhead, while integration with system components ensures seamless operation. Consistent hashing's adaptability to workload and data distribution variations, along with minimal overhead for operations, makes it a cornerstone technique for designing robust, efficient distributed systems.
-
-[↑ Back to top](#systems_design-topics)
-
 ### What are HTTP Status Codes?
 
 HTTP status codes are issued by a server in response to a client's request made to the server. These codes are divided into five categories:
@@ -331,9 +295,70 @@ In essence, while performance is about how well a system operates at a given sca
 
 [↑ Back to top](#systems_design-topics)
 
-### What is sharding and partitioning? How do they differ?
+### How do you design consistent hashing, and why?
+
+If you have n cache servers, a common way to balance the load is to use the following hash method: `serverIndex = hash(key) % N`, where N is the size of the server pool. This approach works well when the size of the server pool is fixed and data distribution is relatively even, but problematic when servers are added or removed, since the same hash will return incorrect an server:
+![consistent hashing](../InterviewQuestions/images/systems_design/consistent_hashing.png)
+So, how can this problem be solved? We need a distribution scheme that does not depend directly on the number of servers, so that when adding or removing servers, the number of keys that need to be relocated is minimized. MIT found a solution to this problem in 1997 called consistent hashing, which involves the use of an abstract circle, or 'ring.' Imagine we mapped the hash output range onto the edge of a circle. That means that the minimum possible hash value, zero, would correspond to an angle of zero, the maximum possible value (some big integer we'll call INT_MAX) would correspond to an angle of 2(pi) radians (or 360 degrees). To find out which server to ask for a given key, we need to locate the key on the ring and move in the ascending (or descending depending on the ring's set up) angle direction until we find a server. From a programming perspective, what we would do is keep a sorted list of server values (which could be angles or numbers in any real interval), and walk this list (or use a binary search) to find the first server with a value greater than, or equal to, that of the desired key. If no such value is found, we need to wrap around, taking the first one from the list.
+![consistent hashing](../InterviewQuestions/images/systems_design/consistent_hashing2.png)
+
+
+So, what's the benefit of this ring approach? Imagine server C is removed. To account for this, we must remove labels C0 .. C9 from the circle. This results in the object keys formerly adjacent to the deleted labels now being randomly labeled Ax and Bx, reassigning them to servers A and B.
+
+But what happens with the other object keys, the ones that originally belonged in A and B? Nothing! That's the beauty of it: The absence of Cx labels does not affect those keys in any way. So, removing a server results in its object keys being randomly reassigned to the rest of the servers, leaving all other keys untouched: 
+This is how consistent hashing solves the rehashing problem. In general, only k/N keys need to be remapped when k is the number of keys and N is the number of servers (more specifically, the maximum of the initial and final number of servers). In general, the number of virtual nodes for a server is proportional to the server capacity. For example, servers with higher capacity are assigned with more virtual nodes.
+
+
+Why?
+Consistent hashing is a strategy designed to distribute data across a cluster of servers in a way that minimizes reorganization when servers are added or removed. It addresses several challenges in distributed systems by ensuring keys are evenly spread across nodes. This includes scalability, high availability, load distribution, data locality, fault tolerance, simplifying data management, and decentralization.
+Required Features
+- Distribution uniformity to ensure keys are evenly spread across the available nodes or buckets.
+- Scalability to easily add or remove nodes without significantly disrupting the key distribution.
+- Replication support to enhance data availability and fault tolerance.
+- Flexibility to accommodate various types of workloads and data distributions.
+- Minimal overhead for key lookup and node selection to maintain high performance.
+
+
+Common Issues
+- Hot spots, where some nodes receive significantly more load than others, leading to uneven load distribution.
+- Handling node failures and ensuring the consistent hashing mechanism quickly adapts to changes in the node set.
+- Maintaining data consistency and availability during node addition or removal.
+- Complexity in implementing a consistent hashing mechanism that accurately reflects the theoretical model.
+
+
+Resolutions
+- Use virtual nodes (vnodes) to improve distribution uniformity and ease the handling of node addition/removal.
+- Implement automatic data replication and rebalancing mechanisms to maintain data availability and consistency.
+- Design a robust failure detection and recovery process to quickly adapt to changes in the cluster's state.
+- Simplify the consistent hashing algorithm's implementation by leveraging existing libraries and frameworks that have been tested and optimized.
+
+
+Considerations
+- Evaluating the trade-offs between the complexity of consistent hashing and the benefits it provides in terms of scalability and performance.
+- Determining the optimal number of virtual nodes to balance between load distribution and management overhead.
+- Choosing the right hashing function that minimizes collisions and provides a good distribution of keys.
+- Integrating with other system components, such as load balancers and caching layers, to ensure seamless operation.
+- Assessing the impact of consistent hashing on application-specific requirements, such as query latency and data locality.
+
+
+Summary
+When using distributed caching to optimize performance, it may happen that the number of caching servers changes (reasons for this may be a server crashing, or the need to add or remove a server to increase or decrease overall capacity). By using consistent hashing to distribute keys between the servers, we can rest assured that should that happen, the number of keys being rehashed-and therefore, the impact on origin servers-will be minimized, preventing potential downtime or performance issues.
+
+There are clients for several systems, such as Memcached and Redis, that include support for consistent hashing out of the box.
+
+[↑ Back to top](#systems_design-topics)
+
+### What is partitioning and what is sharding? How do they differ?
 
 Sharding and partitioning are both techniques used to distribute data across multiple databases or tables to improve scalability, performance, and manageability of large-scale database systems. While they share a common goal of dividing data to manage it more effectively, there are distinctions in their approaches and use cases.
+
+Partitioning
+Partitioning typically refers to dividing a database or table into smaller segments or partitions, often within a single database server. The main goal of partitioning is to improve manageability, performance, and efficiency of data retrieval. Data can be partitioned in various ways, such as by range (e.g., date ranges), list (e.g., category), or hash (based on a hash function applied to a partition key).
+
+Key characteristics of partitioning include:
+- Partitions are usually contained within a single database system, making it easier to manage than sharded setups.
+- It is primarily used to improve query performance, especially for read-heavy operations, by reducing the amount of data scanned during query execution.
+- Partitioning can be transparent to the application, as the database management system (DBMS) can handle data distribution and retrieval across partitions without requiring application-level changes.
 
 
 Sharding
@@ -343,14 +368,6 @@ Key characteristics of sharding include:
 - Shards are distributed across different physical or virtual servers, often using a shard key to determine how data is distributed.
 - It is primarily used to improve performance and scalability of write-heavy database operations by distributing the load.
 - Sharding can be complex to implement and manage, as it often requires changes to application logic to handle data distribution and aggregation from multiple shards.
-
-Partitioning
-Partitioning typically refers to dividing a database or table into smaller segments or partitions, but it usually happens within a single database server. The main goal of partitioning is to improve manageability, performance, and efficiency of data retrieval. Data can be partitioned in various ways, such as by range (e.g., date ranges), list (e.g., category), or hash (based on a hash function applied to a partition key).
-
-Key characteristics of partitioning include:
-- Partitions are usually contained within a single database system, making it easier to manage than sharded setups.
-- It is primarily used to improve query performance, especially for read-heavy operations, by reducing the amount of data scanned during query execution.
-- Partitioning can be transparent to the application, as the database management system (DBMS) can handle data distribution and retrieval across partitions without requiring application-level changes.
 
 Differences Between Sharding and Partitioning
 - Scope of Distribution: Sharding distributes data across multiple servers or database instances, while partitioning divides data within a single database or table.
@@ -833,6 +850,98 @@ Considerations
 - Determining the granularity of caching (whole pages, fragments, database queries) to best suit the application's needs
 - Balancing between implementing a custom caching solution and using off-the-shelf caching systems
 - Evaluating the impact of caching on dynamic content and personalization features
+
+[↑ Back to top](#systems_design-topics)
+
+### How do you design a key-value store, and what problems do they solve?
+
+A key-value store, also referred to as a key-value database (and is one type of NoSQL database) uses a simple key-value method to store data. Unlike traditional relational databases that use tables, rows, and columns, key-value stores work by creating a unique identifier (key) for each piece of data, which is then used to retrieve or modify the data (value). Each unique identifier is stored as a key with its associated value. This data pairing is known as a 'key-value' pair. In a key-value pair, the key must be unique, and the value associated with the key can be accessed through the key. Keys can be plain text or hashed values. For performance reasons, a short key works better. An example: Plain text key: 'last_logged_in_at',  Hashed key: 253DDEC4. The value in a key-value pair can be strings, lists, objects, etc. 
+
+For large applications, it is infeasible to fit a complete data set in a single server. The simplest way to accomplish this is to split the data into smaller partitions and store them in multiple servers (called sharding). There are two challenges while partitioning the data: 1) distribute the data across multiple servers evenly, 2) minimize data inconsistency and movement when nodes are added or removed. Consistent hashing using a hash ring is a great way to resolve both of these issues.
+
+
+Data Replication
+To achieve high availability and reliability, data must be replicated asynchronously over N servers, where N is a configurable parameter. These N servers are chosen using the following logic: after a key is mapped to a position on the hash ring, walk clockwise from that position and choose the first N servers on the ring to store data copies. In the below image (N = 3), key0 is replicated at s1, s2, and s3. With virtual nodes, the first N nodes on the ring may be owned by fewer than N physical servers. To avoid this issue, we only choose unique servers while performing the clockwise walk logic. Nodes in the same data center often fail at the same time due to power outages, network issues, natural disasters, etc. For better reliability, replicas are placed in distinct data centers, and data centers are connected through high-speed networks.
+![key_value_store](../InterviewQuestions/images/systems_design/key_value_store.png)
+
+Consistency
+Since data is replicated at multiple nodes, it must be synchronized across replicas. Quorum consensus can guarantee consistency for both read and write operations. Let us establish a few definitions first. N = The number of replicas. W = A write quorum of size W. For a write operation to be considered as successful, write operation must be acknowledged from W replicas. R = A read quorum of size R. For a read operation to be considered as successful, read operation must wait for responses from at least R replicas. Consider the below example where N = 3. 
+
+W = 1 does not mean data is written on one server. For instance, with the configuration shown below, data is replicated at s0, s1, and s2. W = 1 means that the coordinator must receive at least one acknowledgment before the write operation is considered as successful. For instance, if we get an acknowledgment from s1, we no longer need to wait for acknowledgements from s0 and s2. A coordinator acts as a proxy between the client and the nodes. The configuration of W, R and N is a typical tradeoff between latency and consistency. If W = 1 or R = 1, an operation is returned quickly because a coordinator only needs to wait for a response from any of the replicas. If W or R > 1, the system offers better consistency; however, the query will be slower because the coordinator must wait for the response from the slowest replica. If W + R > N, strong consistency is guaranteed because there must be at least one overlapping node that has the latest data to ensure consistency.
+![key_value_store2](../InterviewQuestions/images/systems_design/key_value_store2.png)
+
+How to configure N, W, and R to fit various use cases? Here are some of the possible setups: 
+If R = 1 and W = N, the system is optimized for a fast read. 
+If W = 1 and R = N, the system is optimized for fast write. 
+If W + R > N, strong consistency is guaranteed (Usually N = 3, W = R = 2). 
+If W + R <= N, strong consistency is not guaranteed. 
+Depending on the requirement, we can tune the values of W, R, N to achieve the desired level of consistency.
+
+
+Consistency models
+Consistency model is another important factor to consider when designing a key-value store. A consistency model defines the degree of data consistency, and a wide spectrum of possible consistency models exist: 
+Strong consistency: any read operation returns a value corresponding to the result of themost updated write data item. A client never sees out-of-date data. Bank systems usually have extremely high consistentcy requirements. 
+Weak consistency: subsequent read operations may not see the most updated value. 
+Eventual consistency: this is a specific form of weak consistency. Given enough time, all updates are propagated, and all replicas are consistent. Strong consistency is usually achieved by forcing a replica not to accept new reads/writes until every replica has agreed on current write. This approach is not ideal for highly availablesystems because it could block new operations. Dynamo and Cassandra adopt eventual consistency, which is our recommended consistency model for our key-value store. From concurrent writes, eventual consistency allows inconsistent values to enter the system and force the client to read the values to reconcile.
+![key_value_store3](../InterviewQuestions/images/systems_design/key_value_store3.png)
+
+Inconsistency resolution using versioning
+Replication gives high availability but causes inconsistencies among replicas. Versioning and vector locks are used to solve inconsistency problems. Versioning means treating each data modification as a new immutable version of data. An example of how inconsistency occurs:
+![key_value_store4](../InterviewQuestions/images/systems_design/key_value_store4.png)
+Both replica nodes n1 and n2 have the same value. Let us call this value the original value. Server 1 and server 2 get the same value for get('name') operation. Next, server 1 changes the name to 'johnSanFrancisco', and server 2 changes the name to 'johnNewYork'. These two changes are performed simultaneously. Now, we have conflicting values, called versions v1 and v2.
+
+
+The original value could be ignored because the modifications were based on it. However, there is no clear way to resolve the conflict of the last two versions. To resolve this issue, we need a versioning system that can detect conflicts and reconcile conflicts. A vector clock is a common technique to solve this problem, which Amazon's DynamoDB uses. A vector clock is a [server, version] pair associated with a data item. It can be used to check if one version precedes, succeeds, or in conflict with others. Assume a vector clock is represented by D([S1, v1], [S2, v2], ..., [Sn, vn]), where D is a data item, v1 is a version counter, and s1 is a server number, etc. If data item D is written to server Si, the system must perform one of the following tasks: 
+Increment vi if [Si, vi] exists.
+Otherwise, create a new entry [Si, 1].
+Even though vector clocks can resolve conflicts, there are two notable downsides. First, vector clocks add complexity to the client because it needs to implement conflict resolution logic. Second, the [server: version] pairs in the vector clock could grow rapidly. To fix this problem, we set a threshold for the length, and if it exceeds the limit, the oldest pairs are removed. This can lead to inefficiencies in reconciliation because the descendant relationship cannot be determined accurately. However, Amazon has not yet encountered this problem in production; therefore, it is probably an acceptable solution for most companies.
+
+Handling failures
+As with any large system at scale, failures are not only inevitable but common. In a distributed system, it is insufficient to believe that a server is down because another server says so. Usually, it requires at least two independent sources of information to mark a server down. All-to-all multicasting is a straightforward solution. However, this is inefficient when many servers are in the system. A better solution is to use decentralized failure detection methods like gossip protocol. Gossip protocol works as follows:
+Each node maintains a node membership list, which contains member IDs and heartbeat counters. 
+Each node periodically increments its heartbeat counter. 
+Each node periodically sends heartbeats to a set of random nodes, which in turn propagate to another set of nodes. 
+Once nodes receive heartbeats, membership list is updated to the latest info. 
+If the heartbeat has not increased for more than predefined periods, the member is considered as offline.
+
+Handling temporary failures 
+After failures have been detected through the gossip protocol, the system needs to deploy certain mechanisms to ensure availability. In the strict quorum approach, read and write operations could be blocked. A technique called 'sloppy quorum' is used to improve availability. Instead of enforcing the quorum requirement, the system chooses the first W healthy servers for writes and first R healthy servers for reads on the hash ring. Offline servers are ignored. If a server is unavailable due to network or server failures, another server will process requests temporarily. When the down server is up, changes will be pushed back to achieve data consistency. This process is called hinted handoff.
+Since s2 is unavailable, reads and writes will be handled by s3 temporarily. When s2 comes back online, s3 will hand the data back to s2:
+![key_value_store5](../InterviewQuestions/images/systems_design/key_value_store5.png)
+Hinted handoff is used to handle temporary failures. What if a replica is permanently unavailable? To handle such a situation, we implement an anti-entropy protocol to keep replicas in sync. Anti-entropy involves comparing each piece of data on replicas and updating each replica to the newest version. A Merkle tree is used for inconsistency detection and minimizing the amount of data transferred. A hash tree or Merkle tree is a tree in which every non-leaf node is labeled with the hash of the labels or values (in case of leaves) of its child nodes. Hash trees allow efficient and secure verification of the contents of large data structures. Assuming key space is from 1 to 12, the following steps show how to build a Merkle tree. 
+
+Highlighted boxes indicate inconsistency. 
+Step 1: Divide key space into buckets (4 in our example) as shown. A bucket is used as the root level node to maintain a limited depth of the tree.
+![key_value_store6](../InterviewQuestions/images/systems_design/key_value_store6.png)
+![key_value_store7](../InterviewQuestions/images/systems_design/key_value_store7.png)
+To compare two Merkle trees, start by comparing the root hashes. If root hashes match, both servers have the same data. If root hashes disagree, then the left child hashes are compared followed by right child hashes. You can traverse the tree to find which buckets are not synchronized and synchronize those buckets only. Using Merkle trees, the amount of data needed to be synchronized is proportional to the differences between the two replicas, and not the amount of data they contain. In real-world systems, the bucket size is quite big. For instance, a possible configuration is one million buckets per one billion keys, so each bucket only contains 1000 keys.
+
+Handling data center outages
+ Data center outage could happen due to power outage, network outage, natural disaster, etc. To build a system capable of handling data center outage, it is important to replicate data across multiple data centers. Even if a data center is completely offline, users can still access data through the other data centers.
+![key_value_store8](../InterviewQuestions/images/systems_design/key_value_store8.png)
+Main features of the architecture are listed as follows: 
+Clients communicate with the key-value store through simple APIs: get(key) and put(key, value). 
+A coordinator is a node that acts as a proxy between the client and the key-value store. 
+Nodes are distributed on a ring using consistent hashing. 
+The system is completely decentralized so adding and moving nodes can be automatic. 
+Data is replicated at multiple nodes. 
+There is no single point of failure as every node has the same set of responsibilities.
+As the design is decentralized, each node performs many tasks:
+![key_value_store9](../InterviewQuestions/images/systems_design/key_value_store9.png)
+
+Write path
+![key_value_store10](../InterviewQuestions/images/systems_design/key_value_store10.png)
+The above image shows what happens after a write request is directed to a specific node. These designs for write/read paths are primary based on the architecture of Cassandra. 1) The write request is persisted on a commit log file. 2) Data is saved in the memory cache. When the memory cache is full or reaches a predefined threshold, data is flushed to SSTable on disk. Note: A sorted-string table (SSTable) is a sorted list of <key, value> pairs.
+
+Read path
+
+![key_value_store11](../InterviewQuestions/images/systems_design/key_value_store11.png)
+If the data is not in memory, it will be retrieved from the disk instead. We need an efficient way to find out which SSTable contains the key. Bloom filter is commonly used to solve this problem. The read path is shown above when data is not in memory. 
+1. The system first checks if data is in memory. If not, go to step 2. 
+2. If data is not in memory, the system checks the bloom filter. 
+3. The bloom filter is used to figure out which SSTables might contain the key. 
+4. SSTables return the result of the data set.
+5. The result of the data set is returned to the client.
 
 [↑ Back to top](#systems_design-topics)
 
