@@ -45,8 +45,10 @@ const QuestionsList: React.FC<QuestionsListProps> = ({navigation, route}) => {
   const renderItem = ({item, index}: ListRenderItemInfo<Question>) => (
     <TouchableOpacity
       onPress={() => onSelect(item)}
-      style={sharedStyles.questionListingItem}>
-      <Text style={sharedStyles.text}>{`${index + 1}. ${item.header}`}</Text>
+      style={sharedStyles.button}>
+      <Text style={sharedStyles.buttonText}>{`${index + 1}. ${
+        item.header
+      }`}</Text>
     </TouchableOpacity>
   );
 

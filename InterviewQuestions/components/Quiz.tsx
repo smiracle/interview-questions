@@ -17,6 +17,7 @@ const Quiz: React.FC<QuizProps> = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={sharedStyles.container}>
+      <Text style={sharedStyles.header}>Select Topic</Text>
       {topics
         .filter(x => allowedTopicsForNow.includes(x.name))
         .map((topic, index) => (

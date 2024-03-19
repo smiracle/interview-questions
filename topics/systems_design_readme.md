@@ -5,18 +5,18 @@
 - [How should systems design interview questions typically be handled?](#how-should-systems-design-interview-questions-typically-be-handled)
 - [What is CAP theorem?](#what-is-cap-theorem)
 - [What is a rate limiter?](#what-is-a-rate-limiter)
-- [What is SSL Termination?](#what-is-ssl-termination)
 - [What is SSL?](#what-is-ssl)
+- [What is SSL Termination?](#what-is-ssl-termination)
 - [What is TLS?](#what-is-tls)
 - [What are HTTP Status Codes?](#what-are-http-status-codes)
 - [What is load balancing? Why is it important in systems design?](#what-is-load-balancing-why-is-it-important-in-systems-design)
 - [What is scalability? How does horizontal scaling differ from vertical scaling?](#what-is-scalability-how-does-horizontal-scaling-differ-from-vertical-scaling)
 - [What is latency, throughput, and availability of a system?](#what-is-latency-throughput-and-availability-of-a-system)
 - [What is performance and scalability, how are they related to each other?](#what-is-performance-and-scalability-how-are-they-related-to-each-other)
-- [How do you design consistent hashing, and why?](#how-do-you-design-consistent-hashing-and-why)
+- [What is consistent hashing? How do you design a consistent hash system?](#what-is-consistent-hashing-how-do-you-design-a-consistent-hash-system)
 - [What is partitioning and what is sharding? How do they differ?](#what-is-partitioning-and-what-is-sharding-how-do-they-differ)
 - [What is caching, what are some update strategies associated with caching?](#what-is-caching-what-are-some-update-strategies-associated-with-caching)
-- [What is consistency and its patterns?](#what-is-consistency-and-its-patterns)
+- [What is consistency?](#what-is-consistency)
 - [What is a CDN?](#what-is-a-cdn)
 - [What is leader election?](#what-is-leader-election)
 - [What is SSE?](#what-is-sse)
@@ -25,7 +25,7 @@
 - [What is DNS?](#what-is-dns)
 - [What is a websocket? How do you implement one? Why use a websocket over Http?](#what-is-a-websocket-how-do-you-implement-one-why-use-a-websocket-over-http)
 - [What is lower latency interaction?](#what-is-lower-latency-interaction)
-- [How does buffer overflow work?](#how-does-buffer-overflow-work)
+- [What is buffer overflow?](#what-is-buffer-overflow)
 - [What are some common design issues in distributed systems?](#what-are-some-common-design-issues-in-distributed-systems)
 - [How do you design a notification system?](#how-do-you-design-a-notification-system)
 - [How do you design Tic-Tac-Toe?](#how-do-you-design-tic-tac-toe)
@@ -39,7 +39,7 @@
 - [How do you design an online shopping cart?](#how-do-you-design-an-online-shopping-cart)
 - [How do you design an API?](#how-do-you-design-an-api)
 - [How do you design autocomplete for a search engine?](#how-do-you-design-autocomplete-for-a-search-engine)
-- [What is the best way to design a global chat service like Whatsapp or a Facebook messenger?](#what-is-the-best-way-to-design-a-global-chat-service-like-whatsapp-or-a-facebook-messenger)
+- [What is the best way to design a chat system like Whatsapp or a Facebook messenger?](#what-is-the-best-way-to-design-a-chat-system-like-whatsapp-or-a-facebook-messenger)
 - [How do you design a URL shortening service like TinyURL or bit.ly?](#how-do-you-design-a-url-shortening-service-like-tinyurl-or-bitly)
 - [How do you design forum-like systems like Quora, Reddit or HackerNews?](#how-do-you-design-forum-like-systems-like-quora-reddit-or-hackernews)
 - [How do you design Facebook's newsfeed system?](#how-do-you-design-facebooks-newsfeed-system)
@@ -78,7 +78,8 @@ Systems design is more about system analysis, architectural patterns, APIs, desi
 - 8. Security Considerations. Identify potential security risks and how they will be mitigated. Discuss authentication, authorization, data encryption, and secure communication protocols.
 - 9. Wrap-up and Trade-offs. Conclude your design by summarizing the key points and discussing any trade-offs you made in your design choices. It's important to communicate why certain decisions were made and how they balance the system's needs in terms of performance, scalability, and reliability.
 - 10. Review and Feedback. Be open to feedback and questions from the interviewer. They may point out aspects you haven't considered or suggest alternatives. Engaging in a constructive discussion shows your ability to adapt and consider different perspectives.
-Good questions to ask:
+
+ ##### Good questions to ask:
 - What specific features are we going to build?
 - How many users does the product have?
 - Is the product intended exclusively for the web or a mobile app, or both?
@@ -90,7 +91,7 @@ Do not under any circumstances attempt to immediately dive into a concrete solut
 
 ### What is CAP theorem?
 
-The CAP Theorem for distributed computing was published by Eric Brewer. This states that it is not possible for a distributed computer system to simultaneously provide all three of the following guarantees, only two at a time:
+CAP Theorem states that it is not possible for a distributed computer system to simultaneously provide all three of the following guarantees, only two at a time:
 - 1. Consistency (all nodes see the same data at the same time, even with concurrent updates)
 - 2. Availability (a guarantee that every request receives a response about whether it was successful or failed)
 - 3. Partition tolerance (the system continues to operate despite arbitrary message loss or failure of part of the system)
@@ -107,19 +108,18 @@ In a network system, a rate limiter is used to control the rate of traffic sent 
 - You can claim rewards no more than 5 times per week from the same device.
 ![rate_limiter](../InterviewQuestions/images/systems_design/rate_limiter.png)
 
-Benefits:
+ ##### Benefits
 - Prevent resource starvation caused by Denial of Service (DoS) attack
 - Reduce cost. Limiting excess requests means fewer servers and allocating more resources to high priority APIs. Rate limiting is extremely important for companies that use paid third party APIs that charge per-call.
 - Prevent servers from being overloaded. To reduce server load, a rate limiter is used to filter out excess requests caused by bots or users' misbehavior.
 
-Design considerations:
+ ##### Design Considerations
 - You can implement a rate limiter on either the client or server-side. But client is generally an unreliable place to enforce rate limiting because client requests can easily be forged by malicious actors. Moreover, we might not have control over the client implementation.
 - When you implement everything on the server-side, you have full control of the algorithm. However, your choice might be limited if you use a third-party gateway.
 - Cloud microservices have become widely popular and rate limiting is usually implemented within a component called API gateway. API gateway is a fully managed service that supports rate limiting, SSL termination, authentication, IP whitelisting, servicing static content, etc. Importatnt to know if the API gateway is middleware that supports rate limiting.
 - If you have already used microservice architecture and included an API gateway in the design to perform authentication, IP whitelisting, etc., adding a rate limiter to the API gateway might be best.
 
-
-Rate Limiter Algorithms
+ ##### Rate Limiter Algorithms
 - Token bucket: A container that has pre-defined capacity. Tokens are put in the bucket at preset rates periodically. Once the bucket is full, no more tokens are added and are considered 'overflow' that is dropped. Like leaking bucket has two parameters - bucket size and refill rate. Easy to understand and implement, memory efficient, and allows for short traffic bursts. But might be difficult to tune properly.
 - Leaking bucket: The leaking bucket algorithm is similar to the token bucket except that requests are processed at a fixed rate. It is usually implemented with a first-in-first-out (FIFO) queue. When a request arrives, the system checks if the queue is full. If it is not full, the request is added to the queue. Otherwise, the request is dropped. Requests are polled and processed at regular intervals. Memory efficient given the limited queue size. This is also memory efficient, and requests are processed at a fixed rate therefore it is suitable for use cases where a stable outflow rate is needed. A burst of traffic fills up the queue with old requests, and if they are not processed in time, recent requests will be rate limited. Like token bucket, has only two parameters - bucket size, outflow rate. Once again may be difficult to tune properly.
 - Fixed window counter: This algorithm divides the timeline into fixed size time 'windows' and assign a counter for each window. Each request increments the counter by one. Once the counter reaches the pre-defined threshold, new requests are dropped until a new time window starts. Memory efficient. Easy to understand. Resetting available quota at the end of a unit time window fits certain use cases. Spike in traffic at the edges of a window could cause more requests than the allowed quota to go through, so may have issues with many traffic bursts.
@@ -136,26 +136,22 @@ In cases where the client exceeds the rate limit, the server responds with a 429
 - X-Ratelimit-Limit: Specifies the total number of requests a client can make per time window.
 - X-Ratelimit-Retry-After: Tells the client how many seconds to wait before making a new request to avoid being throttled.
 
-
-A Detailed Design Deep Dive
+ ##### A Detailed Design Deep Dive
 ![rate_limiter2](../InterviewQuestions/images/systems_design/rate_limiter2.png)
 - Rules are stored on the disk. Workers frequently pull rules from the disk and store them in the cache.
 - When a client sends a request to the server, the request is sent to the rate limiter middleware first.
 - Rate limiter middleware loads rules from the cache. It fetches counters and last request timestamp from Redis cache. Based on the response, the rate limiter decides: 1) if the request is not rate limited, it is forwarded to API servers. 2) if the request is rate limited, the rate limiter returns 429 too many requests error to the client. In the meantime, the request is either dropped or forwarded to the queue.
 
-
-Distributed Environment Rate Limiting Pitfalls
+ ##### Pitfalls of Rate Limiting in a Distributed Environment
 There are two challenges: 
 1) Race condition - If two requests concurrently read the counter value before either of them writes the value back, each will increment the counter by one and write it back without checking the other thread. Both requests, which are really threads, believe they have the correct counter value. However, the correct counter value should be +1)
 2) Synchronization - As the web tier is stateless, clients can send requests to a different rate limiter. If no synchronization happens, rate limiter 1 does not contain any data about client 2. Thus, the rate limiter cannot work properly. One possible solution is to use sticky sessions that allow a client to send traffic to the same rate limiter. This solution is not advisable because it is neither scalable nor flexible. A better approach is to use centralized data stores like Redis.
 
-
-Performance Optimization
+ ##### Performance Optimization
 First, multi-data center setup is crucial for a rate limiter because latency is high for users located far away from the data center. Most cloud service providers build many edge server locations around the world. For example, as of 5/20 2020, Cloudflare has 194 geographically distributed edge servers. Traffic is automatically routed to the closest edge server to reduce latency.
 Second, synchronize data with an eventual consistency model. The eventual consistency model seeks to achieve high availability that informally guarantees that, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. This is suitable for applications where the system can tolerate some degree of inconsistency for a period, such as social networking feeds, collaborative editing platforms, and distributed file systems.
 
-
-Review
+ ##### Review
 Hard vs soft rate limiting. Hard: The number of requests cannot exceed the threshold. Soft: Requests can exceed the threshold for a short period.
  Rate limiting at different levels. This json mostly describes application level rate limiting (layer 7, the highest). It is possible to apply rate limiting at other layers. For example, you can apply rate limiting by IP addresses using Iptables (layer 3).
  Note: The Open Systems Interconnection model (OSI model) has 7 layers: Layer 1: Physical layer, Layer 2: Data link layer, Layer 3: Network layer, Layer 4: Transport layer, Layer 5: Session layer, Layer 6: Presentation layer, Layer 7: Application layer.
@@ -163,15 +159,15 @@ Avoid being rate limited. Design your client with best practices: Use client cac
 
 [↑ Back to top](#systems_design-topics)
 
-### What is SSL Termination?
-
-SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer before it reaches the web server. This setup enables the web server to focus on delivering content rather than encryption, enhancing performance and speed. It's particularly beneficial in environments where high traffic is expected, as it efficiently distributes the load across multiple servers. SSL termination also simplifies SSL certificate management, as only the load balancer needs to have the certificate installed, not every server in the network.
-
-[↑ Back to top](#systems_design-topics)
-
 ### What is SSL?
 
 SSL, or Secure Sockets Layer, is a cryptographic protocol designed to provide secure communications over a computer network. It's most commonly used on the internet to secure connections between web servers and clients (browsers), ensuring that all data transmitted is encrypted and safe from eavesdropping. The use of SSL certificates, issued by Certificate Authorities (CAs), helps in verifying the authenticity of websites, adding an additional layer of trust for online transactions and information exchange.
+
+[↑ Back to top](#systems_design-topics)
+
+### What is SSL Termination?
+
+SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer before it reaches the web server. This setup enables the web server to focus on delivering content rather than encryption, enhancing performance and speed. It's particularly beneficial in environments where high traffic is expected, as it efficiently distributes the load across multiple servers. SSL termination also simplifies SSL certificate management, as only the load balancer needs to have the certificate installed, not every server in the network.
 
 [↑ Back to top](#systems_design-topics)
 
@@ -208,21 +204,18 @@ Common HTTP Status Codes:
 Load balancers are systems or devices that distribute incoming network traffic across multiple servers. This distribution ensures that no single server bears too much demand. By spreading the requests across multiple servers, load balancers reduce individual server load, increase the capacity and reliability of applications, and ensure their availability even under high traffic conditions. Load balancers can provide additional security features like SSL termination, where SSL encryption and decryption occur at the load balancer level instead of on individual servers.
 ![load balancing](../InterviewQuestions/images/systems_design/load_balancing.png)
 
-
-How load balancers work
+ ##### How load balancers work
 - Traffic Distribution: When a client sends a request to a server, the load balancer receives the request first. Based on its configuration, it selects a server from the pool of available servers to forward the request to.
 - Health Checks: Load balancers periodically check the health of all servers in the pool to ensure they can handle requests. If a server fails a health check, it is temporarily removed from the pool until it becomes healthy again.
 - Session Persistence: Some applications require that a user's session be maintained with the same server for the duration of their visit. Load balancers can use various methods to ensure session persistence or 'stickiness'.
 
-
-Types of Load Balancing:
+ ##### Types of Load Balancing
 - Round Robin: Requests are distributed across the servers sequentially.
 - Least Connections: Requests are sent to the server with the fewest active connections.
 - IP Hash: The client's IP address is used to determine which server receives the request, ensuring session persistence.
 - Least Response Time: Requests are sent to the server with the shortest average response time.
 
-
-Deployment Models:
+ ##### Deployment Models
 - Hardware Load Balancers: Physical devices specifically designed for load balancing with built-in optimizations and features.
 - Software Load Balancers: Applications running on general-purpose hardware, offering flexibility and integration with cloud environments.
 - Cloud-Based Load Balancers: Provided as part of cloud services, these are fully managed by the cloud provider, offering scalability and integration with cloud resources.
@@ -236,19 +229,18 @@ Scalability in systems design refers to the ability of a system, network, or pro
 
 There are two primary methods to scale a system: horizontal scaling and vertical scaling, each with its own strategies and implications for system design.
 
+ ##### Horizontal Scaling
+Horizontal scaling (or in/out scaling) involves adding more machines or instances to your pool of resources to manage an increased load. It's about scaling out (or in) by increasing the number of nodes in the system, such as adding more servers to a cluster to handle more traffic. This method can significantly increase the system's capacity to handle more requests or data processing tasks. Horizontal scaling is often easier to implement with modern cloud-based services since it usually involves adding more instances of the same type of resource rather than upgrading existing ones. It's highly effective for distributed systems and applications designed to work over multiple machines, like web applications using microservices architecture.
 
-Horizontal Scaling (Scaling Out/In)
-Horizontal scaling involves adding more machines or instances to your pool of resources to manage an increased load. It's about scaling out (or in) by increasing the number of nodes in the system, such as adding more servers to a cluster to handle more traffic. This method can significantly increase the system's capacity to handle more requests or data processing tasks. Horizontal scaling is often easier to implement with modern cloud-based services since it usually involves adding more instances of the same type of resource rather than upgrading existing ones. It's highly effective for distributed systems and applications designed to work over multiple machines, like web applications using microservices architecture.
-
-Advantages of horizontal scaling include:
+ ##### Horizontal Scaling Advantages
 - Enhanced fault tolerance and redundancy, as the failure of a single node doesn't necessarily bring down the entire system.
 - Flexibility in scaling, as resources can be added or removed easily based on demand.
 - Potentially unlimited scaling, constrained only by the infrastructure provider's capabilities or the architecture's ability to distribute workloads efficiently.
 
+ ##### Vertical Scaling
+Vertical scaling (scaling up/down), on the other hand, means upgrading the existing machines' capacity within your system. This could involve adding more CPUs, memory, or storage to a server to increase its capability to handle more load. Vertical scaling is often referred to as scaling up (or down) because you're essentially making a single node in the system more powerful. It is a straightforward approach to scaling since it involves enhancing the existing servers' capabilities rather than adding more servers to the system.
 
-Vertical Scaling (Scaling Up/Down)
-Vertical scaling, on the other hand, means upgrading the existing machines' capacity within your system. This could involve adding more CPUs, memory, or storage to a server to increase its capability to handle more load. Vertical scaling is often referred to as scaling up (or down) because you're essentially making a single node in the system more powerful. It is a straightforward approach to scaling since it involves enhancing the existing servers' capabilities rather than adding more servers to the system. 
-Advantages of vertical scaling include:
+ ##### Vertical Scaling Advantages
 - Simplicity, as it usually involves fewer complexities related to the system architecture changes.
 - Lower initial complexity for applications not designed to run on multiple machines, since there's no need to manage communication or data consistency across multiple nodes.
 However, vertical scaling has its limits - there's a maximum to how much you can upgrade a single machine, and at some point, it becomes cost-prohibitive or technically unfeasible to scale up further. Additionally, it introduces a single point of failure; if the upgraded server goes down, the entire service can be affected.
@@ -259,20 +251,16 @@ However, vertical scaling has its limits - there's a maximum to how much you can
 
 In systems design, latency, throughput, and availability are key performance indicators (KPIs) that measure the efficiency, reliability, and overall performance of a system. 
 
-
-Latency
+ ##### Latency
 Latency refers to the time it takes for a system to respond to a request. It's usually measured in milliseconds (ms) and indicates the delay between a user initiating a request and receiving a response. Low latency is crucial for interactive applications where a quick response time is essential for a good user experience, such as online gaming, real-time communications, and high-frequency trading systems.
 
-
-Throughput
+ ##### Throughput
 Throughput is the amount of work or data processed by a system in a given amount of time. It's often measured in transactions per second (tps), requests per second (rps), or data bits per second (bps). Throughput is an indicator of the capacity of a system to handle load and perform tasks. High throughput is essential for systems that need to process large volumes of data or serve many users simultaneously, such as video streaming services, large-scale web applications, and data processing pipelines.
 
-
-Availability
+ ##### Availability
 Availability measures the proportion of time a system is operational and accessible to users. It's typically expressed as a percentage of uptime in the context of the total time considered (usually a year). For example, a system with 99.9% availability is down for no more than 8.76 hours over the course of a year. High availability is critical for systems that provide essential services where downtime can result in significant financial loss, safety issues, or user dissatisfaction. Strategies to improve availability include redundant systems, failover mechanisms, and robust error handling.
 
-
-Importance in Systems Design:
+ ##### Importance in Systems Design:
 Latency and Throughput: There's often a trade-off between latency and throughput that needs to be balanced based on the application's requirements. For instance, optimizing for low latency might mean processing fewer requests at a time to ensure quick responses, while maximizing throughput might involve batch processing that introduces delays.
 Availability: Designing for high availability often involves redundancy, geographic distribution of resources, and the ability to quickly recover from failures. This can add complexity and cost to the system design but is necessary for mission-critical applications.
 
@@ -280,9 +268,11 @@ Availability: Designing for high availability often involves redundancy, geograp
 
 ### What is performance and scalability, how are they related to each other?
 
-Performance
+
+ ##### Performance
 Performance refers to how efficiently a system processes requests and carries out its operations under a given workload. It is often measured in terms of latency (the time it takes to respond to a request) and throughput (the number of requests a system can handle per unit of time). High performance means that the system is capable of executing tasks and responding to requests quickly and efficiently, leading to a better user experience.
-Scalability
+
+ ##### Scalability
 Scalability, on the other hand, is the ability of a system to maintain or improve its performance when the workload increases. This can involve handling more users, data, transactions, or requests without significant drops in performance. Scalability can be achieved through various means, such as adding resources (hardware or software), optimizing existing resources, or changing the system's architecture. Scalability is often categorized into two types:
 - Horizontal scalability (scaling out/in): Adding more machines or instances to a pool to distribute the load more broadly.
 - Vertical scalability (scaling up/down): Adding more power (e.g., CPU, RAM) to an existing machine to handle more load.
@@ -295,22 +285,24 @@ In essence, while performance is about how well a system operates at a given sca
 
 [↑ Back to top](#systems_design-topics)
 
-### How do you design consistent hashing, and why?
+### What is consistent hashing? How do you design a consistent hash system?
 
-If you have n cache servers, a common way to balance the load is to use the following hash method: `serverIndex = hash(key) % N`, where N is the size of the server pool. This approach works well when the size of the server pool is fixed and data distribution is relatively even, but problematic when servers are added or removed, since the same hash will return incorrect an server:
+To achieve horizontal scaling in a distributed system, it is important to send and receive requests and data efficiently and evenly across a cluster of nodes (such as caches, databases, or web servers), even as nodes are added or removed. Consistent hashing is a commonly used technique to achieve this goal.
+
+
+If you have n cache servers, a common way to balance the load is to use the following hash method: `serverIndex = hash(key) % N`, where N is the size of the server pool. This approach works well when the size of the server pool is fixed and data distribution is relatively even, but very problematic when servers are added or removed, since the same hash will return incorrect an server:
 ![consistent hashing](../InterviewQuestions/images/systems_design/consistent_hashing.png)
-So, how can this problem be solved? We need a distribution scheme that does not depend directly on the number of servers, so that when adding or removing servers, the number of keys that need to be relocated is minimized. MIT found a solution to this problem in 1997 called consistent hashing, which involves the use of an abstract circle, or 'ring.' Imagine we mapped the hash output range onto the edge of a circle. That means that the minimum possible hash value, zero, would correspond to an angle of zero, the maximum possible value (some big integer we'll call INT_MAX) would correspond to an angle of 2(pi) radians (or 360 degrees). To find out which server to ask for a given key, we need to locate the key on the ring and move in the ascending (or descending depending on the ring's set up) angle direction until we find a server. From a programming perspective, what we would do is keep a sorted list of server values (which could be angles or numbers in any real interval), and walk this list (or use a binary search) to find the first server with a value greater than, or equal to, that of the desired key. If no such value is found, we need to wrap around, taking the first one from the list.
+Instead, we need a design that does not depend directly on the number of servers, so that when adding or removing servers, the number of keys that need to be relocated is minimized. MIT found a solution to this problem in 1997 called consistent hashing.
+
+ Consistent hashing involves the use of an abstract circle, or 'ring.' Imagine we mapped the hash output range onto the edge of a circle. That means that the minimum possible hash value, zero, would correspond to an angle of zero, the maximum possible value (some big integer we'll call INT_MAX) would correspond to an angle of 2(pi) radians (or 360 degrees). To find out which server to ask for a given key, we need to locate the key on the ring and move clockwise (or counter-clockwise depending on the system configuration) direction until we find a server. From a programming perspective, what we would do is keep a sorted list of server values (which could be angles or numbers in any real interval), and walk this list (or use a binary search) to find the first server with a value greater than, or equal to, that of the desired key. If no such value is found, we need to wrap around, taking the first one from the list.
 ![consistent hashing](../InterviewQuestions/images/systems_design/consistent_hashing2.png)
 
-
-So, what's the benefit of this ring approach? Imagine server C is removed. To account for this, we must remove labels C0 .. C9 from the circle. This results in the object keys formerly adjacent to the deleted labels now being randomly labeled Ax and Bx, reassigning them to servers A and B.
+What's the benefit of this ring approach? Imagine server C is removed. To account for this, we must remove labels C0 ... C9 from the circle. This results in the object keys formerly adjacent to the deleted labels now being randomly labeled Ax and Bx, reassigning them to servers A and B.
 
 But what happens with the other object keys, the ones that originally belonged in A and B? Nothing! That's the beauty of it: The absence of Cx labels does not affect those keys in any way. So, removing a server results in its object keys being randomly reassigned to the rest of the servers, leaving all other keys untouched: 
-This is how consistent hashing solves the rehashing problem. In general, only k/N keys need to be remapped when k is the number of keys and N is the number of servers (more specifically, the maximum of the initial and final number of servers). In general, the number of virtual nodes for a server is proportional to the server capacity. For example, servers with higher capacity are assigned with more virtual nodes.
+This is how consistent hashing solves the rehashing problem. In general, only k/N keys need to be remapped where k is the number of keys and N is the number of servers (more specifically, the maximum of the initial and final number of servers). 
+These artificial 'labels' on the key ring are known as virtual nodes. Virtual nodes allow each physical node to be represented by any location on the hash ring. In general, the number of virtual nodes for a server is proportional to the server's capacity at a given moment in time, servers with higher capacity are assigned more virtual nodes. This reduces the likelihood of hotspots where one server is significantly more loaded than others.
 
-
-Why?
-Consistent hashing is a strategy designed to distribute data across a cluster of servers in a way that minimizes reorganization when servers are added or removed. It addresses several challenges in distributed systems by ensuring keys are evenly spread across nodes. This includes scalability, high availability, load distribution, data locality, fault tolerance, simplifying data management, and decentralization.
 Required Features
 - Distribution uniformity to ensure keys are evenly spread across the available nodes or buckets.
 - Scalability to easily add or remove nodes without significantly disrupting the key distribution.
@@ -318,33 +310,26 @@ Required Features
 - Flexibility to accommodate various types of workloads and data distributions.
 - Minimal overhead for key lookup and node selection to maintain high performance.
 
-
-Common Issues
+ ##### Common Issues
 - Hot spots, where some nodes receive significantly more load than others, leading to uneven load distribution.
 - Handling node failures and ensuring the consistent hashing mechanism quickly adapts to changes in the node set.
 - Maintaining data consistency and availability during node addition or removal.
 - Complexity in implementing a consistent hashing mechanism that accurately reflects the theoretical model.
 
-
-Resolutions
+ ##### Resolutions
 - Use virtual nodes (vnodes) to improve distribution uniformity and ease the handling of node addition/removal.
 - Implement automatic data replication and rebalancing mechanisms to maintain data availability and consistency.
 - Design a robust failure detection and recovery process to quickly adapt to changes in the cluster's state.
 - Simplify the consistent hashing algorithm's implementation by leveraging existing libraries and frameworks that have been tested and optimized.
 
-
-Considerations
-- Evaluating the trade-offs between the complexity of consistent hashing and the benefits it provides in terms of scalability and performance.
+ ##### Considerations
 - Determining the optimal number of virtual nodes to balance between load distribution and management overhead.
 - Choosing the right hashing function that minimizes collisions and provides a good distribution of keys.
-- Integrating with other system components, such as load balancers and caching layers, to ensure seamless operation.
+- Integrating with other system components, such as load balancers and caching layers.
 - Assessing the impact of consistent hashing on application-specific requirements, such as query latency and data locality.
 
 
-Summary
-When using distributed caching to optimize performance, it may happen that the number of caching servers changes (reasons for this may be a server crashing, or the need to add or remove a server to increase or decrease overall capacity). By using consistent hashing to distribute keys between the servers, we can rest assured that should that happen, the number of keys being rehashed-and therefore, the impact on origin servers-will be minimized, preventing potential downtime or performance issues.
-
-There are clients for several systems, such as Memcached and Redis, that include support for consistent hashing out of the box.
+There are clients for several systems, such as Memcached and Redis, that include support for consistent hashing out of the box. Some types of NoSQL databases rely on distributed hashing as well.
 
 [↑ Back to top](#systems_design-topics)
 
@@ -352,7 +337,7 @@ There are clients for several systems, such as Memcached and Redis, that include
 
 Sharding and partitioning are both techniques used to distribute data across multiple databases or tables to improve scalability, performance, and manageability of large-scale database systems. While they share a common goal of dividing data to manage it more effectively, there are distinctions in their approaches and use cases.
 
-Partitioning
+ ##### Partitioning
 Partitioning typically refers to dividing a database or table into smaller segments or partitions, often within a single database server. The main goal of partitioning is to improve manageability, performance, and efficiency of data retrieval. Data can be partitioned in various ways, such as by range (e.g., date ranges), list (e.g., category), or hash (based on a hash function applied to a partition key).
 
 Key characteristics of partitioning include:
@@ -360,8 +345,7 @@ Key characteristics of partitioning include:
 - It is primarily used to improve query performance, especially for read-heavy operations, by reducing the amount of data scanned during query execution.
 - Partitioning can be transparent to the application, as the database management system (DBMS) can handle data distribution and retrieval across partitions without requiring application-level changes.
 
-
-Sharding
+ ##### Sharding
 Sharding is a type of database partitioning that spreads data across multiple servers or database instances, effectively breaking up a large database into smaller, more manageable pieces called shards. Each shard holds a subset of the data, and the collection of shards make up the entire dataset. Sharding is primarily used to scale out applications horizontally, allowing for more data to be handled by adding more servers. It can significantly improve performance and reduce the load on any single server, as operations can be executed in parallel across shards.
 
 Key characteristics of sharding include:
@@ -369,7 +353,7 @@ Key characteristics of sharding include:
 - It is primarily used to improve performance and scalability of write-heavy database operations by distributing the load.
 - Sharding can be complex to implement and manage, as it often requires changes to application logic to handle data distribution and aggregation from multiple shards.
 
-Differences Between Sharding and Partitioning
+ ##### Differences Between Sharding and Partitioning
 - Scope of Distribution: Sharding distributes data across multiple servers or database instances, while partitioning divides data within a single database or table.
 - Purpose and Use Case: Sharding is used to scale databases horizontally by adding more servers to handle increased load, particularly for write operations. Partitioning is used to improve the manageability and query performance within a single database, especially for read operations.
 - Complexity and Management: Sharding tends to be more complex to implement and manage, as it requires careful planning of data distribution strategies and might necessitate application changes. Partitioning is often managed by the DBMS, requiring less direct intervention and being more transparent to applications.
@@ -412,11 +396,11 @@ Choosing the right cache update strategy involves balancing the need for data co
 
 [↑ Back to top](#systems_design-topics)
 
-### What is consistency and its patterns?
+### What is consistency?
 
 Consistency in the context of distributed systems refers to how a system guarantees that data remains accurate, synchronized, and reliable across multiple nodes or components, despite potential challenges like network failures, concurrent access, or data replication delays. Achieving consistency in such environments is crucial for maintaining the integrity and dependability of data operations. There are several patterns and models designed to manage consistency, each balancing the trade-offs between availability, consistency, and partition tolerance, famously summarized by the CAP theorem.
 
-Consistency Models
+ ##### Consistency Models
 - 1. Strong Consistency (Immediate Consistency). Strong consistency ensures that any read operation retrieves the most recent write operation's result, guaranteeing that all users see the same data at the same time. This model is simple to understand and reason about from a developer's perspective but can be challenging to achieve in distributed systems without impacting availability or performance due to the need for synchronous updates across all nodes.
 - 2. Eventual Consistency. Eventual consistency is a weaker consistency model where the system guarantees that if no new updates are made to a given data item, eventually all accesses to that item will return the same value. It is a common model in distributed systems that prioritize availability and partition tolerance over immediate consistency, allowing for temporary discrepancies between nodes with the understanding that they will become consistent over time.
 - 3. Causal Consistency. Causal consistency ensures that causally related updates (where one operation depends on the result of another) are seen by all nodes in the same order, while concurrent updates (independent from each other) may be seen in a different order on different nodes. This model provides a balance between strict consistency requirements and the flexibility needed in distributed environments.
@@ -425,7 +409,7 @@ Consistency Models
 - 6. Monotonic Read Consistency. Monotonic read consistency ensures that if a read operation returns a particular value, any subsequent read operations will never return an older value. This model helps prevent regressions in data seen by the client but does not guarantee immediate visibility of the latest writes.
 - 7. Monotonic Write Consistency. This pattern ensures that writes from a single source are applied in the order they were issued, which is crucial for maintaining the logical sequence of operations. It does not, however, guarantee immediate consistency across the system.
 
-Trade-offs and Considerations
+ ##### Considerations
 The choice of consistency model has significant implications for system design, particularly in balancing the trade-offs between consistency (C), availability (A), and partition tolerance (P) as outlined by the CAP theorem. Systems often need to prioritize two out of these three properties, leading to different consistency patterns being more suitable for some applications than others. The decision largely depends on the specific requirements of the application, such as the need for real-time data accuracy versus the need for high availability and fault tolerance.
 
 [↑ Back to top](#systems_design-topics)
@@ -434,29 +418,24 @@ The choice of consistency model has significant implications for system design, 
 
 A Content Delivery Network (CDN) is a distributed network of servers designed to deliver web content and pages to users based on their geographic locations, the origin of the webpage, and a content delivery server. CDNs are used to efficiently distribute the load of delivering content, reduce bandwidth costs, improve web page load times, and increase content availability and redundancy.
 
-
-How CDNs Work
+ ##### How CDNs Work
 CDNs store a cached version of its content in multiple geographical locations, known as "points of presence" (PoPs). Each PoP contains a number of caching servers responsible for content delivery to visitors within its proximity. When a user requests a webpage or other content, the request is redirected to the closest server geographically, rather than fetching the content from the website's central server. This significantly reduces the distance the data travels, decreasing latency, improving site speed, and providing a better user experience.
 
-
-Key Features of CDNs
+ ##### Key Features of CDNs
 - Reduced Latency: By serving content from locations closer to the user, CDNs reduce the time it takes for data to travel, thus reducing latency.
 - Scalability: CDNs can handle sudden spikes in traffic by distributing the load across multiple servers, making websites more scalable and reliable.
 - Content Availability and Redundancy: CDNs can reroute traffic in case of server failure, enhancing content availability and providing redundancy.
 - Optimized Bandwidth: Through caching and other optimizations, CDNs can reduce the amount of data transferred, lowering hosting costs and improving website load times.
 - Security: CDNs can improve security by providing DDoS protection, improving security certificates management, and other security features to safeguard websites against attacks.
 
-
-Types of Content Served by CDNs
-CDNs are versatile and can deliver a wide range of content, including:
+ ##### Types of CDN Content
 - Web objects (text, graphics, and scripts)
 - Downloadable objects (media files, software, documents)
 - Applications (e-commerce, portals)
 - Live streaming media, on-demand video, and social networks
 - And more
 
-
-Use Cases
+ ##### Use Cases
 CDNs are used across various types of websites and applications, especially those requiring high availability and performance, such as:
 - E-commerce sites, to ensure fast loading times during high traffic periods.
 - News and media websites, to handle the distribution of large video files and streams.
@@ -471,25 +450,20 @@ Leader election is a coordination mechanism used in distributed systems to ensur
 
 The need for leader election arises in scenarios where having multiple nodes perform the same operation could lead to conflicts, inconsistencies, or inefficiencies. By electing a leader, the system ensures that only one node is in charge of critical operations, simplifying the management of distributed tasks and reducing the likelihood of errors.
 
-
-How Leader Election Works
-Leader election algorithms vary in complexity and behavior, but they generally follow a basic process:
+ ##### How Leader Election Usually Works
 - Initiation: The election process starts when there's no current leader, perhaps due to the system starting up or the previous leader failing or stepping down.
 - Election: Nodes in the system communicate with each other using a predefined protocol to nominate and elect a new leader. This can be based on node IDs, timestamps, random choice, or other criteria that ensure a fair and decisive election.
 - Declaration: Once a leader is elected, the new leader announces its role to the other nodes, and those nodes acknowledge the leader's authority.
 - Operation: The leader then performs its designated tasks, while other nodes may take on worker roles or standby in a ready state to take over leadership if needed.
 - Monitoring and Failover: The system continuously monitors the health of the leader. If the leader fails or becomes unresponsive, the election process is reinitiated to select a new leader.
 
-
-Common Leader Election Algorithms
+ ##### Common Leader Election Algorithms
 - Bully Algorithm: This algorithm elects the node with the highest ID as the leader. If a node detects the leader is down, it starts an election, and the node with the highest ID among the contenders wins.
 - Ring Algorithm: In this approach, nodes are arranged in a logical ring, and election messages are passed around the ring until a leader is elected.
 - Raft Consensus Algorithm: Raft is a more modern consensus algorithm designed to be easy to understand. It ensures a leader is elected and that the leader coordinates all changes to the distributed data.
 - Zookeeper's Zab Protocol: Used by Apache Zookeeper to manage leader election among distributed processes. It ensures a single leader is elected and handles message coordination to maintain consistency.
 
-
-Applications of Leader Election
-Leader election is crucial in various distributed systems scenarios, including:
+ ##### Applications of Leader Election
 - Distributed databases and data stores to coordinate writes and maintain data consistency.
 - Cluster management systems (like Kubernetes or Apache Mesos) to manage resources and schedule tasks.
 - Distributed file systems to manage access to files and directories.
@@ -501,25 +475,20 @@ Leader election is crucial in various distributed systems scenarios, including:
 
 SSE stands for Server-Sent Events, a standard describing how servers can initiate data transmission towards browser clients once an initial client connection has been established. It is part of the HTML5 specification and provides a way to send real-time updates or continuous data streams from the server to the browser over a single, long-lived HTTP connection.
 
-
-Key Features of SSE
+ ##### Key Features of SSE
 - Unidirectional Communication: SSE allows data to be sent from the server to the client (browser) but not the other way around. For two-way communication, WebSockets might be a more suitable choice.
 - Text-based Protocol: SSE uses a simple text-based protocol, which makes it easy to implement and understand. Data is sent in a simple event-stream format.
 - Automatic Reconnection: If the connection to the server is lost, the browser automatically attempts to reconnect after a timeout. The server can also suggest a reconnection time via the retry field.
 - Event IDs: SSE supports event IDs that help the client keep track of the last event received. This is useful for resuming the event stream from the correct point after a disconnection.
 - Custom Events: Servers can specify event types, allowing clients to listen for specific types of messages and handle them accordingly.
 
-
-Use Cases for SSE
-SSE is particularly well-suited for applications that require real-time data updates from the server, such as:
+ ##### Use Cases for SSE
 - Live feeds: News, sports scores, or social media updates can be pushed to clients as they happen.
 - Notifications: Real-time notifications or alerts can be sent to users' browsers.
 - Real-time analytics: Updating dashboards with real-time metrics and analytics data.
 - Chat applications: Displaying new messages in chat applications (although two-way communication might require additional technology like WebSockets).
 
-
-Comparing SSE with WebSockets
-While both SSE and WebSockets provide mechanisms for real-time communication between clients and servers, there are key differences:
+ ##### Comparing SSE with WebSockets
 - Direction of Communication: SSE is designed for unidirectional communication (server to client), making it simpler but less flexible compared to WebSockets, which support full-duplex, two-way communication.
 - Protocol: SSE operates over standard HTTP, making it compatible with existing server and proxy configurations. WebSockets, however, use a different protocol (WebSocket), which can sometimes lead to challenges with proxies and firewalls.
 - Complexity and Overhead: SSE is simpler to implement on the server side and has lower overhead for sending simple notifications or updates from the server to the client. WebSockets provide more robust and flexible communication options but with slightly higher complexity and overhead.
@@ -531,19 +500,18 @@ In summary, SSE provides an efficient and standardized way for servers to push u
 
 Long polling is a web communication technique used to simulate pushing data from the server to the client, making it appear as if the server is initiating the transfer of data. Unlike traditional polling, where the client repeatedly requests data from the server at regular intervals, long polling keeps the connection open for a longer period, allowing the server to respond whenever new data becomes available within a certain timeframe.
 
-
-How Long Polling Works
+ ##### How Long Polling Works
 - Client Request: The client sends a request to the server to ask for new information.
 - Server Holding: Instead of responding immediately with no data if there's nothing new, the server holds the request open, waiting until new data becomes available or a timeout occurs.
 - Server Response: Once new data is available or a timeout is reached, the server sends the response back to the client with the new information or a notice that no new data is available.
 - Repeat: After receiving the server's response, the client immediately sends another request, and the process repeats. This creates a near-continuous connection between the client and the server.
 
-Advantages of Long Polling
+ ##### Advantages of Long Polling
 - Real-time Updates: It allows the server to send updates as soon as new data is available, making it suitable for applications that require real-time information, such as chat apps or live feeds.
 - Simplicity: Long polling is relatively easy to implement on both client and server sides, and it doesn't require special protocols or servers, unlike WebSockets or Server-Sent Events (SSE).
 - Compatibility: It works with existing HTTP infrastructure and is compatible with web browsers that do not support newer technologies like WebSockets.
 
-Disadvantages of Long Polling
+ ##### Disadvantages of Long Polling
 - Resource Intensive: Keeping connections open for long periods can be resource-intensive for the server, especially with a large number of clients, as each open connection consumes server resources.
 - Latency: While it reduces latency compared to traditional polling, there's still a delay between when data becomes available and when the server sends the response, especially if the connection times out and needs to be re-established.
 - Scalability: Scalability can be an issue due to the high number of open connections the server has to manage, which can be mitigated but requires additional infrastructure and complexity.
@@ -587,7 +555,7 @@ Off-page SEO focuses on external factors that influence your site's authority an
 - Social Signals: While not a direct ranking factor, social media activity can increase visibility and traffic, indirectly affecting SEO.
 - Online Reputation and Reviews: Managing your online reputation, including encouraging positive reviews, which can influence both users and search engine perceptions.
 
-Best Practices for Effective SEO
+ ##### Best Practices for Effective SEO
 - Continuous Improvement: SEO is not a one-time task but an ongoing process. Search engines frequently update their algorithms, so staying informed and adapting your strategies is crucial.
 - User Experience (UX): Prioritize creating a positive user experience, as factors like dwell time (how long visitors stay on your site) can influence rankings.
 - Avoid Black Hat Techniques: Stick to ethical SEO practices. Techniques designed to trick search engines (like keyword stuffing, cloaking, or buying links) can result in penalties.
@@ -603,8 +571,7 @@ The Domain Name System (DNS) is a hierarchical and decentralized naming system u
 
 DNS is fundamental to the functionality of the internet, providing a quick and user-friendly way of accessing websites without needing to remember the numerical IP addresses of web servers. It's often described as the "phonebook of the internet" because it converts human-readable domain names into machine-readable IP addresses, allowing browsers to load Internet resources.
 
-
-How DNS Works:
+ ##### How DNS Works
 - 1. DNS Query: When you type a web address (e.g., www.example.com) into your browser, your computer sends a DNS query to find the corresponding IP address for that website.
 - 2. Recursive Resolver: The query first goes to a DNS recursive resolver, typically operated by your Internet Service Provider (ISP). If the resolver has the IP address in its cache from a previous lookup, it returns the address to your computer. If not, it queries further.
 - 3. Root Name Servers: The resolver then queries one of the root name servers. The root server responds with the address of a Top-Level Domain (TLD) name server (e.g., .com, .net, .org) that stores information for its domains.
@@ -612,8 +579,7 @@ How DNS Works:
 - 5. Authoritative Name Servers: Finally, the resolver queries the authoritative name server for the web address. This server has access to the domain's records and responds with the IP address of the server where the website is hosted.
 - 6. Resolution: The DNS resolver sends the IP address back to your computer. Your computer can then make a direct request to the web server at that IP address to access the website.
 
-
-Key components:
+ ##### Key components:
 Domain: A human-friendly address of a website (e.g., www.example.com). 
 IP Address: A unique numeric identifier for each device on a network.
 DNS Resolver: Acts as a mediator between the user and DNS servers to find the correct IP address.
@@ -627,19 +593,10 @@ Authoritative Name Servers: Hold the DNS records for individual domains, providi
 
 WebSocket is a communication protocol that provides a full-duplex communication channel over a single, long-lived connection between a client (typically a web browser) and a server. Unlike HTTP, which is stateless and requires a new connection for each request/response pair, WebSocket allows for continuous two-way communication, enabling real-time data transfer without the need to repeatedly establish connections. This makes it particularly well-suited for applications that require real-time updates, such as live chat applications, online gaming, real-time notifications, and collaborative platforms.
 
-
-How to Implement a WebSocket
-Server-Side Implementation
+ ##### How to Implement a WebSocket on the Server-Side
 - 1) Choose a WebSocket Library: For most programming languages, there are libraries available that simplify the process of implementing WebSocket servers. For example, in Node.js, you might use the ws or socket.io library.
 - 2) Create a WebSocket Server: Using your chosen library, create a WebSocket server that listens for incoming WebSocket connections. Define the logic for handling different types of messages from clients, such as opening connections, closing connections, and processing incoming data.
 - 3) Handling Connections: Implement event handlers to manage connection lifecycle events, including connection establishment (onopen), receiving messages (onmessage), error handling (onerror), and connection closure (onclose).
-
-Client-Side Implementation
-- 1) Creating a WebSocket Connection: In the browser, use the WebSocket API to create a new WebSocket connection by specifying the URL of the WebSocket server. The URL scheme starts with ws:// or wss:// for secure connections.
-- 2) Handling Events: Similar to the server side, implement event handlers on the client side to manage connection events, including opening the connection, receiving messages, handling errors, and closing the connection.
-- 3) Sending and Receiving Messages: Use the send method to send data to the server and process received data in the onmessage event handler.
-
-Server-Side Example (Node.js using ws library):
 ```javascript
 const WebSocket = require("ws");
 const wss = new WebSocket.Server({ port: 8080 });
@@ -651,7 +608,11 @@ wss.on("connection", function connection(ws) {
 });
 
 ```
-Client-Side Example (HTML/JavaScript):
+
+ ##### How to Implement a Websocket on the Client-Side
+- 1) Creating a WebSocket Connection: In the browser, use the WebSocket API to create a new WebSocket connection by specifying the URL of the WebSocket server. The URL scheme starts with ws:// or wss:// for secure connections.
+- 2) Handling Events: Similar to the server side, implement event handlers on the client side to manage connection events, including opening the connection, receiving messages, handling errors, and closing the connection.
+- 3) Sending and Receiving Messages: Use the send method to send data to the server and process received data in the onmessage event handler.
 ```javascript
 <script>
   var ws = new WebSocket("ws://localhost:8080"); ws.onopen = function()
@@ -661,7 +622,7 @@ Client-Side Example (HTML/JavaScript):
 
 ```
 
-Why Use WebSocket Over HTTP?
+ ##### Why Use WebSocket Over HTTP?
 - Real-Time Communication: WebSocket provides a real-time, two-way communication channel, making it ideal for applications that require instant updates.
 - Lower Overhead: After the initial handshake, WebSocket does not require the HTTP headers for each message, reducing the amount of overhead and improving performance, especially for frequent and small messages.
 - Persistent Connection: WebSocket keeps the connection open, eliminating the need to establish a new connection for each message exchange, as is necessary with HTTP. This persistent connection reduces latency and increases efficiency.
@@ -681,7 +642,7 @@ Lowering latency is crucial in many scenarios, such as:
 - 3) Real-Time Communication Applications: Video conferencing, VoIP, and live streaming services benefit significantly from lower latency, as it enables more natural and interruption-free conversations and interactions among participants.
 - 4) Web Applications and Services: Websites and web applications strive for lower latency to improve user experience, ensuring that pages load quickly and interactions feel responsive.
 
-Strategies for Achieving Lower Latency
+ ##### Strategies for Achieving Lower Latency
 - Optimizing Network Routes: Using the most direct network paths between clients and servers can reduce transmission times.
 - Content Delivery Networks (CDNs): Distributing content across geographically dispersed servers allows users to access data from a location closer to them, reducing latency.
 - Edge Computing: Processing data closer to the source of data generation (at the "edge" of the network) reduces the need for long-distance communications to central servers.
@@ -689,21 +650,21 @@ Strategies for Achieving Lower Latency
 - Protocol Optimization: Using protocols designed for low latency, such as WebSockets for real-time web applications, can reduce the delays introduced by communication protocols.
 - Caching: Storing frequently accessed data in temporary storage close to the user (such as in-browser caches or edge nodes) minimizes the need for repeated data retrieval actions.
 
-In essence, lower latency interaction enhances the performance and user experience of digital services and applications by minimizing delays, making activities such as online gaming, real-time communication, and interactive web browsing more efficient and enjoyable.
+Lower latency interaction enhances the performance and user experience of digital services and applications by minimizing delays, making activities such as online gaming, real-time communication, and interactive web browsing more efficient and enjoyable.
 
 [↑ Back to top](#systems_design-topics)
 
-### How does buffer overflow work?
+### What is buffer overflow?
 
 A buffer overflow occurs when more data is written to a buffer (a temporary storage area in memory) than it can hold. Since buffers have a fixed capacity, any extra data can overflow into adjacent memory spaces. This behavior can lead to various types of software vulnerabilities, including crashes, data corruption, and security breaches, such as unauthorized access or execution of malicious code.
 
-How Buffer Overflow Works:
+ ##### How Buffer Overflow Works
 - 1) Buffer Definition and Data Writing: A buffer is typically created by allocating a fixed amount of memory for storing data, such as user input. When data is written into the buffer, it's expected that the amount does not exceed the allocated size.
 - 2) Overflow Condition: The overflow happens when the program does not properly check the amount of data written into the buffer, allowing more data to be written than there is space allocated for it.
 - 3) Memory Corruption: The extra data that cannot fit in the buffer spills over into adjacent memory spaces. This can overwrite important data, such as other variables, program state information, or even the instructions to be executed next (the return address of a function, for example).
 - 4) Exploitation: Malicious actors can exploit buffer overflows by carefully crafting the input data so that the overflow overwrites specific areas of memory with payloads designed to execute arbitrary code. If, for example, the return address of a function is overwritten with the address of the injected malicious code, the program's execution flow can be hijacked, allowing attackers to execute code with the privileges of the vulnerable program.
 
-Preventing Buffer Overflows: To mitigate buffer overflow vulnerabilities, developers and programmers use several strategies, including:
+ ##### Preventing Buffer Overflows
 - Bounds Checking: Implementing checks in the code to ensure that data written to a buffer does not exceed its allocated size.
 - Safe Programming Languages: Using programming languages that inherently check array and buffer boundaries, such as Java or Python, can prevent buffer overflows.
 - Static Code Analysis: Utilizing tools that analyze source code for potential buffer overflow vulnerabilities before the application is run.
@@ -733,7 +694,8 @@ Distributed systems, which consist of components located on different networked 
 
 ### How do you design a notification system?
 
-Required Features
+
+ ##### Required Features
 - Multi-channel support (e.g., email, SMS, push notifications, in-app messages)
 - User subscription and preference management
 - Rate limiting and throttling to prevent spam
@@ -744,8 +706,7 @@ Required Features
 - Security and privacy compliance (e.g., GDPR for EU users)
 - Integration capabilities with external services (e.g., SMS gateways, email service providers)
 
-
-Common Issues
+ ##### Common Issues
 - Handling high latency in notification delivery
 - Managing scalability to accommodate peak loads
 - Ensuring reliable delivery across all channels
@@ -755,8 +716,7 @@ Common Issues
 - Avoiding notification spam and ensuring relevance
 - Adapting to the diverse and changing landscape of client devices and platforms
 
-
-Resolutions
+ ##### Resolutions
 - Implement content delivery networks (CDNs) and edge computing to reduce latency by serving notifications from locations closer to the end-user.
 - Utilize a microservices architecture for the notification system, allowing for the dynamic allocation of resources and scaling of individual components based on demand.
 - Leverage message queueing and background processing for notifications, ensuring that failures in one channel do not affect others, and implement retry mechanisms for failed deliveries.
@@ -766,8 +726,7 @@ Resolutions
 - Implement user preferences and behavior tracking to personalize and limit the frequency of notifications, ensuring that each message is relevant and valuable to the recipient.
 - Develop a platform-agnostic core for the notification system that can easily integrate with new devices and technologies, ensuring long-term adaptability.
 
-
-Considerations
+ ##### Considerations
 - Choosing between push and pull notification models based on use case
 - Balancing between immediate and batched notifications for efficiency
 - Implementing user feedback loops for optimizing notification strategies
@@ -781,7 +740,8 @@ Considerations
 
 ### How do you design Tic-Tac-Toe?
 
-Required Features
+
+ ##### Required Features
 - Two-player gameplay support, either local (two players on the same device) or online (players on separate devices)
 - A 3x3 grid that players can interact with to place their X or O
 - Ability to determine a win, loss, or draw based on the game's rules
@@ -789,24 +749,21 @@ Required Features
 - Reset or new game functionality to start over without restarting the application
 - Score tracking to keep track of wins, losses, and draws for each session
 
-
-Common Issues
+ ##### Common Issues
 - Ensuring fairness and turn management in online play
 - Handling disconnections or timeouts in online matches
 - Designing a user-friendly interface that works on multiple device types
 - Preventing cheating in online play
 - Scaling the system for a large number of concurrent online games
 
-
-Resolutions
+ ##### Resolutions
 - Implement a server-based turn validation system to manage turn sequence and ensure fairness.
 - Use a heartbeat or ping mechanism to detect disconnections and allow reconnection within a certain timeframe.
 - Adopt responsive design principles to ensure the game interface is adaptable to different screen sizes and resolutions.
 - Implement server-side checks and validations to prevent cheating and ensure moves are legal.
 - Utilize scalable cloud services and load balancing to manage and distribute server load for handling multiple concurrent games efficiently.
 
-
-Considerations
+ ##### Considerations
 - Choosing between a simple AI opponent for single-player mode and the complexity of implementing it
 - Deciding on communication protocols for online play (WebSockets, HTTP long polling) to balance real-time updates and server load
 - Providing customization options (e.g., choosing symbols, game board themes) to enhance user experience
@@ -817,7 +774,8 @@ Considerations
 
 ### How do you design a web cache?
 
-Required Features
+
+ ##### Required Features
 - Caching strategies (e.g., Least Recently Used (LRU), First In First Out (FIFO), etc.) to manage cache eviction
 - Support for different content types (HTML, images, files) and sizes
 - Configurable TTL (Time to Live) for cached objects to ensure freshness
@@ -827,24 +785,21 @@ Required Features
 - Secure storage and transmission of sensitive data
 - Monitoring and analytics tools to track cache hits, misses, and performance metrics
 
-
-Common Issues
+ ##### Common Issues
 - Cache coherence and stale data, leading to outdated content being served
 - Cache stampedes, where simultaneous requests for the same non-cached resource overwhelm the origin server
 - Cache size and eviction policies, balancing between cache hit rates and resource consumption
 - Security concerns with cached sensitive data
 - Complexity in invalidating and updating cached content accurately
 
-
-Resolutions
+ ##### Resolutions
 - Implement conditional GET requests and use ETags or Last-Modified headers to validate cache freshness
 - Use techniques like cache locking or request collapsing to mitigate cache stampedes
 - Adopt smart eviction policies that consider both data access patterns and the size/time constraints of cached objects
 - Encrypt sensitive data in the cache and ensure secure connections (e.g., TLS) for data transmission
 - Automate cache invalidation based on predefined rules or notifications from the origin server about data updates
 
-
-Considerations
+ ##### Considerations
 - Choosing between a distributed cache and a local cache based on the application architecture and requirements
 - Deciding on the cache placement (client-side, server-side, CDN) for optimal performance
 - Determining the granularity of caching (whole pages, fragments, database queries) to best suit the application's needs
@@ -855,16 +810,15 @@ Considerations
 
 ### How do you design a key-value store, and what problems do they solve?
 
-A key-value store, also referred to as a key-value database (and is one type of NoSQL database) uses a simple key-value method to store data. Unlike traditional relational databases that use tables, rows, and columns, key-value stores work by creating a unique identifier (key) for each piece of data, which is then used to retrieve or modify the data (value). Each unique identifier is stored as a key with its associated value. This data pairing is known as a 'key-value' pair. In a key-value pair, the key must be unique, and the value associated with the key can be accessed through the key. Keys can be plain text or hashed values. For performance reasons, a short key works better. An example: Plain text key: 'last_logged_in_at',  Hashed key: 253DDEC4. The value in a key-value pair can be strings, lists, objects, etc. 
+A key-value store, also referred to as a key-value database (one type of NoSQL database) uses a simple key-value method to store data. Unlike traditional relational databases that use tables, rows, and columns, key-value stores work by creating a unique identifier (key) for each piece of data, which is then used to retrieve or modify the data (value). Each unique identifier is stored as a key with its associated value. This data pairing is known as a 'key-value' pair. In a key-value pair, the key must be unique, and the value associated with the key can be accessed through the key. Keys can be plain text or hashed values. For performance reasons, a short key works better. An example: Plain text key: 'last_logged_in_at',  Hashed key: 253DDEC4. The value in a key-value pair can be strings, lists, objects, etc. 
 
 For large applications, it is infeasible to fit a complete data set in a single server. The simplest way to accomplish this is to split the data into smaller partitions and store them in multiple servers (called sharding). There are two challenges while partitioning the data: 1) distribute the data across multiple servers evenly, 2) minimize data inconsistency and movement when nodes are added or removed. Consistent hashing using a hash ring is a great way to resolve both of these issues.
 
-
-Data Replication
+ ##### Data Replication
 To achieve high availability and reliability, data must be replicated asynchronously over N servers, where N is a configurable parameter. These N servers are chosen using the following logic: after a key is mapped to a position on the hash ring, walk clockwise from that position and choose the first N servers on the ring to store data copies. In the below image (N = 3), key0 is replicated at s1, s2, and s3. With virtual nodes, the first N nodes on the ring may be owned by fewer than N physical servers. To avoid this issue, we only choose unique servers while performing the clockwise walk logic. Nodes in the same data center often fail at the same time due to power outages, network issues, natural disasters, etc. For better reliability, replicas are placed in distinct data centers, and data centers are connected through high-speed networks.
 ![key_value_store](../InterviewQuestions/images/systems_design/key_value_store.png)
 
-Consistency
+ ##### Consistency
 Since data is replicated at multiple nodes, it must be synchronized across replicas. Quorum consensus can guarantee consistency for both read and write operations. Let us establish a few definitions first. N = The number of replicas. W = A write quorum of size W. For a write operation to be considered as successful, write operation must be acknowledged from W replicas. R = A read quorum of size R. For a read operation to be considered as successful, read operation must wait for responses from at least R replicas. Consider the below example where N = 3. 
 
 W = 1 does not mean data is written on one server. For instance, with the configuration shown below, data is replicated at s0, s1, and s2. W = 1 means that the coordinator must receive at least one acknowledgment before the write operation is considered as successful. For instance, if we get an acknowledgment from s1, we no longer need to wait for acknowledgements from s0 and s2. A coordinator acts as a proxy between the client and the nodes. The configuration of W, R and N is a typical tradeoff between latency and consistency. If W = 1 or R = 1, an operation is returned quickly because a coordinator only needs to wait for a response from any of the replicas. If W or R > 1, the system offers better consistency; however, the query will be slower because the coordinator must wait for the response from the slowest replica. If W + R > N, strong consistency is guaranteed because there must be at least one overlapping node that has the latest data to ensure consistency.
@@ -877,15 +831,14 @@ If W + R > N, strong consistency is guaranteed (Usually N = 3, W = R = 2).
 If W + R <= N, strong consistency is not guaranteed. 
 Depending on the requirement, we can tune the values of W, R, N to achieve the desired level of consistency.
 
-
-Consistency models
+ ##### Consistency Models
 Consistency model is another important factor to consider when designing a key-value store. A consistency model defines the degree of data consistency, and a wide spectrum of possible consistency models exist: 
 Strong consistency: any read operation returns a value corresponding to the result of themost updated write data item. A client never sees out-of-date data. Bank systems usually have extremely high consistentcy requirements. 
 Weak consistency: subsequent read operations may not see the most updated value. 
 Eventual consistency: this is a specific form of weak consistency. Given enough time, all updates are propagated, and all replicas are consistent. Strong consistency is usually achieved by forcing a replica not to accept new reads/writes until every replica has agreed on current write. This approach is not ideal for highly availablesystems because it could block new operations. Dynamo and Cassandra adopt eventual consistency, which is our recommended consistency model for our key-value store. From concurrent writes, eventual consistency allows inconsistent values to enter the system and force the client to read the values to reconcile.
 ![key_value_store3](../InterviewQuestions/images/systems_design/key_value_store3.png)
 
-Inconsistency resolution using versioning
+ ##### Inconsistency Resolution Using Versioning
 Replication gives high availability but causes inconsistencies among replicas. Versioning and vector locks are used to solve inconsistency problems. Versioning means treating each data modification as a new immutable version of data. An example of how inconsistency occurs:
 ![key_value_store4](../InterviewQuestions/images/systems_design/key_value_store4.png)
 Both replica nodes n1 and n2 have the same value. Let us call this value the original value. Server 1 and server 2 get the same value for get('name') operation. Next, server 1 changes the name to 'johnSanFrancisco', and server 2 changes the name to 'johnNewYork'. These two changes are performed simultaneously. Now, we have conflicting values, called versions v1 and v2.
@@ -896,7 +849,7 @@ Increment vi if [Si, vi] exists.
 Otherwise, create a new entry [Si, 1].
 Even though vector clocks can resolve conflicts, there are two notable downsides. First, vector clocks add complexity to the client because it needs to implement conflict resolution logic. Second, the [server: version] pairs in the vector clock could grow rapidly. To fix this problem, we set a threshold for the length, and if it exceeds the limit, the oldest pairs are removed. This can lead to inefficiencies in reconciliation because the descendant relationship cannot be determined accurately. However, Amazon has not yet encountered this problem in production; therefore, it is probably an acceptable solution for most companies.
 
-Handling failures
+ ##### Failure Handling
 As with any large system at scale, failures are not only inevitable but common. In a distributed system, it is insufficient to believe that a server is down because another server says so. Usually, it requires at least two independent sources of information to mark a server down. All-to-all multicasting is a straightforward solution. However, this is inefficient when many servers are in the system. A better solution is to use decentralized failure detection methods like gossip protocol. Gossip protocol works as follows:
 Each node maintains a node membership list, which contains member IDs and heartbeat counters. 
 Each node periodically increments its heartbeat counter. 
@@ -911,7 +864,7 @@ Since s2 is unavailable, reads and writes will be handled by s3 temporarily. Whe
 Hinted handoff is used to handle temporary failures. What if a replica is permanently unavailable? To handle such a situation, we implement an anti-entropy protocol to keep replicas in sync. Anti-entropy involves comparing each piece of data on replicas and updating each replica to the newest version. A Merkle tree is used for inconsistency detection and minimizing the amount of data transferred. A hash tree or Merkle tree is a tree in which every non-leaf node is labeled with the hash of the labels or values (in case of leaves) of its child nodes. Hash trees allow efficient and secure verification of the contents of large data structures. Assuming key space is from 1 to 12, the following steps show how to build a Merkle tree. 
 
 Highlighted boxes indicate inconsistency. 
-Step 1: Divide key space into buckets (4 in our example) as shown. A bucket is used as the root level node to maintain a limited depth of the tree.
+Step 1: Divide key space into buckets (4 in this example) as shown. A bucket is used as the root level node to maintain a limited depth of the tree.
 ![key_value_store6](../InterviewQuestions/images/systems_design/key_value_store6.png)
 ![key_value_store7](../InterviewQuestions/images/systems_design/key_value_store7.png)
 To compare two Merkle trees, start by comparing the root hashes. If root hashes match, both servers have the same data. If root hashes disagree, then the left child hashes are compared followed by right child hashes. You can traverse the tree to find which buckets are not synchronized and synchronize those buckets only. Using Merkle trees, the amount of data needed to be synchronized is proportional to the differences between the two replicas, and not the amount of data they contain. In real-world systems, the bucket size is quite big. For instance, a possible configuration is one million buckets per one billion keys, so each bucket only contains 1000 keys.
@@ -929,12 +882,11 @@ There is no single point of failure as every node has the same set of responsibi
 As the design is decentralized, each node performs many tasks:
 ![key_value_store9](../InterviewQuestions/images/systems_design/key_value_store9.png)
 
-Write path
+ ##### Write path
 ![key_value_store10](../InterviewQuestions/images/systems_design/key_value_store10.png)
 The above image shows what happens after a write request is directed to a specific node. These designs for write/read paths are primary based on the architecture of Cassandra. 1) The write request is persisted on a commit log file. 2) Data is saved in the memory cache. When the memory cache is full or reaches a predefined threshold, data is flushed to SSTable on disk. Note: A sorted-string table (SSTable) is a sorted list of <key, value> pairs.
 
-Read path
-
+ ##### Read Path
 ![key_value_store11](../InterviewQuestions/images/systems_design/key_value_store11.png)
 If the data is not in memory, it will be retrieved from the disk instead. We need an efficient way to find out which SSTable contains the key. Bloom filter is commonly used to solve this problem. The read path is shown above when data is not in memory. 
 1. The system first checks if data is in memory. If not, go to step 2. 
@@ -947,29 +899,27 @@ If the data is not in memory, it will be retrieved from the disk instead. We nee
 
 ### How do you design a unique ID generator in distributed systems?
 
-Required Features
+
+ ##### Required Features
 - Uniqueness across the entire system to prevent ID collisions.
 - Scalability to support high throughput and fast generation of IDs under load.
 - Temporal ordering, where newer IDs are greater than older ones, if required by the application logic.
 - Compactness, ensuring IDs are of a manageable size for storage and transmission efficiency.
 - Decentralization to allow ID generation without reliance on a single point of failure.
 
-
-Common Issues
+ ##### Common Issues
 - Synchronization challenges in a distributed environment to ensure ID uniqueness.
 - Performance bottlenecks when a central service is used for ID generation.
 - Handling node failures and network partitions without interrupting ID generation.
 - Ensuring IDs do not predictably increase to prevent enumeration attacks.
 
-
-Resolutions
+ ##### Resolutions
 - Implementing algorithms like Snowflake or ULID, which combine timestamps, machine or process identifiers, and sequence numbers to generate unique IDs.
 - Using distributed consensus algorithms (e.g., Raft, Paxos) for coordination when central ID stores are necessary.
 - Adopting a multi-layered approach, where local ID buffers are filled in batches from a central or regional service to reduce dependency.
 - Incorporating randomness or cryptographic hashes to make ID sequences less predictable.
 
-
-Considerations
+ ##### Considerations
 - Choosing between strictly ordered versus loosely ordered ID generation based on application requirements.
 - Balancing between ID generation speed and system complexity.
 - Considering the impact of ID size on system performance, especially in database indexing and network transmission.
@@ -980,7 +930,8 @@ Considerations
 
 ### How do you design a ticketing system like JIRA?
 
-Required Features
+
+ ##### Required Features
 - Project and task management capabilities, including creation, assignment, tracking, and closing of tickets.
 - Customizable workflows to match different project management styles and processes.
 - User roles and permissions to control access and actions within the system.
@@ -991,8 +942,7 @@ Required Features
 - Support for attachments and links to allow users to add additional information to tickets.
 - Commenting and collaboration tools to facilitate communication within the team.
 
-
-Common Issues
+ ##### Common Issues
 - Scalability issues as the number of tickets, projects, and users grows.
 - Ensuring data consistency and integrity across different parts of the application.
 - Managing complex workflows and customizations without impacting system performance.
@@ -1000,8 +950,7 @@ Common Issues
 - Integrating seamlessly with a wide range of external tools and systems.
 - Maintaining high availability and minimizing downtime for a system critical to daily operations.
 
-
-Resolutions
+ ##### Resolutions
 - Design the system with microservices architecture to improve scalability and ease of updates.
 - Implement robust data validation and transaction management to ensure data integrity.
 - Use a flexible data model and workflow engine that can accommodate various customization needs without degrading performance.
@@ -1009,8 +958,7 @@ Resolutions
 - Develop a comprehensive API and use webhooks to facilitate integration with external systems.
 - Utilize cloud-based infrastructure with auto-scaling capabilities and implement disaster recovery strategies to achieve high availability.
 
-
-Considerations
+ ##### Considerations
 - Balancing feature richness with ease of use to avoid overwhelming users.
 - Choosing the right technologies and frameworks that can support long-term growth and adaptability of the system.
 - Implementing strong security measures to protect sensitive project data and user information.
@@ -1021,7 +969,8 @@ Considerations
 
 ### How do you design an e-commerce store?
 
-Required Features
+
+ ##### Required Features
 - Product catalog with categories, descriptions, images, and prices
 - Search and filter functionality for finding products
 - User accounts and profiles for order tracking and history
@@ -1033,8 +982,7 @@ Required Features
 - Promotions and discounts management
 - Inventory management to track and update stock levels
 
-
-Common Issues
+ ##### Common Issues
 - Scalability challenges with increasing products, users, and transactions
 - Security vulnerabilities, including data breaches and payment fraud
 - Complex navigation and poor search functionality leading to low conversion rates
@@ -1042,8 +990,7 @@ Common Issues
 - Managing consistent and accurate inventory levels across multiple channels
 - Ensuring high availability and fast loading times under heavy load
 
-
-Resolutions
+ ##### Resolutions
 - Use a scalable cloud hosting solution with CDN for global reach and performance
 - Implement robust security protocols, regular audits, and compliance with PCI DSS for payment processing
 - Design a user-friendly interface with an efficient search engine and intuitive navigation
@@ -1051,8 +998,7 @@ Resolutions
 - Adopt real-time inventory management systems synchronized across all sales channels
 - Optimize website performance through efficient coding practices, image optimization, and using a reliable Content Delivery Network (CDN)
 
-
-Considerations
+ ##### Considerations
 - Providing a personalized shopping experience through recommendations and targeted promotions
 - Ensuring compliance with legal requirements, including GDPR for customer data protection
 - Developing a mobile-first approach given the increasing prevalence of mobile e-commerce
@@ -1064,7 +1010,8 @@ Considerations
 
 ### How do you design an online portal to sell products?
 
-Required Features
+
+ ##### Required Features
 - User registration and profile management for personalized experiences
 - Product catalog with detailed descriptions, images, and pricing information
 - Search and filtering capabilities to help users find products
@@ -1076,24 +1023,21 @@ Required Features
 - Product reviews and ratings to assist purchase decisions
 - Promotional and discount code functionality
 
-
-Common Issues
+ ##### Common Issues
 - Managing high traffic volumes without performance degradation
 - Protecting against security breaches and data theft
 - Ensuring accurate inventory management across multiple sales channels
 - Providing a seamless and intuitive user experience
 - Integrating efficiently with third-party services (payment gateways, shipping providers)
 
-
-Resolutions
+ ##### Resolutions
 - Utilizing scalable cloud infrastructure and CDN for global reach and load management
 - Implementing strong cybersecurity measures, including SSL, two-factor authentication, and regular security audits
 - Adopting real-time inventory updates and synchronization technology
 - Conducting usability testing to refine the user interface and experience
 - Creating robust APIs for seamless integration with third-party services
 
-
-Considerations
+ ##### Considerations
 - Ensuring compliance with legal regulations, including data protection laws and tax requirements
 - Optimizing for search engines (SEO) to enhance product visibility
 - Developing a content strategy for engaging product descriptions and blog content
@@ -1104,7 +1048,8 @@ Considerations
 
 ### How do you design a fitness wearable to measure heart rate?
 
-Required Features
+
+ ##### Required Features
 - Continuous heart rate monitoring with high accuracy
 - Real-time data display on the device or through a connected app
 - Long battery life to support extended monitoring periods
@@ -1115,24 +1060,21 @@ Required Features
 - Integration with other health metrics tracking, such as steps, calories, and sleep quality
 - Secure data storage and privacy protection
 
-
-Common Issues
+ ##### Common Issues
 - Inaccuracy in heart rate measurement due to motion artifacts or poor fit
 - Limited battery life requiring frequent recharges
 - Skin irritation or discomfort from prolonged wear
 - Difficulty in syncing data with other devices or platforms
 - Water damage affecting the device's functionality
 
-
-Resolutions
+ ##### Resolutions
 - Implementing advanced algorithms and sensor technology to filter motion artifacts and improve accuracy
 - Using energy-efficient components and optimizing software for longer battery life
 - Selecting hypoallergenic and breathable materials for the band to reduce skin irritation
 - Ensuring robust Bluetooth or Wi-Fi connectivity for reliable data sync
 - Designing the device with a high waterproof rating for protection against water and sweat
 
-
-Considerations
+ ##### Considerations
 - Ensuring the device is easy to use and understand for a wide range of users
 - Offering different sizes or adjustability options to fit various wrist sizes
 - Balancing advanced features with cost to make the device accessible to more users
@@ -1143,7 +1085,8 @@ Considerations
 
 ### How do you design an online shopping cart?
 
-Required Features
+
+ ##### Required Features
 - Product addition and removal capabilities, allowing users to easily modify their cart contents
 - Real-time update of quantities, with the ability to increase or decrease the number of items
 - Price calculation, including itemized costs, discounts, taxes, and total price
@@ -1154,24 +1097,21 @@ Required Features
 - Compatibility with multiple devices and browsers
 - Secure handling of user data and transactions
 
-
-Common Issues
+ ##### Common Issues
 - Cart abandonment due to complex navigation or checkout processes
 - Inaccurate inventory management leading to the sale of out-of-stock items
 - Performance issues under high load, especially during sales or peak shopping times
 - Data consistency challenges, especially in distributed systems where carts are accessed across different devices
 - Security vulnerabilities, including exposure to CSRF, XSS, and SQL injection attacks
 
-
-Resolutions
+ ##### Resolutions
 - Streamlining the checkout process and providing clear progress indicators
 - Implementing real-time inventory checks and alerts for low-stock items
 - Utilizing scalable cloud services and efficient database design to manage load
 - Adopting strategies like eventual consistency and session storage to ensure data consistency
 - Enforcing strict security measures, regular audits, and adhering to best practices in web development
 
-
-Considerations
+ ##### Considerations
 - Ensuring a seamless user experience across all devices and platforms
 - Providing users with options for guest checkout or account creation for enhanced flexibility
 - Offering multiple payment and shipping options to cater to a wide range of preferences
@@ -1182,7 +1122,8 @@ Considerations
 
 ### How do you design an API?
 
-Required Features
+
+ ##### Required Features
 - Well-defined endpoints that clearly specify the purpose and functionality
 - Authentication and authorization mechanisms to secure access
 - Rate limiting to manage and protect the API from abuse and overuse
@@ -1193,8 +1134,7 @@ Required Features
 - Support for multiple data formats (e.g., JSON, XML) where necessary
 - Caching mechanisms to improve performance and reduce server load
 
-
-Common Issues
+ ##### Common Issues
 - Poorly defined endpoints leading to confusion and misuse
 - Inadequate security leading to data breaches or unauthorized access
 - Overloading or abuse causing downtime or degraded performance
@@ -1203,8 +1143,7 @@ Common Issues
 - Insufficient or outdated documentation hindering adoption and use
 - Inconsistent naming conventions and practices reducing usability
 
-
-Resolutions
+ ##### Resolutions
 - Adopt RESTful principles or GraphQL for clear and intuitive endpoint design
 - Implement robust security protocols like OAuth for access control
 - Enforce rate limiting with clear policies and feedback mechanisms
@@ -1213,8 +1152,7 @@ Resolutions
 - Maintain comprehensive and interactive API documentation using tools like Swagger or Postman
 - Establish and adhere to a consistent naming convention and API design guidelines
 
-
-Considerations
+ ##### Considerations
 - Designing with scalability in mind to accommodate growth in users and traffic
 - Ensuring high availability and reliability through redundant infrastructure and monitoring
 - Providing clear guidelines and support for developers integrating with the API
@@ -1227,7 +1165,8 @@ Considerations
 
 ### How do you design autocomplete for a search engine?
 
-Required Features
+
+ ##### Required Features
 - Real-time suggestions as the user types their query
 - Relevance ranking to ensure the most relevant suggestions are displayed first
 - Handling of typos and misspellings to guide users towards correct queries
@@ -1237,24 +1176,21 @@ Required Features
 - Performance optimization to ensure low latency in suggestions delivery
 - Privacy protection for user data and search inputs
 
-
-Common Issues
+ ##### Common Issues
 - Maintaining high performance and low latency with increasing data volume
 - Ensuring the relevance of suggestions amidst a wide variety of query intents
 - Protecting user privacy while providing personalized suggestions
 - Handling complex languages, slang, and new phrases or terms
 - Dealing with ambiguous queries where multiple interpretations exist
 
-
-Resolutions
+ ##### Resolutions
 - Implementing efficient data structures like Tries or Prefix Trees for quick lookup of suggestions
 - Utilizing machine learning algorithms to improve the relevance of suggestions based on query context and user behavior
 - Adopting strict data handling and anonymization techniques to protect user privacy
 - Incorporating natural language processing (NLP) to better understand and predict user intent, even with complex or misspelled queries
 - Designing a flexible suggestion algorithm that can adapt to new terms and languages over time
 
-
-Considerations
+ ##### Considerations
 - Balancing between speed and accuracy of suggestions to enhance user experience without overwhelming them
 - Considering the impact of personalization on privacy and opting for transparent data usage policies
 - Ensuring scalability of the backend systems to handle peak loads without degradation in suggestion quality
@@ -1263,11 +1199,13 @@ Considerations
 
 [↑ Back to top](#systems_design-topics)
 
-### What is the best way to design a global chat service like Whatsapp or a Facebook messenger?
+### What is the best way to design a chat system like Whatsapp or a Facebook messenger?
 
-Required Features
-- Instant messaging between two users or within groups
-- Support for multimedia messages (images, videos, audio)
+
+ ##### Commonly Required Features
+- Millions of daily active users
+- Instant messaging between two users and multiple users within groups
+- Support for images and video attachments
 - End-to-end encryption for privacy and security
 - Presence indicators (online status, typing indicators, read receipts)
 - Push notifications for new messages or events
@@ -1276,25 +1214,91 @@ Required Features
 - Cross-platform synchronization to keep messages in sync across devices
 - User authentication and profile management
 - Ability to create and manage groups, including adding/removing members
+When a user sends a message, a chat service should 1) store the message, 2) relay the message to the correct user(s). When a client intends to start a chat, it connects the chats service using one or more network protocols. For a chat service, the choice of network protocols is important. Requests are initiated by the client for most client/server applications. This is also true for the sender side of a chat application. when the sender sends a message to the receiver via the chat service, it uses the time-tested HTTP protocol, which is the most common web protocol. In this scenario, the client opens a HTTP connection with the chat service and sends the message, informing the service to send the message to the receiver. The keep-alive is efficient for this because the keep-alive header allows a client to maintain a persistent connection with the chat service. It also reduces the number of TCP handshakes. HTTP is a fine option on the sender side, and many popular chat applications such as Facebook used HTTP initially to send messages.
+
+The receiver side is a bit more complicated. Since HTTP is client-initiated, it is not trivial to send messages from the server. There are three major techniques used to simulate server connection: polling, long-polling, and WebSocket.
+
+ ##### Polling
+Polling is a technique that the client periodically asks the server if there are messages available. Depending on polling frequency, polling could be costly. It could consume precious server resources to answer a question that offers no as an answer most of the time.
+![Chat system polling](../InterviewQuestions/images/systems_design/chat_system.png)
+
+ ##### Long Polling
+In long polling, a client holds the connection open until there are actually new messages available or a timeout threshold has been reached. Once the client receives new messages, it immediately sends another request to the server, restarting the process.Long polling has a few drawbacks:
+
+Sender and receiver may not connect to the same chat server. HTTP based servers are usually stateless. If you use round robin for load balancing, the server that receives the message might not have a long-polling connection with the client who receives the message. 
+A server has no good way to tell if a client is disconnected. 
+It is inefficient. If a user does not chat much, long polling still makes periodic connections after timeouts.
+![Chat system long polling](../InterviewQuestions/images/systems_design/chat_system2.png)
+
+ ##### WebSocket
+WebSocket is the most common solution for sending asynchronous updates from server to client. WebSocket connection is initiated by the client. It is bi-directional and persistent. It starts its life as a HTTP connection and could be "upgraded" via some well-defined handshake to a WebSocket connection. Through this persistent connection, a server could send updates to a client. WebSocket connections generally work even if a firewall is in place. This is because they use port 80 or 443 which are also used by HTTP/HTTPS connections. Earlier we said that on the sender side HTTP is a fine protocol to use, but since WebSocket is bidirectional, there is no strong technical reason not to use it also for sending.
+![Chat system web sockets](../InterviewQuestions/images/systems_design/chat_system3.png)
+![Chat system sender receiver stateful](../InterviewQuestions/images/systems_design/chat_system4.png)
+
+ ##### High-level design
+WebSocket is typically chosen as the main communication protocol between the client and server for its bidirectional communication, it is important to note that everything else does not have to be WebSocket. In fact, most features (sign up, login, user profile, etc) of a chat application could use the traditional request/response method over HTTP. Let us drill in a bit and look at the high-level components of the system.The chat system is broken down into three major categories: stateless services, stateful services, and third-party integration.
+![Chat system stateless components vs stateful](../InterviewQuestions/images/systems_design/chat_system5.png)
 
 
-Common Issues
+Stateless Services
+Stateless services are traditional public-facing request/response services, used to manage the login, signup, user profile, etc. These are common features among many websites and apps. Stateless services sit behind a load balancer whose job is to route requests to the correct services based on the request paths. These services can be monolithic or individual microservices. We do not need to build many of these stateless services by ourselves as there are services in the market that can be integrated easily. The one service that we will discuss more in deep dive is the service discovery. Its primary job is to give the client a list of DNS host names of chat servers that the client could connect to. 
+
+Third-party integration
+ For a chat app, push notification is the most important third-party integration. It is a way to inform users when new messages have arrived, even when the app is not running. Proper integration of push notification is crucial. Refer to Chapter 10 Design a notification system for more information. 
+
+Scalability
+ On a small scale, all services listed above could fit in one server. Even at the scale we design for, it is in theory possible to fit all user connections in one modern cloud server. The number of concurrent connections that a server can handle will most likely be the limiting factor. In our scenario, at 1M concurrent users, assuming each user connection needs 10K of memory on the server (this is a very rough figure and very dependent on the language choice), it only needs about 10GB of memory to hold all the connections on one box. If we propose a design where everything fits in one server, this may raise a big red flag in the interviewer's mind. No technologist would design such a scale in a single server. Single server design is a deal breaker due to many factors. The single point of failure is the biggest among them. However, it is perfectly fine to start with a single server design. Just make sure the interviewer knows this is a starting point.
+![Chat system high level architecture](../InterviewQuestions/images/systems_design/chat_system6.png)
+The client maintains a persistent WebSocket connection to a chat server for real-time messaging.
+- Chat servers facilitate message sending/receiving.
+- Presence servers manage online/offline status.
+- API servers handle everything including user login, signup, change profile, etc.
+- Notification servers send push notifications.
+- Finally, the key-value store is used to store chat history. When an offline user comes online, she will see all her previous chat history.
+Storage
+Two types of data exist in a typical chat system. The first is generic data, such as user profile, setting, user friends list. These data are stored in robust and reliable relational databases. Replication and sharding are common techniques to satisfy availability and scalability requirements. The second is unique to chat systems: chat history data. It is important to understand the read/write pattern.
+- The amount of data is enormous for chat systems. A previous study reveals that Facebook messenger and Whatsapp process 60 billion messages a day.
+- Only recent chats are accessed frequently. Users do not usually look up for old chats.
+- Although very recent chat history is viewed in most cases, users might use features that require random access of data, such as search, view your mentions, jump to specific messages, etc. These cases should be supported by the data access layer.
+- The read to write ratio is about 1:1 for 1 on 1 chat apps.
+Key-value stores are recommended for storage for the following reasons
+- Key-value stores allow easy horizontal scaling.
+- Key-value stores provide very low latency to access data.
+- Relational databases do not handle long tail of data well. When the indexes grow large, random access is expensive.
+- Key-value stores are adopted by other proven reliable chat applications. For example, both Facebook messenger and Discord use key-value stores. Facebook messenger uses HBase, and Discord uses Cassandra.
+
+ ##### Service Discovery
+![Chat system discovery](../InterviewQuestions/images/systems_design/chat_system7.png)
+
+ ##### 1:1 Chat Message Flows
+![Chat system message sync queue](../InterviewQuestions/images/systems_design/chat_system8.png)
+
+ ##### Small Group Chat Message Flow
+![Chat system user key value store](../InterviewQuestions/images/systems_design/chat_system9.png)
+![Chat system message queues](../InterviewQuestions/images/systems_design/chat_system10.png)
+![Chat system partitioned queues](../InterviewQuestions/images/systems_design/chat_system11.png)
+
+ ##### User Disconnection
+![Chat system heartbeat](../InterviewQuestions/images/systems_design/chat_system12.png)
+
+ ##### Online Status Fanout
+![Chat system channel subscriptions](../InterviewQuestions/images/systems_design/chat_system13.png)
+
+ ##### Common Issues
 - Scaling infrastructure to support millions of concurrent users globally
 - Maintaining low latency for message delivery across different geographical locations
 - Ensuring data consistency across devices and handling offline scenarios
 - Protecting against security vulnerabilities and safeguarding user data
 - Managing and storing large volumes of messages and media efficiently
 
-
-Resolutions
+ ##### Resolutions
 - Utilizing a distributed system architecture with data centers in multiple regions to reduce latency
 - Implementing robust caching and database replication strategies to ensure quick access to recent messages and high data consistency
 - Employing end-to-end encryption protocols like Signal Protocol to enhance security
 - Adopting efficient data storage solutions and compression techniques for multimedia
 - Designing for fault tolerance and using techniques like message queues for reliable message delivery
 
-
-Considerations
+ ##### Considerations
 - Complying with global data protection regulations (e.g., GDPR) for user privacy
 - Choosing scalable backend technologies and databases that can handle rapid growth
 - Providing comprehensive APIs for third-party integrations while maintaining security
@@ -1306,7 +1310,8 @@ Considerations
 
 ### How do you design a URL shortening service like TinyURL or bit.ly?
 
-Required Features
+
+ ##### Required Features
 - Shortening of long URLs to a manageable length for sharing
 - Redirection to the original URL when the short URL is accessed
 - Custom alias for URLs, allowing users to create memorable links
@@ -1317,24 +1322,21 @@ Required Features
 - Robust input validation to prevent malicious use
 - High availability and reliability to handle significant traffic volumes
 
-
-Common Issues
+ ##### Common Issues
 - Collision handling where different long URLs may result in the same short URL
 - Scalability to support rapid growth in the number of URLs being shortened
 - Security risks, including the shortening of malicious URLs
 - Ensuring the persistence and durability of URL mappings
 - Latency in redirection for users located far from the service's servers
 
-
-Resolutions
+ ##### Resolutions
 - Generating unique short URLs using hashing algorithms and handling collisions with retries or alternative methods
 - Using distributed databases and caching mechanisms to scale horizontally and manage load efficiently
 - Implementing security measures such as URL validation, blacklist checks, and rate limiting to mitigate risks
 - Ensuring data durability through regular backups and using reliable storage systems
 - Deploying the service across multiple geographic locations to reduce latency for global users
 
-
-Considerations
+ ##### Considerations
 - Providing a user-friendly interface and seamless user experience
 - Offering detailed analytics to users for tracking the performance of their links
 - Maintaining privacy and security of user data and analytics
@@ -1345,7 +1347,8 @@ Considerations
 
 ### How do you design forum-like systems like Quora, Reddit or HackerNews?
 
-Required Features
+
+ ##### Required Features
 - User registration and profile management for personalization and tracking of activity.
 - Content creation, editing, and deletion capabilities for posts, comments, and replies.
 - Categorization or tagging of content to facilitate easy navigation and search.
@@ -1357,24 +1360,21 @@ Required Features
 - Integration with social media for sharing content and driving engagement.
 - Analytics for users and administrators to track engagement and activity.
 
-
-Common Issues
+ ##### Common Issues
 - Scalability to handle large volumes of users and content without performance degradation.
 - Content moderation to prevent spam, abuse, and ensure community guidelines are upheld.
 - Ensuring data consistency in a distributed system where content is constantly being created and updated.
 - User privacy and security, particularly in handling personal information and authentication.
 - Engagement and retention strategies to keep users active and contributing to the community.
 
-
-Resolutions
+ ##### Resolutions
 - Using scalable architecture patterns like microservices and efficient data storage solutions to manage growth.
 - Implementing automated moderation tools, such as spam detection algorithms, and establishing clear community guidelines.
 - Adopting eventual consistency where necessary and using technologies like distributed databases to manage data.
 - Implementing robust authentication mechanisms and privacy controls to protect user information.
 - Creating features that enhance user engagement, such as gamification, personalized feeds, and community events.
 
-
-Considerations
+ ##### Considerations
 - Designing for accessibility to ensure the platform is usable by as wide an audience as possible.
 - Providing clear and comprehensive documentation for both users and moderators to understand platform features and guidelines.
 - Ensuring the platform's UI/UX is intuitive and fosters a positive community environment.
@@ -1385,7 +1385,8 @@ Considerations
 
 ### How do you design Facebook's newsfeed system?
 
-Required Features
+
+ ##### Required Features
 - Personalized content delivery based on user interests, interactions, and connections
 - Real-time updates to ensure users see the most recent and relevant content
 - Support for various content types, including text posts, images, videos, and links
@@ -1396,24 +1397,21 @@ Required Features
 - Content moderation tools to filter out spam and inappropriate content
 - Analytics and feedback mechanisms to continuously refine the content ranking algorithms
 
-
-Common Issues
+ ##### Common Issues
 - Scaling to accommodate billions of users and their activities without performance degradation
 - Balancing relevance and freshness in the content ranking algorithm
 - Protecting user privacy while providing personalized content
 - Managing the spread of misinformation and ensuring content quality
 - Optimizing the storage and retrieval of massive amounts of data efficiently
 
-
-Resolutions
+ ##### Resolutions
 - Using distributed systems and data partitioning to manage and scale data storage
 - Employing machine learning algorithms to improve content ranking based on user feedback and interaction patterns
 - Implementing strict privacy controls and data encryption to secure user data
 - Developing sophisticated content moderation and fact-checking tools to combat misinformation
 - Optimizing database queries and utilizing caching mechanisms to speed up data retrieval
 
-
-Considerations
+ ##### Considerations
 - Ensuring the newsfeed algorithm promotes diversity and prevents echo chambers
 - Maintaining transparency with users about how their data is used to generate the newsfeed
 - Providing users with controls to adjust their newsfeed preferences and prioritize content
@@ -1424,7 +1422,8 @@ Considerations
 
 ### How do you design a parking lot system?
 
-Required Features
+
+ ##### Required Features
 - Entry and exit ticketing systems to track vehicle entry and exit times
 - Automated payment processing based on parking duration with multiple payment options
 - Real-time tracking of available parking spaces
@@ -1436,24 +1435,21 @@ Required Features
 - Integration with mobile apps for remote access and notifications
 - Reporting tools for administrators to track occupancy, revenue, and usage patterns
 
-
-Common Issues
+ ##### Common Issues
 - Inefficient use of space leading to unnecessary congestion
 - Long wait times at entry and exit points
 - Payment system failures causing delays and customer dissatisfaction
 - Difficulty in finding available parking spots, especially in large lots
 - Security concerns, including vehicle theft and personal safety
 
-
-Resolutions
+ ##### Resolutions
 - Implementing dynamic space allocation algorithms to maximize space utilization
 - Using automated ticketing kiosks and license plate recognition systems to speed up vehicle processing
 - Offering diverse payment solutions, including mobile payments and prepaid options, to streamline transactions
 - Integrating IoT sensors and guidance systems to direct drivers to open spaces efficiently
 - Enhancing security measures through constant surveillance, patrolling, and implementing secure access controls
 
-
-Considerations
+ ##### Considerations
 - Designing the system for scalability to accommodate future expansion of parking capacity
 - Ensuring the system is accessible and user-friendly for people with disabilities
 - Adopting green practices, such as electric vehicle charging stations and bicycle parking
@@ -1464,7 +1460,8 @@ Considerations
 
 ### How do you design a recommendation system?
 
-Required Features
+
+ ##### Required Features
 - Personalized content recommendations based on user preferences and behavior
 - Diverse recommendation algorithms (e.g., collaborative filtering, content-based filtering, hybrid methods)
 - Real-time processing capabilities to adjust recommendations based on recent user interactions
@@ -1474,24 +1471,21 @@ Required Features
 - Analytics and reporting tools for monitoring the performance of the recommendation system
 - Data privacy and security measures to protect user information
 
-
-Common Issues
+ ##### Common Issues
 - Cold start problem for new users or items with limited interaction data
 - Bias in recommendation algorithms leading to a narrow range of suggestions
 - Data sparsity in user-item interactions complicating accurate recommendations
 - Scalability challenges in processing large datasets in real-time
 - Maintaining user privacy and trust while collecting and analyzing data
 
-
-Resolutions
+ ##### Resolutions
 - Utilizing demographic data or content attributes to provide initial recommendations for new users or items
 - Incorporating diversity and serendipity into recommendation algorithms to broaden suggestions
 - Employing techniques like matrix factorization to address data sparsity issues
 - Adopting distributed computing and data storage solutions to enhance scalability
 - Implementing strict data privacy policies and transparently communicating data usage to users
 
-
-Considerations
+ ##### Considerations
 - Regularly updating algorithms and models to adapt to changing user behaviors and preferences
 - Ensuring recommendations are relevant and timely to enhance user engagement
 - Balancing recommendation accuracy with computational efficiency
@@ -1531,7 +1525,8 @@ UDP (User Datagram Protocol)
 
 ### How do you design an API Rate Limiter system for GitHub or Firebase sites?
 
-Required Features
+
+ ##### Required Features
 - Limiting requests based on IP address, user ID, or API token to prevent abuse
 - Configurable rate limits allowing different limits for various endpoints or user tiers
 - Real-time tracking of requests to accurately enforce rate limits
@@ -1540,24 +1535,21 @@ Required Features
 - Rate limit override capabilities for emergency situations or specific user needs
 - Logging and analytics to monitor API usage patterns and adjust rate limits as necessary
 
-
-Common Issues
+ ##### Common Issues
 - Determining optimal rate limits that balance server load without hindering legitimate user needs
 - Handling distributed environments where requests are spread across multiple servers
 - Ensuring rate limiter accuracy and fairness, especially in high-traffic scenarios
 - Minimizing latency introduced by rate limiting checks
 - Communicating rate limits effectively to developers and end-users
 
-
-Resolutions
+ ##### Resolutions
 - Implementing dynamic rate limiting algorithms that adjust based on real-time server load and usage patterns
 - Using distributed data stores like Redis to synchronize rate limit counters across servers
 - Employing efficient data structures, such as sliding logs, fixed window counters, or token buckets, to track and enforce rate limits
 - Optimizing rate limiter code paths to reduce processing overhead
 - Providing comprehensive documentation and developer tools to help users understand and work within rate limits
 
-
-Considerations
+ ##### Considerations
 - Offering a grace period or warnings before enforcing hard limits to accommodate accidental overages
 - Regularly reviewing and updating rate limits based on infrastructure improvements and usage trends
 - Ensuring transparency in how rate limits are calculated and applied
@@ -1568,7 +1560,8 @@ Considerations
 
 ### How do you design global file storage and file sharing services like Google Drive, Dropbox etc?
 
-Required Features
+
+ ##### Required Features
 - Secure file storage with redundancy and backup capabilities
 - File sharing with various permission levels (view, edit, comment)
 - Cross-platform synchronization to keep files up-to-date across devices
@@ -1580,24 +1573,21 @@ Required Features
 - Integration with third-party apps and services
 - Scalability to support a growing number of users and data volume
 
-
-Common Issues
+ ##### Common Issues
 - Data security and privacy concerns, including unauthorized access and data breaches
 - Ensuring data consistency across multiple devices and concurrent edits
 - Scalability challenges in handling massive amounts of data and user requests
 - Performance bottlenecks, particularly with file upload and download speeds
 - Managing storage costs while providing sufficient space to users
 
-
-Resolutions
+ ##### Resolutions
 - Implementing robust encryption and security protocols for data at rest and in transit
 - Using conflict resolution algorithms and operational transformation for file versioning and real-time collaboration
 - Adopting a microservices architecture and leveraging cloud storage solutions to scale resources dynamically
 - Optimizing file transfer algorithms and using content delivery networks (CDNs) to improve global performance
 - Implementing data deduplication and compression techniques to reduce storage requirements and costs
 
-
-Considerations
+ ##### Considerations
 - Designing a user-friendly interface that simplifies file management and sharing
 - Providing detailed documentation and support to assist users
 - Offering flexible pricing plans to cater to different user needs and capacities
@@ -1608,7 +1598,8 @@ Considerations
 
 ### How do you design a type-ahead search engine service?
 
-Required Features
+
+ ##### Required Features
 - Fast and responsive auto-completion suggestions as users type their query
 - Support for handling typos and fuzzy matching to improve user experience
 - Ranking and relevance algorithms to ensure the most appropriate suggestions are shown first
@@ -1619,16 +1610,14 @@ Required Features
 - Ability to update suggestion data in real-time as new information becomes available
 - Analytics and logging to monitor usage patterns and optimize suggestion quality
 
-
-Common Issues
+ ##### Common Issues
 - Maintaining low latency and high throughput under heavy load
 - Ensuring data freshness and accuracy in suggestions
 - Handling scalability challenges as data and request volumes grow
 - Dealing with diverse and complex user queries in multiple languages
 - Balancing personalization with user privacy concerns
 
-
-Resolutions
+ ##### Resolutions
 - Implementing caching strategies and using in-memory databases like Redis for fast data access
 - Utilizing algorithms like Trie or Prefix Hash Tree for efficient prefix matching
 - Employing machine learning models to improve ranking and relevance of suggestions
@@ -1636,8 +1625,7 @@ Resolutions
 - Incorporating user feedback loops to refine and improve the suggestion algorithms over time
 - Adhering to privacy standards and regulations by anonymizing user data used for personalization
 
-
-Considerations
+ ##### Considerations
 - Designing a robust API that can support diverse client applications
 - Ensuring backward compatibility of the API to support existing clients
 - Monitoring performance metrics and optimizing system architecture based on observed data
@@ -1648,7 +1636,8 @@ Considerations
 
 ### How do you design Netflix?
 
-Required Features
+
+ ##### Required Features
 - Streaming of video content in various resolutions, including HD and 4K
 - Personalized content recommendations based on user viewing history and preferences
 - User profiles within a single account to cater to different family members
@@ -1660,24 +1649,21 @@ Required Features
 - User authentication and account management
 - High availability and scalability to support millions of concurrent users
 
-
-Common Issues
+ ##### Common Issues
 - Maintaining streaming quality under varying network conditions
 - Effective handling of large-scale, global content delivery
 - Managing and updating a massive catalog of diverse content
 - Protecting against data breaches and ensuring user privacy
 - Personalizing recommendations in real-time for millions of users
 
-
-Resolutions
+ ##### Resolutions
 - Adaptive bitrate streaming to dynamically adjust video quality according to the user's bandwidth
 - Utilization of a content delivery network (CDN) to distribute content closer to users globally
 - Implementing a microservices architecture for efficient content management and scalability
 - Enforcing strict data security measures and regular audits to protect user data
 - Leveraging machine learning algorithms for accurate and dynamic content recommendations
 
-
-Considerations
+ ##### Considerations
 - Ensuring a seamless user experience across all platforms and devices
 - Complying with global content distribution laws and regulations
 - Optimizing infrastructure costs while scaling service capabilities
@@ -1688,7 +1674,8 @@ Considerations
 
 ### How do you design YouTube?
 
-Required Features
+
+ ##### Required Features
 - Video uploading and processing to support multiple formats and resolutions
 - Streamlined video playback on various devices and network conditions
 - User account creation and management for viewers and content creators
@@ -1700,24 +1687,21 @@ Required Features
 - Live streaming capabilities for real-time content broadcast
 - Content moderation and copyright enforcement to maintain community standards
 
-
-Common Issues
+ ##### Common Issues
 - Video data storage and bandwidth management for massive volumes of content
 - Ensuring smooth video playback across different devices and bandwidths
 - Balancing content discovery algorithms for fairness to new creators while promoting popular content
 - Protecting against inappropriate content and copyright infringement
 - Maintaining user privacy and security in account management and interaction data
 
-
-Resolutions
+ ##### Resolutions
 - Utilizing cloud storage and content delivery networks (CDN) to manage and distribute video content efficiently
 - Implementing adaptive bitrate streaming to adjust video quality to the user's network speed
 - Developing sophisticated recommendation algorithms that factor in user behavior, content quality, and freshness
 - Automating content moderation with AI and machine learning, supplemented by human review
 - Enforcing strong encryption and authentication practices to safeguard user data
 
-
-Considerations
+ ##### Considerations
 - Designing a scalable architecture to handle growth in users, videos, and views
 - Ensuring a user-friendly and accessible platform interface
 - Providing tools and resources for content creators to produce and manage their videos
@@ -1728,7 +1712,8 @@ Considerations
 
 ### How do you design a traffic control system?
 
-Required Features
+
+ ##### Required Features
 - Real-time monitoring of traffic conditions using cameras, sensors, and data analytics
 - Adaptive signal control to adjust green/red light durations based on traffic flow
 - Emergency vehicle prioritization to reduce response times for police, fire, and EMS
@@ -1740,24 +1725,21 @@ Required Features
 - Red light violation detection and automated enforcement systems
 - Integration with navigation apps and services to disseminate traffic condition updates
 
-
-Common Issues
+ ##### Common Issues
 - Congestion during peak hours leading to increased travel times and pollution
 - Inefficient traffic signal timing contributing to delays and accidents
 - Lack of real-time data integration from various sources leading to suboptimal traffic management
 - Coordination challenges between different types of road users (vehicles, pedestrians, cyclists)
 - Maintaining system reliability and performance in adverse weather conditions
 
-
-Resolutions
+ ##### Resolutions
 - Implementing intelligent transportation systems (ITS) that use AI and machine learning to optimize traffic flow
 - Developing dynamic signal control algorithms that adapt to real-time traffic conditions
 - Integrating disparate data sources (sensors, cameras, GPS data from cars and mobile devices) for comprehensive traffic analysis
 - Designing inclusive traffic control strategies that accommodate all road users effectively
 - Utilizing weather-resistant materials and redundant systems to ensure operational integrity under various conditions
 
-
-Considerations
+ ##### Considerations
 - Ensuring the privacy and security of traffic data, especially when sourced from personal devices
 - Balancing the needs of traffic efficiency, safety, and environmental impact
 - Engaging with community stakeholders to align traffic management strategies with public expectations
@@ -1768,7 +1750,8 @@ Considerations
 
 ### How do you design a web crawler?
 
-Required Features
+
+ ##### Required Features
 - Robust URL fetching mechanism to download web pages
 - HTML parsing to extract links and content
 - URL normalization to avoid crawling the same page multiple times
@@ -1780,24 +1763,21 @@ Required Features
 - User-agent configuration to identify the crawler to web servers
 - Error handling and retry mechanisms for network issues or server errors
 
-
-Common Issues
+ ##### Common Issues
 - Respecting website crawl policies and not overloading servers
 - Dealing with infinite URL loops caused by dynamic content generation
 - Managing the vast amount of data collected, including deduplication
 - Staying up-to-date with changes in web standards and technologies
 - Ensuring the crawler is not blocked by web servers or mistaken for malicious activity
 
-
-Resolutions
+ ##### Resolutions
 - Adhering strictly to robots.txt and implementing polite crawling practices
 - Using URL fingerprinting and canonicalization to identify and avoid duplicate content
 - Employing scalable storage solutions like distributed databases for data management
 - Regularly updating the crawler to handle new web technologies and content types
 - Maintaining a good reputation for the crawler through responsible operation and communication with website administrators
 
-
-Considerations
+ ##### Considerations
 - Balancing breadth-first and depth-first crawling strategies based on goals
 - Incorporating machine learning for more intelligent parsing and content classification
 - Designing with privacy in mind, especially when handling personal or sensitive information
@@ -1808,7 +1788,8 @@ Considerations
 
 ### How do you design an ATM system?
 
-Required Features
+
+ ##### Required Features
 - User authentication via PIN and card details
 - Account balance inquiry and transaction history display
 - Cash withdrawal with denomination selection
@@ -1820,24 +1801,21 @@ Required Features
 - Accessibility features for users with disabilities
 - Integration with banking network for real-time transaction processing
 
-
-Common Issues
+ ##### Common Issues
 - Security vulnerabilities, including card skimming and PIN theft
 - Cash and paper jams causing machine downtime
 - Network connectivity issues affecting transaction processing
 - Insufficient cash dispensing leading to customer dissatisfaction
 - User interface and accessibility challenges for diverse users
 
-
-Resolutions
+ ##### Resolutions
 - Implementing advanced encryption for data transmission and EMV chip technology
 - Regular maintenance and quality checks for hardware components
 - Utilizing redundant network solutions and offline modes for basic transactions
 - Dynamic cash management algorithms to optimize refill schedules
 - Designing intuitive interfaces with step-by-step instructions and voice guidance for accessibility
 
-
-Considerations
+ ##### Considerations
 - Ensuring compliance with financial regulations and standards
 - Providing 24/7 customer support for resolving immediate issues
 - Incorporating feedback mechanisms for continuous improvement
@@ -1848,7 +1826,8 @@ Considerations
 
 ### How do you design ride sharing systems like Uber, Ola or Lyft?
 
-Required Features
+
+ ##### Required Features
 - User profiles for drivers and riders, including registration, authentication, and profile management
 - GPS and map integration for real-time location tracking and route mapping
 - Ride request and matching system to connect riders with nearby drivers
@@ -1860,8 +1839,7 @@ Required Features
 - Notifications and alerts for ride status updates and promotions
 - Analytics dashboard for monitoring system performance and user activity
 
-
-Common Issues
+ ##### Common Issues
 - Ensuring accurate and timely matching of riders and drivers
 - Maintaining low latency and high reliability in location tracking
 - Balancing supply and demand, especially during peak times or in less popular areas
@@ -1869,8 +1847,7 @@ Common Issues
 - Handling payments securely and efficiently
 - Dealing with regulatory and compliance challenges across different regions
 
-
-Resolutions
+ ##### Resolutions
 - Using sophisticated algorithms for ride matching that consider proximity, destination, and user preferences
 - Implementing scalable and robust back-end systems for real-time data processing
 - Dynamic pricing and incentive models to manage supply and demand effectively
@@ -1878,8 +1855,7 @@ Resolutions
 - Adopting secure payment gateways and encrypted data transmission for financial transactions
 - Engaging with local authorities and stakeholders to ensure compliance and address regulatory concerns
 
-
-Considerations
+ ##### Considerations
 - Focusing on user experience design to make the app intuitive and accessible
 - Implementing robust data privacy measures to protect user information
 - Developing a scalable infrastructure that can grow with user base and geographic expansion
@@ -1891,7 +1867,8 @@ Considerations
 
 ### How do you design an MMO game?
 
-Required Features
+
+ ##### Required Features
 - Massively multiplayer environment supporting thousands of players simultaneously
 - Persistent world that continues to evolve, even when the player is offline
 - Character creation and customization for personalized gaming experiences
@@ -1903,8 +1880,7 @@ Required Features
 - Guilds, alliances, and social structures for community engagement
 - Regular updates and expansions to keep the game fresh and engaging
 
-
-Common Issues
+ ##### Common Issues
 - Scalability to handle simultaneous connections and interactions of thousands of players
 - Latency and synchronization issues affecting real-time gameplay
 - Balancing game mechanics to ensure fairness and competitiveness
@@ -1912,8 +1888,7 @@ Common Issues
 - Content creation and world-building to sustain long-term player engagement
 - Managing the game economy to prevent inflation or deflation
 
-
-Resolutions
+ ##### Resolutions
 - Using distributed server architectures and instancing to manage load and enhance scalability
 - Implementing lag compensation techniques and predictive algorithms to improve synchronization
 - Continuously monitoring game data and player feedback for balancing adjustments
@@ -1921,8 +1896,7 @@ Resolutions
 - Investing in content development teams and procedural generation technologies to create engaging and dynamic worlds
 - Designing economic controls and sinks to stabilize the in-game currency
 
-
-Considerations
+ ##### Considerations
 - Ensuring accessibility and inclusivity for a diverse player base
 - Developing a sustainable monetization model that respects player experience
 - Providing robust customer support systems for player assistance and dispute resolution

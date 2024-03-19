@@ -41,7 +41,7 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
         paddingRight: 10,
         paddingBottom: 50,
       }}>
-      <Text style={sharedStyles.questionHeader}>{question.header}</Text>
+      <Text style={sharedStyles.header}>{question.header}</Text>
 
       {question.content.map((content: QuestionContent, index: number) => {
         const imgKey = `image-${index}`;
@@ -49,6 +49,12 @@ const QuestionDetails: React.FC<QuestionDetailsProps> = ({route}) => {
           case 'text':
             return (
               <Text key={index} style={sharedStyles.text}>
+                {content.value}
+              </Text>
+            );
+          case 'subheader':
+            return (
+              <Text key={index} style={sharedStyles.subheader}>
                 {content.value}
               </Text>
             );

@@ -43,6 +43,7 @@ while IFS= read -r line; do
     # Append contents
     contents=$(echo "$line" | jq -r '.content[] |
         if .type == "text" then .value
+        elif .type == "subheader" then "\n ##### " + .value
         elif .type == "code" then "```javascript\n" + .value + "\n```"
         elif .type == "json" then "```json\n" + .value + "\n```"
         elif .type == "link" then "[\(.displayText)](\(.value))"

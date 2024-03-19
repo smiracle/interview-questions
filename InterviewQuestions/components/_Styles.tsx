@@ -3,21 +3,23 @@ import {StyleSheet} from 'react-native';
 export const sharedStyles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
+    padding: 20,
     backgroundColor: '#f0f0f0',
   },
   button: {
+    margin: 10,
     padding: 15,
     marginVertical: 8,
-    backgroundColor: '#009688',
+    backgroundColor: '#007bff',
     color: '#fff',
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#00796B',
-    width: '80%',
     alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
   },
   questionListingItem: {
     padding: 15,
@@ -32,40 +34,28 @@ export const sharedStyles = StyleSheet.create({
     color: '#000000',
     fontSize: 16,
   },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  revealButton: {
-    backgroundColor: '#009688',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginVertical: 10,
-  },
-  revealButtonText: {
-    color: '#ffffff',
-    fontSize: 16,
-  },
-  questionHeader: {
+  header: {
     fontSize: 20,
-    marginBottom: 20,
+    margin: 10,
     color: '#000',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
-  answerButton: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5,
+  subheader: {
+    fontSize: 16,
+    marginTop: 10,
+    color: '#000',
+    fontWeight: 'bold',
   },
   answerText: {
-    fontSize: 16,
+    fontSize: 20,
+    color: '#000',
   },
   answerFeedback: {
     marginTop: 20,
   },
   nextButton: {
-    backgroundColor: '#009688',
+    backgroundColor: '#007bff',
     padding: 10,
     borderRadius: 5,
   },
@@ -87,5 +77,21 @@ export const sharedStyles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 12,
   },
-  image: {width: '100%', height: 200 /* Adjust as needed */},
+  image: {width: '100%', height: 200},
+  quizQuestionContainer: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  feedbackTextCorrect: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: 'green',
+  },
+  feedbackTextIncorrect: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+    color: 'red',
+  },
 });

@@ -16,10 +16,7 @@ const TopicsList: React.FC<TopicsListProps> = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={sharedStyles.container}>
-      <Text>
-        (Many of these are bare bones for now, though React and Systems Design
-        has some info)
-      </Text>
+      <Text style={sharedStyles.header}>Select a Topic:</Text>
       {topics.map((topic, index) => (
         <TouchableOpacity
           key={index}

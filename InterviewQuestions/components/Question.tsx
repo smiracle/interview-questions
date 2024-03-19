@@ -1,5 +1,6 @@
 export type QuestionContent =
   | {type: 'text'; value: string}
+  | {type: 'subheader'; value: string}
   | {type: 'bullets'; values: string[]}
   | {type: 'code'; value: string}
   | {type: 'json'; value: string}

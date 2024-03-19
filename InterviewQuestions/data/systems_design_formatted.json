@@ -40,7 +40,7 @@
                     ]
                 },
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Good questions to ask:"
                 },
                 {
@@ -76,7 +76,7 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "The CAP Theorem for distributed computing was published by Eric Brewer. This states that it is not possible for a distributed computer system to simultaneously provide all three of the following guarantees, only two at a time:"
+                    "value": "CAP Theorem states that it is not possible for a distributed computer system to simultaneously provide all three of the following guarantees, only two at a time:"
                 },
                 {
                     "type": "bullets",
@@ -130,8 +130,8 @@
                     "path": "../InterviewQuestions/images/systems_design/rate_limiter.png"
                 },
                 {
-                    "type": "text",
-                    "value": "\nBenefits:"
+                    "type": "subheader",
+                    "value": "Benefits"
                 },
                 {
                     "type": "bullets",
@@ -142,8 +142,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nDesign considerations:"
+                    "type": "subheader",
+                    "value": "Design Considerations"
                 },
                 {
                     "type": "bullets",
@@ -155,8 +155,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nRate Limiter Algorithms"
+                    "type": "subheader",
+                    "value": "Rate Limiter Algorithms"
                 },
                 {
                     "type": "bullets",
@@ -185,8 +185,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nA Detailed Design Deep Dive"
+                    "type": "subheader",
+                    "value": "A Detailed Design Deep Dive"
                 },
                 {
                     "type": "image",
@@ -202,16 +202,28 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nDistributed Environment Rate Limiting Pitfalls\nThere are two challenges: \n1) Race condition - If two requests concurrently read the counter value before either of them writes the value back, each will increment the counter by one and write it back without checking the other thread. Both requests, which are really threads, believe they have the correct counter value. However, the correct counter value should be +1)\n2) Synchronization - As the web tier is stateless, clients can send requests to a different rate limiter. If no synchronization happens, rate limiter 1 does not contain any data about client 2. Thus, the rate limiter cannot work properly. One possible solution is to use sticky sessions that allow a client to send traffic to the same rate limiter. This solution is not advisable because it is neither scalable nor flexible. A better approach is to use centralized data stores like Redis."
+                    "type": "subheader",
+                    "value": "Pitfalls of Rate Limiting in a Distributed Environment"
                 },
                 {
                     "type": "text",
-                    "value": "\n\nPerformance Optimization\nFirst, multi-data center setup is crucial for a rate limiter because latency is high for users located far away from the data center. Most cloud service providers build many edge server locations around the world. For example, as of 5/20 2020, Cloudflare has 194 geographically distributed edge servers. Traffic is automatically routed to the closest edge server to reduce latency.\nSecond, synchronize data with an eventual consistency model. The eventual consistency model seeks to achieve high availability that informally guarantees that, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. This is suitable for applications where the system can tolerate some degree of inconsistency for a period, such as social networking feeds, collaborative editing platforms, and distributed file systems."
+                    "value": "There are two challenges: \n1) Race condition - If two requests concurrently read the counter value before either of them writes the value back, each will increment the counter by one and write it back without checking the other thread. Both requests, which are really threads, believe they have the correct counter value. However, the correct counter value should be +1)\n2) Synchronization - As the web tier is stateless, clients can send requests to a different rate limiter. If no synchronization happens, rate limiter 1 does not contain any data about client 2. Thus, the rate limiter cannot work properly. One possible solution is to use sticky sessions that allow a client to send traffic to the same rate limiter. This solution is not advisable because it is neither scalable nor flexible. A better approach is to use centralized data stores like Redis."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Performance Optimization"
                 },
                 {
                     "type": "text",
-                    "value": "\n\nReview\nHard vs soft rate limiting. Hard: The number of requests cannot exceed the threshold. Soft: Requests can exceed the threshold for a short period.\n Rate limiting at different levels. This json mostly describes application level rate limiting (layer 7, the highest). It is possible to apply rate limiting at other layers. For example, you can apply rate limiting by IP addresses using Iptables (layer 3).\n Note: The Open Systems Interconnection model (OSI model) has 7 layers: Layer 1: Physical layer, Layer 2: Data link layer, Layer 3: Network layer, Layer 4: Transport layer, Layer 5: Session layer, Layer 6: Presentation layer, Layer 7: Application layer.\nAvoid being rate limited. Design your client with best practices: Use client cache to avoid making frequent API calls, understand the limit and do not send too many requests in a short time frame, include code to catch exceptions or errors so your client can gracefully recover from exceptions. Add sufficient back off time to retry logic."
+                    "value": "First, multi-data center setup is crucial for a rate limiter because latency is high for users located far away from the data center. Most cloud service providers build many edge server locations around the world. For example, as of 5/20 2020, Cloudflare has 194 geographically distributed edge servers. Traffic is automatically routed to the closest edge server to reduce latency.\nSecond, synchronize data with an eventual consistency model. The eventual consistency model seeks to achieve high availability that informally guarantees that, if no new updates are made to a given data item, eventually all accesses to that item will return the last updated value. This is suitable for applications where the system can tolerate some degree of inconsistency for a period, such as social networking feeds, collaborative editing platforms, and distributed file systems."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Review"
+                },
+                {
+                    "type": "text",
+                    "value": "Hard vs soft rate limiting. Hard: The number of requests cannot exceed the threshold. Soft: Requests can exceed the threshold for a short period.\n Rate limiting at different levels. This json mostly describes application level rate limiting (layer 7, the highest). It is possible to apply rate limiting at other layers. For example, you can apply rate limiting by IP addresses using Iptables (layer 3).\n Note: The Open Systems Interconnection model (OSI model) has 7 layers: Layer 1: Physical layer, Layer 2: Data link layer, Layer 3: Network layer, Layer 4: Transport layer, Layer 5: Session layer, Layer 6: Presentation layer, Layer 7: Application layer.\nAvoid being rate limited. Design your client with best practices: Use client cache to avoid making frequent API calls, understand the limit and do not send too many requests in a short time frame, include code to catch exceptions or errors so your client can gracefully recover from exceptions. Add sufficient back off time to retry logic."
                 }
             ],
             "answers": [
@@ -228,22 +240,6 @@
             ]
         },
         {
-            "header": "What is SSL Termination?",
-            "content": [
-                {
-                    "type": "text",
-                    "value": "SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer before it reaches the web server. This setup enables the web server to focus on delivering content rather than encryption, enhancing performance and speed. It's particularly beneficial in environments where high traffic is expected, as it efficiently distributes the load across multiple servers. SSL termination also simplifies SSL certificate management, as only the load balancer needs to have the certificate installed, not every server in the network."
-                }
-            ],
-            "answers": [
-                "SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer, enhancing performance and simplifying SSL certificate management.",
-                "SSL termination involves encrypting non-SSL traffic with SSL/TLS at the load balancer to secure communications.",
-                "SSL termination is the action of permanently invalidating an SSL certificate at the web server level to switch to a non-secure HTTP protocol.",
-                "SSL termination refers to the process where encrypted SSL traffic is inspected for threats at the firewall before being sent to the server.",
-                "SSL termination is a method where the SSL/TLS encryption process is offloaded to a third-party service outside the server's network for improved security."
-            ]
-        },
-        {
             "header": "What is SSL?",
             "content": [
                 {
@@ -257,6 +253,22 @@
                 "SSL stands for Server Software Licensing, a method for web servers to ensure only authorized users can access certain web pages.",
                 "SSL is a type of malware designed to steal personal information by posing as legitimate security software.",
                 "SSL is an outdated method for creating websites, replaced by modern programming languages like HTML5 and JavaScript."
+            ]
+        },
+        {
+            "header": "What is SSL Termination?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer before it reaches the web server. This setup enables the web server to focus on delivering content rather than encryption, enhancing performance and speed. It's particularly beneficial in environments where high traffic is expected, as it efficiently distributes the load across multiple servers. SSL termination also simplifies SSL certificate management, as only the load balancer needs to have the certificate installed, not every server in the network."
+                }
+            ],
+            "answers": [
+                "SSL termination is the process of decrypting SSL/TLS encrypted traffic at the load balancer, enhancing performance and simplifying SSL certificate management.",
+                "SSL termination involves encrypting non-SSL traffic with SSL/TLS at the load balancer to secure communications.",
+                "SSL termination is the action of permanently invalidating an SSL certificate at the web server level to switch to a non-secure HTTP protocol.",
+                "SSL termination refers to the process where encrypted SSL traffic is inspected for threats at the firewall before being sent to the server.",
+                "SSL termination is a method where the SSL/TLS encryption process is offloaded to a third-party service outside the server's network for improved security."
             ]
         },
         {
@@ -333,8 +345,8 @@
                     "path": "../InterviewQuestions/images/systems_design/load_balancing.png"
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nHow load balancers work"
+                    "type": "subheader",
+                    "value": "How load balancers work"
                 },
                 {
                     "type": "bullets",
@@ -345,8 +357,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nTypes of Load Balancing:"
+                    "type": "subheader",
+                    "value": "Types of Load Balancing"
                 },
                 {
                     "type": "bullets",
@@ -358,8 +370,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nDeployment Models:"
+                    "type": "subheader",
+                    "value": "Deployment Models"
                 },
                 {
                     "type": "bullets",
@@ -392,8 +404,16 @@
                     "value": "Scalability in systems design refers to the ability of a system, network, or process to handle a growing amount of work, or its potential to be enlarged to accommodate that growth. For a system to be scalable, it must be able to increase its total throughput under an increased load when resources are added. Scalability is a crucial aspect of modern systems and applications, especially those with variable workloads or rapidly growing user bases. \n\nThere are two primary methods to scale a system: horizontal scaling and vertical scaling, each with its own strategies and implications for system design."
                 },
                 {
+                    "type": "subheader",
+                    "value": "Horizontal Scaling"
+                },
+                {
                     "type": "text",
-                    "value": "\n\nHorizontal Scaling (Scaling Out/In)\nHorizontal scaling involves adding more machines or instances to your pool of resources to manage an increased load. It's about scaling out (or in) by increasing the number of nodes in the system, such as adding more servers to a cluster to handle more traffic. This method can significantly increase the system's capacity to handle more requests or data processing tasks. Horizontal scaling is often easier to implement with modern cloud-based services since it usually involves adding more instances of the same type of resource rather than upgrading existing ones. It's highly effective for distributed systems and applications designed to work over multiple machines, like web applications using microservices architecture.\n\nAdvantages of horizontal scaling include:"
+                    "value": "Horizontal scaling (or in/out scaling) involves adding more machines or instances to your pool of resources to manage an increased load. It's about scaling out (or in) by increasing the number of nodes in the system, such as adding more servers to a cluster to handle more traffic. This method can significantly increase the system's capacity to handle more requests or data processing tasks. Horizontal scaling is often easier to implement with modern cloud-based services since it usually involves adding more instances of the same type of resource rather than upgrading existing ones. It's highly effective for distributed systems and applications designed to work over multiple machines, like web applications using microservices architecture."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Horizontal Scaling Advantages"
                 },
                 {
                     "type": "bullets",
@@ -404,8 +424,16 @@
                     ]
                 },
                 {
+                    "type": "subheader",
+                    "value": "Vertical Scaling"
+                },
+                {
                     "type": "text",
-                    "value": "\n\nVertical Scaling (Scaling Up/Down)\nVertical scaling, on the other hand, means upgrading the existing machines' capacity within your system. This could involve adding more CPUs, memory, or storage to a server to increase its capability to handle more load. Vertical scaling is often referred to as scaling up (or down) because you're essentially making a single node in the system more powerful. It is a straightforward approach to scaling since it involves enhancing the existing servers' capabilities rather than adding more servers to the system. \nAdvantages of vertical scaling include:"
+                    "value": "Vertical scaling (scaling up/down), on the other hand, means upgrading the existing machines' capacity within your system. This could involve adding more CPUs, memory, or storage to a server to increase its capability to handle more load. Vertical scaling is often referred to as scaling up (or down) because you're essentially making a single node in the system more powerful. It is a straightforward approach to scaling since it involves enhancing the existing servers' capabilities rather than adding more servers to the system."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Vertical Scaling Advantages"
                 },
                 {
                     "type": "bullets",
@@ -440,20 +468,36 @@
                     "value": "In systems design, latency, throughput, and availability are key performance indicators (KPIs) that measure the efficiency, reliability, and overall performance of a system. "
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nLatency\nLatency refers to the time it takes for a system to respond to a request. It's usually measured in milliseconds (ms) and indicates the delay between a user initiating a request and receiving a response. Low latency is crucial for interactive applications where a quick response time is essential for a good user experience, such as online gaming, real-time communications, and high-frequency trading systems."
+                    "type": "subheader",
+                    "value": "Latency"
                 },
                 {
                     "type": "text",
-                    "value": "\n\nThroughput\nThroughput is the amount of work or data processed by a system in a given amount of time. It's often measured in transactions per second (tps), requests per second (rps), or data bits per second (bps). Throughput is an indicator of the capacity of a system to handle load and perform tasks. High throughput is essential for systems that need to process large volumes of data or serve many users simultaneously, such as video streaming services, large-scale web applications, and data processing pipelines."
+                    "value": "Latency refers to the time it takes for a system to respond to a request. It's usually measured in milliseconds (ms) and indicates the delay between a user initiating a request and receiving a response. Low latency is crucial for interactive applications where a quick response time is essential for a good user experience, such as online gaming, real-time communications, and high-frequency trading systems."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Throughput"
                 },
                 {
                     "type": "text",
-                    "value": "\n\nAvailability\nAvailability measures the proportion of time a system is operational and accessible to users. It's typically expressed as a percentage of uptime in the context of the total time considered (usually a year). For example, a system with 99.9% availability is down for no more than 8.76 hours over the course of a year. High availability is critical for systems that provide essential services where downtime can result in significant financial loss, safety issues, or user dissatisfaction. Strategies to improve availability include redundant systems, failover mechanisms, and robust error handling."
+                    "value": "Throughput is the amount of work or data processed by a system in a given amount of time. It's often measured in transactions per second (tps), requests per second (rps), or data bits per second (bps). Throughput is an indicator of the capacity of a system to handle load and perform tasks. High throughput is essential for systems that need to process large volumes of data or serve many users simultaneously, such as video streaming services, large-scale web applications, and data processing pipelines."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Availability"
                 },
                 {
                     "type": "text",
-                    "value": "\n\nImportance in Systems Design:\nLatency and Throughput: There's often a trade-off between latency and throughput that needs to be balanced based on the application's requirements. For instance, optimizing for low latency might mean processing fewer requests at a time to ensure quick responses, while maximizing throughput might involve batch processing that introduces delays.\nAvailability: Designing for high availability often involves redundancy, geographic distribution of resources, and the ability to quickly recover from failures. This can add complexity and cost to the system design but is necessary for mission-critical applications."
+                    "value": "Availability measures the proportion of time a system is operational and accessible to users. It's typically expressed as a percentage of uptime in the context of the total time considered (usually a year). For example, a system with 99.9% availability is down for no more than 8.76 hours over the course of a year. High availability is critical for systems that provide essential services where downtime can result in significant financial loss, safety issues, or user dissatisfaction. Strategies to improve availability include redundant systems, failover mechanisms, and robust error handling."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Importance in Systems Design:"
+                },
+                {
+                    "type": "text",
+                    "value": "Latency and Throughput: There's often a trade-off between latency and throughput that needs to be balanced based on the application's requirements. For instance, optimizing for low latency might mean processing fewer requests at a time to ensure quick responses, while maximizing throughput might involve batch processing that introduces delays.\nAvailability: Designing for high availability often involves redundancy, geographic distribution of resources, and the ability to quickly recover from failures. This can add complexity and cost to the system design but is necessary for mission-critical applications."
                 }
             ],
             "answers": [
@@ -473,12 +517,20 @@
             "header": "What is performance and scalability, how are they related to each other?",
             "content": [
                 {
-                    "type": "text",
-                    "value": "Performance\nPerformance refers to how efficiently a system processes requests and carries out its operations under a given workload. It is often measured in terms of latency (the time it takes to respond to a request) and throughput (the number of requests a system can handle per unit of time). High performance means that the system is capable of executing tasks and responding to requests quickly and efficiently, leading to a better user experience."
+                    "type": "subheader",
+                    "value": "Performance"
                 },
                 {
                     "type": "text",
-                    "value": "Scalability\nScalability, on the other hand, is the ability of a system to maintain or improve its performance when the workload increases. This can involve handling more users, data, transactions, or requests without significant drops in performance. Scalability can be achieved through various means, such as adding resources (hardware or software), optimizing existing resources, or changing the system's architecture. Scalability is often categorized into two types:"
+                    "value": "Performance refers to how efficiently a system processes requests and carries out its operations under a given workload. It is often measured in terms of latency (the time it takes to respond to a request) and throughput (the number of requests a system can handle per unit of time). High performance means that the system is capable of executing tasks and responding to requests quickly and efficiently, leading to a better user experience."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Scalability"
+                },
+                {
+                    "type": "text",
+                    "value": "Scalability, on the other hand, is the ability of a system to maintain or improve its performance when the workload increases. This can involve handling more users, data, transactions, or requests without significant drops in performance. Scalability can be achieved through various means, such as adding resources (hardware or software), optimizing existing resources, or changing the system's architecture. Scalability is often categorized into two types:"
                 },
                 {
                     "type": "bullets",
@@ -519,11 +571,15 @@
             ]
         },
         {
-            "header": "How do you design consistent hashing, and why?",
+            "header": "What is consistent hashing? How do you design a consistent hash system?",
             "content": [
                 {
                     "type": "text",
-                    "value": "If you have n cache servers, a common way to balance the load is to use the following hash method: `serverIndex = hash(key) % N`, where N is the size of the server pool. This approach works well when the size of the server pool is fixed and data distribution is relatively even, but problematic when servers are added or removed, since the same hash will return incorrect an server:"
+                    "value": "To achieve horizontal scaling in a distributed system, it is important to send and receive requests and data efficiently and evenly across a cluster of nodes (such as caches, databases, or web servers), even as nodes are added or removed. Consistent hashing is a commonly used technique to achieve this goal."
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nIf you have n cache servers, a common way to balance the load is to use the following hash method: `serverIndex = hash(key) % N`, where N is the size of the server pool. This approach works well when the size of the server pool is fixed and data distribution is relatively even, but very problematic when servers are added or removed, since the same hash will return incorrect an server:"
                 },
                 {
                     "type": "image",
@@ -532,7 +588,7 @@
                 },
                 {
                     "type": "text",
-                    "value": "So, how can this problem be solved? We need a distribution scheme that does not depend directly on the number of servers, so that when adding or removing servers, the number of keys that need to be relocated is minimized. MIT found a solution to this problem in 1997 called consistent hashing, which involves the use of an abstract circle, or 'ring.' Imagine we mapped the hash output range onto the edge of a circle. That means that the minimum possible hash value, zero, would correspond to an angle of zero, the maximum possible value (some big integer we'll call INT_MAX) would correspond to an angle of 2(pi) radians (or 360 degrees). To find out which server to ask for a given key, we need to locate the key on the ring and move in the ascending (or descending depending on the ring's set up) angle direction until we find a server. From a programming perspective, what we would do is keep a sorted list of server values (which could be angles or numbers in any real interval), and walk this list (or use a binary search) to find the first server with a value greater than, or equal to, that of the desired key. If no such value is found, we need to wrap around, taking the first one from the list."
+                    "value": "Instead, we need a design that does not depend directly on the number of servers, so that when adding or removing servers, the number of keys that need to be relocated is minimized. MIT found a solution to this problem in 1997 called consistent hashing.\n\n Consistent hashing involves the use of an abstract circle, or 'ring.' Imagine we mapped the hash output range onto the edge of a circle. That means that the minimum possible hash value, zero, would correspond to an angle of zero, the maximum possible value (some big integer we'll call INT_MAX) would correspond to an angle of 2(pi) radians (or 360 degrees). To find out which server to ask for a given key, we need to locate the key on the ring and move clockwise (or counter-clockwise depending on the system configuration) direction until we find a server. From a programming perspective, what we would do is keep a sorted list of server values (which could be angles or numbers in any real interval), and walk this list (or use a binary search) to find the first server with a value greater than, or equal to, that of the desired key. If no such value is found, we need to wrap around, taking the first one from the list."
                 },
                 {
                     "type": "image",
@@ -541,15 +597,11 @@
                 },
                 {
                     "type": "text",
-                    "value": "\n\nSo, what's the benefit of this ring approach? Imagine server C is removed. To account for this, we must remove labels C0 .. C9 from the circle. This results in the object keys formerly adjacent to the deleted labels now being randomly labeled Ax and Bx, reassigning them to servers A and B.\n\nBut what happens with the other object keys, the ones that originally belonged in A and B? Nothing! That's the beauty of it: The absence of Cx labels does not affect those keys in any way. So, removing a server results in its object keys being randomly reassigned to the rest of the servers, leaving all other keys untouched: \nThis is how consistent hashing solves the rehashing problem. In general, only k/N keys need to be remapped when k is the number of keys and N is the number of servers (more specifically, the maximum of the initial and final number of servers). In general, the number of virtual nodes for a server is proportional to the server capacity. For example, servers with higher capacity are assigned with more virtual nodes."
+                    "value": "\nWhat's the benefit of this ring approach? Imagine server C is removed. To account for this, we must remove labels C0 ... C9 from the circle. This results in the object keys formerly adjacent to the deleted labels now being randomly labeled Ax and Bx, reassigning them to servers A and B.\n\nBut what happens with the other object keys, the ones that originally belonged in A and B? Nothing! That's the beauty of it: The absence of Cx labels does not affect those keys in any way. So, removing a server results in its object keys being randomly reassigned to the rest of the servers, leaving all other keys untouched: \nThis is how consistent hashing solves the rehashing problem. In general, only k/N keys need to be remapped where k is the number of keys and N is the number of servers (more specifically, the maximum of the initial and final number of servers). "
                 },
                 {
                     "type": "text",
-                    "value": "\n\nWhy?\nConsistent hashing is a strategy designed to distribute data across a cluster of servers in a way that minimizes reorganization when servers are added or removed. It addresses several challenges in distributed systems by ensuring keys are evenly spread across nodes. This includes scalability, high availability, load distribution, data locality, fault tolerance, simplifying data management, and decentralization."
-                },
-                {
-                    "type": "text",
-                    "value": "Required Features"
+                    "value": "These artificial 'labels' on the key ring are known as virtual nodes. Virtual nodes allow each physical node to be represented by any location on the hash ring. In general, the number of virtual nodes for a server is proportional to the server's capacity at a given moment in time, servers with higher capacity are assigned more virtual nodes. This reduces the likelihood of hotspots where one server is significantly more loaded than others.\n\nRequired Features"
                 },
                 {
                     "type": "bullets",
@@ -562,8 +614,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -575,8 +627,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -588,22 +640,21 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
                     "values": [
-                        "Evaluating the trade-offs between the complexity of consistent hashing and the benefits it provides in terms of scalability and performance.",
                         "Determining the optimal number of virtual nodes to balance between load distribution and management overhead.",
                         "Choosing the right hashing function that minimizes collisions and provides a good distribution of keys.",
-                        "Integrating with other system components, such as load balancers and caching layers, to ensure seamless operation.",
+                        "Integrating with other system components, such as load balancers and caching layers.",
                         "Assessing the impact of consistent hashing on application-specific requirements, such as query latency and data locality."
                     ]
                 },
                 {
                     "type": "text",
-                    "value": "\n\nSummary\nWhen using distributed caching to optimize performance, it may happen that the number of caching servers changes (reasons for this may be a server crashing, or the need to add or remove a server to increase or decrease overall capacity). By using consistent hashing to distribute keys between the servers, we can rest assured that should that happen, the number of keys being rehashed-and therefore, the impact on origin servers-will be minimized, preventing potential downtime or performance issues.\n\nThere are clients for several systems, such as Memcached and Redis, that include support for consistent hashing out of the box."
+                    "value": "\n\nThere are clients for several systems, such as Memcached and Redis, that include support for consistent hashing out of the box. Some types of NoSQL databases rely on distributed hashing as well."
                 }
             ],
             "answers": [
@@ -626,8 +677,12 @@
                     "value": "Sharding and partitioning are both techniques used to distribute data across multiple databases or tables to improve scalability, performance, and manageability of large-scale database systems. While they share a common goal of dividing data to manage it more effectively, there are distinctions in their approaches and use cases."
                 },
                 {
+                    "type": "subheader",
+                    "value": "Partitioning"
+                },
+                {
                     "type": "text",
-                    "value": "\nPartitioning\nPartitioning typically refers to dividing a database or table into smaller segments or partitions, often within a single database server. The main goal of partitioning is to improve manageability, performance, and efficiency of data retrieval. Data can be partitioned in various ways, such as by range (e.g., date ranges), list (e.g., category), or hash (based on a hash function applied to a partition key).\n\nKey characteristics of partitioning include:"
+                    "value": "Partitioning typically refers to dividing a database or table into smaller segments or partitions, often within a single database server. The main goal of partitioning is to improve manageability, performance, and efficiency of data retrieval. Data can be partitioned in various ways, such as by range (e.g., date ranges), list (e.g., category), or hash (based on a hash function applied to a partition key).\n\nKey characteristics of partitioning include:"
                 },
                 {
                     "type": "bullets",
@@ -638,8 +693,12 @@
                     ]
                 },
                 {
+                    "type": "subheader",
+                    "value": "Sharding"
+                },
+                {
                     "type": "text",
-                    "value": "\n\nSharding\nSharding is a type of database partitioning that spreads data across multiple servers or database instances, effectively breaking up a large database into smaller, more manageable pieces called shards. Each shard holds a subset of the data, and the collection of shards make up the entire dataset. Sharding is primarily used to scale out applications horizontally, allowing for more data to be handled by adding more servers. It can significantly improve performance and reduce the load on any single server, as operations can be executed in parallel across shards.\n\nKey characteristics of sharding include:"
+                    "value": "Sharding is a type of database partitioning that spreads data across multiple servers or database instances, effectively breaking up a large database into smaller, more manageable pieces called shards. Each shard holds a subset of the data, and the collection of shards make up the entire dataset. Sharding is primarily used to scale out applications horizontally, allowing for more data to be handled by adding more servers. It can significantly improve performance and reduce the load on any single server, as operations can be executed in parallel across shards.\n\nKey characteristics of sharding include:"
                 },
                 {
                     "type": "bullets",
@@ -650,8 +709,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nDifferences Between Sharding and Partitioning"
+                    "type": "subheader",
+                    "value": "Differences Between Sharding and Partitioning"
                 },
                 {
                     "type": "bullets",
@@ -723,11 +782,15 @@
             ]
         },
         {
-            "header": "What is consistency and its patterns?",
+            "header": "What is consistency?",
             "content": [
                 {
                     "type": "text",
-                    "value": "Consistency in the context of distributed systems refers to how a system guarantees that data remains accurate, synchronized, and reliable across multiple nodes or components, despite potential challenges like network failures, concurrent access, or data replication delays. Achieving consistency in such environments is crucial for maintaining the integrity and dependability of data operations. There are several patterns and models designed to manage consistency, each balancing the trade-offs between availability, consistency, and partition tolerance, famously summarized by the CAP theorem.\n\nConsistency Models"
+                    "value": "Consistency in the context of distributed systems refers to how a system guarantees that data remains accurate, synchronized, and reliable across multiple nodes or components, despite potential challenges like network failures, concurrent access, or data replication delays. Achieving consistency in such environments is crucial for maintaining the integrity and dependability of data operations. There are several patterns and models designed to manage consistency, each balancing the trade-offs between availability, consistency, and partition tolerance, famously summarized by the CAP theorem."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Consistency Models"
                 },
                 {
                     "type": "bullets",
@@ -742,8 +805,12 @@
                     ]
                 },
                 {
+                    "type": "subheader",
+                    "value": "Considerations"
+                },
+                {
                     "type": "text",
-                    "value": "\nTrade-offs and Considerations\nThe choice of consistency model has significant implications for system design, particularly in balancing the trade-offs between consistency (C), availability (A), and partition tolerance (P) as outlined by the CAP theorem. Systems often need to prioritize two out of these three properties, leading to different consistency patterns being more suitable for some applications than others. The decision largely depends on the specific requirements of the application, such as the need for real-time data accuracy versus the need for high availability and fault tolerance."
+                    "value": "The choice of consistency model has significant implications for system design, particularly in balancing the trade-offs between consistency (C), availability (A), and partition tolerance (P) as outlined by the CAP theorem. Systems often need to prioritize two out of these three properties, leading to different consistency patterns being more suitable for some applications than others. The decision largely depends on the specific requirements of the application, such as the need for real-time data accuracy versus the need for high availability and fault tolerance."
                 }
             ],
             "answers": [
@@ -765,12 +832,16 @@
                     "value": "A Content Delivery Network (CDN) is a distributed network of servers designed to deliver web content and pages to users based on their geographic locations, the origin of the webpage, and a content delivery server. CDNs are used to efficiently distribute the load of delivering content, reduce bandwidth costs, improve web page load times, and increase content availability and redundancy."
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nHow CDNs Work\nCDNs store a cached version of its content in multiple geographical locations, known as \"points of presence\" (PoPs). Each PoP contains a number of caching servers responsible for content delivery to visitors within its proximity. When a user requests a webpage or other content, the request is redirected to the closest server geographically, rather than fetching the content from the website's central server. This significantly reduces the distance the data travels, decreasing latency, improving site speed, and providing a better user experience."
+                    "type": "subheader",
+                    "value": "How CDNs Work"
                 },
                 {
                     "type": "text",
-                    "value": "\n\nKey Features of CDNs"
+                    "value": "CDNs store a cached version of its content in multiple geographical locations, known as \"points of presence\" (PoPs). Each PoP contains a number of caching servers responsible for content delivery to visitors within its proximity. When a user requests a webpage or other content, the request is redirected to the closest server geographically, rather than fetching the content from the website's central server. This significantly reduces the distance the data travels, decreasing latency, improving site speed, and providing a better user experience."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Key Features of CDNs"
                 },
                 {
                     "type": "bullets",
@@ -783,8 +854,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nTypes of Content Served by CDNs\nCDNs are versatile and can deliver a wide range of content, including:"
+                    "type": "subheader",
+                    "value": "Types of CDN Content"
                 },
                 {
                     "type": "bullets",
@@ -797,8 +868,12 @@
                     ]
                 },
                 {
+                    "type": "subheader",
+                    "value": "Use Cases"
+                },
+                {
                     "type": "text",
-                    "value": "\n\nUse Cases\nCDNs are used across various types of websites and applications, especially those requiring high availability and performance, such as:"
+                    "value": "CDNs are used across various types of websites and applications, especially those requiring high availability and performance, such as:"
                 },
                 {
                     "type": "bullets",
@@ -828,8 +903,8 @@
                     "value": "Leader election is a coordination mechanism used in distributed systems to ensure that among multiple nodes or processes, one node is designated as the \"leader\" at any given time. This leader node is responsible for managing specific tasks, such as coordinating access to a shared resource, making decisions on behalf of the cluster, or handling read and write requests to ensure data consistency.\n\nThe need for leader election arises in scenarios where having multiple nodes perform the same operation could lead to conflicts, inconsistencies, or inefficiencies. By electing a leader, the system ensures that only one node is in charge of critical operations, simplifying the management of distributed tasks and reducing the likelihood of errors."
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nHow Leader Election Works\nLeader election algorithms vary in complexity and behavior, but they generally follow a basic process:"
+                    "type": "subheader",
+                    "value": "How Leader Election Usually Works"
                 },
                 {
                     "type": "bullets",
@@ -842,8 +917,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Leader Election Algorithms"
+                    "type": "subheader",
+                    "value": "Common Leader Election Algorithms"
                 },
                 {
                     "type": "bullets",
@@ -855,8 +930,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nApplications of Leader Election\nLeader election is crucial in various distributed systems scenarios, including:"
+                    "type": "subheader",
+                    "value": "Applications of Leader Election"
                 },
                 {
                     "type": "bullets",
@@ -886,8 +961,8 @@
                     "value": "SSE stands for Server-Sent Events, a standard describing how servers can initiate data transmission towards browser clients once an initial client connection has been established. It is part of the HTML5 specification and provides a way to send real-time updates or continuous data streams from the server to the browser over a single, long-lived HTTP connection."
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nKey Features of SSE"
+                    "type": "subheader",
+                    "value": "Key Features of SSE"
                 },
                 {
                     "type": "bullets",
@@ -900,8 +975,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nUse Cases for SSE\nSSE is particularly well-suited for applications that require real-time data updates from the server, such as:"
+                    "type": "subheader",
+                    "value": "Use Cases for SSE"
                 },
                 {
                     "type": "bullets",
@@ -913,8 +988,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nComparing SSE with WebSockets\nWhile both SSE and WebSockets provide mechanisms for real-time communication between clients and servers, there are key differences:"
+                    "type": "subheader",
+                    "value": "Comparing SSE with WebSockets"
                 },
                 {
                     "type": "bullets",
@@ -950,8 +1025,8 @@
                     "value": "Long polling is a web communication technique used to simulate pushing data from the server to the client, making it appear as if the server is initiating the transfer of data. Unlike traditional polling, where the client repeatedly requests data from the server at regular intervals, long polling keeps the connection open for a longer period, allowing the server to respond whenever new data becomes available within a certain timeframe."
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nHow Long Polling Works"
+                    "type": "subheader",
+                    "value": "How Long Polling Works"
                 },
                 {
                     "type": "bullets",
@@ -963,8 +1038,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nAdvantages of Long Polling"
+                    "type": "subheader",
+                    "value": "Advantages of Long Polling"
                 },
                 {
                     "type": "bullets",
@@ -975,8 +1050,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nDisadvantages of Long Polling"
+                    "type": "subheader",
+                    "value": "Disadvantages of Long Polling"
                 },
                 {
                     "type": "bullets",
@@ -1054,8 +1129,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nBest Practices for Effective SEO"
+                    "type": "subheader",
+                    "value": "Best Practices for Effective SEO"
                 },
                 {
                     "type": "bullets",
@@ -1092,8 +1167,8 @@
                     "value": "The Domain Name System (DNS) is a hierarchical and decentralized naming system used for computers, services, or any resource connected to the Internet or a private network. It associates various information with domain names assigned to each of the participating entities. Most prominently, it translates more readily memorized domain names to the numerical IP addresses needed for locating and identifying computer services and devices with the underlying network protocols.\n\nDNS is fundamental to the functionality of the internet, providing a quick and user-friendly way of accessing websites without needing to remember the numerical IP addresses of web servers. It's often described as the \"phonebook of the internet\" because it converts human-readable domain names into machine-readable IP addresses, allowing browsers to load Internet resources."
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nHow DNS Works:"
+                    "type": "subheader",
+                    "value": "How DNS Works"
                 },
                 {
                     "type": "bullets",
@@ -1107,8 +1182,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nKey components:"
+                    "type": "subheader",
+                    "value": "Key components:"
                 },
                 {
                     "type": "text",
@@ -1136,8 +1211,8 @@
                     "value": "WebSocket is a communication protocol that provides a full-duplex communication channel over a single, long-lived connection between a client (typically a web browser) and a server. Unlike HTTP, which is stateless and requires a new connection for each request/response pair, WebSocket allows for continuous two-way communication, enabling real-time data transfer without the need to repeatedly establish connections. This makes it particularly well-suited for applications that require real-time updates, such as live chat applications, online gaming, real-time notifications, and collaborative platforms."
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nHow to Implement a WebSocket\nServer-Side Implementation"
+                    "type": "subheader",
+                    "value": "How to Implement a WebSocket on the Server-Side"
                 },
                 {
                     "type": "bullets",
@@ -1148,8 +1223,12 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nClient-Side Implementation"
+                    "type": "code",
+                    "value": "const WebSocket = require(\"ws\");\nconst wss = new WebSocket.Server({ port: 8080 });\nwss.on(\"connection\", function connection(ws) {\n  ws.on(\"message\", function incoming(message) {\n    console.log(\"received: %s\", message);\n  });\n  ws.send(\"something\");\n});\n"
+                },
+                {
+                    "type": "subheader",
+                    "value": "How to Implement a Websocket on the Client-Side"
                 },
                 {
                     "type": "bullets",
@@ -1160,24 +1239,12 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nServer-Side Example (Node.js using ws library):"
-                },
-                {
-                    "type": "code",
-                    "value": "const WebSocket = require(\"ws\");\nconst wss = new WebSocket.Server({ port: 8080 });\nwss.on(\"connection\", function connection(ws) {\n  ws.on(\"message\", function incoming(message) {\n    console.log(\"received: %s\", message);\n  });\n  ws.send(\"something\");\n});\n"
-                },
-                {
-                    "type": "text",
-                    "value": "Client-Side Example (HTML/JavaScript):"
-                },
-                {
                     "type": "code",
                     "value": "<script>\n  var ws = new WebSocket(\"ws://localhost:8080\"); ws.onopen = function()\n  {ws.send(\"Hello Server!\")}; ws.onmessage = function(evt)\n  {alert(\"Message from server: \" + evt.data)};\n</script>;\n"
                 },
                 {
-                    "type": "text",
-                    "value": "\nWhy Use WebSocket Over HTTP?"
+                    "type": "subheader",
+                    "value": "Why Use WebSocket Over HTTP?"
                 },
                 {
                     "type": "bullets",
@@ -1223,8 +1290,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nStrategies for Achieving Lower Latency"
+                    "type": "subheader",
+                    "value": "Strategies for Achieving Lower Latency"
                 },
                 {
                     "type": "bullets",
@@ -1239,7 +1306,7 @@
                 },
                 {
                     "type": "text",
-                    "value": "\nIn essence, lower latency interaction enhances the performance and user experience of digital services and applications by minimizing delays, making activities such as online gaming, real-time communication, and interactive web browsing more efficient and enjoyable."
+                    "value": "\nLower latency interaction enhances the performance and user experience of digital services and applications by minimizing delays, making activities such as online gaming, real-time communication, and interactive web browsing more efficient and enjoyable."
                 }
             ],
             "answers": [
@@ -1256,15 +1323,15 @@
             ]
         },
         {
-            "header": "How does buffer overflow work?",
+            "header": "What is buffer overflow?",
             "content": [
                 {
                     "type": "text",
                     "value": "A buffer overflow occurs when more data is written to a buffer (a temporary storage area in memory) than it can hold. Since buffers have a fixed capacity, any extra data can overflow into adjacent memory spaces. This behavior can lead to various types of software vulnerabilities, including crashes, data corruption, and security breaches, such as unauthorized access or execution of malicious code."
                 },
                 {
-                    "type": "text",
-                    "value": "\nHow Buffer Overflow Works:"
+                    "type": "subheader",
+                    "value": "How Buffer Overflow Works"
                 },
                 {
                     "type": "bullets",
@@ -1276,8 +1343,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\nPreventing Buffer Overflows: To mitigate buffer overflow vulnerabilities, developers and programmers use several strategies, including:"
+                    "type": "subheader",
+                    "value": "Preventing Buffer Overflows"
                 },
                 {
                     "type": "bullets",
@@ -1348,7 +1415,7 @@
             "header": "How do you design a notification system?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -1366,8 +1433,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -1383,8 +1450,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -1400,8 +1467,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -1434,7 +1501,7 @@
             "header": "How do you design Tic-Tac-Toe?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -1449,8 +1516,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -1463,8 +1530,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -1477,8 +1544,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -1508,7 +1575,7 @@
             "header": "How do you design a web cache?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -1525,8 +1592,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -1539,8 +1606,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -1553,8 +1620,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -1585,11 +1652,15 @@
             "content": [
                 {
                     "type": "text",
-                    "value": "A key-value store, also referred to as a key-value database (and is one type of NoSQL database) uses a simple key-value method to store data. Unlike traditional relational databases that use tables, rows, and columns, key-value stores work by creating a unique identifier (key) for each piece of data, which is then used to retrieve or modify the data (value). Each unique identifier is stored as a key with its associated value. This data pairing is known as a 'key-value' pair. In a key-value pair, the key must be unique, and the value associated with the key can be accessed through the key. Keys can be plain text or hashed values. For performance reasons, a short key works better. An example: Plain text key: 'last_logged_in_at',  Hashed key: 253DDEC4. The value in a key-value pair can be strings, lists, objects, etc. \n\nFor large applications, it is infeasible to fit a complete data set in a single server. The simplest way to accomplish this is to split the data into smaller partitions and store them in multiple servers (called sharding). There are two challenges while partitioning the data: 1) distribute the data across multiple servers evenly, 2) minimize data inconsistency and movement when nodes are added or removed. Consistent hashing using a hash ring is a great way to resolve both of these issues."
+                    "value": "A key-value store, also referred to as a key-value database (one type of NoSQL database) uses a simple key-value method to store data. Unlike traditional relational databases that use tables, rows, and columns, key-value stores work by creating a unique identifier (key) for each piece of data, which is then used to retrieve or modify the data (value). Each unique identifier is stored as a key with its associated value. This data pairing is known as a 'key-value' pair. In a key-value pair, the key must be unique, and the value associated with the key can be accessed through the key. Keys can be plain text or hashed values. For performance reasons, a short key works better. An example: Plain text key: 'last_logged_in_at',  Hashed key: 253DDEC4. The value in a key-value pair can be strings, lists, objects, etc. \n\nFor large applications, it is infeasible to fit a complete data set in a single server. The simplest way to accomplish this is to split the data into smaller partitions and store them in multiple servers (called sharding). There are two challenges while partitioning the data: 1) distribute the data across multiple servers evenly, 2) minimize data inconsistency and movement when nodes are added or removed. Consistent hashing using a hash ring is a great way to resolve both of these issues."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Data Replication"
                 },
                 {
                     "type": "text",
-                    "value": "\n\nData Replication\nTo achieve high availability and reliability, data must be replicated asynchronously over N servers, where N is a configurable parameter. These N servers are chosen using the following logic: after a key is mapped to a position on the hash ring, walk clockwise from that position and choose the first N servers on the ring to store data copies. In the below image (N = 3), key0 is replicated at s1, s2, and s3. With virtual nodes, the first N nodes on the ring may be owned by fewer than N physical servers. To avoid this issue, we only choose unique servers while performing the clockwise walk logic. Nodes in the same data center often fail at the same time due to power outages, network issues, natural disasters, etc. For better reliability, replicas are placed in distinct data centers, and data centers are connected through high-speed networks."
+                    "value": "To achieve high availability and reliability, data must be replicated asynchronously over N servers, where N is a configurable parameter. These N servers are chosen using the following logic: after a key is mapped to a position on the hash ring, walk clockwise from that position and choose the first N servers on the ring to store data copies. In the below image (N = 3), key0 is replicated at s1, s2, and s3. With virtual nodes, the first N nodes on the ring may be owned by fewer than N physical servers. To avoid this issue, we only choose unique servers while performing the clockwise walk logic. Nodes in the same data center often fail at the same time due to power outages, network issues, natural disasters, etc. For better reliability, replicas are placed in distinct data centers, and data centers are connected through high-speed networks."
                 },
                 {
                     "type": "image",
@@ -1597,8 +1668,12 @@
                     "path": "../InterviewQuestions/images/systems_design/key_value_store.png"
                 },
                 {
+                    "type": "subheader",
+                    "value": "Consistency"
+                },
+                {
                     "type": "text",
-                    "value": "\nConsistency\nSince data is replicated at multiple nodes, it must be synchronized across replicas. Quorum consensus can guarantee consistency for both read and write operations. Let us establish a few definitions first. N = The number of replicas. W = A write quorum of size W. For a write operation to be considered as successful, write operation must be acknowledged from W replicas. R = A read quorum of size R. For a read operation to be considered as successful, read operation must wait for responses from at least R replicas. Consider the below example where N = 3. \n\nW = 1 does not mean data is written on one server. For instance, with the configuration shown below, data is replicated at s0, s1, and s2. W = 1 means that the coordinator must receive at least one acknowledgment before the write operation is considered as successful. For instance, if we get an acknowledgment from s1, we no longer need to wait for acknowledgements from s0 and s2. A coordinator acts as a proxy between the client and the nodes. The configuration of W, R and N is a typical tradeoff between latency and consistency. If W = 1 or R = 1, an operation is returned quickly because a coordinator only needs to wait for a response from any of the replicas. If W or R > 1, the system offers better consistency; however, the query will be slower because the coordinator must wait for the response from the slowest replica. If W + R > N, strong consistency is guaranteed because there must be at least one overlapping node that has the latest data to ensure consistency."
+                    "value": "Since data is replicated at multiple nodes, it must be synchronized across replicas. Quorum consensus can guarantee consistency for both read and write operations. Let us establish a few definitions first. N = The number of replicas. W = A write quorum of size W. For a write operation to be considered as successful, write operation must be acknowledged from W replicas. R = A read quorum of size R. For a read operation to be considered as successful, read operation must wait for responses from at least R replicas. Consider the below example where N = 3. \n\nW = 1 does not mean data is written on one server. For instance, with the configuration shown below, data is replicated at s0, s1, and s2. W = 1 means that the coordinator must receive at least one acknowledgment before the write operation is considered as successful. For instance, if we get an acknowledgment from s1, we no longer need to wait for acknowledgements from s0 and s2. A coordinator acts as a proxy between the client and the nodes. The configuration of W, R and N is a typical tradeoff between latency and consistency. If W = 1 or R = 1, an operation is returned quickly because a coordinator only needs to wait for a response from any of the replicas. If W or R > 1, the system offers better consistency; however, the query will be slower because the coordinator must wait for the response from the slowest replica. If W + R > N, strong consistency is guaranteed because there must be at least one overlapping node that has the latest data to ensure consistency."
                 },
                 {
                     "type": "image",
@@ -1610,8 +1685,12 @@
                     "value": "\nHow to configure N, W, and R to fit various use cases? Here are some of the possible setups: \nIf R = 1 and W = N, the system is optimized for a fast read. \nIf W = 1 and R = N, the system is optimized for fast write. \nIf W + R > N, strong consistency is guaranteed (Usually N = 3, W = R = 2). \nIf W + R <= N, strong consistency is not guaranteed. \nDepending on the requirement, we can tune the values of W, R, N to achieve the desired level of consistency."
                 },
                 {
+                    "type": "subheader",
+                    "value": "Consistency Models"
+                },
+                {
                     "type": "text",
-                    "value": "\n\nConsistency models\nConsistency model is another important factor to consider when designing a key-value store. A consistency model defines the degree of data consistency, and a wide spectrum of possible consistency models exist: \nStrong consistency: any read operation returns a value corresponding to the result of themost updated write data item. A client never sees out-of-date data. Bank systems usually have extremely high consistentcy requirements. \nWeak consistency: subsequent read operations may not see the most updated value. \nEventual consistency: this is a specific form of weak consistency. Given enough time, all updates are propagated, and all replicas are consistent. Strong consistency is usually achieved by forcing a replica not to accept new reads/writes until every replica has agreed on current write. This approach is not ideal for highly availablesystems because it could block new operations. Dynamo and Cassandra adopt eventual consistency, which is our recommended consistency model for our key-value store. From concurrent writes, eventual consistency allows inconsistent values to enter the system and force the client to read the values to reconcile."
+                    "value": "Consistency model is another important factor to consider when designing a key-value store. A consistency model defines the degree of data consistency, and a wide spectrum of possible consistency models exist: \nStrong consistency: any read operation returns a value corresponding to the result of themost updated write data item. A client never sees out-of-date data. Bank systems usually have extremely high consistentcy requirements. \nWeak consistency: subsequent read operations may not see the most updated value. \nEventual consistency: this is a specific form of weak consistency. Given enough time, all updates are propagated, and all replicas are consistent. Strong consistency is usually achieved by forcing a replica not to accept new reads/writes until every replica has agreed on current write. This approach is not ideal for highly availablesystems because it could block new operations. Dynamo and Cassandra adopt eventual consistency, which is our recommended consistency model for our key-value store. From concurrent writes, eventual consistency allows inconsistent values to enter the system and force the client to read the values to reconcile."
                 },
                 {
                     "type": "image",
@@ -1619,8 +1698,12 @@
                     "path": "../InterviewQuestions/images/systems_design/key_value_store3.png"
                 },
                 {
+                    "type": "subheader",
+                    "value": "Inconsistency Resolution Using Versioning"
+                },
+                {
                     "type": "text",
-                    "value": "\nInconsistency resolution using versioning\nReplication gives high availability but causes inconsistencies among replicas. Versioning and vector locks are used to solve inconsistency problems. Versioning means treating each data modification as a new immutable version of data. An example of how inconsistency occurs:"
+                    "value": "Replication gives high availability but causes inconsistencies among replicas. Versioning and vector locks are used to solve inconsistency problems. Versioning means treating each data modification as a new immutable version of data. An example of how inconsistency occurs:"
                 },
                 {
                     "type": "image",
@@ -1636,8 +1719,12 @@
                     "value": "\n\nThe original value could be ignored because the modifications were based on it. However, there is no clear way to resolve the conflict of the last two versions. To resolve this issue, we need a versioning system that can detect conflicts and reconcile conflicts. A vector clock is a common technique to solve this problem, which Amazon's DynamoDB uses. A vector clock is a [server, version] pair associated with a data item. It can be used to check if one version precedes, succeeds, or in conflict with others. Assume a vector clock is represented by D([S1, v1], [S2, v2], ..., [Sn, vn]), where D is a data item, v1 is a version counter, and s1 is a server number, etc. If data item D is written to server Si, the system must perform one of the following tasks: \nIncrement vi if [Si, vi] exists.\nOtherwise, create a new entry [Si, 1].\nEven though vector clocks can resolve conflicts, there are two notable downsides. First, vector clocks add complexity to the client because it needs to implement conflict resolution logic. Second, the [server: version] pairs in the vector clock could grow rapidly. To fix this problem, we set a threshold for the length, and if it exceeds the limit, the oldest pairs are removed. This can lead to inefficiencies in reconciliation because the descendant relationship cannot be determined accurately. However, Amazon has not yet encountered this problem in production; therefore, it is probably an acceptable solution for most companies."
                 },
                 {
+                    "type": "subheader",
+                    "value": "Failure Handling"
+                },
+                {
                     "type": "text",
-                    "value": "\nHandling failures\nAs with any large system at scale, failures are not only inevitable but common. In a distributed system, it is insufficient to believe that a server is down because another server says so. Usually, it requires at least two independent sources of information to mark a server down. All-to-all multicasting is a straightforward solution. However, this is inefficient when many servers are in the system. A better solution is to use decentralized failure detection methods like gossip protocol. Gossip protocol works as follows:\nEach node maintains a node membership list, which contains member IDs and heartbeat counters. \nEach node periodically increments its heartbeat counter. \nEach node periodically sends heartbeats to a set of random nodes, which in turn propagate to another set of nodes. \nOnce nodes receive heartbeats, membership list is updated to the latest info. \nIf the heartbeat has not increased for more than predefined periods, the member is considered as offline.\n\nHandling temporary failures \nAfter failures have been detected through the gossip protocol, the system needs to deploy certain mechanisms to ensure availability. In the strict quorum approach, read and write operations could be blocked. A technique called 'sloppy quorum' is used to improve availability. Instead of enforcing the quorum requirement, the system chooses the first W healthy servers for writes and first R healthy servers for reads on the hash ring. Offline servers are ignored. If a server is unavailable due to network or server failures, another server will process requests temporarily. When the down server is up, changes will be pushed back to achieve data consistency. This process is called hinted handoff.\nSince s2 is unavailable, reads and writes will be handled by s3 temporarily. When s2 comes back online, s3 will hand the data back to s2:"
+                    "value": "As with any large system at scale, failures are not only inevitable but common. In a distributed system, it is insufficient to believe that a server is down because another server says so. Usually, it requires at least two independent sources of information to mark a server down. All-to-all multicasting is a straightforward solution. However, this is inefficient when many servers are in the system. A better solution is to use decentralized failure detection methods like gossip protocol. Gossip protocol works as follows:\nEach node maintains a node membership list, which contains member IDs and heartbeat counters. \nEach node periodically increments its heartbeat counter. \nEach node periodically sends heartbeats to a set of random nodes, which in turn propagate to another set of nodes. \nOnce nodes receive heartbeats, membership list is updated to the latest info. \nIf the heartbeat has not increased for more than predefined periods, the member is considered as offline.\n\nHandling temporary failures \nAfter failures have been detected through the gossip protocol, the system needs to deploy certain mechanisms to ensure availability. In the strict quorum approach, read and write operations could be blocked. A technique called 'sloppy quorum' is used to improve availability. Instead of enforcing the quorum requirement, the system chooses the first W healthy servers for writes and first R healthy servers for reads on the hash ring. Offline servers are ignored. If a server is unavailable due to network or server failures, another server will process requests temporarily. When the down server is up, changes will be pushed back to achieve data consistency. This process is called hinted handoff.\nSince s2 is unavailable, reads and writes will be handled by s3 temporarily. When s2 comes back online, s3 will hand the data back to s2:"
                 },
                 {
                     "type": "image",
@@ -1646,7 +1733,7 @@
                 },
                 {
                     "type": "text",
-                    "value": "Hinted handoff is used to handle temporary failures. What if a replica is permanently unavailable? To handle such a situation, we implement an anti-entropy protocol to keep replicas in sync. Anti-entropy involves comparing each piece of data on replicas and updating each replica to the newest version. A Merkle tree is used for inconsistency detection and minimizing the amount of data transferred. A hash tree or Merkle tree is a tree in which every non-leaf node is labeled with the hash of the labels or values (in case of leaves) of its child nodes. Hash trees allow efficient and secure verification of the contents of large data structures. Assuming key space is from 1 to 12, the following steps show how to build a Merkle tree. \n\nHighlighted boxes indicate inconsistency. \nStep 1: Divide key space into buckets (4 in our example) as shown. A bucket is used as the root level node to maintain a limited depth of the tree."
+                    "value": "Hinted handoff is used to handle temporary failures. What if a replica is permanently unavailable? To handle such a situation, we implement an anti-entropy protocol to keep replicas in sync. Anti-entropy involves comparing each piece of data on replicas and updating each replica to the newest version. A Merkle tree is used for inconsistency detection and minimizing the amount of data transferred. A hash tree or Merkle tree is a tree in which every non-leaf node is labeled with the hash of the labels or values (in case of leaves) of its child nodes. Hash trees allow efficient and secure verification of the contents of large data structures. Assuming key space is from 1 to 12, the following steps show how to build a Merkle tree. \n\nHighlighted boxes indicate inconsistency. \nStep 1: Divide key space into buckets (4 in this example) as shown. A bucket is used as the root level node to maintain a limited depth of the tree."
                 },
                 {
                     "type": "image",
@@ -1677,8 +1764,8 @@
                     "path": "../InterviewQuestions/images/systems_design/key_value_store9.png"
                 },
                 {
-                    "type": "text",
-                    "value": "\nWrite path"
+                    "type": "subheader",
+                    "value": "Write path"
                 },
                 {
                     "type": "image",
@@ -1687,7 +1774,11 @@
                 },
                 {
                     "type": "text",
-                    "value": "The above image shows what happens after a write request is directed to a specific node. These designs for write/read paths are primary based on the architecture of Cassandra. 1) The write request is persisted on a commit log file. 2) Data is saved in the memory cache. When the memory cache is full or reaches a predefined threshold, data is flushed to SSTable on disk. Note: A sorted-string table (SSTable) is a sorted list of <key, value> pairs.\n\nRead path\n"
+                    "value": "The above image shows what happens after a write request is directed to a specific node. These designs for write/read paths are primary based on the architecture of Cassandra. 1) The write request is persisted on a commit log file. 2) Data is saved in the memory cache. When the memory cache is full or reaches a predefined threshold, data is flushed to SSTable on disk. Note: A sorted-string table (SSTable) is a sorted list of <key, value> pairs."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Read Path"
                 },
                 {
                     "type": "image",
@@ -1704,7 +1795,7 @@
             "header": "How do you design a unique ID generator in distributed systems?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -1718,8 +1809,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -1731,8 +1822,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -1744,8 +1835,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -1775,7 +1866,7 @@
             "header": "How do you design a ticketing system like JIRA?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -1793,8 +1884,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -1808,8 +1899,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -1823,8 +1914,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -1854,7 +1945,7 @@
             "header": "How do you design an e-commerce store?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -1873,8 +1964,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -1888,8 +1979,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -1903,8 +1994,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -1935,7 +2026,7 @@
             "header": "How do you design an online portal to sell products?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -1954,8 +2045,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -1968,8 +2059,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -1982,8 +2073,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2013,7 +2104,7 @@
             "header": "How do you design a fitness wearable to measure heart rate?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2031,8 +2122,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2045,8 +2136,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2059,8 +2150,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2090,7 +2181,7 @@
             "header": "How do you design an online shopping cart?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2108,8 +2199,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2122,8 +2213,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2136,8 +2227,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2167,7 +2258,7 @@
             "header": "How do you design an API?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2185,8 +2276,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2201,8 +2292,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2217,8 +2308,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2250,7 +2341,7 @@
             "header": "How do you design autocomplete for a search engine?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2267,8 +2358,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2281,8 +2372,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2295,8 +2386,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2323,17 +2414,18 @@
             ]
         },
         {
-            "header": "What is the best way to design a global chat service like Whatsapp or a Facebook messenger?",
+            "header": "What is the best way to design a chat system like Whatsapp or a Facebook messenger?",
             "content": [
                 {
-                    "type": "text",
-                    "value": "Required Features"
+                    "type": "subheader",
+                    "value": "Commonly Required Features"
                 },
                 {
                     "type": "bullets",
                     "values": [
-                        "Instant messaging between two users or within groups",
-                        "Support for multimedia messages (images, videos, audio)",
+                        "Millions of daily active users",
+                        "Instant messaging between two users and multiple users within groups",
+                        "Support for images and video attachments",
                         "End-to-end encryption for privacy and security",
                         "Presence indicators (online status, typing indicators, read receipts)",
                         "Push notifications for new messages or events",
@@ -2346,7 +2438,172 @@
                 },
                 {
                     "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "value": "When a user sends a message, a chat service should 1) store the message, 2) relay the message to the correct user(s). When a client intends to start a chat, it connects the chats service using one or more network protocols. For a chat service, the choice of network protocols is important. Requests are initiated by the client for most client/server applications. This is also true for the sender side of a chat application. when the sender sends a message to the receiver via the chat service, it uses the time-tested HTTP protocol, which is the most common web protocol. In this scenario, the client opens a HTTP connection with the chat service and sends the message, informing the service to send the message to the receiver. The keep-alive is efficient for this because the keep-alive header allows a client to maintain a persistent connection with the chat service. It also reduces the number of TCP handshakes. HTTP is a fine option on the sender side, and many popular chat applications such as Facebook used HTTP initially to send messages.\n\nThe receiver side is a bit more complicated. Since HTTP is client-initiated, it is not trivial to send messages from the server. There are three major techniques used to simulate server connection: polling, long-polling, and WebSocket."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Polling"
+                },
+                {
+                    "type": "text",
+                    "value": "Polling is a technique that the client periodically asks the server if there are messages available. Depending on polling frequency, polling could be costly. It could consume precious server resources to answer a question that offers no as an answer most of the time."
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system polling",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "Long Polling"
+                },
+                {
+                    "type": "text",
+                    "value": "In long polling, a client holds the connection open until there are actually new messages available or a timeout threshold has been reached. Once the client receives new messages, it immediately sends another request to the server, restarting the process.Long polling has a few drawbacks:\n\nSender and receiver may not connect to the same chat server. HTTP based servers are usually stateless. If you use round robin for load balancing, the server that receives the message might not have a long-polling connection with the client who receives the message. \nA server has no good way to tell if a client is disconnected. \nIt is inefficient. If a user does not chat much, long polling still makes periodic connections after timeouts."
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system long polling",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system2.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "WebSocket"
+                },
+                {
+                    "type": "text",
+                    "value": "WebSocket is the most common solution for sending asynchronous updates from server to client. WebSocket connection is initiated by the client. It is bi-directional and persistent. It starts its life as a HTTP connection and could be \"upgraded\" via some well-defined handshake to a WebSocket connection. Through this persistent connection, a server could send updates to a client. WebSocket connections generally work even if a firewall is in place. This is because they use port 80 or 443 which are also used by HTTP/HTTPS connections. Earlier we said that on the sender side HTTP is a fine protocol to use, but since WebSocket is bidirectional, there is no strong technical reason not to use it also for sending."
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system web sockets",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system3.png"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system sender receiver stateful",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system4.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "High-level design"
+                },
+                {
+                    "type": "text",
+                    "value": "WebSocket is typically chosen as the main communication protocol between the client and server for its bidirectional communication, it is important to note that everything else does not have to be WebSocket. In fact, most features (sign up, login, user profile, etc) of a chat application could use the traditional request/response method over HTTP. Let us drill in a bit and look at the high-level components of the system.The chat system is broken down into three major categories: stateless services, stateful services, and third-party integration."
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system stateless components vs stateful",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system5.png"
+                },
+                {
+                    "type": "text",
+                    "value": "\n\nStateless Services\nStateless services are traditional public-facing request/response services, used to manage the login, signup, user profile, etc. These are common features among many websites and apps. Stateless services sit behind a load balancer whose job is to route requests to the correct services based on the request paths. These services can be monolithic or individual microservices. We do not need to build many of these stateless services by ourselves as there are services in the market that can be integrated easily. The one service that we will discuss more in deep dive is the service discovery. Its primary job is to give the client a list of DNS host names of chat servers that the client could connect to. \n\nThird-party integration\n For a chat app, push notification is the most important third-party integration. It is a way to inform users when new messages have arrived, even when the app is not running. Proper integration of push notification is crucial. Refer to Chapter 10 Design a notification system for more information. \n\nScalability\n On a small scale, all services listed above could fit in one server. Even at the scale we design for, it is in theory possible to fit all user connections in one modern cloud server. The number of concurrent connections that a server can handle will most likely be the limiting factor. In our scenario, at 1M concurrent users, assuming each user connection needs 10K of memory on the server (this is a very rough figure and very dependent on the language choice), it only needs about 10GB of memory to hold all the connections on one box. If we propose a design where everything fits in one server, this may raise a big red flag in the interviewer's mind. No technologist would design such a scale in a single server. Single server design is a deal breaker due to many factors. The single point of failure is the biggest among them. However, it is perfectly fine to start with a single server design. Just make sure the interviewer knows this is a starting point."
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system high level architecture",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system6.png"
+                },
+                {
+                    "type": "text",
+                    "value": "The client maintains a persistent WebSocket connection to a chat server for real-time messaging."
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Chat servers facilitate message sending/receiving.",
+                        "Presence servers manage online/offline status.",
+                        "API servers handle everything including user login, signup, change profile, etc.",
+                        "Notification servers send push notifications.",
+                        "Finally, the key-value store is used to store chat history. When an offline user comes online, she will see all her previous chat history."
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": "Storage\nTwo types of data exist in a typical chat system. The first is generic data, such as user profile, setting, user friends list. These data are stored in robust and reliable relational databases. Replication and sharding are common techniques to satisfy availability and scalability requirements. The second is unique to chat systems: chat history data. It is important to understand the read/write pattern."
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "The amount of data is enormous for chat systems. A previous study reveals that Facebook messenger and Whatsapp process 60 billion messages a day.",
+                        "Only recent chats are accessed frequently. Users do not usually look up for old chats.",
+                        "Although very recent chat history is viewed in most cases, users might use features that require random access of data, such as search, view your mentions, jump to specific messages, etc. These cases should be supported by the data access layer.",
+                        "The read to write ratio is about 1:1 for 1 on 1 chat apps."
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": "Key-value stores are recommended for storage for the following reasons"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Key-value stores allow easy horizontal scaling.",
+                        "Key-value stores provide very low latency to access data.",
+                        "Relational databases do not handle long tail of data well. When the indexes grow large, random access is expensive.",
+                        "Key-value stores are adopted by other proven reliable chat applications. For example, both Facebook messenger and Discord use key-value stores. Facebook messenger uses HBase, and Discord uses Cassandra."
+                    ]
+                },
+                {
+                    "type": "subheader",
+                    "value": "Service Discovery"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system discovery",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system7.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "1:1 Chat Message Flows"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system message sync queue",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system8.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "Small Group Chat Message Flow"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system user key value store",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system9.png"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system message queues",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system10.png"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system partitioned queues",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system11.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "User Disconnection"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system heartbeat",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system12.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "Online Status Fanout"
+                },
+                {
+                    "type": "image",
+                    "alt": "Chat system channel subscriptions",
+                    "path": "../InterviewQuestions/images/systems_design/chat_system13.png"
+                },
+                {
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2359,8 +2616,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2373,8 +2630,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2405,7 +2662,7 @@
             "header": "How do you design a URL shortening service like TinyURL or bit.ly?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2423,8 +2680,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2437,8 +2694,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2451,8 +2708,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2482,7 +2739,7 @@
             "header": "How do you design forum-like systems like Quora, Reddit or HackerNews?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2501,8 +2758,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2515,8 +2772,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2529,8 +2786,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2560,7 +2817,7 @@
             "header": "How do you design Facebook's newsfeed system?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2578,8 +2835,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2592,8 +2849,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2606,8 +2863,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2637,7 +2894,7 @@
             "header": "How do you design a parking lot system?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2656,8 +2913,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2670,8 +2927,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2684,8 +2941,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2715,7 +2972,7 @@
             "header": "How do you design a recommendation system?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2732,8 +2989,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2746,8 +3003,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2760,8 +3017,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2862,7 +3119,7 @@
             "header": "How do you design an API Rate Limiter system for GitHub or Firebase sites?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2878,8 +3135,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2892,8 +3149,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2906,8 +3163,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -2937,7 +3194,7 @@
             "header": "How do you design global file storage and file sharing services like Google Drive, Dropbox etc?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -2956,8 +3213,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -2970,8 +3227,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -2984,8 +3241,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3015,7 +3272,7 @@
             "header": "How do you design a type-ahead search engine service?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3033,8 +3290,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3047,8 +3304,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3062,8 +3319,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3081,7 +3338,7 @@
             "header": "How do you design Netflix?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3100,8 +3357,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3114,8 +3371,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3128,8 +3385,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3159,7 +3416,7 @@
             "header": "How do you design YouTube?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3178,8 +3435,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3192,8 +3449,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3206,8 +3463,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3237,7 +3494,7 @@
             "header": "How do you design a traffic control system?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3256,8 +3513,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3270,8 +3527,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3284,8 +3541,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3315,7 +3572,7 @@
             "header": "How do you design a web crawler?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3334,8 +3591,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3348,8 +3605,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3362,8 +3619,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3393,7 +3650,7 @@
             "header": "How do you design an ATM system?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3412,8 +3669,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3426,8 +3683,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3440,8 +3697,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3471,7 +3728,7 @@
             "header": "How do you design ride sharing systems like Uber, Ola or Lyft?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3490,8 +3747,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3505,8 +3762,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3520,8 +3777,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",
@@ -3552,7 +3809,7 @@
             "header": "How do you design an MMO game?",
             "content": [
                 {
-                    "type": "text",
+                    "type": "subheader",
                     "value": "Required Features"
                 },
                 {
@@ -3571,8 +3828,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nCommon Issues"
+                    "type": "subheader",
+                    "value": "Common Issues"
                 },
                 {
                     "type": "bullets",
@@ -3586,8 +3843,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nResolutions"
+                    "type": "subheader",
+                    "value": "Resolutions"
                 },
                 {
                     "type": "bullets",
@@ -3601,8 +3858,8 @@
                     ]
                 },
                 {
-                    "type": "text",
-                    "value": "\n\nConsiderations"
+                    "type": "subheader",
+                    "value": "Considerations"
                 },
                 {
                     "type": "bullets",

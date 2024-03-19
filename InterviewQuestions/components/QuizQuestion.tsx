@@ -1,12 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  Image,
-} from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View, Image} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackParamList} from '../App';
@@ -173,7 +166,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
           <Image
             key={index}
             source={imageSource}
-            style={styles.image}
+            style={sharedStyles.image}
             resizeMode="contain"
           />
         );
@@ -183,16 +176,16 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.questionHeader}>{currentQuestion?.header}</Text>
+    <ScrollView style={sharedStyles.container}>
+      <Text style={sharedStyles.header}>{currentQuestion?.header}</Text>
       {hasAnswers &&
         !showAnswer &&
         currentQuestion?.answers?.map((answer, index) => (
           <TouchableOpacity
             key={index}
-            style={styles.answerButton}
+            style={sharedStyles.button}
             onPress={() => handleAnswerSelection(answer.text)}>
-            <Text style={styles.answerText}>{answer.text}</Text>
+            <Text style={sharedStyles.buttonText}>{answer.text}</Text>
           </TouchableOpacity>
         ))}
 
@@ -201,16 +194,16 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
           <Text
             style={
               isAnswerCorrect
-                ? styles.feedbackTextCorrect
-                : styles.feedbackTextIncorrect
+                ? sharedStyles.feedbackTextCorrect
+                : sharedStyles.feedbackTextIncorrect
             }>
             {isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
           </Text>
           {currentQuestion?.content.map(renderContent)}
           <TouchableOpacity
-            style={styles.nextButton}
+            style={sharedStyles.nextButton}
             onPress={handleNextQuestion}>
-            <Text style={styles.nextButtonText}>Continue</Text>
+            <Text style={sharedStyles.nextButtonText}>Continue</Text>
           </TouchableOpacity>
         </>
       )}
@@ -219,52 +212,5 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({route, navigation}) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  questionHeader: {
-    fontSize: 20,
-    marginBottom: 20,
-    color: '#000',
-  },
-  answerButton: {
-    backgroundColor: '#f0f0f0',
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5,
-  },
-  answerText: {
-    fontSize: 16,
-    color: '#000',
-  },
-  feedbackTextCorrect: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 20,
-    color: 'green',
-  },
-  feedbackTextIncorrect: {
-    fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 20,
-    color: 'red',
-  },
-  nextButton: {
-    backgroundColor: '#009688',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
-    marginTop: 10,
-  },
-  nextButtonText: {
-    color: '#ffffff',
-    textAlign: 'center',
-    fontSize: 16,
-  },
-  image: {width: '100%', height: 200},
-});
 
 export default QuizQuestion;

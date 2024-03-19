@@ -3,9 +3,9 @@ import {ThemeProvider} from './components/ThemeProvider';
 
 const RootComponent = () => {
   return (
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    // <ThemeProvider>
+    <App />
+    // </ThemeProvider>
   );
 };
 

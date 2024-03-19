@@ -14,7 +14,7 @@ const MainMenu: React.FC<MainMenuProps> = ({navigation}) => {
   return (
     <View style={sharedStyles.container}>
       {/* <Image style={{width: 100}} resizeMode="contain" source={brainImage} /> */}
-      <Text style={sharedStyles.text}>Welcome. Select a Study Mode</Text>
+      <Text style={sharedStyles.header}>Welcome. Select a Study Mode:</Text>
       <TouchableOpacity
         style={sharedStyles.button}
         onPress={() => navigation.navigate('TopicsList')}>
