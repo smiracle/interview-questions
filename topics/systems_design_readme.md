@@ -1268,21 +1268,55 @@ Key-value stores are recommended for storage for the following reasons
 - Key-value stores are adopted by other proven reliable chat applications. For example, both Facebook messenger and Discord use key-value stores. Facebook messenger uses HBase, and Discord uses Cassandra.
 
  ##### Service Discovery
+The primary role of service discovery is to recommend the best chat server for a client based on the criteria like geographical location, server capacity, etc. Apache Zookeeper is a popular open-source solution for service discovery. It registers all the available chat servers and picks the best chat server for a client based on predefined criteria.
+- User A tries to log in to the app.
+- The load balancer sends the login request to API servers.
+- After the backend authenticates the user, service discovery finds the best chat server for User A. In this example, server 2 is chosen and the server info is returned back to User A.
+- User A connects to chat server 2 through WebSocket.
 ![Chat system discovery](../InterviewQuestions/images/systems_design/chat_system7.png)
 
  ##### 1:1 Chat Message Flows
 ![Chat system message sync queue](../InterviewQuestions/images/systems_design/chat_system8.png)
+- 1. User A sends a chat message to Chat server 1.
+- 2. Chat server 1 obtains a message ID from the ID generator.
+- 3. Chat server 1 sends the message to the message sync queue.
+- 4. The message is stored in a key-value store
+- 5a. If User B is online, the message is forwarded to Chat server 2 where User B is connected.
+- 5b. If User B is offline, a push notification is sent from push notification (PN) servers.
+- 6. Chat server 2 forwards the message to User B. There is a persistent WebSocket connection between User B and Chat server 2.
+
+ ##### Message synchronization across multiple devices
+![Chat system user key value store](../InterviewQuestions/images/systems_design/chat_system9.png)
+User A has two devices: a phone and a laptop. When User A logs in to the chat app with her phone, it establishes a WebSocket connection with Chat server 1. Similarly, there is a connection between the laptop and Chat server 1. Each device maintains a variable called cur_max_message_id, which keeps track of the latest message ID on the device. Messages that satisfy the following two conditions are considered as news messages: 
+-The recipient ID is equal to the currently logged-in user ID. 
+-Message ID in the key-value store is larger than cur_max_message_id. 
+With distinct cur_max_message_id on each device, message synchronization is easy as each device can get new messages from the KV store.
 
  ##### Small Group Chat Message Flow
-![Chat system user key value store](../InterviewQuestions/images/systems_design/chat_system9.png)
+The below image explains what happens when User A sends a message in a group chat. Assume there are 3 members in the group (User A, User B and user C). First, the message from User A is copied to each group member's message sync queue: one for User B and the second for User C. You can think of the message sync queue as an inbox for a recipient. This design choice is good for small group chat because: 
+-It simplifies message sync flow as each client only needs to check its own inbox to get new messages. 
+-When the group number is small, storing a copy in each recipient's inbox is not too expensive. WeChat uses a similar approach, and it limits a group to 500 members. However, for groups with a lot of users, storing a message copy for each member is not acceptable. On the recipient side, a recipient can receive messages from multiple users. Each recipient has an inbox (message sync queue) which contains messages from different senders. The 2nd image below illustates this design.
 ![Chat system message queues](../InterviewQuestions/images/systems_design/chat_system10.png)
 ![Chat system partitioned queues](../InterviewQuestions/images/systems_design/chat_system11.png)
 
+ ##### Online presence
+An online presence indicator is an essential feature of many chat applications. Usually, you can see a green dot next to a user's profile picture or username. This section explains what happens behind the scenes. In the high-level design, presence servers are responsible for managing online status and communicating with clients through WebSocket. There are a few flows that will trigger online status change. Let us examine each of them.
+
+ ##### User Login
+ The user login flow is explained in the "Service Discovery" section. After a WebSocket connection is built between the client and the real-time service, user A's online status and last_active_at timestamp are saved in the KV store. Presence indicator shows the user is online after they log in.
+
+ ##### User Logout
+When a user logs out, it goes through the user logout flow: User A -> (logout action) -> Api Servers -> Presence Servers -> KV store (UserA: {status: offline})
+
  ##### User Disconnection
+It's desirable for internet connection to be consistent and reliable. However, that is not always feasible. Thus, we must address this issue in our design. When a user disconnects from the internet, the persistent connection between the client and server is lost. A naive way to handle user disconnection is to mark the user as offline and change the status to online when the connection re-establishes. However, this approach has a major flaw. It is common for users to disconnect and reconnect to the internet frequently in a short time. For example, network connections can be on and off while a user goes through a tunnel. Updating online status on every disconnect/reconnect would make the presence indicator change too often, resulting in poor user experience. 
+We introduce a heartbeat mechanism to solve this problem. Periodically, an online client sends a heartbeat event to presence servers. If presence servers receive a heartbeat event within a certain time, say x seconds from the client, a user is considered as online. Otherwise, it is offline. In the below image, the client sends a heartbeat event to the server every 5 seconds. After sending 3 heartbeat events, the client is disconnected and does not reconnect within x = 30 seconds (This number is arbitrarily chosen to demonstrate the logic). The online status is changed to offline.
 ![Chat system heartbeat](../InterviewQuestions/images/systems_design/chat_system12.png)
 
  ##### Online Status Fanout
+How do user A's friends know about the status changes? Figure 12-19 explains how it works. Presence servers use a publish-subscribe model, in which each friend pair maintains a channel. When User A's online status changes, it publishes the event to three channels, channel A-B, A-C, and A-D. Those three channels are subscribed by User B, C, and D, respectively. Thus, it is easy for friends to get online status updates. The communication between clients and servers is through real-time WebSocket.
 ![Chat system channel subscriptions](../InterviewQuestions/images/systems_design/chat_system13.png)
+The above design is effective for a small user group. For instance, WeChat uses a similar approach because its user group is capped to 500. For larger groups, informing all members about online status is expensive and time consuming. Assume a group has 100,000 members. Each status change will generate 100,000 events. To solve the performance bottleneck, a possible solution is to fetch online status only when a user enters a group or manually refreshes the friend list.
 
  ##### Common Issues
 - Scaling infrastructure to support millions of concurrent users globally
@@ -1305,6 +1339,18 @@ Key-value stores are recommended for storage for the following reasons
 - Regularly updating the app with new features to stay competitive in the market
 - Creating a user-friendly interface that supports diverse languages and cultures
 - Implementing a robust moderation system to prevent abuse and ensure a safe user environment
+
+ ##### Wrap up
+Chat system architecture typically supports both 1-to-1 chat and small group chat. WebSocket is used for real-time communication between the client and server. The chat system contains the following components: chat servers for real-time messaging, presence servers for managing online presence, push notification servers for sending push notifications, key-value stores for chat history persistence and API servers for other functionalities.
+
+If you have extra time at the end of the interview, here are additional talking points: 
+-Extend the chat app to support media files such as photos and videos. Media files are significantly larger than text in size. Compression, cloud storage, and thumbnails are interesting topics to talk about. 
+-End-to-end encryption. Whatsapp supports end-to-end encryption for messages. Only the sender and the recipient can read messages. Interested readers should refer to the article in the reference materials. 
+-Caching messages on the client-side is effective to reduce the data transfer between the client and server. 
+-Improve load time. Slack built a geographically distributed network to cache users' data, channels, etc for better load time. 
+-Error handling. 
+-The chat server error. There might be hundreds of thousands, or even more persistent connections to a chat server. If a chat server goes offline, service discovery (Zookeeper) will provide a new chat server for clients to establish new connections with. 
+-Message resent mechanism. Retry and queueing are common techniques for resending messages.
 
 [↑ Back to top](#systems_design-topics)
 

@@ -20,6 +20,196 @@
         "Applications deployed with Docker are less secure than those deployed on physical servers.",
         "Docker is incompatible with cloud services, limiting its use in modern, cloud-based applications."
       ]
+    },
+    {
+      "header": "What is a Docker Container?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What is a Docker Image?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What is a Docker Registry?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What are the three major components of the Docker engine?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you run a Docker container?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you publish a port?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What is detached mode, how do you use it?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What are some basic docker container commands (list, rename, restart, kill)?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What is interactive mode, how do you use it?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you execute commands inside of a container?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What are executable images, how do you use them?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you create a Docker Image?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What are tags, how do you use them?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What are some basic Docker Image commands (list, ?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "What is a Dockerfile, how is it used?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you optimize Docker Images?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you create executable images and share them?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you containerize a JavaScript Application?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
+    },
+    {
+      "header": "How do you access Docker logs?",
+      "content": [
+        {
+          "type": "text",
+          "value": "todo"
+        }
+      ],
+      "answers": []
     }
   ]
 }
