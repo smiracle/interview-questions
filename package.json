@@ -27,6 +27,7 @@
     "python": "node .\\format_code_blocks.js python && .\\generate-readme.sh python",
     "rust": "node .\\format_code_blocks.js rust && .\\generate-readme.sh rust",
     "machine_learning": "node .\\format_code_blocks.js machine_learning && .\\generate-readme.sh machine_learning",
-    "aws": "node .\\format_code_blocks.js aws && .\\generate-readme.sh aws"
+    "aws": "node .\\format_code_blocks.js aws && .\\generate-readme.sh aws",
+    "tech_stacks_and_tools": "node .\\format_code_blocks.js tech_stacks_and_tools && .\\generate-readme.sh tech_stacks_and_tools"
   }
 }

@@ -20,6 +20,7 @@ import securityQuestions from '../data/security_formatted.json';
 import shellQuestions from '../data/shell_formatted.json';
 import soapQuestions from '../data/soap_formatted.json';
 import sqlQuestions from '../data/sql_formatted.json';
+import techStacksAndToolsQuestions from '../data/tech_stacks_and_tools.json';
 import typescriptQuestions from '../data/typescript_formatted.json';
 
 export type TopicFileName =
@@ -44,6 +45,7 @@ export type TopicFileName =
   | 'soap_formatted'
   | 'sql_formatted'
   | 'systems_design_formatted'
+  | 'tech_stacks_and_tools_formatted'
   | 'typescript_formatted';
 
 export const topics = [
@@ -71,6 +73,7 @@ export const topics = [
   {name: 'SOAP', fileName: 'soap_formatted'},
   {name: 'SQL', fileName: 'sql_formatted'},
   {name: 'Systems Design', fileName: 'systems_design_formatted'},
+  {name: 'TechStacksAndTools', fileName: 'tech_stacks_and_tools_formatted'},
   {name: 'TypeScript', fileName: 'typescript_formatted'},
 ];
 
@@ -89,13 +92,7 @@ const validatedDataStructuresAndAlgorithmsQuestions: {questions: Question[]} =
 const validatedReactQuestions: {questions: Question[]} = reactQuestions as {
   questions: Question[];
 };
-const validatedSystemsDesignQuestions: {questions: Question[]} =
-  systemsDesignQuestions as {questions: Question[]};
 
-const validatedTypeScriptQuestions: {questions: Question[]} =
-  typescriptQuestions as {
-    questions: Question[];
-  };
 const validatedDockerQuestions: {questions: Question[]} = dockerQuestions as {
   questions: Question[];
 };
@@ -140,6 +137,17 @@ const validatedSoapQuestions: {questions: Question[]} = soapQuestions as {
 const validatedSQLQuestions: {questions: Question[]} = sqlQuestions as {
   questions: Question[];
 };
+const validatedSystemsDesignQuestions: {questions: Question[]} =
+  systemsDesignQuestions as {questions: Question[]};
+
+const validatedTechStacksAndToolsQuestions: {questions: Question[]} =
+  techStacksAndToolsQuestions as {
+    questions: Question[];
+  };
+const validatedTypeScriptQuestions: {questions: Question[]} =
+  typescriptQuestions as {
+    questions: Question[];
+  };
 
 export const topicToDataMap: Record<TopicFileName, {questions: Question[]}> = {
   aws_formatted: validatedAWSQuestions,
@@ -164,5 +172,6 @@ export const topicToDataMap: Record<TopicFileName, {questions: Question[]}> = {
   soap_formatted: validatedSoapQuestions,
   sql_formatted: validatedSQLQuestions,
   systems_design_formatted: validatedSystemsDesignQuestions,
+  tech_stacks_and_tools_formatted: validatedTechStacksAndToolsQuestions,
   typescript_formatted: validatedTypeScriptQuestions,
 };
