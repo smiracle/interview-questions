@@ -913,7 +913,7 @@ If the data is not in memory, it will be retrieved from the disk instead. We nee
 - Handling node failures and network partitions without interrupting ID generation.
 - Ensuring IDs do not predictably increase to prevent enumeration attacks.
 
- ##### Resolutions
+ ##### Todo: Resolutions
 - Implementing algorithms like Snowflake or ULID, which combine timestamps, machine or process identifiers, and sequence numbers to generate unique IDs.
 - Using distributed consensus algorithms (e.g., Raft, Paxos) for coordination when central ID stores are necessary.
 - Adopting a multi-layered approach, where local ID buffers are filled in batches from a central or regional service to reduce dependency.
