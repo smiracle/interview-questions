@@ -17,7 +17,6 @@
     "security": "node .\\format_code_blocks.js security && .\\generate-readme.sh security",
     "nosql": "node .\\format_code_blocks.js nosql && .\\generate-readme.sh nosql",
     "sql": "node .\\format_code_blocks.js sql && .\\generate-readme.sh sql",
-    "postgresql": "node .\\format_code_blocks.js postgresql && .\\generate-readme.sh postgresql",
     "dotnet": "node .\\format_code_blocks.js dotnet && .\\generate-readme.sh dotnet",
     "rest": "node .\\format_code_blocks.js rest && .\\generate-readme.sh rest",
     "soap": "node .\\format_code_blocks.js soap && .\\generate-readme.sh soap",

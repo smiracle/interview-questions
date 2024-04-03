@@ -12,7 +12,6 @@ import javascriptQuestions from '../data/javascript_formatted.json';
 import machineLearningQuestions from '../data/machine_learning_formatted.json';
 import nodejsQuestions from '../data/nodejs_formatted.json';
 import nosqlQuestions from '../data/nosql_formatted.json';
-import postgresqlQuestions from '../data/postgresql_formatted.json';
 import pythonQuestions from '../data/python_formatted.json';
 import restQuestions from '../data/rest_formatted.json';
 import rustQuestions from '../data/rust_formatted.json';
@@ -35,7 +34,6 @@ export type TopicFileName =
   | 'machine_learning_formatted'
   | 'nodejs_formatted'
   | 'nosql_formatted'
-  | 'postgresql_formatted'
   | 'python_formatted'
   | 'react_formatted'
   | 'rest_formatted'
@@ -63,7 +61,6 @@ export const topics = [
   {name: 'Machine Learning', fileName: 'machine_learning_formatted'},
   {name: 'Node.js', fileName: 'nodejs_formatted'},
   {name: 'NoSQL', fileName: 'nosql_formatted'},
-  {name: 'PostgreSQL', fileName: 'postgresql_formatted'},
   {name: 'Python', fileName: 'python_formatted'},
   {name: 'React', fileName: 'react_formatted'},
   {name: 'REST', fileName: 'rest_formatted'},
@@ -115,8 +112,6 @@ const validatedNodejsQuestions: {questions: Question[]} = nodejsQuestions as {
 const validatedNosqlQuestions: {questions: Question[]} = nosqlQuestions as {
   questions: Question[];
 };
-const validatedPostgresqlQuestions: {questions: Question[]} =
-  postgresqlQuestions as {questions: Question[]};
 const validatedPythonQuestions: {questions: Question[]} = pythonQuestions as {
   questions: Question[];
 };
@@ -162,7 +157,6 @@ export const topicToDataMap: Record<TopicFileName, {questions: Question[]}> = {
   machine_learning_formatted: validatedMachineLearningQuestions,
   nodejs_formatted: validatedNodejsQuestions,
   nosql_formatted: validatedNosqlQuestions,
-  postgresql_formatted: validatedPostgresqlQuestions,
   python_formatted: validatedPythonQuestions,
   react_formatted: validatedReactQuestions,
   rest_formatted: validatedRestQuestions,
