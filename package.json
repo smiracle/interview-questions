@@ -11,6 +11,7 @@
     "javascript": "node .\\format_code_blocks.js javascript && .\\generate-readme.sh javascript",
     "nodejs": "node .\\format_code_blocks.js nodejs && .\\generate-readme.sh nodejs",
     "css": "node .\\format_code_blocks.js css && .\\generate-readme.sh css",
+    "graphql": "node .\\format_code_blocks.js graphql && .\\generate-readme.sh graphql",
     "html": "node .\\format_code_blocks.js html && .\\generate-readme.sh html",
     "data_structures_and_algorithms": "node .\\format_code_blocks.js data_structures_and_algorithms && .\\generate-readme.sh data_structures_and_algorithms",
     "systems_design": "node .\\format_code_blocks.js systems_design && .\\generate-readme.sh systems_design",

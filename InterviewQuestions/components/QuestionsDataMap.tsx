@@ -6,6 +6,7 @@ import cssQuestions from '../data/css_formatted.json';
 import dataStructuresAndAlgorithmsQuestions from '../data/data_structures_and_algorithms_formatted.json';
 import dockerQuestions from '../data/docker_formatted.json';
 import dotnetQuestions from '../data/dotnet_formatted.json';
+import graphQLQuestions from '../data/graphql.json';
 import htmlQuestions from '../data/html_formatted.json';
 import javaQuestions from '../data/java_formatted.json';
 import javascriptQuestions from '../data/javascript_formatted.json';
@@ -28,6 +29,7 @@ export type TopicFileName =
   | 'data_structures_and_algorithms_formatted'
   | 'docker_formatted'
   | 'dotnet_formatted'
+  | 'graphql_formatted'
   | 'html_formatted'
   | 'java_formatted'
   | 'javascript_formatted'
@@ -55,6 +57,7 @@ export const topics = [
   },
   {name: 'Docker', fileName: 'docker_formatted'},
   {name: '.NET', fileName: 'dotnet_formatted'},
+  {name: 'GraphQL', fileName: 'graphql_formatted'},
   {name: 'HTML', fileName: 'html_formatted'},
   {name: 'Java', fileName: 'java_formatted'},
   {name: 'JavaScript', fileName: 'javascript_formatted'},
