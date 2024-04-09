@@ -97,7 +97,7 @@
                 },
                 {
                     "type": "text",
-                    "value": "...Results in this JSON output:"
+                    "value": "...May result in this JSON output:"
                 },
                 {
                     "type": "json",
@@ -106,6 +106,60 @@
             ],
             "answers": [
                 "Fields in GraphQL are the fundamental queryable units that define the shape and structure of the data that can be returned in response to queries. They allow for precise, customizable, and efficient data retrieval, aligned with the client's specific data requirements."
+            ]
+        },
+        {
+            "header": "What are arguments in GraphQL?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "In GraphQL, arguments are used to specify the exact data or shape of data a client wants to retrieve or the operations it wants to perform. They are similar to function arguments in programming languages and can be attached to fields or directives to precisely define the query or mutation operation. Arguments can be as simple as a string or number, or as complex as an input object specifying multiple fields."
+                },
+                {
+                    "type": "text",
+                    "value": "Arguments in GraphQL are key to making queries and mutations flexible and powerful, allowing clients to request precisely what they need. For example, an argument could filter a list of items, specify the sorting order of results, or determine the number of items to return. This capability significantly enhances the efficiency and flexibility of data retrieval and manipulation in a GraphQL API."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Key Features"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Precise Data Fetching: Enables clients to specify filtering, pagination, and sorting criteria directly in the query, making data retrieval more efficient.",
+                        "Dynamic Query Construction: Allows for the construction of dynamic queries based on user input or application state, enhancing flexibility.",
+                        "Strong Typing: Arguments are strongly typed, with types defined in the GraphQL schema. This helps in validating the arguments against the schema to ensure correctness.",
+                        "Default Values: GraphQL supports default values for arguments, simplifying query construction and ensuring predictable behavior."
+                    ]
+                },
+                {
+                    "type": "subheader",
+                    "value": "Common Use Cases"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Filtering and Sorting Data: Arguments can specify criteria to filter and sort data, tailoring the response to the client's needs.",
+                        "Pagination: Supports efficient data fetching by allowing clients to request data in chunks, specifying the starting point and the number of items.",
+                        "Configuration of Mutations: Used in mutation operations to provide the values needed for creating or updating data.",
+                        "Directive Control: Directives can use arguments to conditionally include or skip fields, dynamically shaping the response."
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": "For example, a GraphQL query using arguments might look like this:"
+                },
+                {
+                    "type": "json",
+                    "value": "{human(id: \"1000\") {name height}}"
+                },
+                {
+                    "type": "text",
+                    "value": "This query uses an argument (id: \"1000\") to fetch the name and height of a specific human. The flexibility of arguments allows clients to tailor their queries and mutations precisely, making GraphQL a powerful tool for data retrieval and manipulation."
+                }
+            ],
+            "answers": [
+                "Arguments in GraphQL are used to fine-tune queries and mutations, allowing for precise data retrieval and manipulation. They add flexibility and efficiency to the GraphQL API by enabling clients to specify exactly what data to fetch or how to manipulate data, based on dynamic criteria or application requirements."
             ]
         }
     ]

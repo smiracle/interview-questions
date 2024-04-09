@@ -3,6 +3,7 @@
 ## Table of Contents
 - [What is GraphQL?](#what-is-graphql)
 - [What are fields in GraphQL?](#what-are-fields-in-graphql)
+- [What are arguments in GraphQL?](#what-are-arguments-in-graphql)
 
 ### What is GraphQL?
 
@@ -44,7 +45,7 @@ For example, the following GraphQL query...
 ```json
 {hero {name}}
 ```
-...Results in this JSON output:
+...May result in this JSON output:
 ```json
 {
   "data": {
@@ -54,6 +55,30 @@ For example, the following GraphQL query...
   }
 }
 ```
+
+[↑ Back to top](#graphql-topics)
+
+### What are arguments in GraphQL?
+
+In GraphQL, arguments are used to specify the exact data or shape of data a client wants to retrieve or the operations it wants to perform. They are similar to function arguments in programming languages and can be attached to fields or directives to precisely define the query or mutation operation. Arguments can be as simple as a string or number, or as complex as an input object specifying multiple fields.
+Arguments in GraphQL are key to making queries and mutations flexible and powerful, allowing clients to request precisely what they need. For example, an argument could filter a list of items, specify the sorting order of results, or determine the number of items to return. This capability significantly enhances the efficiency and flexibility of data retrieval and manipulation in a GraphQL API.
+
+ ##### Key Features
+- Precise Data Fetching: Enables clients to specify filtering, pagination, and sorting criteria directly in the query, making data retrieval more efficient.
+- Dynamic Query Construction: Allows for the construction of dynamic queries based on user input or application state, enhancing flexibility.
+- Strong Typing: Arguments are strongly typed, with types defined in the GraphQL schema. This helps in validating the arguments against the schema to ensure correctness.
+- Default Values: GraphQL supports default values for arguments, simplifying query construction and ensuring predictable behavior.
+
+ ##### Common Use Cases
+- Filtering and Sorting Data: Arguments can specify criteria to filter and sort data, tailoring the response to the client's needs.
+- Pagination: Supports efficient data fetching by allowing clients to request data in chunks, specifying the starting point and the number of items.
+- Configuration of Mutations: Used in mutation operations to provide the values needed for creating or updating data.
+- Directive Control: Directives can use arguments to conditionally include or skip fields, dynamically shaping the response.
+For example, a GraphQL query using arguments might look like this:
+```json
+{human(id: "1000") {name height}}
+```
+This query uses an argument (id: "1000") to fetch the name and height of a specific human. The flexibility of arguments allows clients to tailor their queries and mutations precisely, making GraphQL a powerful tool for data retrieval and manipulation.
 
 [↑ Back to top](#graphql-topics)
 
