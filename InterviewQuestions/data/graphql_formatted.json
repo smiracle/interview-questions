@@ -161,6 +161,60 @@
             "answers": [
                 "Arguments in GraphQL are used to fine-tune queries and mutations, allowing for precise data retrieval and manipulation. They add flexibility and efficiency to the GraphQL API by enabling clients to specify exactly what data to fetch or how to manipulate data, based on dynamic criteria or application requirements."
             ]
+        },
+        {
+            "header": "What are aliases in GraphQL?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "In GraphQL, aliases are a feature that allows clients to rename the result of a field to anything they choose. This is particularly useful when the query includes multiple fields with the same name but different arguments or when the client needs to reshape the data structure of the response to fit their application requirements. Aliases are defined in the query by specifying a new name followed by a colon and then the actual field name."
+                },
+                {
+                    "type": "text",
+                    "value": "Aliases in GraphQL enhance the flexibility of data retrieval by allowing clients to tailor the shape of the response according to their specific needs. Without aliases, handling multiple fields with the same name or transforming the response structure would require additional processing on the client side. With aliases, these scenarios are elegantly handled within the query itself."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Key Features"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Field Renaming: Enables clients to rename fields in the response, avoiding conflicts and clarifying the purpose of fields.",
+                        "Query Simplification: Simplifies queries that fetch the same field with different arguments by allowing each instance to be uniquely named.",
+                        "Response Shaping: Allows the response to be structured in a way that directly serves the client's application logic, reducing the need for data transformation on the client side.",
+                        "Enhanced Readability: Improves query readability and maintainability by allowing meaningful names that reflect the use case or context."
+                    ]
+                },
+                {
+                    "type": "subheader",
+                    "value": "Common Use Cases"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Handling Field Conflicts: Resolves conflicts when querying multiple instances of a field on the same object with different arguments.",
+                        "Data Shaping for UI Components: Enables structuring the data in a way that maps directly to UI components, simplifying data integration.",
+                        "Simplifying Query Results: Helps in simplifying complex query results by renaming fields for easier access and manipulation.",
+                        "Integrating with Legacy Systems: Facilitates the integration of GraphQL with legacy systems by allowing field names to be aliased to match expected legacy field names."
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": "For example, a GraphQL query using aliases might look like this:"
+                },
+                {
+                    "type": "json",
+                    "value": "{emp1: employee(id: \"1\") {name}, emp2: employee(id: \"2\") {name}}"
+                },
+                {
+                    "type": "text",
+                    "value": "In this example, two fields are queried from the same object (employee) with different arguments (id values), and aliases (emp1 and emp2) are used to differentiate the resulting fields in the response. This makes it clear which result corresponds to which query, simplifying data handling on the client side."
+                }
+            ],
+            "answers": [
+                "Aliases in GraphQL are used to rename fields in the query response, providing flexibility in handling field conflicts and shaping the response to fit client-side requirements. They simplify data retrieval and manipulation by allowing fields to be queried multiple times with different arguments and renamed to reflect their specific use case or context."
+            ]
         }
     ]
 }
