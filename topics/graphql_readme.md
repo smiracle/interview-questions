@@ -5,6 +5,7 @@
 - [What are fields in GraphQL?](#what-are-fields-in-graphql)
 - [What are arguments in GraphQL?](#what-are-arguments-in-graphql)
 - [What are aliases in GraphQL?](#what-are-aliases-in-graphql)
+- [What are fragments in GraphQL?](#what-are-fragments-in-graphql)
 
 ### What is GraphQL?
 
@@ -104,6 +105,30 @@ For example, a GraphQL query using aliases might look like this:
 {emp1: employee(id: "1") {name}, emp2: employee(id: "2") {name}}
 ```
 In this example, two fields are queried from the same object (employee) with different arguments (id values), and aliases (emp1 and emp2) are used to differentiate the resulting fields in the response. This makes it clear which result corresponds to which query, simplifying data handling on the client side.
+
+[↑ Back to top](#graphql-topics)
+
+### What are fragments in GraphQL?
+
+Fragments in GraphQL are a reusable piece of a query that can be shared among multiple queries or mutations. They allow for the definition of complex data structures or sets of fields that can be included in different parts of a GraphQL query, without the need to repeat the definitions. This not only makes the queries more concise but also enhances maintainability and readability by abstracting common patterns into reusable units.
+Using fragments, developers can define a set of fields on a specific type once and then include that set in multiple queries. Fragments are especially useful in large, complex applications where similar data needs to be fetched in multiple components or views, promoting consistency and reducing the potential for errors.
+
+ ##### Key Features
+- Reusability: Enables the definition of common data requirements once and reuse across multiple queries or mutations, reducing duplication.
+- Complexity Management: Helps manage complexity in large queries by breaking them down into smaller, reusable pieces.
+- Type Safety: Fragments are defined on a specific type, ensuring that they can only be used in contexts where that type is valid, enhancing the type safety of queries.
+- Maintainability: Improves the maintainability of the codebase by centralizing data definitions, making updates easier and reducing the risk of inconsistencies.
+
+ ##### Common Use Cases
+- Component-Based Data Fetching: Perfect for component-based architectures, allowing each component to specify its data requirements as fragments.
+- Avoiding Duplication: Reduces duplication in the code by centralizing the definition of complex data structures that are used in multiple places.
+- Consistency Across Views: Ensures consistency in the data structure used across various parts of an application, as fragments enforce a uniform structure.
+- Optimizing Query Performance: Can potentially optimize query performance by reducing the size and complexity of queries sent to the server.
+For example, a GraphQL fragment might be defined as follows:
+```json
+fragment employeeDetails on Employee {name, id, email, department {name}}
+```
+This fragment, 'employeeDetails', can then be included in any query that fetches employee data, ensuring that the same set of fields is consistently fetched without needing to rewrite the fields for each query.
 
 [↑ Back to top](#graphql-topics)
 

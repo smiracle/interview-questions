@@ -215,6 +215,60 @@
             "answers": [
                 "Aliases in GraphQL are used to rename fields in the query response, providing flexibility in handling field conflicts and shaping the response to fit client-side requirements. They simplify data retrieval and manipulation by allowing fields to be queried multiple times with different arguments and renamed to reflect their specific use case or context."
             ]
+        },
+        {
+            "header": "What are fragments in GraphQL?",
+            "content": [
+                {
+                    "type": "text",
+                    "value": "Fragments in GraphQL are a reusable piece of a query that can be shared among multiple queries or mutations. They allow for the definition of complex data structures or sets of fields that can be included in different parts of a GraphQL query, without the need to repeat the definitions. This not only makes the queries more concise but also enhances maintainability and readability by abstracting common patterns into reusable units."
+                },
+                {
+                    "type": "text",
+                    "value": "Using fragments, developers can define a set of fields on a specific type once and then include that set in multiple queries. Fragments are especially useful in large, complex applications where similar data needs to be fetched in multiple components or views, promoting consistency and reducing the potential for errors."
+                },
+                {
+                    "type": "subheader",
+                    "value": "Key Features"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Reusability: Enables the definition of common data requirements once and reuse across multiple queries or mutations, reducing duplication.",
+                        "Complexity Management: Helps manage complexity in large queries by breaking them down into smaller, reusable pieces.",
+                        "Type Safety: Fragments are defined on a specific type, ensuring that they can only be used in contexts where that type is valid, enhancing the type safety of queries.",
+                        "Maintainability: Improves the maintainability of the codebase by centralizing data definitions, making updates easier and reducing the risk of inconsistencies."
+                    ]
+                },
+                {
+                    "type": "subheader",
+                    "value": "Common Use Cases"
+                },
+                {
+                    "type": "bullets",
+                    "values": [
+                        "Component-Based Data Fetching: Perfect for component-based architectures, allowing each component to specify its data requirements as fragments.",
+                        "Avoiding Duplication: Reduces duplication in the code by centralizing the definition of complex data structures that are used in multiple places.",
+                        "Consistency Across Views: Ensures consistency in the data structure used across various parts of an application, as fragments enforce a uniform structure.",
+                        "Optimizing Query Performance: Can potentially optimize query performance by reducing the size and complexity of queries sent to the server."
+                    ]
+                },
+                {
+                    "type": "text",
+                    "value": "For example, a GraphQL fragment might be defined as follows:"
+                },
+                {
+                    "type": "json",
+                    "value": "fragment employeeDetails on Employee {name, id, email, department {name}}"
+                },
+                {
+                    "type": "text",
+                    "value": "This fragment, 'employeeDetails', can then be included in any query that fetches employee data, ensuring that the same set of fields is consistently fetched without needing to rewrite the fields for each query."
+                }
+            ],
+            "answers": [
+                "Fragments in GraphQL are reusable units of a query that allow for the definition of complex data structures or sets of fields that can be included in multiple queries or mutations. They promote reusability, maintainability, and consistency in querying complex data structures, making them an essential tool for managing complexity in GraphQL queries."
+            ]
         }
     ]
 }
