@@ -6,6 +6,7 @@
 - [What are arguments in GraphQL?](#what-are-arguments-in-graphql)
 - [What are aliases in GraphQL?](#what-are-aliases-in-graphql)
 - [What are fragments in GraphQL?](#what-are-fragments-in-graphql)
+- [How are variables used within fragments in GraphQL?](#how-are-variables-used-within-fragments-in-graphql)
 
 ### What is GraphQL?
 
@@ -129,6 +130,30 @@ For example, a GraphQL fragment might be defined as follows:
 fragment employeeDetails on Employee {name, id, email, department {name}}
 ```
 This fragment, 'employeeDetails', can then be included in any query that fetches employee data, ensuring that the same set of fields is consistently fetched without needing to rewrite the fields for each query.
+
+[↑ Back to top](#graphql-topics)
+
+### How are variables used within fragments in GraphQL?
+
+In GraphQL, variables can be used within fragments to parameterize the fragment and make it more dynamic and reusable across different queries. Variables within fragments allow you to pass in values when the fragment is used in a query, thus customizing the fragment's behavior based on the inputs provided at query execution time.
+This use of variables enhances the flexibility and reusability of fragments. By defining variables at the fragment level, developers can create highly customizable and adaptive query structures. These variables are defined in the query or mutation that includes the fragment and are passed to the fragment to control aspects such as filtering criteria, pagination limits, or any other dynamic data needs.
+
+ ##### Key Features
+- Dynamic Data Fetching: Allows fragments to adapt to different data fetching scenarios by accepting variables for aspects like filtering and sorting.
+- Enhanced Reusability: Increases the reusability of fragments by making them adaptable to various contexts and needs through parameterization.
+- Flexibility: Provides flexibility in queries and mutations, enabling more complex and customizable interactions with a GraphQL API.
+- Consistency and Maintainability: Maintains consistency across queries while improving maintainability by reducing the need to duplicate logic for similar data requirements.
+
+ ##### Common Use Cases
+- Customizable Data Fetching: Enables specific and varying data requirements to be met by adjusting fragment inputs via variables.
+- Modular Query Building: Supports building more modular and maintainable queries by separating the variable logic from the fragment structure.
+- Tailored API Responses: Facilitates the tailoring of API responses to client requirements without changing the server-side schema.
+- Efficient Data Queries: Allows for the efficient querying of data by dynamically changing request parameters based on client-side state or user input.
+For example, a variable-enhanced fragment usage might look like this:
+```json
+query GetEmployees($deptId: ID) { employees(departmentId: $deptId) { ...employeeDetails } } fragment employeeDetails on Employee { id, name, email }
+```
+In this example, the variable $deptId is defined in the query and used to fetch employees from a specific department, with the employee details encapsulated in a fragment that is reused across different queries.
 
 [↑ Back to top](#graphql-topics)
 
