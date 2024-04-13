@@ -7,6 +7,7 @@
 - [What are aliases in GraphQL?](#what-are-aliases-in-graphql)
 - [What are fragments in GraphQL?](#what-are-fragments-in-graphql)
 - [How are variables used within fragments in GraphQL?](#how-are-variables-used-within-fragments-in-graphql)
+- [What are variables in GraphQL?](#what-are-variables-in-graphql)
 
 ### What is GraphQL?
 
@@ -154,6 +155,30 @@ For example, a variable-enhanced fragment usage might look like this:
 query GetEmployees($deptId: ID) { employees(departmentId: $deptId) { ...employeeDetails } } fragment employeeDetails on Employee { id, name, email }
 ```
 In this example, the variable $deptId is defined in the query and used to fetch employees from a specific department, with the employee details encapsulated in a fragment that is reused across different queries.
+
+[↑ Back to top](#graphql-topics)
+
+### What are variables in GraphQL?
+
+Variables in GraphQL are dynamic values that can be used in queries and mutations to parameterize inputs, making the operations more dynamic and reusable. Instead of hardcoding values directly into the queries, variables allow users to pass in different values to the same query, enabling the execution of queries with different arguments without changing the query structure itself. This feature enhances the flexibility and reusability of GraphQL queries and mutations.
+By using variables, developers can create more secure and maintainable queries, as they separate the query definition from the actual values used. This separation also helps in preventing injection attacks by using type-specific variables that GraphQL can validate against the schema before execution.
+
+ ##### Key Features
+- Dynamic Input Handling: Allows the input values of queries and mutations to be parameterized, facilitating the execution of the same query with different inputs.
+- Increased Security: Helps prevent injection attacks by separating query logic from data values and validating input types against the schema.
+- Code Reusability: Enhances code reusability by allowing the same query structure to be used with different values, reducing code redundancy.
+- Improved Query Efficiency: Streamlines queries by enabling server-side optimizations based on variable usage patterns.
+
+ ##### Common Use Cases
+- User-specific Data Fetching: Variables enable fetching data specific to a user or session by passing user IDs or session keys as variables.
+- Dynamic Filtering: Facilitates dynamic filtering in queries, where the filter criteria can be specified as variables based on user input.
+- Batch Data Operations: Supports batch operations where multiple instances of an operation can be executed with different variables.
+- Configuration of API Behavior: Allows API behavior to be configured dynamically at runtime using variables, such as switching between different modes or settings.
+For example, a GraphQL query using variables might look like this:
+```json
+query GetEmployee($id: ID) { employee(id: $id) { name, email, department { name } } }
+```
+In this example, the variable $id is used to fetch data for a specific employee. The query can be reused for any employee by simply changing the value of $id, which is passed in at execution time.
 
 [↑ Back to top](#graphql-topics)
 
