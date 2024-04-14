@@ -8,6 +8,7 @@
 - [What are fragments in GraphQL?](#what-are-fragments-in-graphql)
 - [How are variables used within fragments in GraphQL?](#how-are-variables-used-within-fragments-in-graphql)
 - [What are variables in GraphQL?](#what-are-variables-in-graphql)
+- [What are directives in GraphQL?](#what-are-directives-in-graphql)
 
 ### What is GraphQL?
 
@@ -179,6 +180,30 @@ For example, a GraphQL query using variables might look like this:
 query GetEmployee($id: ID) { employee(id: $id) { name, email, department { name } } }
 ```
 In this example, the variable $id is used to fetch data for a specific employee. The query can be reused for any employee by simply changing the value of $id, which is passed in at execution time.
+
+[↑ Back to top](#graphql-topics)
+
+### What are directives in GraphQL?
+
+Directives in GraphQL are instructions that modify the execution of queries, mutations, and types within a GraphQL document. They can be attached to a field or fragment and serve as a powerful tool to dynamically alter the behavior or structure of queries and schema definitions based on specific conditions. Directives provide a way to add optional features to GraphQL operations, such as conditional inclusion of fields, dynamic transformation of values, or deprecating schema elements.
+Directives are prefixed with an '@' symbol followed by the directive name and can include arguments to further specify their behavior. Built-in directives like @skip, @include, and @deprecated are commonly used, but GraphQL also allows the creation of custom directives, offering extensive flexibility to address complex application requirements.
+
+ ##### Key Features
+- Conditional Field Inclusion: Directives like @include and @skip allow fields to be included or skipped based on variable conditions.
+- Schema Evolution: @deprecated helps in evolving a schema over time without breaking existing setups by marking fields or types as deprecated.
+- Custom Behavior: Custom directives can be defined to introduce specific behaviors in queries or mutations, such as formatting or permission checks.
+- Enhanced Flexibility: Provides the ability to modify execution behavior dynamically, enhancing the flexibility and capability of GraphQL APIs.
+
+ ##### Common Use Cases
+- Dynamic Query Modifications: Using @include and @skip for dynamically including or skipping fields in a query based on variables.
+- Managing Schema Deprecations: Using @deprecated to manage schema changes and migrations by indicating obsolete schema elements.
+- Implementing Access Control: Custom directives can enforce access controls and other security measures at the field level.
+- Formatting Data: Custom directives can format data directly within the query, such as converting strings to uppercase or formatting dates.
+For example, a GraphQL query using directives might look like this:
+```json
+query GetUser($isActive: Boolean!) { user { id name email (include: {if: $isActive}) } }
+```
+In this example, the @include directive is used to conditionally include the 'email' field in the response based on the value of the $isActive variable, demonstrating how directives can dynamically alter query execution.
 
 [↑ Back to top](#graphql-topics)
 
