@@ -9,6 +9,7 @@
 - [How are variables used within fragments in GraphQL?](#how-are-variables-used-within-fragments-in-graphql)
 - [What are variables in GraphQL?](#what-are-variables-in-graphql)
 - [What are directives in GraphQL?](#what-are-directives-in-graphql)
+- [How does validation work in GraphQL?](#how-does-validation-work-in-graphql)
 
 ### What is GraphQL?
 
@@ -204,6 +205,18 @@ For example, a GraphQL query using directives might look like this:
 query GetUser($isActive: Boolean!) { user { id name email (include: {if: $isActive}) } }
 ```
 In this example, the @include directive is used to conditionally include the 'email' field in the response based on the value of the $isActive variable, demonstrating how directives can dynamically alter query execution.
+
+[↑ Back to top](#graphql-topics)
+
+### How does validation work in GraphQL?
+
+Validation in GraphQL is a critical process that occurs before a query or mutation is executed to ensure that it is structurally and semantically correct according to the GraphQL schema. This process helps prevent incorrectly formed requests from being processed, which can lead to runtime errors and inconsistent data. Validation checks for a variety of conditions such as correct field names, appropriate field types, adherence to directives, and proper use of arguments.
+The GraphQL server automatically validates incoming queries against the schema definitions. This includes type checking, ensuring that the fields exist on the types they are queried on, that required fields in queries and mutations are provided, and that the values supplied for arguments conform to their expected types. This validation ensures that the operations are executable before any data fetching or writing is attempted.
+For example, a GraphQL validation might look like this:
+```json
+{ query: '{user(id: "123") {name, age}}', variables: {}, operationName: 'getUser'}
+```
+In this example, the query is validated to ensure the 'user' type exists, 'id' is a valid argument for 'user', and 'name' and 'age' are valid fields under 'user'. If any of these checks fail, an error is returned before any data fetching occurs.
 
 [↑ Back to top](#graphql-topics)
 
